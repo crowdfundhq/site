@@ -1,0 +1,15 @@
+# Asset manifest
+
+css:
+  - reset.css
+  - grid.css
+  - universals.css
+  - app.css
+  - dropbox.css
+
+js:
+  - lib/cookies.js
+  - lib/hq.js
+  - lib/location.js
+  - lib/dropzone.js
+  - app.js
