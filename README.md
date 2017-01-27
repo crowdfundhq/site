@@ -1,2 +1,2 @@
-# site
-The default CrowdfundHQ site and assets
+# CrowdfundHQ Site
+The default CrowdfundHQ site and assets.
