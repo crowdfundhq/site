@@ -1,0 +1,41 @@
+/* Text Editor */
+
+div.editor div.control ul {
+  float: left;
+  margin: 0 8px 5px 0;
+}
+
+div.editor div.control ul li {
+  position: relative;
+  float: left;
+  background: #ddd;
+  color: #444;
+  text-shadow: 1px 1px 1px rgba(255,255,255,.8);
+  padding: 3px 6px;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+  margin-right: 1px;
+}
+
+div.editor div.control ul li:last-child {
+  border-right: none;
+}
+
+div.editor div.control ul li.active,
+div.editor div.control ul li:hover,
+div.editor div.control ul li:active {
+  background: #ededed;
+}
+
+textarea.small-editor {
+  height: 150px;
+}
+
+textarea.medium-editor {
+  height: 300px;
+}
+
+textarea.large-editor {
+  height: 400px;
+}
+

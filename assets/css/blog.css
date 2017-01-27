@@ -1,0 +1,55 @@
+/******** BLOG **********/
+
+/*Blog Bar*/
+
+.blog_bar {
+  margin-bottom: 20px;
+}
+
+.blog_bar_status{
+  cursor: help;
+}
+
+/*Blog Bar END*/
+
+
+#comment_error {
+  color: red;
+}
+
+
+.article .date, .comment_date, .comment_user {
+  color: #666;
+}
+
+
+.comment_date, .comment_user {
+  font-size: 95%;
+}
+
+.article .content {
+  padding-top: 1.618em;
+}
+
+
+.article .comments_list {
+  margin-top: 1.618em;
+}
+
+.article .comments_list .comment {
+  border-top: 1px solid #ddd;
+  padding-top: 1.618em;
+}
+
+.article .comments_list .comment_content {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+.article-search input {
+   width: 80%;
+}
+
+.empty-article-search h2 {
+  margin-top: 1.618em;
+}

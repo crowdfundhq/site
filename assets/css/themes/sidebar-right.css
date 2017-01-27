@@ -1,0 +1,25 @@
+/* Sidebar Right */
+
+#content ul#ctabs.nav.nav-tabs {
+  float: right;
+/*  padding-right: 15px;*/
+}
+
+#content ul#ctabs.nav.nav-tabs li {
+	text-align: left;
+}
+
+#content ul#ctabs.nav.nav-tabs li a.selected,
+#content ul#ctabs.nav.nav-tabs li a:hover {
+	left: auto;
+	right: 8px;
+}
+
+#content #badges.well.white {
+  margin-left: 0;
+  margin-right: 18%;
+}
+
+.campaign_badge {
+	margin-right: 30px;
+}

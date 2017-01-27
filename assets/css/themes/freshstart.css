@@ -1,0 +1,722 @@
+body{
+  background: #F9FFFF;
+  font-family:  "Helvetica Neue", Helvetica,Arial,FreeSans,sans-serif;
+  color: #313a3d;
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+  font-family: "roboto", "Helvetica Neue", Helvetica,Arial,FreeSans,sans-serif;
+  font-weight: 500;
+}
+
+.content h2, .content h1 {
+  border-bottom: none;
+}
+
+/* Universals */
+
+a {
+  color: #00c0ff;
+  -webkit-transition: all .2s;
+  -moz-transition: all .2s;
+  -o-transition: all .2s;
+  transition: all .2s;
+}
+
+a.close {
+  color: #d15b27;
+}
+
+#campaign_files .well,
+.well {
+  background: #faf9f1;
+  border: 1px solid rgba(0,0,0,.05);
+  border-radius: 2px;
+  box-shadow: none;
+}
+
+.well.white {
+  background: #fff;
+}
+
+
+
+/* Buttons
+---------------------------------*/
+/* BUTTON RESET */
+button,
+.btn::-moz-focus-inner {
+  border:0;
+  padding:0
+}
+
+button,
+.btn {
+  width:auto;
+  border:0 none;
+  margin:0;
+  padding:0;
+  background:transparent;
+  overflow:visible;
+  /* IE Fix */
+  font: 100% helvetica, sans-serif;
+}
+
+button [class*="icon-"] {
+  line-height: .8em;
+}
+/* end button reset */
+
+button,
+.btn {
+  background: #ffae00;
+  text-shadow: 0 0 2px rgba(0,0,0,.3);
+  padding: 8px 16px;
+  border-radius: 3px;
+  border: none;
+  font-size: 100%;
+  color: #fff;
+  font-weight: 500;
+  white-space: nowrap;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 100%;
+  line-height: 1.7em;
+}
+
+button,
+button.btn {
+  line-height: 1.2em;
+}
+
+.btn-small {
+  padding: 4px 8px;
+  font-size: 95%;
+}
+
+.btn-primary {
+  padding: 12px 24px;
+  font-size: 120%;
+}
+
+#commitments ul li div a.btn-small:hover,
+#rewards ul li div a.btn-small:hover,
+.btn:hover {
+  background: #ffc600;
+  color: #fff;
+}
+
+.btn:active,
+.btn.active {
+  background: #f2990e;
+  color: #fff;
+  border: none;
+}
+
+.btn.disabled,
+.btn.btn-primary.disabled,
+.btn[disabled],
+.btn.disabled:hover,
+.btn.btn-primary.disabled:hover {
+  background: #aaa;
+}
+
+.btn-warning {
+  background: #d15b27;
+}
+
+#commitments ul li div a.btn-warning:hover,
+#rewards ul li div a.btn-warning:hover,
+.btn-warning:hover {
+  background: #b84513;
+}
+
+.btn-warning:active,
+.btn-warning.active {
+  background: #f0723a;
+}
+
+.btn-activate {
+  background: #a5de42;
+}
+
+.btn-activate:hover {
+  background: #91cb2b;
+}
+
+.btn-activate:active {
+  background: #b3ee4c;
+}
+
+.nav.nav-pills a.active {
+  background: #8bc231;
+  color: #fff;
+}
+
+.nav.nav-pills a {
+  color: #444;
+}
+
+/* Header */
+
+#top .logo {
+  margin: 24px 30px 6px 0;
+}
+
+#top nav li.main-link {
+  margin: 0;
+}
+
+#top nav li.main-link a {
+  margin: 3px 0 0;
+  padding: 13px 15px 9px;
+  text-align: center;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+  position: relative;
+}
+
+
+#top nav li.main-link a:before {
+  font-family: 'icomoon';
+  content: "\f004";
+  color: #ccc;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  position: absolute;
+  top: 14px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+#top nav li.main-link.new-campaign a:before {
+  content: "\f005";
+}
+
+
+#top nav li.main-link a:hover:before {
+  top: 10px;
+  font-size: 120%;
+  color: #ffae00;
+}
+
+#top .tall {
+  margin-top: 23px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 10px;
+}
+
+#top a .menu-note {
+  display: none;
+}
+
+#top nav ul li.search {
+  position: relative;
+  margin: 0;
+  padding: 19px 15px 7px;
+}
+
+#top nav ul li.search .icon-search {
+  display: block;
+  position: absolute;
+  z-index: 4;
+  top: 27px;
+  left: 22px;
+  font-size: 18px;
+  color: #ccc;
+}
+
+#top nav ul li.search input {
+  border-radius: 5px;
+  font-size: 12px;
+  padding-left: 27px;
+  padding-right: 28px;
+}
+
+#lang {
+  border: none;
+  background: none;
+  font-size: 10px;
+}
+
+#top nav ul li a#login-link:before {
+  font-family: 'icomoon';
+  content: "\f007";
+  margin-right: 3px;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+}
+
+#top nav ul li a:hover:before {
+  color: #ffae00;
+}
+
+#top nav ul li.user img {
+  box-shadow: 0 0 1px #999;
+}
+
+#top nav ul li.user ul li:hover {
+  background: #eaf9fc;
+}
+
+/* Tagline */
+
+#tagline {
+  border: none;
+  background: transparent;
+  background: #DDF3F8;
+  text-align: center;
+}
+
+#tagline h1,
+#tagline h2 {
+  font-size: 18px;
+  color: #313a3d;
+  text-shadow: none;
+  display: inline-block;
+  border-bottom: none;
+}
+
+#tagline h2 {
+  margin-left: 6px;
+}
+
+/* Footer */
+
+#footer {
+  background: #35332E;
+  color: #fff;
+  font-weight: 300;
+  border-top: none;
+  padding-top: 20px;
+  height: 85px;
+}
+
+#footer a {
+  color: #C3E0E6;
+}
+
+
+/* Discover */
+
+#content #badges.well.white {
+  border-left: 1px solid #eff5e9;
+}
+
+#content ul#ctabs.nav.nav-tabs li {
+  margin-bottom: 2px;
+}
+
+#content ul#ctabs.nav.nav-tabs li a {
+  border-radius: 4px;
+  color: #444;
+  padding: 2px 8px;
+}
+
+#content ul#ctabs.nav.nav-tabs li a:hover {
+  color: #8bc231;
+  background: rgba(255,255,255,.9);
+}
+
+#content ul#ctabs.nav.nav-tabs li a.selected {
+  box-shadow: none;
+  border: none;
+  background: #8bc231;
+  color: #fff;
+}
+
+#content ul#ctabs.nav.nav-tabs li a.category-tab {
+  padding-right: 23px;
+}
+
+li#category-tab .down-arrow {
+  top: 11px;
+}
+
+.group_badge h3 {
+  padding: 5px 2%;
+  text-align: center;
+}
+
+a.group_site:after {
+  font-family: 'icomoon';
+  content: "\f08e";
+  margin-left: 5px;
+  position: relative;
+  top: 2px;
+}
+/* Campaign Page */
+
+body.campaign #tagline {
+  margin-bottom: 55px;
+}
+
+body.campaign #tagline .inner-width {
+  width: 700px;
+  min-width: 700px;
+  padding: 10px 0 40px;
+}
+
+body.campaign #tagline h1 {
+  margin-top: 15px;
+  line-height: 40px;
+}
+
+body.campaign #tagline h1,
+body.campaign #tagline h2 {
+  display: block;
+  text-align: center;
+  font-size: 32px;
+}
+
+body.campaign #tagline h2 {
+  margin: 10px 0 0 0;
+  font-size: 16px;
+}
+
+body.campaign #tagline h2 a {
+  color: #444;
+}
+
+body.campaign .container {
+  position: relative;
+}
+
+body.campaign #flash {
+  text-align: center;
+  position: absolute;
+  top: -80px;
+  left: 0;
+
+}
+
+body.campaign .container {
+  margin-bottom: 40px;
+}
+
+body.campaign .container,
+body.campaign #container,
+body.campaign #content {
+  overflow: visible;
+}
+
+body.campaign #content {
+  position: relative;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  border: 1px solid rgba(0,0,0,.1);
+  padding: 25px 0px;
+  box-shadow: 0 0 0 4px rgba(0,0,0,0.05);
+  margin: 15px 0 50px;
+}
+
+body.campaign #campaign_icons {
+  position: absolute;
+  top: -32px;
+  right: 0;
+  color: #444;
+}
+
+body.campaign .grid_4 {
+  padding-right: 20px;
+  margin-top: 0px;
+  width: 29.75%;
+}
+
+body.campaign .grid_8 {
+  margin-right: 3%;
+  padding-left: 20px;
+  width: 62.4%
+}
+
+ul#campaign_nav {
+  padding: 0;
+  margin: -39px 0 6px;
+}
+
+body.tabs-above ul#campaign_nav {
+  position: relative;
+  bottom: 28px;
+}
+
+#campaign_content {
+  margin-top: -28px;
+}
+
+body.tabs-above #content {
+  margin-top: 37px;
+}
+
+ul#campaign_nav li a {
+  border-bottom: 5px solid transparent;
+  color: #444;
+}
+
+ul#campaign_nav li a:hover {
+  background: none;
+  color: #57B1E4;
+}
+
+a:hover .count {
+  background: #57B1E4;
+}
+
+ul#campaign_nav li a.selected {
+  background: none;
+  border: none;
+  border-bottom: 5px solid #8bc231;
+}
+
+a .count {
+  background: #57B1E4;
+  color: #fff;
+  border-radius: 50%;
+}
+
+body.campaign .well {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 20px 0 0;
+}
+
+#stats {
+  background: #FEFFEA;
+  border: none;
+  position: relative;
+  padding: 0 0 80px;
+}
+
+#stats ul {
+  background: #EBF6E8;
+}
+
+#stats li {
+  text-align: center;
+  position: relative;
+  width: 100%;
+  padding: 16px 0;
+  margin-bottom: 0;
+}
+
+#stats li:nth-child(2) {
+  background: rgba(0,0,0,.015);
+  border-top: 1px solid rgba(0,0,0,.02);
+  border-bottom: 1px solid rgba(0,0,0,.02);
+}
+
+#stats .number {
+  font-size: 38px;
+  color:#313a3d;
+  line-height: 38px;
+  font-weight: 400;
+}
+
+#stats li:first-of-type {
+  margin-top: 0;
+  padding-top: 20px;
+}
+
+#stats li:first-of-type .number:before,
+#stats li:nth-child(2) .number:before,
+#stats li:last-of-type .number:before {
+  font-family: 'icomoon';
+  content: "\f004";
+  top: 25px;
+  left: 20px;
+  font-size: 80%;
+  position: absolute;
+  color: rgba(0,0,0,.1);
+}
+
+#stats li:first-of-type .number:before {
+  content: "\f005";
+}
+
+#stats li:last-of-type .number:before {
+  content: "\e602";
+}
+
+#stats .center {
+  margin-top: 50px;
+}
+
+#stats .hint {
+  background: rgba(0,0,0,.02);
+  border: none;
+  color: #444;
+  position: absolute;
+  width: 94%;
+  bottom: 0;
+  padding: 10px 3%;
+  margin: 0;
+  line-height: 14px;
+}
+
+#stats .progressbar {
+  width: 100%;
+  margin: 12px 0;
+}
+
+body.badges-badge-classic .progress_percentage {
+  color: #666;
+  top: 0px;
+}
+
+#stats .btn-primary {
+  padding: 18px 32px;
+  font-size: 130%;
+}
+
+#campaign_bio {
+  background: #fff;
+  border: none;
+}
+
+#campaign_bio h6 {
+  border-bottom: 1px solid rgba(0,0,0,.05);
+}
+
+#commitments ul,
+#rewards ul {
+  border: none;
+}
+
+#commitments ul li,
+#rewards ul li {
+  background: #FEFFEA;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+}
+
+#commitments ul li,
+#rewards ul li,
+#commitments ul li h3,
+#commitments ul li a h3,
+#rewards ul li h3,
+#rewards ul li a h3 {
+  color: #444;
+}
+
+#commitments ul li h3,
+#commitments ul li a h3,
+#rewards ul li h3,
+#rewards ul li a h3 {
+  font-size: 15px;
+}
+
+#commitments ul li a:hover,
+#rewards ul li a:hover {
+  background: #fe9;
+}
+
+#campaign_data ul.block-list li {
+  width: 92.2%;
+  margin-left: 0;
+  padding: 3%;
+}
+
+body.campaign ul#campaign_dash {
+  position: relative;
+  left: 20px;
+  top: 0px;
+  border-bottom: none;
+}
+
+body.campaign ul.block-list {
+  border: none;
+}
+
+.campaign_action {
+  position: absolute;
+  top: -30px;
+}
+
+body.tabs-above .campaign_action {
+  position: absolute;
+  top: -72px;
+}
+
+.campaign_action .btn {
+  display: inline-block;
+  font-size: 13px;
+  padding: 4px 6px;
+  text-align: center;
+}
+
+.campaign_action button.btn {
+  margin: 0 0 10px;
+  line-height: 22px;
+}
+
+#campaign_stats tr:nth-child(even) {
+  background: #faf9f1;
+}
+/* Dialog */
+
+#dialog {
+  border: none;
+  box-shadow: 0 0 3px rgba(0,0,0,.1);
+}
+
+#dialog_header {
+  background: #faf9f1;
+    box-shadow: none;
+  border-bottom: 1px solid rgba(0,0,0,.05);
+}
+
+#overlay {
+  background: rgba(245, 253, 253, 0.85);
+}
+
+/* Profile */
+
+body.profile .grid_6 {
+  width: 46%;
+}
+
+body.profile .grid_6.last {
+  width: 50%;
+}
+
+body.profile .campaign_badge {
+  margin-right: 8px;
+}
+
+#user_profile .well.white a.btn:before {
+  font-family: 'icomoon';
+  content: "\f013";
+  margin-right: 3px;
+  position: relative;
+  top: 1px;
+}
+
+/* Category Tabs */
+
+#content #badges.well.white {
+  box-shadow: none;
+  border: none;
+  background: none;
+}
+
+/* Campaign with Tabs below video */
+
+body.tabs-below.campaign #campaign_content {
+  margin-top: 0px;
+}
+
+body.tabs-below.campaign ul#campaign_nav {
+  margin: 25px 0 0;
+}
+
+body.tabs-below.campaign #campaign_icons {
+  top: -28px;
+}

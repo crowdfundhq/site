@@ -1,0 +1,92 @@
+.sticky {
+  position: relative;
+  top: 0;
+}
+
+body {
+  background: #fff;
+  color: #454545;
+}
+
+.content h1,
+.content h2,
+.content h3 {
+  font-family: garamond, times, serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #2a3b65;
+  text-shadow: -1px 1px 0px #fff, -1px 1px 2px rgba(0,0,0,.3);
+}
+
+.blue,
+a,
+.green,
+#tagline h2 a {
+  color: #ffae00;
+}
+
+a:hover .green,
+a:hover,
+#tagline h2 a:hover {
+  color: #f59600;
+}
+
+#top .logo {
+  margin: 10px 40px 2px 0px;
+}
+
+#tagline {
+  background: transparent;
+  border-top: none;
+  border-bottom: none;
+  padding: 0;
+  margin-bottom: -12px;
+}
+
+#tagline h1,
+#tagline h2 {
+  display: inline-block;
+  text-shadow: none;
+  color: #666;
+  padding: 0;
+}
+
+#tagline h1 {
+  font-size: 15px;
+  font-weight: 400;
+  margin-right: 1px;
+}
+
+#tagline h2:before {
+  content: '// ';
+}
+
+#content ul#ctabs.nav.nav-tabs li {
+  border-radius: 0px;
+  border-top: 1px solid rgba(0,0,0,.1);
+}
+
+#content ul#ctabs.nav.nav-tabs li a {
+  background: #fff;
+  border-radius: 0px;
+  text-align: left;
+  font-family: garamond, times, serif;
+  font-size: 17px;
+  color: #2a3b65;
+  text-shadow: -1px 1px 0px #fff, -1px 1px 2px rgba(0,0,0,.3);
+}
+
+#content ul#ctabs.nav.nav-tabs li:last-child {
+  border-bottom: 2px solid rgba(0,0,0,.1);
+}
+
+#content ul#ctabs.nav.nav-tabs li a:hover,
+#content ul#ctabs.nav.nav-tabs li a.selected {
+  left: 0;
+  box-shadow: none;
+  background: #f1f1f1;
+}
+
+#campaign_icons {
+  margin: 30px 0 4px;
+}

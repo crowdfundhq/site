@@ -1,0 +1,101 @@
+.badge-big.campaign_badge {
+  margin-right: 0;
+  width: 100%;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.badge-big.campaign_badge:last-child {
+  margin-bottom: 40px;
+}
+
+.badge-big.campaign_badge .campaign_image {
+  width: 52%;
+  height: 100%;
+  float: left;
+  margin-right: 3%;
+  overflow: hidden;
+}
+
+.campaign_image .no_image,
+.badge-big.campaign_badge .campaign_image .no_image {
+  width: 100%;
+  height: auto;
+}
+
+.badge-big.campaign_badge .campaign_image img {
+  height: auto;
+  width: 100%;
+}
+
+#content .well.white .badge-big.campaign_badge h1 a {
+  font-size: 18px;
+  line-height: 23px;
+}
+
+.badge-big.campaign_badge .campaign_headline {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+#content .badge-big.campaign_badge .campaign_owner {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.badge-big.campaign_badge .campaign_category {
+  margin-top: 0;
+  bottom: 78px;
+  right: 1%;
+  text-align: right;
+  background: none;
+}
+
+.badge-big.campaign_badge .campaign_category {
+  color: #aaa;
+  font-size: 12px;
+}
+
+.badge-big.campaign_badge .campaign_progress {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 43%;
+  padding: 0 2% 2%;
+  background: transparent;
+  border: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  height: auto;
+}
+
+.badge-big.campaign_badge .progressbar {
+  position:relative;
+  width: 100%;
+}
+
+.badge-big.campaign_badge .campaign_progress ul {
+  font-size: 100%;
+  line-height: 1em;
+}
+
+.badge-big.campaign_badge .campaign_progress ul li {
+  margin-left: 1%;
+  margin-right: 15%;
+}
+
+.badge-big.campaign_badge .campaign_progress ul li:last-child {
+  margin-right: 0;
+}
+
+#content .badge-big.campaign_badge a:hover .campaign_header,
+#content .badge-big.campaign_badge a:hover .campaign_progress {
+  box-shadow: none;
+}
+
+.badge-big.campaign_badge .campaign_location {
+  right: 20px;
+  height: 18px;
+  bottom: 98px;
+}

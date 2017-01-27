@@ -1,0 +1,413 @@
+/* Body and Structure
+------------------------------------------------ */
+
+body {
+  background-color: rgba(0,0,0,.8);
+  color: #fff;
+}
+
+#overlay {
+  background: rgba(0,0,0,.55);
+}
+
+
+/* LINKS
+------------------------------------------------ */
+
+
+#tagline h2 a,
+a {
+  color: #86E9FC;
+  text-decoration: none;
+}
+
+#tagline h2 a:hover,
+a:hover {
+  color: #00D5FF;
+}
+
+a.selected {
+  color: #00D5FF;
+}
+
+
+/* Header
+------------------------------------------------ */
+h1.logo a {
+  color: #4bb0f6;
+}
+
+h1.logo a:hover {
+  color: #4BC3F6;
+}
+
+#tagline {
+  background-color: rgba(0,0,0, 0.25);
+  border-bottom: 1px solid rgba(0, 0, 0, .8);
+}
+
+
+/* Tabs
+------------------------------------------------ */
+
+a:hover .count {
+  background: #4bb0f6;
+}
+
+
+/* Footer
+------------------------------------------------ */
+
+#footer {
+  background-color: #0f0f0f;
+  background-color: rgba(15, 15, 15, 0.5);
+  color: #cccccc;
+  border-top: none;
+  height: 85px;
+}
+
+#ads {
+  background: url(/images/themes/dark/advertiser-fade.png) top center no-repeat;
+  background-color: #0f0f0f;
+  background-color: rgba(0,0,0, 0.5);
+  color: #cccccc;
+  border-top: 1px solid #000;
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+#ads ul li {
+  background: rgba(255,255,255,.9);
+}
+
+#ads, #footer ul.nav, a.powered-by {
+  position: relative;
+  top: 20px
+}
+
+a.powered-by:hover {
+  background: rgba(0,0,0,.4);
+}
+
+
+/* Campaign Badges
+------------------------------------------------ */
+
+.campaign_badge a h1 {
+  color: #4bb0f6;
+  text-shadow: none;
+}
+
+.campaign_badge a:hover h1 {
+  color: #0C94F2;
+}
+
+
+/* Flash
+------------------------------------------------ */
+
+#flash #info, .alert {
+  background: #DAF2F7;
+  color: #333;
+}
+
+/* Dialog
+------------------------------------------------ */
+
+#dialog {
+  background-color: #fff;
+}
+
+#dialog a {
+  color: #4bb0f6;
+}
+
+#dialog a:hover {
+  color: #0C94F2;
+}
+
+#dialog_flash #dialog_info,
+.wmd-prompt-dialog,
+#dialog_content {
+  color: #666;
+}
+
+#dialog_header {
+  background: url(/images/diagonal.png) #eee;
+  text-shadow: 1px 1px 1px #fff;
+  box-shadow: 0 1px 1px #ddd;
+}
+
+/* Pages
+------------------------------------------------ */
+
+/*--- Tabs ---*/
+
+#content ul.nav-tabs {
+  border-bottom: 1px solid #888;
+  border-bottom: 1px solid rgba(0,0,0,.3);
+}
+
+#content ul.nav-tabs li {
+  border-radius: 4px;
+}
+
+#content ul.nav-tabs li a:hover {
+  background-color: #eee;
+  background-color: rgba(0,0,0,.2);
+}
+
+#content ul.nav-tabs li a.selected {
+  background-color: rgba(0,0,0,.4);
+  border: 2px solid transparent;
+  border-bottom: 2px solid rgba(0,0,0,.2);
+}
+
+#content ul.nav-tabs li a.selected:hover {
+  background-color: rgba(0,0,0,.7);
+}
+
+ul#category-dropdown {
+  background-color: rgba(0,0,0,.4);
+  border: 1px solid rgba(0,0,0,.2);
+  border-top: none;
+}
+
+ul#category-dropdown li a {
+  background: rgba(0,0,0,.7);
+}
+
+#content ul#category-dropdown li a.selected,
+#content ul#category-dropdown li a:hover {
+  background: #333;
+  border: none;
+}
+
+/*---Contributions ---*/
+
+#new_contribution .grid_8 {
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #666;
+  box-shadow: inset 1px 1px 1px #ddd;
+  width: 61%;
+  border-radius: 4px;
+}
+
+#new_contribution .grid_8 a {
+  color: #4bb0f6;
+}
+
+#new_contribution .grid_8 a:hover {
+  color: #0D7DBD;
+}
+
+/*---Thank You ---*/
+#thank_you .grid_8 h1 {
+  text-shadow: 1px 1px 1px rgba(0,0,0,.2);
+}
+
+
+
+/* Text Color fixes */
+
+#commitments,
+#rewards,
+#commitment-list,
+#campaign_files .well .hint {
+  color: #555;
+}
+
+#campaign_stats table tr:first-child th:first-child,
+#campaign_stats table th {
+    color: #ccc;
+}
+
+#campaign_files .hint {
+    color: #fff;
+}
+
+/*--Dark BG Pages--*/
+
+#user_profile,
+#contact_thanks,
+#contact,
+#page,
+#page p,
+#page ul li {
+  color: #fff;
+}
+
+
+#user_profile h2,
+.content .well.white h1,
+.content .well.white h2,
+.content .well.white h3,
+.content .well.white h4
+#contact_thanks h1,
+#contact h1,
+#page h1,
+#page h2,
+#page h3,
+#page h4 {
+  color: #fff;
+  text-shadow: 1px 1px 0px #444;
+  border-bottom: 1px solid #757168;
+  border-bottom: 1px solid rgba(255,255,255,.2);
+}
+
+#content #badges.well.white h1 h1 {
+  margin-bottom: 1px;
+  text-shadow: none;
+}
+
+#page h2 {
+  border-bottom: 1px dotted #fff;
+  border-bottom: 1px solid rgba(255,255,255,0);
+  background: rgba(255,255,255,.2);
+  margin-top: 70px;
+  padding-left: 10px;
+}
+
+#page h2:first-child {
+  margin-top: 0;
+}
+
+#page h3 {
+  font-size: 18px;
+  margin: 52px 0 18px;
+}
+
+#contact form label {
+  color: #fff;
+}
+
+.time {
+  color: #ddd;
+}
+
+
+/*-- White BG Tab Section => Transparent on Dark BG --*/
+
+#content .well {
+  background: #222;
+}
+
+#content .well.white {
+  background: transparent;
+  color: #fff;
+  border: none;
+}
+
+#content .well.white ul.block-list li {
+  background: #757168;
+  background: rgba(255,255,255,.2);
+  margin-bottom: 3px;
+  border: none;
+  width: 96%;
+}
+
+#content .well.white .hint,
+#content .well.white label {
+  color: #eee;
+}
+
+#content .well.white hr {
+  border-top: transparent;
+}
+
+
+/*--Campaign Pages--*/
+
+#campaign_data ul.block-list li:last-child {
+  padding-bottom: 18px;
+}
+
+#stats li {
+  color: #444;
+}
+
+#stats .hint {
+  background: url(/images/diagonal.png) #f1f1f1;
+  border-bottom: 1px solid #eaeaea;
+  border-top: 1px solid #ddd;
+}
+
+/*--Share buttons---*/
+
+ul#campaign_share a .data-count {
+  background: rgba(255,255,255,.25);
+  border: none;
+}
+
+ul#campaign_share .left-arrow-bg {
+  border: transparent;
+}
+
+ul#campaign_share .left-arrow {
+  border-right: 4px solid rgba(255,255,255,.25);
+}
+
+/* badges */
+
+.campaign_badge h1 a {
+  text-shadow: none;
+  color: #00C2FF;
+}
+
+.campaign_badge h1 a:hover {
+  color: #0099FF;
+}
+
+.progress_info {
+  color: #555;
+}
+
+#campaign_bio {
+  background: none;
+  border: none;
+}
+
+#campaign_bio a.hint {
+  color: #86E9FC;
+}
+
+/* campaign update on dark themes needs different color buttons */
+
+#campaign_data .wysiwyg-editor-toolbar ul.commands li {
+  color: #eee;
+  color: rgba(255,255,255,.9);
+  text-shadow: 1px 1px 1px rgba(0,0,0,.8);
+}
+
+.wysiwyg-editor-toolbar ul.commands li.active,
+.wysiwyg-editor-toolbar ul.commands li:hover,
+.wysiwyg-editor-toolbar ul.commands li:active {
+  cursor: pointer;
+  background: rgba(255,255,255,.25);
+  border-bottom: 3px solid rgba(255,255,255,.8);
+}
+
+.wysiwyg-editor-toolbar ul.commands li.wysihtml5-command-active,
+.wysiwyg-editor-toolbar ul.commands li.wysihtml5-command-dialog-opened {
+  background: rgba(255,255,255,.4);
+  border-bottom: 3px solid #a5de42;
+}
+
+.wysiwyg-editor-toolbar ul.commands li.wysihtml5-command-dialog-opened {
+  border-bottom: 3px solid transparent;
+}
+
+[data-wysihtml5-dialog] {
+  background: rgba(255,255,255,.4);
+}
+
+/* Messages */
+ul#message-list li {
+  color: #333;
+}
+
+/* Stripe payments */
+#stripe-payment {
+  background-color: #777 !important;
+}

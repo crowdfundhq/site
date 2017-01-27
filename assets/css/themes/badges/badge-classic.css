@@ -1,0 +1,223 @@
+/*BADGE*/
+
+.campaign_badge {
+  width: 214px;
+  float: left;
+  max-height: 395px;
+  margin: 0 16px 30px 0;
+  position: relative;
+  color: #444;
+}
+
+.campaign_badge.badge-last{
+  margin-right: 0;
+}
+
+.campaign_badge .campaign_header {
+  position: relative;
+}
+
+.campaign_badge .campaign_location a {
+  color: #777;
+}
+
+.campaign_badge .campaign_location a:hover {
+  color: #444;
+}
+
+.campaign_header {
+  padding: 5px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border: 1px solid #ddd;
+  background: #fff;
+  height: 310px;
+  overflow: hidden;
+  position: relative;
+}
+
+.campaign_image {
+  width: 202px;
+  height: 120px;
+  overflow: hidden;
+  position: relative;
+}
+
+.campaign_image .no_image {
+  height: 120px;
+}
+
+.campaign_image img {
+  height: auto;
+  min-width: 208px;
+  min-height: 120px;
+}
+
+.no_image {
+  position: relative;
+  background: #ffffff; /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, #ffffff 0%, #eeeeee 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffffff), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover, #ffffff 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover, #ffffff 0%,#eeeeee 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover, #ffffff 0%,#eeeeee 100%); /* IE10+ */
+  background: radial-gradient(ellipse at center, #ffffff 0%,#eeeeee 100%); /* W3C */
+}
+
+.no_image i {
+  position: absolute;
+  top: 40%;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  width: 100%;
+  font-size: 200%;
+  text-align: center;
+  color: #999;
+}
+
+.campaign_category {
+  position: absolute;
+  bottom: 195px;
+  background: rgba(0,0,0,.2);
+  width: 182px;
+  padding: 1px 10px;
+  text-align: right;
+  font-weight: 200;
+}
+
+.campaign_category {
+  color: #eee;
+}
+
+.campaign_badge h1 {
+  border-bottom: none;
+  line-height: 16px;
+  font-size: 15px;
+  margin-bottom: 1px;
+  padding: 0 5px;
+  margin-top: 6px;
+  color: #0096ff;
+  font-weight: 500;
+}
+
+.campaign_badge h1 a,
+.group_badge h3 {
+  display: block;
+  word-break: normal;
+  color: #0096ff;
+  text-shadow: none;
+}
+
+.campaign_badge h1 a:hover {
+  color: #0096ff;
+}
+
+.campaign_owner {
+  margin: 0 0 3px;
+  color: #aaa;
+  font-size: 12px;
+  line-height: 14px;
+  padding: 0 5px;
+}
+
+.campaign_headline {
+  min-height: 90px;
+  font-size: 12px;
+  line-height: 15px;
+  padding: 5px;
+}
+
+.campaign_location {
+  color: #888;
+  font-size: 85%;
+  overflow: hidden;
+  position: absolute;
+  bottom: 7px;
+  height: 18px;
+}
+
+.campaign_location .icon-location {
+  position: relative;
+  top: 1px;
+  margin-right: 2px;
+}
+
+.campaign_successful {
+  background-color: #8AD413;
+  height: 20px;
+  margin: -12px -9px 6px -9px;
+  padding: 0 0 0 10px;
+  color: #fff;
+  text-transform: uppercase;
+  text-shadow: 0px 0px 1px rgba(0,0,0,.2);
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.campaign_progress {
+  background: #eee;
+  height: 60px;
+  padding: 10px 8px 0;
+  border: 1px solid #ddd;
+  border-top: 1px solid #fff;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.progressbar,
+.progressbar .progress {
+  height: 9px;
+  border-radius: 4px;
+}
+
+.progressbar {
+  width: 196px;
+  background: #bbb;
+  margin-bottom: 5px;
+}
+
+.progressbar .progress {
+  background-color: #87c622;
+  max-width: 100%;
+}
+
+.campaign_progress ul {
+  width: 100%;
+  font-size: 90%;
+  margin: 10px 0 0 0;
+  line-height: 16px;
+  text-shadow: 0 1px 1px #fff;
+}
+
+.campaign_progress tr td {
+  text-transform: uppercase;
+  font-size: 85%;
+  float: left;
+  margin-right: 10px;
+  font-weight: 600;
+}
+
+.campaign_progress tr.numbers td {
+  position: relative;
+  top: 5px;
+}
+
+.campaign_progress tr td {
+  font-size: 80%;
+  float: none;
+  margin: 0;
+}
+
+.campaign_progress ul li:last-child {
+  margin-right: 0;
+}
+
+.campaign_progress tr.desc td,
+.campaign_progress .desc {
+  font-weight: 300;
+  font-size: 85%;
+  color: #444;
+}
+

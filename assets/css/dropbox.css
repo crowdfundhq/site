@@ -1,0 +1,22 @@
+.dropbox {
+  -webkit-transition: all .2s;
+  -moz-transition: all .2s;
+  transition: all .2s;
+}
+
+.dropbox-inline {
+  display: inline;
+}
+
+.dropbox-error, .dropbox-progress {
+  font-size: 90%;
+  margin-left: 0.2em;
+}
+
+.dropbox-progress {
+  color: #888;
+}
+
+.dropbox-error {
+  color: #c6222e;
+}

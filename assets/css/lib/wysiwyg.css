@@ -1,0 +1,83 @@
+
+/* Text Editor */
+
+#campaign_data .wysiwyg-editor-toolbar ul.commands,
+.wysiwyg-editor-toolbar ul.commands {
+  margin: 0 0 10px 0;
+  list-style: none;
+}
+
+.wysiwyg-editor-toolbar ul.commands li {
+  line-height: 1em;
+  position: relative;
+  float: left;
+  color: #444;
+  text-shadow: 1px 1px 1px rgba(255,255,255,.8);
+  padding: 7px 7px 3px;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+  margin-right: 1px;
+  border-bottom: 2px solid transparent;
+}
+
+.wysiwyg-editor-toolbar ul.commands li.active,
+.wysiwyg-editor-toolbar ul.commands li:hover,
+.wysiwyg-editor-toolbar ul.commands li:active {
+  cursor: pointer;
+  background: rgba(0,0,0,.075);
+  border-bottom: 2px solid rgba(0,0,0,.1);
+}
+
+.wysiwyg-editor-toolbar ul.commands li.wysihtml5-upload {
+  cursor: default;
+  color: inherit;
+  border: none;
+  background-color: inherit;
+  padding: 0;
+}
+
+.wysiwyg-editor-toolbar ul.commands li.wysihtml5-upload span {
+  position: relative;
+  top: 8px;
+}
+
+#wysihtml5-editor-toolbar {
+  position: relative;
+}
+
+.wysiwyg-editor-toolbar .upload-form {
+  padding: 10px 0 0;
+  margin-top: 5px;
+  border-top: 1px solid rgba(0,0,0,.1);
+}
+
+[data-wysihtml5-command],
+[data-wysihtml5-dialog] {
+  color: #333;
+}
+
+.wysiwyg-editor-toolbar ul.commands li.wysihtml5-command-active,
+.wysiwyg-editor-toolbar ul.commands li.wysihtml5-command-dialog-opened {
+  background: #fafafa;
+}
+
+.wysiwyg-editor-toolbar ul.commands li.wysihtml5-command-dialog-opened {
+  margin-top: 4px;
+}
+
+.wysiwyg-editor-toolbar select {
+  margin-bottom: 0;
+}
+
+.wysiwyg-editor-toolbar input[type="text"] {
+  padding: 1px 6px;
+}
+
+[data-wysihtml5-dialog] {
+  max-width: 704px;
+  padding: 10px 10px 6px;
+}
+
+[data-wysihtml5-dialog] {
+  margin-bottom: 5px;
+}

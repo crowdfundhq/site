@@ -1,0 +1,64 @@
+/* Campaign Badges */
+
+.campaign_badge {
+  border-radius: 9px;
+  border: 4px solid rgba(255,255,255,.5);
+  max-height: 380px
+}
+
+.campaign_badge .campaign_header {
+  border-radius: 6px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border: 1px solid #d0d5cb;
+}
+
+a .campaign_category {
+  display: none;
+}
+
+.campaign_image img {
+  height: 150px;
+}
+
+.content .campaign_badge a h1 {
+  color: #0b1902;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.content a .campaign_owner {
+  color: #75796f;
+}
+
+.campaign_headline {
+  color: #75796f;
+  line-height: 15px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.campaign_badge a:hover,
+.campaign_badge a:active {
+  color: #75796f;
+  box-shadow: none;
+  background: #fff;
+}
+
+.content .campaign_badge a:hover h1 {
+  color: #75796f;
+}
+
+.content .campaign_badge a:hover .campaign_header,
+.content .campaign_badge a:hover .campaign_progress {
+  box-shadow: none;
+}
+
+.content .campaign_badge a:hover .campaign_header {
+  background: inherit;
+}
+
+.campaign_progress {
+  background: #f8f8f8;
+}

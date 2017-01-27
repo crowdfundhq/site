@@ -1,0 +1,132 @@
+a .green,
+a .blue {
+  color: #EBFDFF;
+}
+
+a:hover .green,
+a:hover .blue {
+  color: #CEF1F5;
+}
+
+body {
+  background: url(http://6113a916f6925d5dd5f6-b1e0f0f230497a8820b57430d1418af5.r1.cf2.rackcdn.com/1364489082_watercolor-bg.jpg) no-repeat center -9px #fffdec;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: #595447;
+}
+
+#dialog_header,
+#stats .hint {
+  background: url(/images/diagonal.png) #F7F6ED;
+}
+
+.well {
+  background: #F7F6ED;
+}
+
+#top nav ul li.user ul#user a:hover,
+#commitments ul li a:hover,
+#rewards ul li a:hover {
+  background: #FFF5DE;
+}
+
+#top nav ul li.user ul#user,
+ul#ctabs.nav-tabs li a.selected,
+ul#ctabs.nav-tabs li a:hover,
+ul.nav-tabs li a:hover,
+ul.nav-tabs li a.selected:hover,
+#stats,
+#commitments ul,
+#rewards ul,
+.white {
+  background: rgba(255,255,255,.9);
+  box-shadow: none;
+}
+
+ul.nav-tabs li {
+  margin-right: 2px;
+  background: rgba(255,255,255,.7);
+  border: none;
+}
+
+
+ul.nav-tabs li a.selected {
+  border: none;
+  border-bottom: none;
+  padding-top: 10px;
+  padding-bottom: 9px;
+}
+
+#top {
+  background: none;
+  border: none;
+}
+
+#tagline {
+  background: rgba(255,255,255,.8);
+  border-top: none;
+  border-bottom: 6px solid rgba(255,255,255,.8);
+  padding: 0;
+  margin-bottom: -12px;
+}
+
+#tagline h1,
+#tagline h2 {
+  display: inline-block;
+  text-shadow: 1px 1px 0px rgba(255,255,255,.5);
+  color: rgba(0,0,0,.7);
+  padding: 0;
+}
+
+#tagline h1 {
+  font-size: 15px;
+  font-weight: 400;
+  margin-right: 1px;
+}
+
+#tagline h2:before {
+  content: '// ';
+}
+
+#tagline h2 a {
+  color: rgba(0,0,0,.7);
+}
+
+#tagline h2 a:hover {
+  color: rgba(0,0,0,.9);
+}
+
+#top nav ul li a,
+#top nav ul li a:hover {
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.2);
+}
+
+#top nav ul li a:hover {
+  color: #EBFDFF;
+}
+
+#top nav ul li.user ul#user a {
+  color: #595447;
+  text-shadow: none;
+}
+
+ul#ctabs.nav-tabs li a:hover {
+  box-shadow: none;
+}
+
+.campaign_header {
+  border-bottom: none;
+}
+
+.campaign_progress {
+  background: #fff;
+  border-top: none;
+}
+
+.content .campaign_badge a:hover .campaign_header,
+.content .campaign_badge a:hover .campaign_progress {
+  box-shadow: none;
+}

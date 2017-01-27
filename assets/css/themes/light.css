@@ -1,0 +1,70 @@
+/* Structure */
+
+body {
+  background: url(/images/noise.png) #fcfcfc;
+}
+
+#lang {
+  background: #eee;
+  border: 1px solid #ddd;
+}
+
+/* Footer */
+
+#footer {
+  background: #eee;
+  background: rgba(0,0,0,.04);
+  border-top: 1px solid #ccc;
+  color: #aaa;
+}
+
+/* Tagline */
+
+#tagline {
+  background: url(/images/diagonal.png) #666;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+#tagline h1 {
+  color: #fff;
+  text-shadow: 1px 1px 2px #00548C;
+}
+
+#tagline h2 {
+  color: #fff;
+}
+
+#tagline h2 a {
+  color: #ffea00;
+}
+
+#tagline h2 a:hover {
+  color: #FFDC42;
+}
+
+/* Dialog */
+
+#dialog_header {
+  background: url(/images/diagonal.png) #eee;
+  text-shadow: 1px 1px 1px #fff;
+  box-shadow: 0 1px 1px #ddd;
+}
+
+/* Campaign Page */
+
+#campaign_icons a:hover,
+#campaign_icons a:active {
+  color: #4bb0f6;
+}
+
+#stats .hint {
+  background: url(/images/diagonal.png) #f1f1f1;
+  border-bottom: 1px solid #eaeaea;
+  border-top: 1px solid #ddd;
+}
+
+#campaign_bio {
+  background: url(/images/diagonal.png) #f1f1f1;
+  border: 1px solid #ddd;
+}
