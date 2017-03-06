@@ -4,6 +4,8 @@ These files are the default [CrowdfundHQ](https://crowdfundhq.com) site and asse
 The CSS and Javascript files are meant to be used as a base for designing your crowdfunding site.
 All of the CSS styles can be overridden by your own styles.
 
+Here's the [CrowdfundHQ documentation.](https://crowdfundhq.com/docs)
+
 ### Open Source
 All of the files here are Open Source MIT Licensed.
 
