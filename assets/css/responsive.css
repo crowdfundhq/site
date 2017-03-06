@@ -1,11 +1,11 @@
-/* Reset old styles */
+/* Responsive styles */
 
 body{
   overflow: hidden;
   overflow-y: scroll;
 }
 
-.inner-width, #container{
+.inner-width, #container {
   width: 960px;
   min-width: 300px;
   max-width: 100%;
@@ -14,7 +14,7 @@ body{
 /* Reset old styles end */
 
 .mobile,
-.messages_dialog{
+.messages_dialog {
   display: none;
 }
 
@@ -39,27 +39,27 @@ body{
   box-shadow: 0 0 3px rgba(0,0,0,0.3);
 }
 
-.show_dialog .mobile_header{
+.show_dialog .mobile_header {
   display: none;
 }
 
-.mobile_header .mobile_item{
+.mobile_header .mobile_item {
   height: 36px;
   display: inline-block;
   float: left;
   cursor: pointer;
 }
 
-.mobile_header .logotype{
+.mobile_header .logotype {
   float: none;
 }
 
-.mobile_header .logotype img{
+.mobile_header .logotype img {
   height: 36px;
   width: auto;
 }
 
-.mobile_header .nav_toggle{
+.mobile_header .nav_toggle {
   margin-left: 10px;
   padding: 0 10px;
   border-radius: 5px;
@@ -67,12 +67,12 @@ body{
 
 .mobile_header .nav_toggle i,
 .mobile_header .search_toggle i,
-.mobile_search .toggle_search i{
+.mobile_search .toggle_search i {
   margin-top: 9px;
   color: #5E605F;
 }
 
-.mobile_header .search_toggle{
+.mobile_header .search_toggle {
   float: right;
   margin-right: 10px;
   padding: 0 10px;
@@ -80,7 +80,7 @@ body{
 }
 
 .mobile_header .nav_toggle:active,
-.mobile_header .search_toggle:active{
+.mobile_header .search_toggle:active {
   background-color: rgba(0,0,0,0.1);
 }
 
@@ -91,7 +91,7 @@ body{
   top: 0;
 }
 
-.mobile_search input[type="text"]{
+.mobile_search input[type="text"] {
   width: 100%;
   max-width: 100%;
   height: 50px;
@@ -111,7 +111,7 @@ body{
   border-radius: 5px;
 }
 
-.search_overlay{
+.search_overlay {
   display: none;
   position: fixed;
   top: 0;
@@ -126,7 +126,7 @@ body{
 
 /* Navigation */
 
-.mobile_navigation{
+.mobile_navigation {
   display: none;
   position: absolute;
   top: 0;
@@ -142,28 +142,28 @@ body{
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.71);
 }
 
-#top .mobile_navigation .mobile_wrap{
+#top .mobile_navigation .mobile_wrap {
   float: none;
   padding: 0 20px;
 }
 
-.mobile_navigation .mobile_block{
+.mobile_navigation .mobile_block {
   padding-top: 70px;
 }
 
-.mobile_navigation li{
+.mobile_navigation li {
   list-style-type: none;
 }
 
-#top .mobile_navigation ul li{
+#top .mobile_navigation ul li {
   margin: 0;
 }
 
-#top .mobile_navigation ul#mob-menu li.user i[class*="icon-"]{
+#top .mobile_navigation ul#mob-menu li.user i[class*="icon-"] {
   display: none;
 }
 
-.mobile_navigation li a{
+.mobile_navigation li a {
   display: block;
   color: #333;
   text-decoration: none;
@@ -172,16 +172,16 @@ body{
   border-radius: 5px;
 }
 
-.mobile_navigation li.mobile_user > a{
+.mobile_navigation li.mobile_user > a {
   color: #697579;
 }
 
-.mobile_navigation li:not(.user) a:active{
+.mobile_navigation li:not(.user) a:active {
   background-color: #57b1e4;
   color: #fff;
 }
 
-.mobile_navigation li.mobile_user > a:active{
+.mobile_navigation li.mobile_user > a:active {
   background-color: transparent;
   color: #697579;
 }
@@ -194,11 +194,11 @@ body{
 }
 
 .mobile_navigation .main-link:active ._exploration,
-.mobile_navigation .main-link:active .menu-note{
+.mobile_navigation .main-link:active .menu-note {
   color: #fff;
 }
 
-.mobile_navigation .navigation.mobile_block{
+.mobile_navigation .navigation.mobile_block {
   margin-top: 20px;
   border-top: solid 1px #ddd;
 }
@@ -221,15 +221,16 @@ body{
   display: inline-block;
 }
 
-.mobile_navigation .top_bar h3{
+.mobile_navigation .top_bar h3 {
   margin-top: 9px;
   color: #333;
 }
 
-.mobile_navigation .top_bar .btn{
+.mobile_navigation .top_bar .btn {
   float: right;
   margin-top: 3px;
 }
+
 .mobile_navigation .tall{
   display: inline-block;
   margin-top: 0;
@@ -241,30 +242,30 @@ body{
 .mobile_navigation a:hover .green,
 .mobile_navigation a:active .green,
 .mobile_navigation .blue,
-.mobile_navigation a:hover .blue{
+.mobile_navigation a:hover .blue {
   color: #585A59;
 }
 
 .mobile_navigation a:active .green,
-.mobile_navigation a:active .blue{
+.mobile_navigation a:active .blue {
   background-color: #57b1e4;
   color: #fff;
 }
 
 .mobile_navigation .search,
 .mobile_navigation .lang.mobile_block:empty,
-.mobile_navigation #menu .mobile_user i.icon-chevron-left{
+.mobile_navigation #menu .mobile_user i.icon-chevron-left {
   display: none;
 }
 
-.mobile_navigation .lang.mobile_block #lang{
+.mobile_navigation .lang.mobile_block #lang {
   position: static;
   padding: 10px 20px;
   border-top: solid 1px #ddd;
   color: #697579;
 }
 
-.side_hide{
+.side_hide {
   position: absolute;
   top: -50px;
   left: 80vw;
@@ -278,36 +279,35 @@ body{
 
 /* Categories */
 
-.mobile_categories{
+.mobile_categories {
   display: none;
 }
 
 /* Categories end */
 
-
 /* Tablets */
 
-@media screen and (max-width: 960px){
+@media screen and (max-width: 960px) {
   body{
     overflow-y: auto;
   }
 
   .inner-width, #container, .container,
-  body.campaign #tagline .inner-width{
+  body.campaign #tagline .inner-width {
     width: 100%;
     min-width: 300px;
     max-width: 100%;
   }
 
-  .container{
+  .container {
     padding-bottom: 30px;
   }
 
-  #tagline .inner-width{
+  #tagline .inner-width {
     min-width: inherit;
   }
 
-  #container{
+  #container {
     padding: 0 20px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -319,15 +319,15 @@ body{
   .show_mob_search .search_overlay,
   .mobile_categories,
   .mobile_header,
-  .mobile{
+  .mobile {
     display: block;
   }
 
-  form label{
+  form label {
     display: block;
   }
 
-  p label{
+  p label {
     display: initial;
   }
 
@@ -335,7 +335,7 @@ body{
   input[type='password'],
   #campaign_form input[type='text'],
   input#location,
-  #login.row input{
+  #login.row input {
     width: 100%;
     max-width: 250px;
   }
@@ -343,7 +343,7 @@ body{
   input[type='text'],
   input[type='password'],
   #login.row input,
-  textarea{
+  textarea {
     display: block;
     height: 30px;
     -webkit-box-sizing: border-box;
@@ -351,12 +351,12 @@ body{
     box-sizing: border-box;
   }
 
-  textarea{
+  textarea {
     height: 150px;
     max-width: 100%;
   }
 
-  .show_mob_search #overlay{
+  .show_mob_search #overlay {
     z-index: 99;
     overflow: hidden;
   }
@@ -367,11 +367,11 @@ body{
   #top h1.logo,
   #top > #lang,
   #ctabs.nav-tabs,
-  .desktop{
+  .desktop {
     display: none;
   }
 
-  .mobile_categories{
+  .mobile_categories {
     width: 100%;
     font-size: 12pt;
     padding: 10px;
@@ -381,7 +381,7 @@ body{
     box-sizing: border-box;
   }
 
-  .well{
+  .well {
     padding: 0;
     border: none;
   }
@@ -391,39 +391,39 @@ body{
     width: 100%;
   }
 
-  #top{
+  #top {
     border: none;
     margin-top: 50px;
     height: auto;
     box-shadow: none;
   }
 
-  #tagline{
+  #tagline {
     padding: 15px 20px;
     margin: 0;
   }
 
-  #tagline h2{
+  #tagline h2 {
     padding: 5px 0;
   }
 
-  .show_mob_nav .mobile_header{
+  .show_mob_nav .mobile_header {
     display: none;
   }
 
-  .show_mob_nav #top .inner-width{
+  .show_mob_nav #top .inner-width {
     position: static;
   }
 
-  .user_edit_avatar.right.center{
+  .user_edit_avatar.right.center {
     float: none;
   }
 
-  #user-update ~ form{
+  #user-update ~ form {
     padding-bottom: 40px;
   }
 
-  #user-update ~ form .right{
+  #user-update ~ form .right {
     float: none;
     position: absolute;
     margin-top: 50px;
@@ -431,7 +431,7 @@ body{
 
 /* Campaign badge */
 
-  #stick #content #badges{
+  #stick #content #badges {
     width: 100%;
     margin-right: 0;
     margin-left: 0;
@@ -450,12 +450,12 @@ body{
 
   .badge-big.campaign_badge,
   .badge-big.campaign_badge:nth-of-type(3n-1),
-  .badge-big.campaign_badge:nth-of-type(even){
+  .badge-big.campaign_badge:nth-of-type(even) {
     margin: 0 0 10px;
   }
 
   .campaign_image,
-  .badge-big.campaign_badge .campaign_image{
+  .badge-big.campaign_badge .campaign_image {
     width: 100%;
     height: auto;
     max-height: inherit;
@@ -465,20 +465,20 @@ body{
     text-align: center;
   }
 
-  .badge-big.campaign_badge .campaign_header{
+  .badge-big.campaign_badge .campaign_header {
     height: auto;
     padding-bottom: 15px;
   }
 
   .campaign_image img,
-  .badge-big.campaign_badge .campaign_image img{
+  .badge-big.campaign_badge .campaign_image img {
     max-width: initial;
     width: auto;
     height: auto;
     max-height: 150px;
   }
 
-  .badge-big.campaign_badge .campaign_headline{
+  .badge-big.campaign_badge .campaign_headline {
     min-height: 50px;
   }
 
@@ -498,28 +498,28 @@ body{
 
   .badge-big.campaign_badge tr.numbers td:nth-child(3),
   .badge-big.campaign_badge tr.numbers td:nth-child(2),
-  .badge-big.campaign_badge .campaign_progress tr.desc td{
+  .badge-big.campaign_badge .campaign_progress tr.desc td {
     position: static;
     float: left;
     width: 50%;
   }
 
-  .campaign_badge:nth-of-type(3n-1){
+  .campaign_badge:nth-of-type(3n-1) {
     margin: 0 2% 10px;
   }
 
-  .campaign_share{
+  .campaign_share {
     display: inline-block;
   }
 
-  .campaign_badge tr.numbers td:first-of-type{
+  .campaign_badge tr.numbers td:first-of-type {
     font-size: 11pt;
     -webkit-text-size-adjust: 100%; /* prevent text scale in landscape mode*/
     text-size-adjust: 100%;
   }
 
   .campaign_category,
-  .badge-big.campaign_badge .campaign_category{
+  .badge-big.campaign_badge .campaign_category {
     position: relative;
     bottom: 29px;
     width: 100%;
@@ -541,7 +541,7 @@ body{
   .badges-badge-classic .campaign_badge tr.numbers td:first-of-type,
   .badges-badge-classic .campaign_badge tr.numbers td:nth-child(3),
   .badges-badge-classic .campaign_badge tr.numbers td:nth-child(2),
-  .badges-badge-classic .campaign_badge .campaign_progress tr.desc td{
+  .badges-badge-classic .campaign_badge .campaign_progress tr.desc td {
     font-size: 9pt;
     width: 33.3%;
     float: left;
@@ -549,34 +549,34 @@ body{
     top: 0;
   }
 
-  .badges-badge-classic .campaign_badge .campaign_progress tr.desc td{
+  .badges-badge-classic .campaign_badge .campaign_progress tr.desc td {
     font-size: 7pt;
   }
 
-  .badge-big.campaign_badge{
+  .badge-big.campaign_badge {
     max-height: initial;
   }
 
   .campaign_image img,
-  .badge-big.campaign_badge .campaign_image img{
+  .badge-big.campaign_badge .campaign_image img {
     height: 150px;
     max-width: 100%;
   }
 
-  .badge-big.campaign_badge .campaign_image img{
+  .badge-big.campaign_badge .campaign_image img {
     height: 250px;
     max-height: 250px;
   }
 
-  .badges-badge-classic .badge-big.campaign_badge .campaign_progress{
+  .badges-badge-classic .badge-big.campaign_badge .campaign_progress {
     padding: 10px;
   }
 
-  .badges-badge-classic .progressbar{
+  .badges-badge-classic .progressbar {
     width: 100%;
   }
 
-  .badges-badge-classic .badge-big.campaign_badge .campaign_location{
+  .badges-badge-classic .badge-big.campaign_badge .campaign_location {
     position: static;
   }
 
@@ -599,7 +599,7 @@ body{
 
   /* Footer */
 
-  #footer{
+  #footer {
     position: relative;
     min-height: 100px;
     height: auto;
@@ -607,24 +607,24 @@ body{
     padding: 20px;
   }
 
-  #footer .nav{
+  #footer .nav {
     display: block;
     padding: 20px 0 10px;
     max-width: 100%;
     overflow: hidden;
   }
 
-  #footer .nav li{
+  #footer .nav li {
     margin: 0;
     height: 30px;
     float: none;
   }
 
-  #footer .nav a{
+  #footer .nav a {
     padding: 5px 0;
   }
 
-  #footer a.powered-by{
+  #footer a.powered-by {
     display: block;
     height: 36px;
     margin-top: 30px;
@@ -632,7 +632,7 @@ body{
     float: none;
   }
 
-  #footer a.powered-by *{
+  #footer a.powered-by * {
     display: none;
   }
   /* Footer end */
@@ -640,7 +640,7 @@ body{
   /* Dialog */
 
   div#overlay,
-  .messages_dialog{
+  .messages_dialog {
     min-height: 100vh;
     position: absolute;
   }
@@ -698,13 +698,13 @@ body{
   }
 
   #dialog_header a.close,
-  .messages_dialog .dialog_header a.close{
+  .messages_dialog .dialog_header a.close {
     position: fixed;
   }
 
   #dialog_header a.close::before,
   .mobile_search .toggle_search:before,
-  .messages_dialog .dialog_header a.close:before{
+  .messages_dialog .dialog_header a.close:before {
     /* content: 'Close'; */
     font-size: 10pt;
     position: absolute;
@@ -712,7 +712,7 @@ body{
     color: #888;
   }
 
-  .mobile_search .toggle_search{
+  .mobile_search .toggle_search {
     padding: 0;
     height: 24px;
   }
@@ -734,7 +734,7 @@ body{
   }
 
   #login.row h4,
-  #login.row #email_login h5{
+  #login.row #email_login h5 {
     font-weight: 600;
   }
 
@@ -753,12 +753,12 @@ body{
 
   /* Create campaign */
 
-  a.campaign_image_upload{
+  a.campaign_image_upload {
     white-space: nowrap;
     margin-left: 0;
   }
 
-  .upload-form-file ~ a{
+  .upload-form-file ~ a {
     display: inline-block;
     white-space: nowrap;
     margin-top: 10px;
@@ -769,40 +769,40 @@ body{
   /* Campaign page */
 
   #campaign_sidebar,
-  #campaign_content{
+  #campaign_content {
     width: 100%;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
 
-  #campaign_sidebar.grid_4{
+  #campaign_sidebar.grid_4 {
     margin-right: 0;
     padding-right: 0;
   }
 
-  .campaign #campaign_content{
+  .campaign #campaign_content {
     padding: 0 20px;
   }
 
-  #stats li{
+  #stats li {
     display: inline-block;
     margin-right: 20px;
   }
 
-  #stats .hint{
+  #stats .hint {
     width: 100%;
     margin: 0 0 30px;
     padding: 10px 0;
   }
 
-  #mobile_campaign_video.mobile{
+  #mobile_campaign_video.mobile {
     height: auto;
     max-width: inherit;
     text-align: center;
   }
 
-  #campaign_content{
+  #campaign_content {
     margin-top: 0;
   }
 
@@ -818,23 +818,23 @@ body{
     padding: 20px 0 0;
   }
 
-  ul#commitment-list{
+  ul#commitment-list {
     min-height: 18px;
   }
 
   #campaign_stats,
-  #campaign_files .block-list{
+  #campaign_files .block-list {
     max-width: 100%;
     overflow-x: auto;
     margin-bottom: 20px;
   }
 
   #campaign_stats table,
-  #campaign_files .block-list li{
+  #campaign_files .block-list li {
     min-width: 480px;
   }
 
-  ul#mobile_campaign_share{
+  ul#mobile_campaign_share {
     margin-bottom: 20px;
     padding: 20px 20px 0;
   }
@@ -845,19 +845,19 @@ body{
     margin-bottom: 15px;
   }
 
-  ul#mobile_campaign_share.mobile > #campaign_reminder{
+  ul#mobile_campaign_share.mobile > #campaign_reminder {
     float: none;
   }
 
-  ul#mobile_campaign_share .share-hint{
+  ul#mobile_campaign_share .share-hint {
     top: -2px;
   }
 
-  ul#mobile_campaign_share li#embed_campaign .icon-code{
+  ul#mobile_campaign_share li#embed_campaign .icon-code {
     top: 0;
   }
 
-  ul#mobile_campaign_share li#campaign_reminder .icon{
+  ul#mobile_campaign_share li#campaign_reminder .icon {
     top: 2px;
     position: relative;
   }
@@ -876,7 +876,7 @@ body{
   #user_profile > div,
   /*#user_profile .campaign_badge,*/
   #conversation_list,
-  #conversation_show{
+  #conversation_show {
     width: 100%;
     max-height: initial;
     -webkit-box-sizing: border-box;
@@ -887,21 +887,21 @@ body{
   #new_contribution .campaign_image img,
   #campaign_dash ~ div > .campaign_badge .campaign_image img,
   #user_profile .campaign_image img,
-  #thank_you .campaign_image img{
-    max-height: 300px
+  #thank_you .campaign_image img {
+    max-height: 300px;
   }
 
   #user_profile .campaign_header,
   #new_contribution .campaign_header,
   #campaign_dash ~ div > .campaign_badge .campaign_header,
-  #thank_you .campaign_header{
+  #thank_you .campaign_header {
     height: auto;
   }
 
   #new_contribution .campaign_headline,
   #user_profile .campaign_headline,
   #campaign_dash ~ div > .campaign_badge .campaign_headline,
-  #thank_you .campaign_headline{
+  #thank_you .campaign_headline {
     min-height: initial;
   }
 
@@ -930,7 +930,7 @@ body{
   /* Inbox */
 
   #conversation_list .right.dd_list,
-  .messages_dialog .right.dd_list{
+  .messages_dialog .right.dd_list {
     display: none;
     position: absolute;
     top: 0;
@@ -942,17 +942,17 @@ body{
   }
 
   .show_messages #conversation_list,
-  .show_messages .mobile_header{
+  .show_messages .mobile_header {
     display: none;
   }
 
   #conversation_list .right.dd_list.show,
-  .messages_dialog .right.dd_list.show{
+  .messages_dialog .right.dd_list.show {
     display: block;
   }
 
   #conversation_list ul.block-list li,
-  .messages_dialog #message-list li{
+  .messages_dialog #message-list li {
     position: relative;
     background-color: #fff;
     height: 60px;
@@ -963,15 +963,15 @@ body{
     box-sizing: border-box;
   }
 
-  .messages_dialog #message-list li{
+  .messages_dialog #message-list li {
     height: auto;
   }
 
-  .messages_dialog #message-list li p:last-of-type{
+  .messages_dialog #message-list li p:last-of-type {
     margin-bottom: 0;
   }
 
-  #conversation_list ul.block-list li > a:last-of-type{
+  #conversation_list ul.block-list li > a:last-of-type {
     height: 18px;
     display: list-item;
     white-space: nowrap;
@@ -980,12 +980,12 @@ body{
     overflow: hidden;
   }
 
-  #conversation_list ul.block-list li > .right:first-of-type{
+  #conversation_list ul.block-list li > .right:first-of-type {
     margin-right: 50px;
   }
 
   #conversation_list span._label,
-  .dd.mobile ._label{
+  .dd.mobile ._label {
     position: absolute;
     top: 0;
     right: 0;
@@ -999,13 +999,13 @@ body{
     background: white;
   }
 
-  .messages_dialog .right.dd_list{
+  .messages_dialog .right.dd_list {
     bottom: auto;
     height: 68px;
   }
 
   #conversation_list .right.dd_list a,
-  .messages_dialog .right.dd_list a{
+  .messages_dialog .right.dd_list a {
     width: 50px;
     display: inline-block;
     float: left;
@@ -1014,15 +1014,15 @@ body{
     line-height: 65px;
   }
 
-  .messages_dialog .right.dd_list a{
+  .messages_dialog .right.dd_list a {
     line-height: 70px;
   }
 
-  .messages_dialog #message_content{
+  .messages_dialog #message_content {
     min-height: 150px;
   }
 
-  .messages_dialog{
+  .messages_dialog {
     display: none;
     position: absolute;
     top: 0;
@@ -1033,12 +1033,12 @@ body{
     z-index: 9999;
   }
 
-  .show_messages .messages_dialog{
+  .show_messages .messages_dialog {
     display: block;
   }
 
   .dialog_content #conversation_content h3,
-  #conversation_show{
+  #conversation_show {
     display: none;
   }
 
@@ -1046,57 +1046,56 @@ body{
 
   /* Error messages */
 
-  .field_error{
+  .field_error {
     display: block;
     margin: 10px 0;
   }
 
   /* Error messages end */
 
+  /* Blog */
 
-  /*Blog*/
-
-  .blog-sidebar-wrapper.grid_4.right.last{
+  .blog-sidebar-wrapper.grid_4.right.last {
     margin-bottom: 40px;
   }
 
   .blog-sidebar-wrapper.grid_4.right.last,
   .blog-sidebar-wrapper.grid_4.right.last input[type="text"],
-  .blog-content-wrapper.grid_8{
+  .blog-content-wrapper.grid_8 {
     float: none;
     width: 100%;
     max-width: 100%;
   }
 
-  .blog-content-wrapper.grid_8{
+  .blog-content-wrapper.grid_8 {
     margin-right: 0;
   }
 
-  .blog-content-wrapper.grid_8 .well{
+  .blog-content-wrapper.grid_8 .well {
     padding: 19px;
   }
-  /*Blog END*/
 
+  /*Blog END*/
 }
 
 /* Tablets end */
 
 /* Big phones */
 
-@media screen and (max-width: 640px){
+@media screen and (max-width: 640px) {
   .campaign_badge {
     width: 48%;
   }
 
-  .campaign_badge:nth-of-type(3n-1){
+  .campaign_badge:nth-of-type(3n-1) {
     margin: 0 0 10px;
   }
 
-  .campaign_badge:nth-of-type(odd){
+  .campaign_badge:nth-of-type(odd) {
     margin-right: 4%;
   }
 
-  #new_contribution .campaign_badge{
+  #new_contribution .campaign_badge {
     width: 100%;
     margin: 0 0 10px;
     -webkit-box-sizing: border-box;
@@ -1104,9 +1103,9 @@ body{
     box-sizing: border-box;
   }
 
-  /*Blog*/
+  /* Blog */
 
-  .blog_actions.right{
+  .blog_actions.right {
     float: none;
     margin: 30px 0 20px;
   }
@@ -1118,14 +1117,14 @@ body{
 
 /* Phones */
 
-@media screen and (max-width: 480px){
+@media screen and (max-width: 480px) {
   .campaign_badge {
     width: 100%;
   }
 
   .campaign_badge:nth-of-type(3n-1),
   .campaign_badge:nth-of-type(even),
-  .campaign_badge:nth-of-type(odd){
+  .campaign_badge:nth-of-type(odd) {
     margin: 0 0 2em;
   }
 
@@ -1133,5 +1132,4 @@ body{
     font-size: 90%;
   }
 }
-
 /* Phones end */

@@ -1,158 +1,149 @@
-/*
-
-Should be used ONLY with neue.css
-
-*/
+/* Breeze Theme. Should be used ONLY with neue.css */
 
 body,
-#badges{
-	background: #F7F6F5;
+#badges {
+  background: #F7F6F5;
 }
 
 a,
 #dialog_header a.close,
 .mobile_search .toggle_search,
-.messages_dialog .dialog_header a.close{
-     color: #2CA6AD;
+.messages_dialog .dialog_header a.close {
+  color: #2CA6AD;
 }
 
 a:hover,
-a:focus{
-    color: #41afb5;
+a:focus {
+  color: #41afb5;
 }
 
-a:active{
-     color: #28959c;
+a:active {
+  color: #28959c;
 }
 
 a.delete,
-.field_error{
-     color: #D83478;
+.field_error {
+  color: #D83478;
 }
 
 a.delete:hover,
-a.delete:focus{
-    color: #dc4886;
+a.delete:focus {
+  color: #dc4886;
 }
 
-a.delete:active{
-     color: #c22f6c;
+a.delete:active {
+  color: #c22f6c;
 }
-
-
 
 button,
 .btn,
-#campaign_nav.nav-tabs li a .count{
-     background-color: #2CA6AD;
+#campaign_nav.nav-tabs li a .count {
+  background-color: #2CA6AD;
 }
 
 button:hover,
 .btn:hover,
 button:focus,
-.btn:focus{
-    background-color: #41afb5;
+.btn:focus {
+  background-color: #41afb5;
 }
 
 button:active,
-.btn:active{
-     background-color: #28959c;
+.btn:active {
+  background-color: #28959c;
 }
-
-
 
 /*-------Top bar-------*/
 
-#top{
-	background: rgba(22, 103, 107, 0.99);
+#top {
+  background: rgba(22, 103, 107, 0.99);
 }
 
-#top h1.logo a{
-	color: #fff;
+#top h1.logo a {
+  color: #fff;
 }
 
 #top nav ul li.main-link a .green,
-#top nav ul li.main-link a .blue{
-	color: #fff;
+#top nav ul li.main-link a .blue {
+  color: #fff;
 }
 
-.menu-note{
-	color: #CEF5F7;
+.menu-note {
+  color: #CEF5F7;
 }
 
 li.search .icon-search,
 #top nav ul li.search input,
-#top nav ul li.user ul li:last-child{
-	border-color: #185B5F;
+#top nav ul li.user ul li:last-child {
+  border-color: #185B5F;
 }
 
-li.search .icon-search{
-	color: #fff;
+li.search .icon-search {
+  color: #fff;
 }
 
-#top nav ul.user li a{
-	color: #f0f0f0;
+#top nav ul.user li a {
+  color: #f0f0f0;
 }
 
 #top nav ul.user li a:hover,
-#top nav ul.user li a:focus{
-	color: #FFF;
+#top nav ul.user li a:focus {
+  color: #FFF;
 }
 
-#top nav ul.user li a:active{
-	color: #f0f0f0;
+#top nav ul.user li a:active {
+  color: #f0f0f0;
 }
 
 #top nav ul li.user ul::before,
-#top nav ul li.user ul{
-    background: #17686C;
+#top nav ul li.user ul {
+  background: #17686C;
 }
 
-#top nav ul li.user ul li{
-     background-color: #17686C;
+#top nav ul li.user ul li {
+  background-color: #17686C;
 }
 
 #top nav ul li.user ul li:hover,
-#top nav ul li.user ul li:focus{
-    background-color: #2e777b;
+#top nav ul li.user ul li:focus {
+  background-color: #2e777b;
 }
 
-#top nav ul li.user ul li:active{
-     background-color: #155e61;
+#top nav ul li.user ul li:active {
+  background-color: #155e61;
 }
-
 
 /*-------Nav Tabs-------*/
 
 ul.nav-tabs li a.selected,
 .sidebar-left #content ul#ctabs.nav.nav-tabs li a.selected,
 .sidebar-right #content ul#ctabs.nav.nav-tabs li a.selected,
-.sidebar-sticky #content ul#ctabs.nav.nav-tabs li a.selected{
-	border-bottom: solid 2px #27A0A7;
+.sidebar-sticky #content ul#ctabs.nav.nav-tabs li a.selected {
+  border-bottom: solid 2px #27A0A7;
 }
 
 ul.nav-tabs li a.selected,
 ul.nav-tabs li a:hover,
-ul#campaign_dash.nav li a:hover{
-    background: rgba(22,103,107,0.05);
+ul#campaign_dash.nav li a:hover {
+  background: rgba(22,103,107,0.05);
 }
 
 ul.nav-tabs li a:active,
-ul#campaign_dash.nav li a:active{
-    background: rgba(22,103,107,0.1);
+ul#campaign_dash.nav li a:active {
+  background: rgba(22,103,107,0.1);
 }
 
 /*-------Errors-------*/
 
 #flash #info,
 #dialog_info,
-.alert{
+.alert {
   background: #2CA6AD;
   color: #fff;
 }
 
 #flash #error,
-#dialog_flash #dialog_error{
+#dialog_flash #dialog_error {
   background: #D83478;
   color: #fff;
 }
@@ -160,40 +151,40 @@ ul#campaign_dash.nav li a:active{
 /*-------Campaign-------*/
 
 ul#campaign_dash.nav li a.active,
-.nav.nav-pills a.active{
-	background: #2CA6AD;
+.nav.nav-pills a.active {
+  background: #2CA6AD;
 }
 
 .campaign_successful,
-.progressbar .progress{
-    background-color: #27A0A7;
+.progressbar .progress {
+  background-color: #27A0A7;
 }
 
-#campaign_content{
+#campaign_content {
   background: #fff;
 }
 
-tr.numbers td:nth-child(2):before{
-	color: #D83478;
+tr.numbers td:nth-child(2):before {
+  color: #D83478;
 }
 
-tr.numbers td:nth-child(3):before{
-	color: #F5B350;
+tr.numbers td:nth-child(3):before {
+  color: #F5B350;
 }
 
-#new_contribution > .grid_8{
-	background: #fff;
+#new_contribution > .grid_8 {
+  background: #fff;
 }
 
 /*-------Footer-------*/
 
-#footer{
-	background: #1B676B;
+#footer {
+  background: #1B676B;
 }
 
 /* Mobile Header
 ------------------------------------------------ */
 
-.mobile_header .mobile_search .toggle_search i{
-    color: #2CA6AD;
+.mobile_header .mobile_search .toggle_search i {
+  color: #2CA6AD;
 }

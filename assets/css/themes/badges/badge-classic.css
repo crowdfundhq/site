@@ -1,4 +1,4 @@
-/*BADGE*/
+/* Campaign Classic Badges */
 
 .campaign_badge {
   width: 214px;
@@ -9,7 +9,7 @@
   color: #444;
 }
 
-.campaign_badge.badge-last{
+.campaign_badge.badge-last {
   margin-right: 0;
 }
 
@@ -220,4 +220,3 @@
   font-size: 85%;
   color: #444;
 }
-

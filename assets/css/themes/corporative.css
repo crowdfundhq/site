@@ -1,74 +1,68 @@
-/*
-
-Should be used ONLY with neue.css
-
-*/
-
+/* Corporative Theme. Should be used ONLY with neue.css */
 body,
-#badges{
+#badges {
   background: #FAFAFA;
 }
 
 a,
 #dialog_header a.close,
 .mobile_search .toggle_search,
-.messages_dialog .dialog_header a.close{
+.messages_dialog .dialog_header a.close {
   color: #1CAF9A;
 }
 
 a:hover,
-a:focus{
+a:focus {
   color: #33b7a4;
 }
 
-a:active{
+a:active {
   color: #199e8b;
 }
 
 a.delete,
-.field_error{
+.field_error {
   color: #EE6456;
 }
 
 a.delete:hover,
-a.delete:focus{
+a.delete:focus {
   color: #f07467;
 }
 
-a.delete:active{
+a.delete:active {
   color: #d65a4d;
 }
 
 button,
 .btn,
-#campaign_nav.nav-tabs li a .count{
+#campaign_nav.nav-tabs li a .count {
   background-color: #1CAF9A;
 }
 
 button:hover,
 .btn:hover,
 button:focus,
-.btn:focus{
+.btn:focus {
   background-color: #33b7a4;
   outline: none;
 }
 
 button:active,
-.btn:active{
+.btn:active {
   background-color: #199e8b;
 }
 
-
-.btn-warning{
+.btn-warning {
   background-color: #E74C3C;
 }
 
 .btn-warning:hover,
-.btn-warning:focus{
+.btn-warning:focus {
   background-color: #e95e50;
 }
 
-.btn-warning:active{
+.btn-warning:active {
   background-color: #d04436;
 }
 
@@ -87,33 +81,33 @@ button:active,
   background: rgba(28,175,154,0.15);
 }
 
-.well{
+.well {
   background: #FAFAFA;
 }
 
 
 /*-------Top bar-------*/
 
-#top{
+#top {
   background: #1D2939;
 }
 
-#top h1.logo a{
+#top h1.logo a {
   color: #fff;
 }
 
-#top nav ul li.main-link a{
+#top nav ul li.main-link a {
   padding: 0 10px;
 }
 
 #top nav ul li.main-link a .green,
-#top nav ul li.main-link a .blue{
+#top nav ul li.main-link a .blue {
   position: relative;
   color: #fff;
 }
 
 #top nav ul li.main-link a .green:after,
-#top nav ul li.main-link a .blue:after{
+#top nav ul li.main-link a .blue:after {
   content: '';
   position: absolute;
   left: 0;
@@ -124,17 +118,17 @@ button:active,
 }
 
 #top nav ul li.main-link a:hover .green:after,
-#top nav ul li.main-link a:hover .blue:after{
+#top nav ul li.main-link a:hover .blue:after {
   width: 100%;
 }
 
-.menu-note{
+.menu-note {
   display: none;
   color: #FFF;
   top: -1px;
 }
 
-#top nav ul li.main-link a:hover{
+#top nav ul li.main-link a:hover {
   -webkit-transform: translateY(0);
   -moz-transform: translateY(0);
   -o-transform: translateY(0);
@@ -142,7 +136,7 @@ button:active,
   transform: translateY(0);
 }
 
-#top nav ul li.main-link a:focus{
+#top nav ul li.main-link a:focus {
   outline: none;
 }
 
@@ -156,11 +150,11 @@ button:active,
 
 li.search .icon-search,
 #top nav ul li.search input,
-#top nav ul li.user ul li:last-child{
+#top nav ul li.user ul li:last-child {
   border-color: transparent;
 }
 
-#top nav ul li.search input{
+#top nav ul li.search input {
   background: transparent;
   color: #f2f2f2;
   z-index: 99;
@@ -180,64 +174,64 @@ li.search .icon-search,
   z-index: 9;
 }
 
-li.search .icon-search{
+li.search .icon-search {
   color: #EE6456;
   line-height: 79px;
   z-index: 10;
 }
 
-#top nav ul.user li a{
+#top nav ul.user li a {
   color: #f0f0f0;
 }
 
 #top nav ul.user li a:hover,
-#top nav ul.user li a:focus{
+#top nav ul.user li a:focus {
   color: #FFF;
 }
 
-#top nav ul.user li a:active{
+#top nav ul.user li a:active {
   color: #f0f0f0;
 }
 
-#top nav ul.user li a i[class*="icon-"]{
+#top nav ul.user li a i[class*="icon-"] {
   color: #FFF;
 }
 
-#top nav ul li.user ul::before{
+#top nav ul li.user ul::before {
 }
 
 #top nav ul li.user ul::before,
-#top nav ul li.user ul{
+#top nav ul li.user ul {
   border: none;
   background: #1D2939;
 }
 
-#top nav ul li.user ul li{
+#top nav ul li.user ul li {
   background-color: #1D2939;
 }
 
 #top nav ul li.user ul li:hover,
-#top nav ul li.user ul li:focus{
+#top nav ul li.user ul li:focus {
   background-color: #343e4d;
 }
 
-#top nav ul li.user ul li:active{
+#top nav ul li.user ul li:active {
   background-color: #1a2533;
 }
 
 /*-------Nav Tabs-------*/
 
-.sidebar-sticky #content ul#ctabs.nav.nav-tabs{
+.sidebar-sticky #content ul#ctabs.nav.nav-tabs {
   width: 15%;
   padding-right: 5%;
 }
 
-.sidebar-sticky #content #badges.well.white{
+.sidebar-sticky #content #badges.well.white {
   width: 80%;
   margin-left: 20%;
 }
 
-.sidebar-right #content #badges.well.white{
+.sidebar-right #content #badges.well.white {
   width: 80%;
 }
 
@@ -245,22 +239,22 @@ ul.nav-tabs li a.selected,
 ul.nav-tabs li a.active,
 .sidebar-left #content ul#ctabs.nav.nav-tabs li a.selected,
 .sidebar-right #content ul#ctabs.nav.nav-tabs li a.selected,
-.sidebar-sticky #content ul#ctabs.nav.nav-tabs li a.selected{
+.sidebar-sticky #content ul#ctabs.nav.nav-tabs li a.selected {
   border-bottom: solid 2px #EE6456;
 }
 
 ul.nav-tabs li a.selected,
 ul.nav-tabs li a:hover,
-ul#campaign_dash.nav li a:hover{
+ul#campaign_dash.nav li a:hover {
   background: rgba(52,152,219,0);
 }
 
 ul.nav-tabs li a:active,
-ul#campaign_dash.nav li a:active{
+ul#campaign_dash.nav li a:active {
   background: rgba(28,175,154,0.1);
 }
 
-a.category-tab.selected ~ ul#category-dropdown{
+a.category-tab.selected ~ ul#category-dropdown {
   border-color: #EE6456;
 }
 
@@ -268,13 +262,13 @@ a.category-tab.selected ~ ul#category-dropdown{
 
 #flash #info,
 #dialog_info,
-.alert{
+.alert {
   background: #1CAF9A;
   color: #fff;
 }
 
 #flash #error,
-#dialog_flash #dialog_error{
+#dialog_flash #dialog_error {
   background: #EE6456;
   color: #fff;
 }
@@ -282,21 +276,20 @@ a.category-tab.selected ~ ul#category-dropdown{
 /*-------Campaign-------*/
 
 ul#campaign_dash.nav li a.active,
-.nav.nav-pills a.active{
+.nav.nav-pills a.active {
   background: #1CAF9A;
 }
 
 .campaign_successful,
-.progressbar .progress{
+.progressbar .progress {
   background-color: #27A0A7;
 }
 
-#campaign_content{
+#campaign_content {
   background: #fff;
 }
 
-
-#new_contribution > .grid_8{
+#new_contribution > .grid_8 {
   background: #fff;
 }
 
@@ -310,7 +303,7 @@ ul#campaign_dash.nav li a.active,
   border-bottom: solid 1px #EAEAEA;
 }
 
-#campaign_data{
+#campaign_data {
   background-color: #fff;
 }
 
@@ -325,9 +318,9 @@ ul#campaign_dash.nav li a.active,
 
 /*-------Profile-------*/
 
-@media screen and (max-width: 960px){
+@media screen and (max-width: 960px) {
 
-  div#user_profile .grid_6 .well.white{
+  div#user_profile .grid_6 .well.white {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
@@ -344,7 +337,7 @@ ul#campaign_dash.nav li a.active,
 
 .home .campaign_badge:not(.badge-big),
 .discover .campaign_badge:not(.badge-big),
-.search .campaign_badge:not(.badge-big){
+.search .campaign_badge:not(.badge-big) {
   margin-right: 0;
   width: 32%;
 }
@@ -356,14 +349,13 @@ ul#campaign_dash.nav li a.active,
   margin-right: 2%;
 }
 
-
-@media screen and (min-width: 960px){
+@media screen and (min-width: 960px) {
   .sidebar-default.home .campaign_badge:not(.badge-big),
   .sidebar-default.discover .campaign_badge:not(.badge-big),
   .sidebar-default.search .campaign_badge:not(.badge-big),
   .sidebar-dropdown.home .campaign_badge:not(.badge-big),
   .sidebar-dropdown.discover .campaign_badge:not(.badge-big),
-  .sidebar-dropdown.search .campaign_badge:not(.badge-big){
+  .sidebar-dropdown.search .campaign_badge:not(.badge-big) {
     width: 24%;
     margin-left: 0;
     margin-right: 0;
@@ -374,12 +366,12 @@ ul#campaign_dash.nav li a.active,
   .sidebar-default.search .campaign_badge:not(.badge-big):not(:nth-of-type(4n+4)),
   .sidebar-dropdown.home .campaign_badge:not(.badge-big):not(:nth-of-type(4n+4)),
   .sidebar-dropdown.discover .campaign_badge:not(.badge-big):not(:nth-of-type(4n+4)),
-  .sidebar-dropdown.search .campaign_badge:not(.badge-big):not(:nth-of-type(4n+4)){
+  .sidebar-dropdown.search .campaign_badge:not(.badge-big):not(:nth-of-type(4n+4)) {
     margin-right: 1.333%;
   }
 }
 
-.campaign_badge .campaign_image{
+.campaign_badge .campaign_image {
   background: rgba(34,177,156,0.05);
 }
 
@@ -391,29 +383,29 @@ ul#campaign_dash.nav li a.active,
   background-color: rgba(78, 191, 175, 0.05);
 }
 
-.campaign_progress .progress_info tr.numbers td:nth-child(2):before{
+.campaign_progress .progress_info tr.numbers td:nth-child(2):before {
   color: #EE6456;
 }
 
-.campaign_progress .progress_info tr.numbers td:nth-child(3):before{
+.campaign_progress .progress_info tr.numbers td:nth-child(3):before {
   color: #EED056;
 }
 
 .badge-big.campaign_badge .progressbar,
 #stats .progressbar,
-.campaign_progress .progressbar{
+.campaign_progress .progressbar {
   background: #1D2939;
 }
 
 .progressbar .progress,
-.campaign_badge .campaign_successful{
+.campaign_badge .campaign_successful {
   background: #1CAF9A;
 }
 
-@media screen and (max-width: 640px){
+@media screen and (max-width: 640px) {
   .home .campaign_badge:not(.badge-big),
   .discover .campaign_badge:not(.badge-big),
-  .search .campaign_badge:not(.badge-big){
+  .search .campaign_badge:not(.badge-big) {
     margin-right: 0;
     width: 49%;
   }
@@ -433,13 +425,13 @@ ul#campaign_dash.nav li a.active,
   }
 }
 
-@media screen and (max-width: 480px){
+@media screen and (max-width: 480px) {
   .home .campaign_badge:not(.badge-big):nth-of-type(odd),
   .discover .campaign_badge:not(.badge-big):nth-of-type(odd),
   .search .campaign_badge:not(.badge-big):nth-of-type(odd),
   .home .campaign_badge:not(.badge-big):nth-of-type(even),
   .discover .campaign_badge:not(.badge-big):nth-of-type(even),
-  .search .campaign_badge:not(.badge-big):nth-of-type(even){
+  .search .campaign_badge:not(.badge-big):nth-of-type(even) {
     margin-right: 0;
     margin-left: 0;
     width: 100%;
@@ -448,7 +440,7 @@ ul#campaign_dash.nav li a.active,
 
 /*-------Groups-------*/
 
-#group_info{
+#group_info {
   padding: 20px;
   box-shadow: 0 0 3px rgba(44,62,80,0.3);
   border-radius: 5px;
@@ -457,13 +449,13 @@ ul#campaign_dash.nav li a.active,
   background-color: #fff;
 }
 
-#group_info .group_site{
+#group_info .group_site {
   position: relative;
   display: block;
   padding-left: 20px;
 }
 
-#group_info .group_site:before{
+#group_info .group_site:before {
   position: absolute;
   left: 0;
   font-size: 14px;
@@ -493,7 +485,7 @@ ul#campaign_dash.nav li a.active,
   margin-bottom: 10px;
 }
 
-#group_info .group_total_amount{
+#group_info .group_total_amount {
   margin-top: 10px;
 }
 
@@ -509,11 +501,11 @@ ul#campaign_dash.nav li a.active,
   vertical-align: middle;
 }
 
-.group_badge .group_img img{
+.group_badge .group_img img {
   vertical-align: middle;
 }
 
-.row .grid_4.group_badge{
+.row .grid_4.group_badge {
   border-radius: 5px;
   overflow: hidden;
   border: none;
@@ -551,21 +543,21 @@ ul#campaign_dash.nav li a.active,
   color: #33b7a4;
 }
 
-@media screen and (max-width: 640px){
-  .row .grid_4.group_badge{
+@media screen and (max-width: 640px) {
+  .row .grid_4.group_badge {
     width: 49%;
     margin-left: 0;
     margin-right: 0;
   }
 
-  .row .grid_4.group_badge:nth-of-type(odd){
+  .row .grid_4.group_badge:nth-of-type(odd) {
     margin-right: 2%;
   }
 }
 
-@media screen and (max-width: 480px){
+@media screen and (max-width: 480px) {
   .row .grid_4.group_badge,
-  .row .grid_4.group_badge:nth-of-type(odd){
+  .row .grid_4.group_badge:nth-of-type(odd) {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
@@ -574,16 +566,16 @@ ul#campaign_dash.nav li a.active,
 
 /*-------Content-------*/
 
-body.search #tagline h2{
+body.search #tagline h2 {
   color: #EE6456;
   font-weight: 600;
 }
 
-body.search #tagline h2:before{
+body.search #tagline h2:before {
   content: '\201C';
 }
 
-body.search #tagline h2:after{
+body.search #tagline h2:after {
   content: '\201D';
 }
 
@@ -605,7 +597,7 @@ body.search #tagline h2:after{
   height: 29px;
 }
 
-#dialog_content .right .delete.small{
+#dialog_content .right .delete.small {
   font-size: 100%;
   margin-left: 10px;
   line-height: 29px;
@@ -614,6 +606,6 @@ body.search #tagline h2:after{
 /* Mobile Header
 ------------------------------------------------ */
 
-.mobile_header .mobile_search .toggle_search i{
+.mobile_header .mobile_search .toggle_search i {
   color: #1CAF9A;
 }

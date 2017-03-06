@@ -11,55 +11,55 @@ strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fiel
 form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside,
 canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output,
 ruby, section, summary, time, mark, audio, video {
-    border:         0;
-    font-size:      100%;
-    font:           inherit;
-    margin:         0;
-    padding:        0;
-    vertical-align: baseline;
+  border:         0;
+  font-size:      100%;
+  font:           inherit;
+  margin:         0;
+  padding:        0;
+  vertical-align: baseline;
 }
 
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-    display: block;
+  display: block;
 }
 
 body {
-    line-height: 1.3;
+  line-height: 1.3;
 }
 
 ol, ul, ol li, ul li {
-    list-style-type: none;
-    margin:          0px;
-    padding:         0px;
+  list-style-type: none;
+  margin:          0px;
+  padding:         0px;
 }
 
 blockquote, q {
-    quotes: none;
+  quotes: none;
 }
 
 blockquote:before, blockquote:after, q:before, q:after  {
-    content: '';
-    content: none;
+  content: '';
+  content: none;
 }
 
 table {
-    /**
-     * Instead of "collapse" I'm using "separate" as that allows me to give table cells
-     * a border without having to go through a lot of trouble
-     */
-    border-collapse: separate;
-    border-spacing:  0;
-    width:           100%;
+  /**
+   * Instead of "collapse" I'm using "separate" as that allows me to give table cells
+   * a border without having to go through a lot of trouble
+   */
+  border-collapse: separate;
+  border-spacing:  0;
+  width:           100%;
 }
 
-    table th {
-        font-weight: bold;
-    }
+table th {
+  font-weight: bold;
+}
 
 pre, code {
-    font-size:   13px;
-    font-family: monospace;
+  font-size:   13px;
+  font-family: monospace;
 }
 
 /**
@@ -68,49 +68,46 @@ pre, code {
  */
 input[type="submit"], input[type="button"], input[type="checkbox"], input[type="radio"],
 button, select {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-*[disabled],
-*[disabled="disabled"] {
-    cursor: not-allowed;
+*[disabled], *[disabled="disabled"] {
+  cursor: not-allowed;
 }
 
 textarea {
-    overflow: auto;
+  overflow: auto;
 }
 
 acronym, abbr {
-    cursor: help;
+  cursor: help;
 }
 
 /* Some typography related styles */
 body {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 a:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-a:hover,
-a:active {
-    outline: none;
+a:hover, a:active {
+  outline: none;
 }
 
-b,
-strong {
-    font-weight: bold;
+b, strong {
+  font-weight: bold;
 }
 
 em {
-    font-style: italic;
+  font-style: italic;
 }
 
 small {
-    font-size: 90%;
+  font-size: 90%;
 }

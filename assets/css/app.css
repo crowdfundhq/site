@@ -1,11 +1,11 @@
-
-/* Keeping the default theme default */
+/* Default styles */
 
 li.search .icon-search {
   display: none;
 }
 
 /* WePay and PayPal Credit Card images */
+
 ul.payment_methods label.wepay {
   background-image: url(/images/creditcards.png);
   background-repeat: no-repeat;
@@ -13,6 +13,7 @@ ul.payment_methods label.wepay {
 }
 
 /* Additional costs and fees to contribution */
+
 #contribution_additional_costs, #contribution_extra_fees {
   margin-bottom: 1em;
 }
@@ -133,6 +134,7 @@ ul.payment_methods #contribution_payment_method_razorpay {
 }
 
 /* Contribution Stripe form */
+
 #stripe_payment_form {
   margin-top: 2em;
 }
@@ -443,6 +445,7 @@ ul#category-dropdown li a:hover {
 }
 
 /* ----------- Footer ----------- */
+
 #footer {
   padding: 0 0;
   margin-top: 40px;
@@ -554,6 +557,11 @@ a.campaign_image_upload {
   border: 2px dotted #dfdfdf;
   margin: 10px 0px;
   overflow: hidden;
+}
+
+#image_preview.preview-small {
+  width: 50px;
+  height: 50px;
 }
 
 .preview_frame {
@@ -704,6 +712,7 @@ table#campaign_status th {
 }
 
 /*--- Embed ---*/
+
 .link-image {
   margin-left: 3px;
   margin-top: 7px;
@@ -793,7 +802,6 @@ p {
 
 /* Header
 ------------------------------------------------ */
-
 
 #tagline {
   padding: 15px 0 0px;
@@ -1361,7 +1369,7 @@ ul#mobile_campaign_share li .icon.icon-pinterest {
   background: #57B1E4;
 }
 
-ul#campaign_share li#campaign_reminder .icon ,
+ul#campaign_share li#campaign_reminder .icon,
 ul#mobile_campaign_share li#campaign_reminder .icon {
   font-size: 160%;
 }
@@ -1371,12 +1379,17 @@ ul#mobile_campaign_share li#campaign_reminder {
   float: right;
 }
 
-ul#campaign_share li#embed_campaign ,
+h3.reminder-header {
+  font-size: 25px;
+  margin-bottom: 25px;
+}
+
+ul#campaign_share li#embed_campaign,
 ul#mobile_campaign_share li#embed_campaign {
   margin-top: 3px;
 }
 
-ul#campaign_share li#embed_campaign .icon-code ,
+ul#campaign_share li#embed_campaign .icon-code,
 ul#mobile_campaign_share li#embed_campaign .icon-code {
   position: relative;
   top: -2px;
@@ -1388,7 +1401,7 @@ ul#mobile_campaign_share li .icon.icon-envelope {
   top: 2px;
 }
 
-ul#campaign_share .data-count ,
+ul#campaign_share .data-count,
 ul#mobile_campaign_share .data-count {
   display: inline-block;
   font-size: 90%;
@@ -1413,7 +1426,7 @@ ul#mobile_campaign_share .left-arrow {
   left: -4px;
 }
 
-ul#campaign_share .left-arrow-bg ,
+ul#campaign_share .left-arrow-bg,
 ul#mobile_campaign_share .left-arrow-bg {
   border-right: 5px solid #ddd;
   border-top: 5px solid transparent;
@@ -1424,7 +1437,7 @@ ul#mobile_campaign_share .left-arrow-bg {
   left: -6px;
 }
 
-ul#campaign_share .share-hint ,
+ul#campaign_share .share-hint,
 ul#mobile_campaign_share .share-hint {
   display: inline;
   font-size: 90%;
@@ -1439,29 +1452,29 @@ ul#mobile_campaign_share.big-icons li {
   font-size: 19px;
 }
 
-ul#campaign_share.big-icons .share-hint ,
+ul#campaign_share.big-icons .share-hint,
 ul#mobile_campaign_share.big-icons .share-hint {
   top: -6px;
   font-size: 70%;
 }
 
-ul#campaign_share.big-icons .data-count ,
+ul#campaign_share.big-icons .data-count,
 ul#mobile_campaign_share.big-icons .data-count {
   top: -5px;
 }
 
-ul#campaign_share.big-icons .left-arrow ,
+ul#campaign_share.big-icons .left-arrow,
 ul#mobile_campaign_share.big-icons .left-arrow {
   top: 7px;
 }
 
-ul#campaign_share.big-icons .left-arrow-bg ,
+ul#campaign_share.big-icons .left-arrow-bg,
 ul#mobile_campaign_share.big-icons .left-arrow-bg {
   top: 6px;
 }
 
 
-/*Stats
+/* Stats
 --------------------*/
 
 #stats {
@@ -1857,7 +1870,6 @@ input#contribution_amount, #contribution_amount_fixed {
   padding: 5px;
 }
 
-
 /* Locations */
 
 input#location {
@@ -2032,7 +2044,6 @@ form.group-invite-users textarea#invite_users {
   top: -31px;
 }
 
-
 /**** Froala ***/
 
 div.fr-popup .fr-layer.fr-active .fr-input-line,
@@ -2067,4 +2078,3 @@ div.fr-layer .fr-checkbox-line label,
 div.fr-tooltip{
   z-index: 99999;
 }
-

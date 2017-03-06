@@ -1,6 +1,6 @@
 /******** BLOG **********/
 
-/*Blog Bar*/
+/* Blog Bar */
 
 .blog_bar {
   margin-bottom: 20px;
@@ -12,16 +12,13 @@
 
 /*Blog Bar END*/
 
-
 #comment_error {
   color: red;
 }
 
-
 .article .date, .comment_date, .comment_user {
   color: #666;
 }
-
 
 .comment_date, .comment_user {
   font-size: 95%;
@@ -30,7 +27,6 @@
 .article .content {
   padding-top: 1.618em;
 }
-
 
 .article .comments_list {
   margin-top: 1.618em;

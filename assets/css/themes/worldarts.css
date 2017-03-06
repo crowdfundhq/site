@@ -1,3 +1,5 @@
+/* The World Arts Theme */
+
 a .green,
 a .blue {
   color: #EBFDFF;
@@ -50,7 +52,6 @@ ul.nav-tabs li {
   background: rgba(255,255,255,.7);
   border: none;
 }
-
 
 ul.nav-tabs li a.selected {
   border: none;

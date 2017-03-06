@@ -1,172 +1,163 @@
-/*
-
-Should be used ONLY with neue.css
-
-*/
+/* Stream Theme. Should be used ONLY with neue.css */
 
 body,
-#badges{
+#badges {
   background: #F7F6F5;
 }
 
 a,
 #dialog_header a.close,
 .mobile_search .toggle_search,
-.messages_dialog .dialog_header a.close{
-     color: #2980B9;
+.messages_dialog .dialog_header a.close {
+  color: #2980B9;
 }
 
 a:hover,
-a:focus{
-    color: #3e8dc0;
+a:focus {
+  color: #3e8dc0;
 }
 
-a:active{
-     color: #2573a7;
+a:active {
+  color: #2573a7;
 }
 
 a.delete,
-.field_error{
-     color: #E74C3C;
+.field_error {
+  color: #E74C3C;
 }
 
 a.delete:hover,
-a.delete:focus{
-    color: #e95e50;
+a.delete:focus {
+  color: #e95e50;
 }
 
-a.delete:active{
-     color: #d04436;
+a.delete:active {
+  color: #d04436;
 }
 
 button,
 .btn,
-#campaign_nav.nav-tabs li a .count{
-     background-color: #3498DB;
+#campaign_nav.nav-tabs li a .count {
+  background-color: #3498DB;
 }
 
 button:hover,
 .btn:hover,
 button:focus,
-.btn:focus{
-    background-color: #48a2df;
+.btn:focus {
+  background-color: #48a2df;
 }
 
 button:active,
-.btn:active{
-     background-color: #2f89c5;
+.btn:active {
+  background-color: #2f89c5;
 }
 
-
-.btn-warning{
-     background-color: #E74C3C;
+.btn-warning {
+  background-color: #E74C3C;
 }
 
 .btn-warning:hover,
-.btn-warning:focus{
-    background-color: #e95e50;
+.btn-warning:focus {
+  background-color: #e95e50;
 }
 
-.btn-warning:active{
-     background-color: #d04436;
+.btn-warning:active {
+  background-color: #d04436;
 }
-
-
 
 /*-------Top bar-------*/
 
-#top{
+#top {
   background: rgba(52,152,219,0.99);
 }
 
-#top h1.logo a{
+#top h1.logo a {
   color: #fff;
 }
 
 #top nav ul li.main-link a .green,
-#top nav ul li.main-link a .blue{
+#top nav ul li.main-link a .blue {
   color: #fff;
 }
 
-.menu-note{
+.menu-note {
   color: #CEF5F7;
 }
 
 li.search .icon-search,
 #top nav ul li.search input,
-#top nav ul li.user ul li:last-child{
+#top nav ul li.user ul li:last-child {
   border-color: #2980B9;
 }
 
-li.search .icon-search{
+li.search .icon-search {
   color: #fff;
 }
 
-#top nav ul.user li a{
+#top nav ul.user li a {
   color: #f0f0f0;
 }
 
 #top nav ul.user li a:hover,
-#top nav ul.user li a:focus{
+#top nav ul.user li a:focus {
   color: #FFF;
 }
 
-#top nav ul.user li a:active{
+#top nav ul.user li a:active {
   color: #f0f0f0;
 }
 
-
 #top nav ul li.user ul::before,
-#top nav ul li.user ul{
-    border: none;
-    background: rgba(52,152,219,0.98);
+#top nav ul li.user ul {
+  border: none;
+  background: rgba(52,152,219,0.98);
 }
 
-#top nav ul li.user ul li{
-     background-color: #3498DB;
+#top nav ul li.user ul li {
+  background-color: #3498DB;
 }
 
 #top nav ul li.user ul li:hover,
-#top nav ul li.user ul li:focus{
-    background-color: #48a2df;
+#top nav ul li.user ul li:focus {
+  background-color: #48a2df;
 }
 
-#top nav ul li.user ul li:active{
-     background-color: #2f89c5;
+#top nav ul li.user ul li:active {
+  background-color: #2f89c5;
 }
-
 
 /*-------Nav Tabs-------*/
 
 ul.nav-tabs li a.selected,
 .sidebar-left #content ul#ctabs.nav.nav-tabs li a.selected,
 .sidebar-right #content ul#ctabs.nav.nav-tabs li a.selected,
-.sidebar-sticky #content ul#ctabs.nav.nav-tabs li a.selected{
+.sidebar-sticky #content ul#ctabs.nav.nav-tabs li a.selected {
   border-bottom: solid 2px #2980B9;
 }
 
 ul.nav-tabs li a.selected,
 ul.nav-tabs li a:hover,
-ul#campaign_dash.nav li a:hover{
-    background: rgba(52,152,219,0.05);
+ul#campaign_dash.nav li a:hover {
+  background: rgba(52,152,219,0.05);
 }
 
 ul.nav-tabs li a:active,
-ul#campaign_dash.nav li a:active{
-    background: rgba(52,152,219,0.1);
+ul#campaign_dash.nav li a:active {
+  background: rgba(52,152,219,0.1);
 }
 
 /*-------Errors-------*/
 
 #flash #info,
 #dialog_info,
-.alert{
+.alert {
   background: #2980B9;
   color: #fff;
 }
 
 #flash #error,
-#dialog_flash #dialog_error{
+#dialog_flash #dialog_error {
   background: #E74C3C;
   color: #fff;
 }
@@ -174,54 +165,53 @@ ul#campaign_dash.nav li a:active{
 /*-------Campaign-------*/
 
 ul#campaign_dash.nav li a.active,
-.nav.nav-pills a.active{
+.nav.nav-pills a.active {
   background: #3498DB;
 }
 
 .campaign_successful,
-.progressbar .progress{
-    background-color: #27A0A7;
+.progressbar .progress {
+  background-color: #27A0A7;
 }
 
-#campaign_content{
+#campaign_content {
   background: #fff;
 }
 
-
-#new_contribution > .grid_8{
+#new_contribution > .grid_8 {
   background: #fff;
 }
 
 /*-------Badges-------*/
 
-.campaign_progress .progress_info tr.numbers td:nth-child(2):before{
+.campaign_progress .progress_info tr.numbers td:nth-child(2):before {
   color: #E74C3C;
 }
 
-.campaign_progress .progress_info tr.numbers td:nth-child(3):before{
+.campaign_progress .progress_info tr.numbers td:nth-child(3):before {
   color: #F5B350;
 }
 
 .badge-big.campaign_badge .progressbar,
 #stats .progressbar,
-.campaign_progress .progressbar{
+.campaign_progress .progressbar {
   background: #2C3E50;
 }
 
 .progressbar .progress,
-.campaign_badge .campaign_successful{
+.campaign_badge .campaign_successful {
   background: #29B941;
 }
 
 /*-------Footer-------*/
 
-#footer{
+#footer {
   background: #2980B9;
 }
 
 /* Mobile Header
 ------------------------------------------------ */
 
-.mobile_header .mobile_search .toggle_search i{
-    color: #3498DB;
+.mobile_header .mobile_search .toggle_search i {
+  color: #3498DB;
 }

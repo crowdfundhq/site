@@ -79,6 +79,16 @@ img.push-left {
   padding: 0px 10px 10px 0;
 }
 
+img.image-thumb {
+  max-width: 200px;
+  height: auto;
+}
+
+img.image-relative {
+  position: relative;
+  top: 4px;
+}
+
 .small {
   font-size: 85%;
 }
@@ -266,7 +276,7 @@ a.header-link {
 
 .btn-primary:active,
 .btn-primary.active {
-    color: #f8f8f8;
+  color: #f8f8f8;
   background: #FCBF56;
 }
 
@@ -308,7 +318,6 @@ a.header-link {
   font-size: 24px;
   padding: 10px 38px;
 }
-
 
 /* GENERAL USE NAV and NAV-TABS
 ------------------------------------------------ */
@@ -390,15 +399,14 @@ ul.nav-tabs li a:hover {
   background-color: #eeeeee;
 }
 
-
-ul.nav-tabs li a.selected ,
+ul.nav-tabs li a.selected,
 ul.nav-tabs li a.active {
   background: #fff;
   border: 1px solid #ddd;
   border-bottom: none;
 }
 
-ul.nav-tabs li a.selected ,
+ul.nav-tabs li a.selected,
 ul.nav-tabs li a.active {
   border-bottom: 2px solid #fff;
 }
@@ -453,7 +461,7 @@ ul#selectable.block-list li.selected {
 }
 
 ul#selectable.block-list li {
-  padding: 0px;
+  padding: 0;
 }
 
 ul#selectable.block-list li label {

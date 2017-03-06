@@ -1,12 +1,14 @@
+/* Template for making a campaign badge with Javascript */
+
 (function(){
-  if(!window.hq) { window.hq = {}; }
+  if(!window.hq){ window.hq = {}; }
 
-  function campaignBadge (campaign) {
-
+  // Pass campaign JSON data into this function to return a campaign badge as HTML
+  function campaignBadge(campaign){
     var status = '';
-    if(campaign.expired) {
+    if(campaign.expired){
       status += '<div class="status_image">';
-      if(campaign.percent > 100.0) {
+      if(campaign.percent > 100.0){
         status += '<img src="/images/successful_no_text.png"><p class="successful">' + t('campaign_campaign_badge_successful') + '</p>';
       } else if(campaign.campaign_strategy == 'keep'){
         status += '<img src="/images/not_successful_no_text.png"><p class="no_success">' + t('campaign_campaign_badge_goal_not_reached') + '</p>';
@@ -16,12 +18,14 @@
       status += '</div>';
     }
 
+    // Update status if campaign has a limit
     var timeLeft = ['', ''];
-    if(!campaign.never_ending) {
+    if(!campaign.never_ending){
       timeLeft[0] = '<td>' + campaign.status + '</td>';
       timeLeft[1] = '<td>' + t('campaign_campaign_badge_to_go')+ '</td>';
     }
 
+    // Insert data
     return '<div class="campaign_badge">'
       + '<a href="' + campaign.url + '">'
         + status
@@ -66,5 +70,4 @@
     + '</div>'
   }
   window.hq.campaignBadge = campaignBadge;
-
 }());

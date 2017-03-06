@@ -1,49 +1,49 @@
 /* Sidebar Left */
 
 #content ul#ctabs.nav.nav-tabs {
-	padding: 0;
-	margin: 0;
-	width: 13%;
-	max-width: 125px;
-	border-bottom: none;
-	float: left;
+  padding: 0;
+  margin: 0;
+  width: 13%;
+  max-width: 125px;
+  border-bottom: none;
+  float: left;
 }
 
 #content ul#ctabs.nav.nav-tabs li {
-	float: none;
-	text-align: right;
+  float: none;
+  text-align: right;
 }
 
 #content ul#ctabs.nav.nav-tabs li a {
-	padding: 4px 5px;
-	margin: 1px 0;
-	left: 0;
-	line-height: 1.25em;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	position: relative;
-	-webkit-transition: all .3s;
-	-moz-transition: all .3s;
-	transition: all .3s;
+  padding: 4px 5px;
+  margin: 1px 0;
+  left: 0;
+  line-height: 1.25em;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  position: relative;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  transition: all .3s;
 }
 
 #content ul#ctabs.nav.nav-tabs li a:hover {
-	left: 8px;
+  left: 8px;
 }
 
 #content ul#ctabs.nav.nav-tabs li a.selected {
-	box-shadow: 1px 1px 2px rgba(0,0,0,.2), -1px -1px 0px rgba(150,150,150,.1);
-	left: 8px;
-	border: none;
+  box-shadow: 1px 1px 2px rgba(0,0,0,.2), -1px -1px 0px rgba(150,150,150,.1);
+  left: 8px;
+  border: none;
 }
 
 #content #badges.well.white {
-	display: block;
-	width: 82%;
-	margin-left: 14.5%;
-	background: none;
-	box-shadow: none;
-	border: none;
-	padding-top: 0;
+  display: block;
+  width: 82%;
+  margin-left: 14.5%;
+  background: none;
+  box-shadow: none;
+  border: none;
+  padding-top: 0;
 }

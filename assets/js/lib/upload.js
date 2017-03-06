@@ -1,5 +1,7 @@
+/* Dropzone setup for uploads */
+
 (function() {
-  // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+  // Set up the template HTML
   var previewNode = document.querySelector("#template");
   previewNode.id = "";
   var previewTemplate = previewNode.parentNode.innerHTML;

@@ -1,4 +1,4 @@
-/* Campaign Badges */
+/* Campaign Neue Badges */
 
 .campaign_badge {
   position: relative;
@@ -10,7 +10,7 @@
   margin: 0 16px 60px 0;
 }
 
-.campaign_badge.badge-last{
+.campaign_badge.badge-last {
   margin-right: 0;
 }
 
@@ -315,7 +315,7 @@ tr.desc td:nth-child(3) {
 
 .badges-badge-neue tr.numbers td:nth-child(3),
 .badges-badge-neue tr.numbers td:nth-child(2),
-.badges-badge-neue .campaign_progress tr.desc td{
+.badges-badge-neue .campaign_progress tr.desc td {
   position: absolute;
   left: 0px;
   top: 35px;
@@ -332,12 +332,12 @@ tr.desc td:nth-child(3) {
   box-sizing: border-box;
 }
 
-.badges-badge-neue tr.numbers td:nth-child(3){
+.badges-badge-neue tr.numbers td:nth-child(3) {
   left: 50%;
 }
 
 
-.progress_info tr.desc td:nth-child(2){
+.progress_info tr.desc td:nth-child(2) {
   padding-left: 20px;
 }
 
@@ -380,25 +380,25 @@ tr.desc td:nth-child(3) {
   top: 1px;
 }
 
-.badges-badge-neue .progress_info tr.desc td:nth-child(2){
+.badges-badge-neue .progress_info tr.desc td:nth-child(2) {
   left: 20px;
 }
 
-.badges-badge-neue .progress_info tr.desc td:nth-child(3){
+.badges-badge-neue .progress_info tr.desc td:nth-child(3) {
     left: 50%;
 }
 
 .badges-badge-neue tr.numbers td:nth-child(2),
-.badges-badge-neue .progress_info tr.desc td:nth-child(2){
+.badges-badge-neue .progress_info tr.desc td:nth-child(2) {
   padding-left: 10px;
 }
 
 .badges-badge-neue .badge-big.campaign_badge tr.numbers td:nth-child(2),
-.badges-badge-neue .badge-big.campaign_badge .progress_info tr.desc td:nth-child(2){
+.badges-badge-neue .badge-big.campaign_badge .progress_info tr.desc td:nth-child(2) {
   padding-left: 20px;
 }
 
-.badges-badge-neue .badge-big.campaign_badge .campaign_progress{
+.badges-badge-neue .badge-big.campaign_badge .campaign_progress {
     width: 50%;
     padding: 0 20px 15px;
     -webkit-box-sizing: border-box;
@@ -406,12 +406,12 @@ tr.desc td:nth-child(3) {
     box-sizing: border-box;
 }
 
-.badges-badge-neue .badge-big.campaign_badge .campaign_successful{
+.badges-badge-neue .badge-big.campaign_badge .campaign_successful {
     margin-left: 0;
     margin-right: 0;
 }
 
-.campaign_badge .campaign_successful ~ .progress_info tr.numbers td:first-of-type{
+.campaign_badge .campaign_successful ~ .progress_info tr.numbers td:first-of-type {
     text-align: right;
     left: -10px;
 }
@@ -459,7 +459,7 @@ tr.desc td:nth-child(3) {
 }
 
 .badges-badge-neue .campaign_badge .campaign_successful,
-.badges-badge-neue .campaign_badge.badge-big .campaign_successful ~ .progress_info tr.numbers td:first-of-type{
+.badges-badge-neue .campaign_badge.badge-big .campaign_successful ~ .progress_info tr.numbers td:first-of-type {
   font-size: 12px;
   font-weight: 500;
   text-shadow: none;
@@ -467,7 +467,7 @@ tr.desc td:nth-child(3) {
   line-height: 18px;
 }
 
-.badges-badge-neue .campaign_badge .campaign_successful ~ .progress_info tr.numbers td:first-of-type{
+.badges-badge-neue .campaign_badge .campaign_successful ~ .progress_info tr.numbers td:first-of-type {
   font-size: 12px;
   max-width: 45%;
   overflow: hidden;
@@ -477,12 +477,12 @@ tr.desc td:nth-child(3) {
   left: auto;
 }
 
-.badges-badge-neue .campaign_badge.badge-big .campaign_successful ~ .progress_info tr.numbers td:first-of-type{
+.badges-badge-neue .campaign_badge.badge-big .campaign_successful ~ .progress_info tr.numbers td:first-of-type {
   left: -30px;
   top: 0;
 }
 
-.badges-badge-neue .campaign_badge.badge-big .campaign_successful{
+.badges-badge-neue .campaign_badge.badge-big .campaign_successful {
   border-radius: 5px;
 }
 
@@ -513,7 +513,7 @@ tr.desc td:nth-child(3) {
   box-sizing: border-box;
 }
 
-.campaign_header > .campaign_headline{
+.campaign_header > .campaign_headline {
   padding: 5px 10px;
 }
 
@@ -528,15 +528,15 @@ tr.desc td:nth-child(3) {
 }
 
 .badge-big.campaign_badge .campaign_header,
-.campaign_badge .campaign_header{
+.campaign_badge .campaign_header {
   border-color: #EAEAEA;
 }
 
-.campaign_badge h1{
+.campaign_badge h1 {
   margin: 10px 0;
 }
 
-.campaign_badge .campaign_image{
+.campaign_badge .campaign_image {
   width: 100%;
   background: rgba(22,103,107,0.05);
   min-height: 135px;
@@ -579,11 +579,11 @@ tr.desc td:nth-child(3) {
 
 #stats .progressbar,
 .campaign_progress .progressbar,
-.progressbar .progress{
+.progressbar .progress {
   background: #646464;
 }
 
-.badge-big.campaign_badge .progressbar{
+.badge-big.campaign_badge .progressbar {
   border-radius: 5px;
   overflow: hidden;
 }
@@ -592,13 +592,13 @@ tr.desc td:nth-child(3) {
   background: #52CA2B;
 }
 
-.campaign_progress{
+.campaign_progress {
   background-color: #FEFEFE;
 }
 
 /* Large Badges */
 
-.badge-big.campaign_badge .campaign_header{
+.badge-big.campaign_badge .campaign_header {
   border-radius: 5px;
 }
 
@@ -607,7 +607,7 @@ tr.desc td:nth-child(3) {
   margin: 0 20px 0 0;
 }
 
-.badge-big.campaign_badge .campaign_header > *:not(.campaign_image){
+.badge-big.campaign_badge .campaign_header > *:not(.campaign_image) {
   padding: 0 20px;
 }
 
@@ -629,45 +629,43 @@ tr.desc td:nth-child(3) {
   box-sizing: border-box;
 }
 
-
-.campaign_badge .campaign_successful ~ .progress_info tr.numbers td:first-of-type{
+.campaign_badge .campaign_successful ~ .progress_info tr.numbers td:first-of-type {
   left: -15px;
 }
 
 
-/* ------------------------------------------------ Responsive ------------------------------------------------ */
-
+/* --------------- Responsive -------------------- */
 
 
 /* Tablets
 ------------------------------------------------ */
 
-@media screen and (max-width: 960px){
+@media screen and (max-width: 960px) {
 
-  .badges-badge-neue .badge-big.campaign_badge .campaign_progress{
+  .badges-badge-neue .badge-big.campaign_badge .campaign_progress {
     border: none;
   }
 
-  .badges-badge-neue .badge-big.campaign_badge .campaign_header > .campaign_headline{
+  .badges-badge-neue .badge-big.campaign_badge .campaign_header > .campaign_headline {
     padding: 0 20px;
   }
 
-  .badges-badge-neue .badge-big.campaign_badge .campaign_progress{
+  .badges-badge-neue .badge-big.campaign_badge .campaign_progress {
     width: 100%;
     background-color: #fff;
     border-radius: 0 0 5px 5px;
   }
 
-  .badges-badge-neue .badge-big.campaign_badge .campaign_progress .progress_info{
+  .badges-badge-neue .badge-big.campaign_badge .campaign_progress .progress_info {
     padding: 0;
   }
 
-  .badges-badge-neue .badge-big.campaign_badge tr.numbers td:nth-child(2){
+  .badges-badge-neue .badge-big.campaign_badge tr.numbers td:nth-child(2) {
     padding-left: 0;
   }
 
   .badges-badge-neue tr.numbers td:nth-child(2),
-  .badges-badge-neue .progress_info tr.desc td:nth-child(2){
+  .badges-badge-neue .progress_info tr.desc td:nth-child(2) {
     padding-left: 10px;
   }
 }

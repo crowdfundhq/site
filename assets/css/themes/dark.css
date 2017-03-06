@@ -1,4 +1,4 @@
-/* Body and Structure
+/* Dark Theme
 ------------------------------------------------ */
 
 body {
@@ -203,10 +203,10 @@ ul#category-dropdown li a {
 }
 
 /*---Thank You ---*/
+
 #thank_you .grid_8 h1 {
   text-shadow: 1px 1px 1px rgba(0,0,0,.2);
 }
-
 
 
 /* Text Color fixes */
@@ -237,7 +237,6 @@ ul#category-dropdown li a {
 #page ul li {
   color: #fff;
 }
-
 
 #user_profile h2,
 .content .well.white h1,
@@ -348,7 +347,7 @@ ul#campaign_share .left-arrow {
   border-right: 4px solid rgba(255,255,255,.25);
 }
 
-/* badges */
+/* Badges */
 
 .campaign_badge h1 a {
   text-shadow: none;
@@ -372,7 +371,7 @@ ul#campaign_share .left-arrow {
   color: #86E9FC;
 }
 
-/* campaign update on dark themes needs different color buttons */
+/* Campaign update on dark themes needs different color buttons */
 
 #campaign_data .wysiwyg-editor-toolbar ul.commands li {
   color: #eee;

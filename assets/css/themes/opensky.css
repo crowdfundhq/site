@@ -1,11 +1,12 @@
-body{
+/* Open Sky Theme */
+
+body {
   background: #e8f3fa;
   font-family: "Helvetica Neue",Helvetica,Arial,"Liberation Sans",FreeSans,sans-serif;
   color: #444;
 }
 
 /* Universals */
-
 
 #top a:hover .tall.blue,
 #top a:hover .tall.green,
@@ -61,7 +62,6 @@ a:hover {
   margin: 8px 30px 6px 0;
 }
 
-
 #top nav li.main-link {
   margin: 0;
 }
@@ -69,7 +69,6 @@ a:hover {
 #top nav li.main-link a {
   margin: 0;
   padding: 13px 15px 9px;
-
 }
 
 #top nav ul.clearfix li {

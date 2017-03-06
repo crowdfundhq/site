@@ -1,6 +1,7 @@
+/* The Neue Theme */
+
 /* Fonts
 ------------------------------------------------ */
-
 
 @import url(https://fonts.googleapis.com/css?family=Work+Sans:400,300,500,700,600,200|Open+Sans:400,300,300italic,400italic,600,600italic&subset=latin,latin-ext,greek,greek-ext,vietnamese,cyrillic-ext,cyrillic);
 
@@ -8,17 +9,17 @@
 /* Body and Structure
 ------------------------------------------------ */
 
-*{
+* {
   word-break: break-word;
   text-shadow: none;
 }
 
-body{
+body {
   font-family: 'Open Sans', sans-serif;
   color: #2C3E50;
 }
 
-#stick{
+#stick {
   padding-top: 70px; /* #top height */
 }
 
@@ -26,7 +27,7 @@ body{
   background: rgba(44,62,80,0.9);
 }
 
-#container{
+#container {
   margin: 10px auto 20px;
   overflow: initial;
 }
@@ -34,13 +35,13 @@ body{
 
 /* Typography
 ------------------------------------------------ */
-html{
+html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: antialiased;
   font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Work Sans', sans-serif;
   text-transform: uppercase;
 }
@@ -52,7 +53,7 @@ h1, h2, h3, h4, h5, h6{
   line-height: initial;
 }
 
-.green{
+.green {
   color: #52CA2B;
 }
 
@@ -60,16 +61,16 @@ a:hover .green {
   color: #52CA2B;
 }
 
-a.delete{
+a.delete {
   color: #F74B76;
 }
 
 a.delete:hover,
-a.delete:focus{
+a.delete:focus {
   color: #f85d84;
 }
 
-a.delete:active{
+a.delete:active {
   color: #de446a;
 }
 
@@ -83,68 +84,66 @@ i, .icon {
   transition: 0s;
 }
 
-
 /* Form
 ------------------------------------------------ */
 
 select,
 textarea,
 input[type="text"],
-input[type="password"]{
+input[type="password"] {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
   border: 1px solid #eaeaea;
 }
 
-select{
+select {
   height: 30px;
 }
-
 
 /* Buttons
 ------------------------------------------------ */
 
-.btn{
-   background-color: #3498DB;
+.btn {
+  background-color: #3498DB;
 }
 
 .btn:hover,
-.btn:focus{
+.btn:focus {
   background-color: #48a2df;
 }
 
-.btn:active{
-   background-color: #2f89c5;
+.btn:active {
+  background-color: #2f89c5;
 }
 
-.btn-warning{
-   background-color: #F74B76;
+.btn-warning {
+  background-color: #F74B76;
 }
 
 .btn-warning:hover,
-.btn-warning:focus{
+.btn-warning:focus {
   background-color: #f85d84;
 }
 
-.btn-warning:active{
-   background-color: #de446a;
+.btn-warning:active {
+  background-color: #de446a;
 }
 
 
 /* Links
 ------------------------------------------------ */
 
-a{
+a {
   color: #3498DB;
 }
 
 a:hover,
-a:focus{
+a:focus {
   color: #48a2df;
 }
 
-a:active{
+a:active {
   color: #2f89c5;
 }
 
@@ -193,7 +192,7 @@ div#dialog_header {
 }
 
 #top h1.logo,
-#top h1.logo a{
+#top h1.logo a {
   display: block;
   vertical-align: middle;
   text-transform: uppercase;
@@ -209,13 +208,13 @@ div#dialog_header {
   line-height: 67px;
 }
 
-#top h1.logo a img{
+#top h1.logo a img {
   max-height: 64px;
   max-width: 110px;
   vertical-align: middle;
 }
 
-#tagline{
+#tagline {
   padding: 40px 0 0;
   margin: 0;
 }
@@ -225,16 +224,16 @@ div#dialog_header {
   font-weight: 500;
 }
 
-#top nav ul{
+#top nav ul {
   margin: 0;
 }
 
-#top nav ul li.main-link{
+#top nav ul li.main-link {
   margin: 0;
   height: 70px;
 }
 
-#top nav ul li.main-link a{
+#top nav ul li.main-link a {
   position: relative;
   height: 40px;
   top: 16px;
@@ -245,11 +244,11 @@ div#dialog_header {
   transition: 0.2s ease-out;
 }
 
-#top nav ul li.main-link a:hover{
+#top nav ul li.main-link a:hover {
   -webkit-transform: translateY(-5px);
 }
 
-#top nav ul li.main-link a:active{
+#top nav ul li.main-link a:active {
   -webkit-transform: translateY(-2px);
 }
 
@@ -266,7 +265,7 @@ div#dialog_header {
   transition: 0.2s ease-out;
 }
 
-#top nav ul li.main-link a:hover .menu-note{
+#top nav ul li.main-link a:hover .menu-note {
   opacity: 1;
 }
 
@@ -322,33 +321,33 @@ li.search .icon-search {
   border-color: #3498DB;
 }
 
-#top nav ul.user{
+#top nav ul.user {
   height: 70px;
 }
 
-#top nav ul.user li{
+#top nav ul.user li {
   margin: 0;
 }
 
-#top nav ul.user li a{
+#top nav ul.user li a {
   color: #646464;
 }
 
-#top nav ul.user li a:hover{
+#top nav ul.user li a:hover {
   color: #48a2df;
 }
 
-#top nav ul.user li a:active{
+#top nav ul.user li a:active {
   color: #2f89c5;
 }
 
-#top nav ul.user > li > a{
+#top nav ul.user > li > a {
   margin: 0;
   height: 70px;
   line-height: 72px;
 }
 
-#top nav ul li.user ul{
+#top nav ul li.user ul {
   top: 70px;
   right: 0px;
   box-shadow: 0 0 5px rgba(44,62,80,0.3);
@@ -365,7 +364,7 @@ li.search .icon-search {
   background: white;
 }
 
-#top nav ul li.user img{
+#top nav ul li.user img {
   width: 35px;
   height: 35px;
   border: none;
@@ -374,20 +373,20 @@ li.search .icon-search {
   border-radius: 5px;
 }
 
-#top nav ul li.user ul li:hover{
+#top nav ul li.user ul li:hover {
   background-color: #FAFAFA;
 }
 
-#top nav ul li.user ul li:active{
+#top nav ul li.user ul li:active {
   background-color: #F2F2F2;
 }
 
-#top nav ul li.user ul li:last-child{
+#top nav ul li.user ul li:last-child {
   border-radius: 0 0 5px 5px;
   border-top: solid 1px #EAEAEA;
 }
 
-#lang{
+#lang {
   background: #f2f2f2;
   right: 20px;
   padding: 2px 10px 0;
@@ -395,17 +394,17 @@ li.search .icon-search {
   height: 26px;
 }
 
-#lang select{
+#lang select {
   height: initial;
 }
 
-.mobile_header .logotype{
+.mobile_header .logotype {
   line-height: 36px;
   text-transform: uppercase;
   font-weight: 600;
 }
 
-div.mobile_navigation div.mobile_block{
+div.mobile_navigation div.mobile_block {
   padding-top: 20px;
 }
 
@@ -413,7 +412,7 @@ div.mobile_navigation div.mobile_block{
 ------------------------------------------------ */
 
 .content h2,
-.content h1{
+.content h1 {
   text-transform: uppercase;
   font-weight: 500;
   border: none;
@@ -430,12 +429,12 @@ div#badges {
   border: none;
 }
 
-ul.nav-tabs{
+ul.nav-tabs {
   margin: 0 0 20px;
   padding: 0;
 }
 
-ul.nav-tabs li a{
+ul.nav-tabs li a {
   border: none;
   border-bottom: solid 2px transparent;
   padding: 5px 10px;
@@ -446,7 +445,7 @@ ul.nav-tabs li a{
 }
 
 ul.nav-tabs li a.selected,
-ul.nav-tabs li a.active{
+ul.nav-tabs li a.active {
   border: none;
   border-bottom: solid 2px #52CA2B;
   font-weight: 600;
@@ -454,14 +453,14 @@ ul.nav-tabs li a.active{
 }
 
 ul.nav-tabs li a:hover,
-ul.nav-tabs li a:focus{
+ul.nav-tabs li a:focus {
   border: none;
   border-bottom: solid 2px #646464;
   color: #2C3E50;
   background: none;
 }
 
-ul.nav-tabs li a:active{
+ul.nav-tabs li a:active {
   color: #2C3E50;
   border-bottom: solid 2px #2C3E50;
   background: #f2f2f2;
@@ -484,7 +483,7 @@ ul#category-dropdown li a {
 
 .sidebar-left #content ul#ctabs.nav.nav-tabs li,
 .sidebar-right #content ul#ctabs.nav.nav-tabs li,
-.sidebar-sticky #content ul#ctabs.nav.nav-tabs li{
+.sidebar-sticky #content ul#ctabs.nav.nav-tabs li {
   text-align: left;
   border-radius: 0;
   margin: 0;
@@ -492,7 +491,7 @@ ul#category-dropdown li a {
 
 .sidebar-left #content ul#ctabs.nav.nav-tabs li a,
 .sidebar-right #content ul#ctabs.nav.nav-tabs li a,
-.sidebar-sticky #content ul#ctabs.nav.nav-tabs li a{
+.sidebar-sticky #content ul#ctabs.nav.nav-tabs li a {
   text-align: left;
   font-size: 11pt;
   padding: 9px 5px;
@@ -508,31 +507,31 @@ ul#category-dropdown li a {
 
 .sidebar-left #content ul#ctabs.nav.nav-tabs li a:hover,
 .sidebar-right #content ul#ctabs.nav.nav-tabs li a:hover,
-.sidebar-sticky #content ul#ctabs.nav.nav-tabs li a:hover{
+.sidebar-sticky #content ul#ctabs.nav.nav-tabs li a:hover {
   left: 0;
 }
 
 .sidebar-left #content ul#ctabs.nav.nav-tabs li a:active,
 .sidebar-right #content ul#ctabs.nav.nav-tabs li a:active,
-.sidebar-sticky #content ul#ctabs.nav.nav-tabs li a:active{
+.sidebar-sticky #content ul#ctabs.nav.nav-tabs li a:active {
   background: none;
 }
 
 .sidebar-left #content ul#ctabs.nav.nav-tabs li a.selected,
 .sidebar-right #content ul#ctabs.nav.nav-tabs li a.selected,
-.sidebar-sticky #content ul#ctabs.nav.nav-tabs li a.selected{
+.sidebar-sticky #content ul#ctabs.nav.nav-tabs li a.selected {
   box-shadow: none;
   left: 0;
   border-bottom: solid 2px #52CA2B;
 }
 
-.sidebar-sticky #content ul#ctabs.nav.nav-tabs[style="position: fixed; top: 20px;"]{
+.sidebar-sticky #content ul#ctabs.nav.nav-tabs[style="position: fixed; top: 20px;"] {
   top: 90px !important;
 }
 
 .sidebar-left #content #badges.well.white,
 .sidebar-right  #content #badges.well.white,
-.sidebar-sticky #content #badges.well.white{
+.sidebar-sticky #content #badges.well.white {
   width: 85.5%;
 }
 
@@ -541,7 +540,7 @@ ul.nav-tabs li#category-tab {
 }
 
 ul#category-dropdown,
-ul#category-dropdown li a{
+ul#category-dropdown li a {
   width: auto;
   left: 2px;
   right: 10px;
@@ -552,24 +551,23 @@ ul#category-dropdown li a{
 ------------------------------------------------ */
 
 .badge-big.campaign_badge .campaign_header,
-.campaign_badge .campaign_header{
+.campaign_badge .campaign_header {
   border-color: #EAEAEA;
 }
 
-.campaign_badge h1{
+.campaign_badge h1 {
   margin: 10px 0;
 }
 
 .campaign_badge h1 a,
-.group_badge h3{
+.group_badge h3 {
   display: block;
   word-break: break-word;
 }
 
-.campaign_badge .campaign_image{
+.campaign_badge .campaign_image {
   width: 100%;
 }
-
 
 .badge-big.campaign_badge .campaign_progress {
   bottom: 30px;
@@ -579,11 +577,11 @@ ul#category-dropdown li a{
 
 #stats .progressbar,
 .campaign_progress .progressbar,
-.progressbar .progress{
+.progressbar .progress {
   background: #646464;
 }
 
-.badge-big.campaign_badge .progressbar{
+.badge-big.campaign_badge .progressbar {
   border-radius: 5px;
   overflow: hidden;
 }
@@ -592,7 +590,7 @@ ul#category-dropdown li a{
   background: #52CA2B;
 }
 
-.campaign_progress{
+.campaign_progress {
   background-color: #FEFEFE;
 }
 
@@ -600,26 +598,26 @@ ul#category-dropdown li a{
 /* Campaign page
 ------------------------------------------------ */
 
-.campaign_action{
+.campaign_action {
   min-height: 35px;
 }
 
-.campaign_action .btn{
+.campaign_action .btn {
   margin-right: 5px
 }
 
-.campaign_action .btn[href*="/authorize/"]{
+.campaign_action .btn[href*="/authorize/"] {
   background: transparent;
   box-shadow: inset 0 0 0 1px #3498DB;
   color: #3498DB !important;
 }
 
 .campaign_action .btn[href*="/authorize/"]:hover,
-.campaign_action .btn[href*="/authorize/"]:focus{
+.campaign_action .btn[href*="/authorize/"]:focus {
   background: rgba(52,152,219,0.07);
 }
 
-.campaign_action .btn[href*="/authorize/"]:active{
+.campaign_action .btn[href*="/authorize/"]:active {
   background: rgba(52,152,219,0.15);
 }
 
@@ -648,16 +646,16 @@ ul#campaign_dash.nav li a {
   line-height: 28px;
 }
 
-ul#campaign_dash.nav li a:hover{
+ul#campaign_dash.nav li a:hover {
   background: rgba(52,152,219,0.05);
 }
 
-ul#campaign_dash.nav li a:active{
+ul#campaign_dash.nav li a:active {
   background: rgba(52,152,219,0.08);
 }
 
 ul#campaign_dash.nav li a.active,
-.nav.nav-pills a.active{
+.nav.nav-pills a.active {
   background: #3498DB;
 }
 
@@ -668,31 +666,30 @@ ul#campaign_dash.nav li a.active,
   clear: both;
 }
 
-
 #campaign_icons,
-#campaign_icons a{
+#campaign_icons a {
   color: #646464;
   font-size: 10pt;
 }
 
-#campaign_icons{
+#campaign_icons {
   text-align: left;
   margin: 0 0 10px;
 }
 
-.tabs-above #campaign_content{
+.tabs-above #campaign_content {
   margin-top: 0;
 }
 
-.tabs-above ul#campaign_dash.nav{
+.tabs-above ul#campaign_dash.nav {
   margin-bottom: 10px;
 }
 
-.tabs-above #campaign_icons{
+.tabs-above #campaign_icons {
   margin-bottom: 20px;
 }
 
-.tabs-above #campaign_nav.nav-tabs{
+.tabs-above #campaign_nav.nav-tabs {
   padding-top: 20px;
 }
 
@@ -716,7 +713,7 @@ body.locked div#dialog,
 div#conversation_list,
 #contact,
 .campaign-report-list,
-div#user_profile .grid_6 .well.white{
+div#user_profile .grid_6 .well.white {
   box-shadow: 0 0 3px rgba(44,62,80,0.3);
   border-radius: 5px;
   border: none;
@@ -727,14 +724,14 @@ div#user_profile .grid_6 .well.white{
 #new_contribution > .grid_8,
 #thank_you .grid_8,
 .contribution-confirmation > .grid_8,
-#contact{
+#contact {
   padding: 10px 20px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-#thank_you .grid_8{
+#thank_you .grid_8 {
   background: #fff;
 }
 
@@ -746,13 +743,13 @@ div#campaign_files.row {
 
 
 #campaign_video,
-#mobile_campaign_video{
+#mobile_campaign_video {
   background: #fafafa;
 }
 
 #campaign_video,
 #campaign_video iframe,
-#campaign_video img{
+#campaign_video img {
   max-width: 100%;
   width: 100%;
 }
@@ -766,7 +763,7 @@ ul#campaign_share {
 
 ul#campaign_share li .icon.icon-facebook3,
 ul#campaign_share li .icon.icon-twitter2,
-ul#campaign_share li .icon.icon-pinterest{
+ul#campaign_share li .icon.icon-pinterest {
   -webkit-transition: 0s;
   -moz-transition: 0s;
   -ms-transition: 0s;
@@ -774,51 +771,51 @@ ul#campaign_share li .icon.icon-pinterest{
   transition: 0s;
 }
 
-ul#campaign_share li .icon.icon-facebook3{
+ul#campaign_share li .icon.icon-facebook3 {
    background-color: #3B5998;
 }
 
 ul#campaign_share li .icon.icon-facebook3:hover,
-ul#campaign_share li .icon.icon-facebook3:focus{
+ul#campaign_share li .icon.icon-facebook3:focus {
   background-color: #4f6aa2;
 }
 
-ul#campaign_share li .icon.icon-facebook3:active{
+ul#campaign_share li .icon.icon-facebook3:active {
    background-color: #355089;
 }
 
-ul#campaign_share li .icon.icon-pinterest{
+ul#campaign_share li .icon.icon-pinterest {
    background-color: #bd081c;
 }
 
 ul#campaign_share li .icon.icon-pinterest:hover,
-ul#campaign_share li .icon.icon-pinterest:focus{
+ul#campaign_share li .icon.icon-pinterest:focus {
   background-color: #c42133;
 }
 
-ul#campaign_share li .icon.icon-pinterest:active{
+ul#campaign_share li .icon.icon-pinterest:active {
    background-color: #aa0719;
 }
 
-ul#campaign_share li .icon.icon-twitter2{
+ul#campaign_share li .icon.icon-twitter2 {
    background-color: #55acee;
 }
 
 ul#campaign_share li .icon.icon-twitter2:hover,
-ul#campaign_share li .icon.icon-twitter2:focus{
+ul#campaign_share li .icon.icon-twitter2:focus {
   background-color: #66b4f0;
 }
 
-ul#campaign_share li .icon.icon-twitter2:active{
+ul#campaign_share li .icon.icon-twitter2:active {
    background-color: #4d9bd6;
 }
 
-#campaign_nav.nav-tabs{
+#campaign_nav.nav-tabs {
   padding: 0 20px;
   margin-bottom: 10px;
 }
 
-#campaign_nav.nav-tabs li a{
+#campaign_nav.nav-tabs li a {
   font-size: 10pt;
   height: 22px;
   outline: none;
@@ -840,7 +837,7 @@ ul#campaign_share li .icon.icon-twitter2:active{
 
 #campaign_about iframe,
 #updates_list iframe,
-.count_me iframe{
+.count_me iframe {
   width: 100%;
 }
 
@@ -848,12 +845,12 @@ ul#campaign_share li .icon.icon-twitter2:active{
   padding-top: 0;
 }
 
-#campaign_data ul.block-list li.count_me .pull-up{
+#campaign_data ul.block-list li.count_me .pull-up {
   top: 0;
 }
 
 ul.block-list li,
-#campaign_contributions li.controls{
+#campaign_contributions li.controls {
   width: 100%;
   padding: 15px 20px;
   border-bottom: solid 1px #eaeaea;
@@ -862,12 +859,12 @@ ul.block-list li,
   box-sizing: border-box;
 }
 
-ul#campaign_share .data-count{
+ul#campaign_share .data-count {
   min-width: 9px;
   text-align: center;
 }
 
-ul#campaign_share .data-count .share-count{
+ul#campaign_share .data-count .share-count {
   display: inline-block;
   min-height: 12px;
 }
@@ -878,7 +875,7 @@ ul#campaign_share .data-count .share-count{
 .campaign .grid_8 > p,
 #campaign_contributions .grid_8 > p,
 #campaign_votes .grid_8 > p,
-#campaign_stats{
+#campaign_stats {
   border: solid 1px #f2f2f2;
   padding: 20px;
   border-radius: 5px;
@@ -891,18 +888,18 @@ ul#campaign_share .data-count .share-count{
   padding: 10px 20px 50px;
 }
 
-#campaign_stats{
+#campaign_stats {
   border: none;
   padding: 0;
 }
 
-.campaign .grid_8 > p{
+.campaign .grid_8 > p {
   border: none;
   margin: 0;
 }
 
 #commitments ul,
-#rewards ul{
+#rewards ul {
   border: none;
   border-radius: 5px;
   overflow: hidden;
@@ -926,7 +923,7 @@ ul#campaign_share .data-count .share-count{
 }
 
 #commitments ul li a > *:not(.commitment_image),
-#rewards ul li a > *:not(.reward_image){
+#rewards ul li a > *:not(.reward_image) {
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -934,12 +931,12 @@ ul#campaign_share .data-count .share-count{
 #commitments ul li.expired,
 #commitments ul li a:hover,
 #rewards ul li.expired,
-#rewards ul li a:hover{
+#rewards ul li a:hover {
   background: #fafafa;
 }
 
 #commitments ul li a:active,
-#rewards ul li a:active{
+#rewards ul li a:active {
   background: #f2f2f2;
 }
 
@@ -947,28 +944,27 @@ ul#campaign_share .data-count .share-count{
 #commitments ul li a h3,
 #rewards ul li h3,
 #rewards ul li a h3,
-
 #commitments ul li p,
 #rewards ul li p,
-#campaign_user_website{
+#campaign_user_website {
   word-break: break-word;
 }
 
 .reward_image,
-.commitment_image{
+.commitment_image {
   padding: 0;
   max-height: 165px;
   overflow: hidden;
 }
 
 #commitments ul li div.commitment_image img,
-#rewards ul li div.reward_image img{
+#rewards ul li div.reward_image img {
   opacity: 0.9;
   width: 100%;
 }
 
 #commitments ul li:hover div.commitment_image img,
-#rewards ul li:hover div.reward_image img{
+#rewards ul li:hover div.reward_image img {
   opacity: 1;
   width: 100%;
 }
@@ -987,14 +983,14 @@ ul#campaign_share .data-count .share-count{
   text-align: center;
 }
 
-#stats .btn{
+#stats .btn {
   width: 100%;
   max-width: 100%;
   display: block;
   box-sizing: border-box;
 }
 
-#campaign_bio{
+#campaign_bio {
   background: #fafafa;
   padding: 10px 20px;
 }
@@ -1040,7 +1036,7 @@ div#campaign_bio:after {
   text-align: right;
 }
 
-#campaign_data ul.block-list li{
+#campaign_data ul.block-list li {
   margin-left: initial;
 }
 
@@ -1051,11 +1047,11 @@ div#campaign_bio:after {
   min-height: 50px;
 }
 
-#campaign_stats tr:nth-child(even){
+#campaign_stats tr:nth-child(even) {
   background: #fafafa;
 }
 
-#campaign_stats table th:first-child{
+#campaign_stats table th:first-child {
   border-right: 1px solid #eaeaea;
 }
 
@@ -1067,11 +1063,11 @@ div#campaign_bio:after {
   padding-left: 20px;
 }
 
-.campaign div#campaign_files.row > .right{
+.campaign div#campaign_files.row > .right {
   padding-right: 20px;
 }
 
-.campaign div#campaign_files.row > .spacer-small.clear{
+.campaign div#campaign_files.row > .spacer-small.clear {
   border-bottom: solid 1px #eaeaea;
 }
 
@@ -1084,13 +1080,13 @@ div#campaign_bio:after {
 #campaign_video,
 #campaign_video .no_image,
 #mobile_campaign_video,
-#mobile_campaign_video .no_image{
+#mobile_campaign_video .no_image {
   height: auto;
   min-height: 346px;
 }
 
 #mobile_campaign_video,
-#mobile_campaign_video .no_image{
+#mobile_campaign_video .no_image {
   min-height: 155px;
 }
 
@@ -1102,12 +1098,12 @@ div#campaign_bio:after {
 /* Classic Badges
 ------------------------------------------------ */
 
-.badges-badge-classic .campaign_badge .campaign_successful ~ .progress_info tr.numbers td:first-of-type{
+.badges-badge-classic .campaign_badge .campaign_successful ~ .progress_info tr.numbers td:first-of-type {
   left: 0;
   text-align: left;
 }
 
-.badges-badge-classic .badge-big.campaign_badge .campaign_progress{
+.badges-badge-classic .badge-big.campaign_badge .campaign_progress {
   bottom: 0;
 }
 
@@ -1122,20 +1118,19 @@ div#campaign_bio:after {
   margin-right: 10px;
 }
 
-.badges-badge-classic .badge-big.campaign_badge .campaign_progress{
+.badges-badge-classic .badge-big.campaign_badge .campaign_progress {
   width: 44%;
 }
 
 /* Icon Badges
 ------------------------------------------------ */
 
-
-.badges-badge-icons tr.numbers td:first-of-type{
+.badges-badge-icons tr.numbers td:first-of-type {
   font-weight: 600;
 }
 
 .badges-badge-icons tr.numbers td:nth-child(3),
-.badges-badge-icons tr.numbers td:nth-child(2){
+.badges-badge-icons tr.numbers td:nth-child(2) {
   position: absolute;
   left: 0px;
   top: 35px;
@@ -1150,19 +1145,19 @@ div#campaign_bio:after {
   font-weight: 400;
 }
 
-.badges-badge-icons tr.numbers td:nth-child(3){
+.badges-badge-icons tr.numbers td:nth-child(3) {
   left: 50%;
 }
 
-.badges-badge-icons tr.numbers td:nth-child(2):before{
+.badges-badge-icons tr.numbers td:nth-child(2):before {
   color: #F74B76;
 }
 
-.badges-badge-icons tr.numbers td:nth-child(3):before{
+.badges-badge-icons tr.numbers td:nth-child(3):before {
   color: #F9D140;
 }
 
-.badges-badge-icons .campaign_progress tr.desc td{
+.badges-badge-icons .campaign_progress tr.desc td {
   position: absolute;
   text-transform: uppercase;
   color: #646464;
@@ -1181,20 +1176,20 @@ div#campaign_bio:after {
 }
 
 
-.badges-badge-icons .progress_info tr.desc td:nth-child(2){
+.badges-badge-icons .progress_info tr.desc td:nth-child(2) {
   left: 0;
 }
 
-.badges-badge-icons .progress_info tr.desc td:nth-child(3){
+.badges-badge-icons .progress_info tr.desc td:nth-child(3) {
   left: 50%;
 }
 
-.campaign_badge .campaign_successful ~ .progress_info tr.numbers td:first-of-type{
+.campaign_badge .campaign_successful ~ .progress_info tr.numbers td:first-of-type {
   text-align: right;
   left: -10px;
 }
 
-.badges-badge-icons .badge-big.campaign_badge .campaign_progress{
+.badges-badge-icons .badge-big.campaign_badge .campaign_progress {
   width: 46%;
   padding-right: 14px;
   -webkit-box-sizing: border-box;
@@ -1202,9 +1197,8 @@ div#campaign_bio:after {
   box-sizing: border-box;
 }
 
-
 .badges-badge-icons .campaign_badge .campaign_successful,
-.badges-badge-icons .campaign_badge.badge-big .campaign_successful ~ .progress_info tr.numbers td:first-of-type{
+.badges-badge-icons .campaign_badge.badge-big .campaign_successful ~ .progress_info tr.numbers td:first-of-type {
   font-size: 12px;
   font-weight: 600;
   text-shadow: none;
@@ -1212,25 +1206,23 @@ div#campaign_bio:after {
   line-height: 18px;
 }
 
-.badges-badge-icons .campaign_badge .campaign_successful ~ .progress_info tr.numbers td:first-of-type{
+.badges-badge-icons .campaign_badge .campaign_successful ~ .progress_info tr.numbers td:first-of-type {
   font-size: 12px;
 }
 
-.badges-badge-icons .campaign_badge.badge-big .campaign_successful ~ .progress_info tr.numbers td:first-of-type{
+.badges-badge-icons .campaign_badge.badge-big .campaign_successful ~ .progress_info tr.numbers td:first-of-type {
   left: -20px;
   top: 0;
 }
 
-
-.badges-badge-icons .campaign_badge.badge-big .campaign_successful{
+.badges-badge-icons .campaign_badge.badge-big .campaign_successful {
   border-radius: 5px;
 }
-
 
 /* Contribution Page
 ------------------------------------------------ */
 
-.contribution #contribution_amount{
+.contribution #contribution_amount {
   width: 100%;
   height: 50px;
   -webkit-box-sizing: border-box;
@@ -1238,36 +1230,36 @@ div#campaign_bio:after {
   box-sizing: border-box;
 }
 
-.contribution ul.payment_methods{
+.contribution ul.payment_methods {
   border: solid 1px #eaeaea;
   border-radius: 5px;
   overflow: hidden;
 }
 
-.contribution ul.payment_methods li{
+.contribution ul.payment_methods li {
   height: 60px;
   min-height: 60px;
 }
 
-.contribution ul.payment_methods img{
+.contribution ul.payment_methods img {
   height: 24px;
   top: 5px;
 }
 
-.contribution ul.payment_methods input{
+.contribution ul.payment_methods input {
   margin-left: 10px;
 }
 
 .contribution button.btn.btn-primary,
-.contribution-confirmation button.btn.btn-primary{
+.contribution-confirmation button.btn.btn-primary {
   float: right;
 }
 
-.contribution a.cancel{
+.contribution a.cancel {
   line-height: 42px;
 }
 
-.contribution-confirmation a.cancel{
+.contribution-confirmation a.cancel {
   line-height: 66px;
 }
 
@@ -1275,39 +1267,38 @@ div#campaign_bio:after {
   padding-top: 0.5em;
 }
 
-#new_contribution #selectable{
+#new_contribution #selectable {
   border-radius: 5px;
   overflow: hidden;
   border-color: #EAEAEA;
 }
 
-#new_contribution ul#selectable.block-list li label{
+#new_contribution ul#selectable.block-list li label {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-ul.payment_methods li label.manual{
+ul.payment_methods li label.manual {
   top: 0;
   line-height: 38px;
 }
 
-ul.payment_methods li.gocardless img{
+ul.payment_methods li.gocardless img {
   top: 7px;
 }
 
 ul.payment_methods #contribution_payment_method_wepay,
 ul.payment_methods #contribution_payment_method_mangopay,
-ul.payment_methods #contribution_payment_method_gocardless{
+ul.payment_methods #contribution_payment_method_gocardless {
   bottom: 0;
 }
 
 ul.payment_methods label.wepay,
 ul.payment_methods label.stripe,
-ul.payment_methods label.paypal{
+ul.payment_methods label.paypal {
   background-position: 175px 16px;
 }
-
 
 /* Flash
 ------------------------------------------------ */
@@ -1316,26 +1307,26 @@ ul.payment_methods label.paypal{
 #flash #info,
 #dialog_flash #dialog_error,
 #dialog_flash #dialog_info,
-.alert{
+.alert {
   padding: 10px 20px;
   border-radius: 5px;
   text-shadow: none;
 }
 
 #dialog_flash #dialog_error,
-#dialog_flash #dialog_info{
+#dialog_flash #dialog_info {
   border-radius: 0;
 }
 
 #flash #error,
-#dialog_flash #dialog_error{
+#dialog_flash #dialog_error {
   background: #DB3479;
   text-shadow: none;
   border: none;
   padding: 10px 25px;
 }
 
-.field_error{
+.field_error {
   color: #DB3479;
   display: block;
   padding: 5px 10px;
@@ -1350,7 +1341,7 @@ ul.payment_methods label.paypal{
 }
 
 .field_error:before,
-.field_error:after{
+.field_error:after {
   content: '';
   border: solid 10px transparent;
   border-bottom-color: #eaeaea;
@@ -1359,14 +1350,14 @@ ul.payment_methods label.paypal{
   left: 10px;
 }
 
-.field_error:after{
+.field_error:after {
   top: -19px;
   border-bottom-color: #fafafa;
 }
 
 #flash #info,
 #dialog_info,
-.alert{
+.alert {
   background: #F7E942;
 }
 
@@ -1378,7 +1369,6 @@ div#custom-page {
   padding: 20px;
 }
 
-
 /* User Page
 ------------------------------------------------ */
 
@@ -1386,16 +1376,16 @@ div#user_profile .grid_6.right.last h2 {
   margin-top: 0;
 }
 
-div#user_profile ul.block-list.no-style.squish li{
+div#user_profile ul.block-list.no-style.squish li {
   padding: 15px 0;
 }
 
-div#user_profile .grid_6 > .well > h2{
+div#user_profile .grid_6 > .well > h2 {
   position: relative;
   margin-bottom: 0;
 }
 
-div#user_profile .grid_6 > .well > h2:before{
+div#user_profile .grid_6 > .well > h2:before {
   content: '';
   position: absolute;
   width: 100%;
@@ -1405,7 +1395,7 @@ div#user_profile .grid_6 > .well > h2:before{
   border-top: solid 1px #eaeaea;
 }
 
-.user_edit_avatar.right.center img{
+.user_edit_avatar.right.center img {
   border-radius: 5px;
 }
 
@@ -1417,7 +1407,7 @@ div#user_profile .grid_6 > .well > h2:before{
   min-height: 400px;
 }
 
-#conversation_list ul.block-list li{
+#conversation_list ul.block-list li {
   background: #fafafa;
 }
 
@@ -1433,7 +1423,7 @@ img.push-left {
   padding: 0;
 }
 
-div#conversation_content h3{
+div#conversation_content h3 {
   margin-bottom: 10px;
   font-size: 14pt;
   font-weight: 500;
@@ -1456,15 +1446,15 @@ div#conversation_content h3{
   transition: 0s;
 }
 
-#ads ul li:last-child{
+#ads ul li:last-child {
   margin: 0;
 }
 
-#ads ul li:hover{
+#ads ul li:hover {
   box-shadow: 0 0 3px rgba(44,62,80,0.4);
 }
 
-#ads ul li:active{
+#ads ul li:active {
   box-shadow: 0 0 2px rgba(44,62,80,0.4);
 }
 
@@ -1481,7 +1471,7 @@ div#conversation_content h3{
 }
 
 #footer .nav > li > a,
-#footer a.powered-by{
+#footer a.powered-by {
   color: #eaeaea;
   -webkit-transition: 0s;
   -moz-transition: 0s;
@@ -1492,13 +1482,13 @@ div#conversation_content h3{
 
 #footer .nav > li > a:hover,
 #footer .nav > li > a:focus,
-#footer #a.powered-by:hover{
+#footer #a.powered-by:hover {
   color: #f2f2f2;
   text-decoration: underline;
 }
 
 #footer .nav > li > a:active,
-#footer a.powered-by:active{
+#footer a.powered-by:active {
   color: #e2e2e2;
 }
 
@@ -1506,7 +1496,7 @@ div#conversation_content h3{
 /* Blog
 ------------------------------------------------ */
 
-.blog-content-wrapper .well.white.box-shadowed{
+.blog-content-wrapper .well.white.box-shadowed {
   box-shadow: 0 0 3px rgba(44,62,80,0.3);
   border-radius: 5px;
   border: none;
@@ -1514,19 +1504,20 @@ div#conversation_content h3{
   background-color: #fff;
 }
 
-.article .title{
+.article .title {
   margin: 0;
 }
 
-.article .article_cover{
+.article .article_cover {
   margin-top: 10px;
 }
 
-.article ul#campaign_share{
+.article ul#campaign_share {
   padding: 10px 0 20px;
+  margin:0 0 10px 0;
 }
 
-.article ul#campaign_share .icon.icon-envelope{
+.article ul#campaign_share .icon.icon-envelope {
   font-size: 170%;
   top: -2px;
 }
@@ -1535,115 +1526,114 @@ div#conversation_content h3{
   padding: 10px 0;
 }
 
-.article .content{
+.article .content {
   padding-top: 10px;
 }
 
-/* ------------------------------------------------ Responsive ------------------------------------------------ */
-
+/* -------------- Responsive ------------------ */
 
 
 /* Tablets
 ------------------------------------------------ */
 
-@media screen and (max-width: 960px){
+@media screen and (max-width: 960px) {
 
-    .show_dialog #stick{
-      padding-top: 0; /*FF fix*/
-    }
+  .show_dialog #stick {
+    padding-top: 0; /*FF fix*/
+  }
 
-    .well,
-    #campaign_data{
-      padding: 0;
-      border: none;
-    }
+  .well,
+  #campaign_data {
+    padding: 0;
+    border: none;
+  }
 
-    .campaign_action > a.btn[href^="/campaigns/"]{
-      display: inline-block;
-      float: none;
-      margin: 0 0 5px;
-    }
+  .campaign_action > a.btn[href^="/campaigns/"] {
+    display: inline-block;
+    float: none;
+    margin: 0 0 5px;
+  }
 
-    .campaign div#campaign_content{
-      padding: 10px 20px;
-    }
+  .campaign div#campaign_content {
+    padding: 10px 20px;
+  }
 
-    #campaign_data ul#contributions_list > li{
-      width: 100%;
-      margin: 0;
-      padding: 10px 0;
-    }
+  #campaign_data ul#contributions_list > li {
+    width: 100%;
+    margin: 0;
+    padding: 10px 0;
+  }
 
-    .campaign .grid_4.last{
-      margin-top: 20px;
-    }
+  .campaign .grid_4.last {
+    margin-top: 20px;
+  }
 
-    .campaign-storage-info.hint{
-      float: left;
-      line-height: 37px;
-    }
+  .campaign-storage-info.hint {
+    float: left;
+    line-height: 37px;
+  }
 
-    .campaign div#campaign_files.row > .right{
-      float: right;
-      padding-top: 0;
-    }
+  .campaign div#campaign_files.row > .right {
+    float: right;
+    padding-top: 0;
+  }
 
-    #campaign_contributions .controls .grid_2 {
-      width: 20%;
-      float: left;
-    }
+  #campaign_contributions .controls .grid_2 {
+    width: 20%;
+    float: left;
+  }
 
-    .campaign_badge .campaign_image,
-    .campaign_image .no_image{
-      min-height: 150px;
-      max-height: 150px;
-    }
+  .campaign_badge .campaign_image,
+  .campaign_image .no_image {
+    min-height: 150px;
+    max-height: 150px;
+  }
 
-    .badges-badge-classic .badge-big.campaign_badge .campaign_progress,
-    .badges-badge-icons .badge-big.campaign_badge .campaign_progress{
-      width: 100%;
-      background-color: #fff;
-      border-radius: 0 0 5px 5px;
-    }
+  .badges-badge-classic .badge-big.campaign_badge .campaign_progress,
+  .badges-badge-icons .badge-big.campaign_badge .campaign_progress {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 0 0 5px 5px;
+  }
 
-    .badges-badge-classic .badge-big .campaign_successful{
-      margin-right: 0;
-    }
+  .badges-badge-classic .badge-big .campaign_successful {
+    margin-right: 0;
+  }
 
-    .profile #user_profile{
-      border: none;
-      padding: 0;
-    }
+  .profile #user_profile {
+    border: none;
+    padding: 0;
+  }
 
-    .profile #user_profile .grid_6:not(#user_campaigns_preview){
-      background: #fff;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 0 2px rgba(44,62,80,0.2);
-    }
+  .profile #user_profile .grid_6:not(#user_campaigns_preview) {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgba(44,62,80,0.2);
+  }
 
-    .show_mob_nav .mobile_navigation li:not(.user) a:active{
-      background-color: #28959c;
-    }
+  .show_mob_nav .mobile_navigation li:not(.user) a:active {
+    background-color: #28959c;
+  }
 
-    div#mobile_reply-section{
-      padding: 20px 20px 10px;
-      border-bottom: solid 1px #EAEAEA;
-    }
+  div#mobile_reply-section {
+    padding: 20px 20px 10px;
+    border-bottom: solid 1px #EAEAEA;
+  }
 
-    div#user_profile .grid_6 .well.white{
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
-      box-shadow: none;
-    }
+  div#user_profile .grid_6 .well.white {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
 
-    div#user_profile .grid_6.right.last h2 {
-      margin-top: 40px;
-    }
+  div#user_profile .grid_6.right.last h2 {
+    margin-top: 40px;
+  }
 
-    #ads {
-      padding: 20px;
-    }
+  #ads {
+    padding: 20px;
+  }
 }
 
 

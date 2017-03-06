@@ -1,62 +1,62 @@
 blockquote {
-	border-left: 2px dotted #888;
-	padding-left: 5px;
-	background: #d0f0ff;
+  border-left: 2px dotted #888;
+  padding-left: 5px;
+  background: #d0f0ff;
 }
 
 #wmd-panel-area {
-	width: 99%;
+  width: 99%;
 }
 
 .wmd-panel {
-	min-width: 100px;
-	width: 100%;
+  min-width: 100px;
+  width: 100%;
 }
 
 .wmd-button-bar {
-	width: 100%;
-	background-color: Silver;
+  width: 100%;
+  background-color: Silver;
 }
 
 .wmd-input {
-	height: 150px;
+  height: 150px;
   overflow: auto;
   vertical-align: top;
 }
 
 .wmd-preview {
-	clear: both;
-	padding: 3px;
-	border: 1px dotted #ccc;
-	line-height: 130%;
-	font-size: 15px;
-	margin-bottom: 20px;
+  clear: both;
+  padding: 3px;
+  border: 1px dotted #ccc;
+  line-height: 130%;
+  font-size: 15px;
+  margin-bottom: 20px;
 }
 
 .wmd-panel textarea,
 .wmd-preview {
-	width: 97.5%;
-	padding: 1%;
+  width: 97.5%;
+  padding: 1%;
 }
 
 .wmd-button-row {
-	position: relative;
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-bottom: 5px;
-	margin-top: 10px;
-	padding: 0px;
-	height: 20px;
+  position: relative;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  padding: 0px;
+  height: 20px;
 }
 
 .wmd-spacer {
-	width: 1px;
-	height: 20px;
-	margin-left: 14px;
-	position: absolute;
-	background-color: Silver;
-	display: inline-block;
-	list-style: none;
+  width: 1px;
+  height: 20px;
+  margin-left: 14px;
+  position: absolute;
+  background-color: Silver;
+  display: inline-block;
+  list-style: none;
 }
 
 .wmd-button {
@@ -71,33 +71,33 @@ blockquote {
 }
 
 .wmd-button > span {
-    background-image: url(/images/wmd-buttons.png);
-    background-repeat: no-repeat;
-    background-position: 0px 0px;
-    width: 20px;
-    height: 20px;
-    display: inline-block;
+  background-image: url(/images/wmd-buttons.png);
+  background-repeat: no-repeat;
+  background-position: 0px 0px;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
 }
 
 .wmd-spacer1 {
-    left: 50px;
+  left: 50px;
 }
-.wmd-spacer2
-{
-    left: 175px;
+
+.wmd-spacer2 {
+  left: 175px;
 }
-.wmd-spacer3
-{
-    left: 300px;
+
+.wmd-spacer3 {
+  left: 300px;
 }
 
 .wmd-prompt-background {
-	background-color: Black;
+  background-color: Black;
 }
 
 .wmd-prompt-dialog {
-	border: 1px solid #666;
-	background-color: #fff;
+  border: 1px solid #666;
+  background-color: #fff;
   padding: 15px 20px;
   -webkit-border-radius: 5px;
      -moz-border-radius: 5px;
@@ -105,7 +105,7 @@ blockquote {
 }
 
 .wmd-prompt-dialog > div {
-	font-size: 13px;
+  font-size: 13px;
 }
 
 .wmd-prompt-dialog > div b {
@@ -114,9 +114,9 @@ blockquote {
 }
 
 .wmd-prompt-dialog > form > input[type="text"] {
-	border: 1px solid #999999;
-	color: black;
+  border: 1px solid #999999;
+  color: black;
 }
 
-.wmd-prompt-dialog > form > input[type="button"]{
+.wmd-prompt-dialog > form > input[type="button"] {
 }
