@@ -1,0 +1,102 @@
+GET#blog:
+  desc: Blog article
+  path: /blog
+  requires:
+    - blog_enabled
+
+GET#blog_rss:
+  desc: Blog article RSS
+  path: /blog.rss
+  requires:
+    - blog_enabled
+
+GET#search:
+  desc: Search article
+  path: /blog/search
+  requires:
+    - blog_enabled
+
+GET#archives:
+  desc: Archives article
+  path: /archives/:month/:year
+  requires:
+    - blog_enabled
+
+GET#new:
+  desc: New article
+  path: /article/new
+  requires:
+    - blog_enabled
+    - user
+    - blog_admin
+
+POST#create:
+  desc: Create article
+  path: /articles
+  requires:
+    - blog_enabled
+    - user
+    - blog_admin
+
+PUT#update:
+  desc: Update article
+  path: /articles/:article_link
+  requires:
+    - blog_enabled
+    - user
+    - blog_admin
+
+GET#show:
+  desc: Show article
+  path: /blog/:article_link
+  requires:
+    - blog_enabled
+
+GET#edit:
+  desc: Edit article
+  path: /articles/:article_link/edit
+  requires:
+    - blog_enabled
+    - user
+    - blog_admin
+
+GET#show_submit:
+  desc: Show submit article
+  path: /articles/:article_link/submit
+  requires:
+    - blog_enabled
+    - user
+    - blog_admin
+
+POST#submit:
+  desc: Submit article
+  path: /articles/:article_link/submit
+  requires:
+    - blog_enabled
+    - user
+    - blog_admin
+
+GET#confirm:
+  desc: Confirm article
+  path: /articles/:article_link/delete
+  requires:
+    - blog_enabled
+    - user
+    - blog_admin
+
+DELETE#delete:
+  desc: Delete article
+  path: /articles/:article_link
+  requires:
+    - blog_enabled
+    - user
+    - blog_admin
+
+GET#index:
+  desc: Index article
+  path: /articles
+  requires:
+    - blog_enabled
+    - user
+    - blog_admin
+

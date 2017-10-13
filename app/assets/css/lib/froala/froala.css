@@ -1,0 +1,26 @@
+/* Froala Editor. Custom styles */
+
+.fr-element ul{
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.fr-element ul li{
+  list-style-type: disc;
+}
+
+.fr-popup{
+	z-index: 99999;
+}
+
+.fr-dib{
+  display: table;
+}
+
+.fr-dib:not(.fr-fil){
+  margin-left: auto;
+}
+
+.fr-dib:not(.fr-fir){
+  margin-right: auto;
+}

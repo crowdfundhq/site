@@ -1,0 +1,8 @@
+{% comment %}Article comment list{% endcomment %}
+
+{% assign paginate = article.article_comments | order: created_at: '-1' | paginate %}
+{% assign comments = paginate.entries %}
+
+{% for comment in comments %}
+  {% include 'article/comment' with comment %}
+{% endfor %}

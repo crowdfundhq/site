@@ -1,0 +1,79 @@
+{% comment %}Campaign rewards{% endcomment %}
+
+{% assign paginate = campaign.contributions.active.has_reward | order: created_at: '-1' | paginate %}
+{% assign contributions = paginate.entries %}
+{% assign rewards = campaign.rewards | order: amount: '1' | all %}
+
+<div class="grid_8">
+  {% if contributions != empty %}
+    <ul id="rewards_list" class="block-list no-style">
+      {% for contribution in contributions %}
+        {% if contribution.reward %}
+          <li class="image-list-item">
+            <div class="right small">
+              <a href="{{ 'contribution_shipping' | path: campaign.link, contribution.id }}" onclick="hq.loadDialog(this);return false">
+                {{ 'campaign_rewards_shipping_details' | t }}
+              </a>
+            </div>
+
+            <img class="user-avatar" src="{{ contribution.user.avatar | e }}" width="50" height="50" alt="">
+            <a href="{{ 'user_show' | path: contribution.user.link }}">
+              {{ contribution.user.name }},
+            </a>
+            <a href="mailto:{{ contribution.user.email }}">
+              {{ contribution.user.email }}
+            </a>
+            <div class="contribution_contributed_to">
+              {{ 'contribution_contributed' | t }}
+              {{ contribution.amount | to_currency }}
+              {{ 'on' | t }}
+              {{ contribution.created_at | date }}
+              {{ 'to' | t }}
+              <a href="{{ 'campaign_show' | path: campaign.link }}">{{ campaign.name }}</a>
+            </div>
+
+            <div class="hint">
+              {{ 'contribution_chosen_reward' | t }}
+              {{ contribution.reward.amount | to_currency: precision: 0 }}:
+              {{ contribution.reward.description_html }}
+            </div>
+            <div class="clear"></div>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    {% if paginate and paginate.total_pages > 1 %}
+      <div class="paginator campaign-rewards-paginate">{{ paginate.default }}</div>
+    {% endif %}
+  {% else %}
+    <p>{{ 'contribution_rewards_no_contributions' | t }}</p>
+  {% endif %}
+</div>
+
+<div id="add_rewards" class="grid_4 last">
+  <div class="right">
+    <span class="hint">{{ rewards.size }}/{{ current_site.max_rewards }}</span>
+    {% if current_site.max_rewards > rewards.size %}
+      <a class="btn" onclick="hq.loadDialog(this);return false" href="{{ 'reward_new' | path: campaign.link }}">{{ 'campaign_show_add_reward' | t }}</a>
+    {% else %}
+      <a class="btn disabled" onclick="return false" href="">{{ 'campaign_show_add_reward' | t }}</a>
+    {% endif %}
+  </div>
+  <div class="clear" style="height:20px"></div>
+
+  <div id="rewards">
+    {% if rewards.size > 0 %}
+      <h4 class="sidebar-title">
+        {{ 'campaign_rewards_section_title' | t }}
+      </h4>
+      <ul>
+        {% assign edit = true %}
+        {% for reward in rewards %}
+          <li{% if campaign.expired? %} class="expired"{% endif %}>
+            {% include 'campaign/reward' with reward %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,187 @@
+{% comment %}Default layout. CSS, Javascript and liquid files are included here.{% endcomment %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    {% if current_site.disable_responsive != true %}<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">{% endif %}
+
+    {% include 'layout/meta' with layout.meta %}
+
+    <title>{% if layout.title != blank %}{{ layout.title }}{% else %}{{ current_site.name }}{% endif %}{% if current_site.title != blank %} {{ current_site.title_separator }} {{ current_site.title | h }}{% endif %}</title>
+
+    {% include 'layout/head' %}
+
+    <script>
+      window.site = {{ current_site.options }};
+      window.site.translations = {{ current_site.badge_translations }};
+      window.t = function(key) { return window.site.translations[key]};
+    </script>
+
+    {{ 'bundle.css' | style_tag }}
+    {{ 'icons.css' | style_tag }}
+
+    {% if current_site.has_sidebar? %}
+      {{ 'themes/sidebar-campaigns.css' | style_tag }}
+    {% endif %}
+
+    {% if current_site.sidebar == 'right' %}
+      {{ 'themes/sidebar-right.css' | style_tag }}
+    {% endif %}
+
+    {{ 'themes/large-badges.css' | style_tag }}
+
+    {% capture badge_style_path %}themes/badges/{{ current_site.badge_style }}.css{% endcapture %}
+    {{ badge_style_path | style_tag }}
+
+    {% if current_site.theme != 'base' %}
+      {% capture theme_path %}themes/{{ current_site.theme }}.css{% endcapture %}
+      {% if current_site.theme_neue %}{{ 'themes/neue.css' | style_tag }}{% endif %}
+      {{ theme_path | style_tag }}
+    {% endif %}
+
+    {% if current_site.tab_position == 'above' %}
+      {{ 'themes/tabs-above.css' | style_tag }}
+    {% endif %}
+
+    {% if current_site.blog_admin != 'disabled' %}
+      {{ 'blog.css' | style_tag }}
+    {% endif %}
+
+    {% if current_site.disable_responsive != true %}
+      {{ 'responsive.css' | style_tag }}
+    {% endif %}
+
+    {% if current_site.favicon != blank %}
+      <link href="{{ current_site.favicon }}" rel="shortcut icon">
+    {% endif %}
+
+    {% for css in current_site.extra_css %}
+      {{ css | style_tag }}
+    {% endfor %}
+
+    {% include 'layout/libraries' %}
+
+    <style>{% include 'layout/styles' %}</style>
+
+    <script>window.onclick = function(e){if(typeof hq === 'undefined'){ e = e || window.event; e.preventDefault();}}</script>
+  </head>
+  <body class="{{ current_site.classes }} {{ layout.body_class }}">
+    <div id="stick">
+      <div id="top" class="grid_12">
+        {% if current_site.languages.size > 1 %}
+          <div id="lang">
+            {{ 'current_language' | t }}
+            <select onchange="window.location.href = '/language/'+this.value">
+              {% for lang in current_site.languages %}
+                <option{% if current_site.lang == lang %} selected {% endif %} value="{{ lang }}">
+                  {{ lang | languages }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+        {% endif %}
+
+        <div class="inner-width">
+          {% include 'layout/navigation' %}
+
+          {% if current_site.disable_responsive != true %}
+            {% include 'layout/mobile' %}
+          {% endif %}
+
+          <nav id="user_menu">{% include 'root/menu' %}</nav>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div id="tagline">
+        <div class="inner-width">
+          <noscript>
+            <div id="alert-message" class="full-width no-padding center">
+              <p class="no-margin">{{ 'javascript_disabled' | t }}</p>
+            </div>
+          </noscript>
+          <h1>{{ layout.tagline }}</h1>
+          <h2>{{ layout.subtitle }}</h2>
+        </div>
+      </div>
+      <div class="container">
+        <div id="container" class="row">
+          <div id="flash" class="grid_12">
+            {% if flash.error %}<div id="error">{{ flash.error }}</div>{% endif %}
+            {% if flash.info %}<div id="info">{{ flash.info }}</div>{% endif %}
+          </div>
+          <div id="content" class="grid_12 content">{{ content }}</div>
+        </div>
+        {% if current_site.ads.count > 0 %}
+          <div id="ads" class="full-width clear">
+            <div class="inner-width">
+              <ul class="no-style">
+                {% for ad in current_site.ads.all %}
+                  <li>
+                    <a href="{{ ad.url | e }}" target="_blank">
+                      <img src="{{ ad.image | e }}?{{ ad.timestamp }}" alt="">
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+              <div class="clear"></div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <footer id="footer">
+      <div class="inner-width">
+        {% include 'layout/footer' %}
+      </div>
+    </footer>
+    <div id="overlay">
+      <div id="center"></div>
+    </div>
+    <div id="fb-root"></div>
+
+    {{ 'bundle.js' | script_tag }}
+
+    {% if current_site.disable_responsive != true %}
+      {{ 'responsive.js' | script_tag }}
+    {% endif %}
+
+    {% include 'layout/scripts' %}
+
+    {% for js in current_site.extra_scripts %}
+      {{ js | script_tag }}
+    {% endfor %}
+
+    {% if params.r %}
+      <script>window.location = '{{ params.r }}';</script>
+    {% endif %}
+
+    {% if current_site.editor == 'froala' %}
+      <script>
+        document.addEventListener('DOMContentLoaded', function(){
+          if(typeof jQuery !== 'undefined') {
+            $.FroalaEditor.DEFAULTS.options.language = '{{ current_site.lang | froala_lang }}';
+            $.FroalaEditor.DEFAULTS.options.imageEditButtons = ['imageReplace', 'imageAlign', 'imageRemove', '|', 'imageLink', 'linkOpen', 'linkEdit', 'linkRemove', '-', 'imageStyle', 'imageAlt', 'imageSize'];
+          }
+        });
+      </script>
+    {% endif %}
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        hq.initSite('{{ params.d }}');
+
+        if(typeof jQuery !== 'undefined') {
+          jQuery.ajaxSetup({
+            beforeSend: function(xhr) {
+              var token = jQuery('meta[name="_csrf"]').attr('content');
+              xhr.setRequestHeader('X-CSRF-TOKEN', token);
+            }
+          });
+        }
+      });
+    </script>
+
+    {% include 'root/google' %}
+  </body>
+</html>

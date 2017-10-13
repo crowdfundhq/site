@@ -1,0 +1,46 @@
+{% comment %}User campaign(s) list{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'user_campaigns_list' | t }} {{ user.name }}{% endtitle %}
+
+<div id="user_campaigns">
+  {% if current_site.mode != 'select' or user.author %}
+    {% assign query = user.campaigns.visible %}
+    {% if current_user.id == user.id %}{% assign query = user.campaigns %}{% endif %}
+    {% assign paginate = query | order: created_at: '-1' | paginate %}
+    {% assign campaigns = paginate.entries %}
+
+    <div class="clear">
+      <p>{{ 'user_campaigns_showing' | t }} ({{ campaigns.size }})</p>
+    </div>
+
+    {% if campaigns != empty %}
+      <div class="user-profile-campaigns" id="user_campaigns_list">
+        {% for campaign in campaigns %}
+          {% include 'campaign/campaign_badge' %}
+        {% endfor %}
+      </div>
+      <div class="clear"></div>
+    {% else %}
+      {% if current_user.id == user.id %}
+        {{ 'user_show_no_campaigns' | t }}
+      {% else %}
+        {{ 'user_show_no_campaigns_from_this_user' | t }}
+      {% endif %}
+    {% endif %}
+
+    {% if campaigns != empty and paginate.total_pages > 1 %}
+      <div class="load-more-data">
+        <a class="small" href="{{ 'user_campaigns_list' | path: user.link }}" data-list="user_campaigns_list" data-count="{{ paginate.total_entries }}" data-per-page="{{ settings.per_page }}" onclick="hq.loadMore(this);return false">
+          {{ 'load_more' | t }} ...
+        </a>
+      </div>
+    {% endif %}
+    <div class="spacer"></div>
+  {% else %}
+    {{ 'user_show_no_campaigns_from_this_user' | t }}
+  {% endif %}
+  <div class="clear center spacer-small">
+    <a class="cancel" href="{{ 'campaign_index' | path }}" onclick="hq.closeDialog();return false">{{ 'cancel' | t }}</a>
+  </div>
+</div>

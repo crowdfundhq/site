@@ -1,0 +1,29 @@
+{% comment %}Edit password for login{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'user_login_new_password' | t }}{% endtitle %}
+
+<form accept-charset="utf-8" onsubmit="hq.postDialog(this);return false" action="{{ 'password_update' | path }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="PUT">
+  <input id="reset_token" type="hidden" name="reset_token" value="{{ user.reset_token }}">
+  <p>
+    <label for="password">{{ 'user_edit_new_password' | t }}</label>
+    <br>
+    <input id="password" type="password" name="password">
+    {% if user.errors.password != blank %}
+      <span class="field_error">{{ user.errors.password | join: ', ' }}</span>
+    {% endif %}
+  </p>
+  <p>
+    <label for="password_confirmation">{{ 'user_edit_repeat_new_password' | t }}</label>
+    <br>
+    <input id="password_confirmation" type="password" name="password_confirmation">
+    {% if user.errors.password_confirmation != blank %}
+      <span class="field_error">{{ user.errors.password_confirmation | join: ', ' }}</span>
+    {% endif %}
+  </p>
+  <p>
+    <button class="btn">{{ 'save' | t }}</button>
+  </p>
+</form>

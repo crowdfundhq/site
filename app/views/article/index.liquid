@@ -1,0 +1,49 @@
+{% comment %}Show blog article index{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ 'blog_title' | t }}{% endtitle %}
+{% subtitle %}{{ 'blog_subtitle' | t }}{% endsubtitle %}
+{% body_class blog %}
+
+{% assign paginate = current_site.articles.published | order: published_at: '-1' | paginate %}
+{% assign articles = paginate.entries %}
+
+<div class="blog-sidebar-wrapper grid_4 right last">
+
+  {% include 'article/sidebar' %}
+
+  <h3>{{ 'article_articles' | t }}</h3>
+  {% for article in articles limit: 20 %}
+    <div class="feed">
+      <a href="{{ 'article_show' | path: article.link }}">
+        <span class="content">{{ article.title }}</span>
+      </a>
+    </div>
+  {% endfor %}
+  <p>
+    <a href="{{ 'article_blog_rss' | path }}" title="{{ 'article_rss' | t }}">
+      <img class="image-relative" src="{{ 'rss.png' | image_url }}" alt="rss">
+      {{ 'article_rss' | t }}
+    </a>
+  </p>
+</div>
+
+<div class="blog-content-wrapper grid_8">
+  <div class="grid_12 last">
+    {% include 'article/blog_bar' %}
+  </div>
+
+  <div class="clear"></div>
+
+  {% if articles != empty %}
+    {% for article in articles limit: 10 %}
+      <div class="well white box-shadowed">
+        {% include 'article/article' with article %}
+      </div>
+    {% endfor %}
+
+  {% else %}
+    <h2>{{ 'article_not_found' | t }}</h2>
+    <p>{{ 'article_no_articles' | t }}</p>
+  {% endif %}
+</div>

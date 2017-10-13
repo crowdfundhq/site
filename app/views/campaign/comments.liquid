@@ -1,0 +1,44 @@
+{% comment %}Campaign comments{% endcomment %}
+
+{% assign paginate = campaign.comments | order: created_at: '-1' | paginate %}
+{% assign comments = paginate.entries %}
+<input id="total_entries" type="hidden" value="{{ paginate.total_entries }}">
+
+{% if current_user %}
+  <form accept-charset="utf-8" onsubmit="hq.postTab(this);return false" action="{{ 'comment_create' | path: campaign.link }}" method="POST">
+    {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+    <textarea id="comment_raw" class="form-input-double" name="raw"></textarea>
+    <button class="btn btn-medium">
+      {{ 'campaign_comments_new' | t }}
+    </button>
+  </form>
+  <br>
+{% else %}
+  <div class="hint">
+    {{ 'campaign_comments_login_to_comment' | t }}
+  </div>
+{% endif %}
+
+{% if comments != empty %}
+  <hr>
+  <ul id="comments_list" class="block-list">
+    {% for comment in comments %}
+      {% if comment.user %}
+        {% include 'comment/comment' with comment %}
+      {% endif %}
+    {% endfor %}
+  </ul>
+
+  {% if comments.size < paginate.total_entries %}
+    <div class="load-more-data">
+      <a class="small" href="{{ 'comment_list' | path: campaign.link }}" data-list="comments_list" data-count="{{ paginate.total_entries }}" data-per-page="{{ settings.per_page }}" onclick="hq.loadMore(this);return false">
+        {{ 'load_more' | t }} ...
+      </a>
+    </div>
+  {% endif %}
+
+{% else %}
+  <p class="campaign-no-comments">
+    {{ 'campaign_comments_no_comments' | t }}
+  </p>
+{% endif %}

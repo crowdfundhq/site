@@ -1,0 +1,65 @@
+{% comment %}User login{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'user_login_title' | t }}{% endtitle %}
+
+<div id="login" class="row">
+  <div class="grid_7">
+    {% if current_site.facebook_login or current_site.google_login %}
+      <div id="oauth">
+        <h4>{{ 'user_login_login_or_signup_via_third_party' | t }}</h4>
+        {% if current_site.facebook_login %}
+          <p>
+            <a class="btn facebook" href="{{ 'user_auth' | path: 'facebook' }}">
+              <i class="icon-facebook3 xlarge"></i>
+              {{ 'user_login_connect_with_facebook' | t }}
+            </a>
+          </p>
+        {% endif %}
+
+        {% if current_site.google_login %}
+          <p>
+            <a class="btn google" href="{{ 'user_auth' | path: 'google_oauth2' }}">
+              <i class="icon-google xxlarge"></i>
+              {{ 'user_login_connect_with_google' | t }}
+            </a>
+          </p>
+        {% endif %}
+      </div>
+    {% endif %}
+    <div id="signup" class="well">
+      <h5>{{ 'user_login_dont_have_account' | t }}</h5>
+      {% if current_site.facebook_login or current_site.google_login %}
+        <span class="hint">{{ 'user_login_dont_want_to_use_third_party' | t }}</span>
+      {% endif %}
+      <p>
+        <a class="btn" onclick="hq.loadDialog(this);return false" href="{{ 'user_new' | path }}">
+          {{ 'user_login_signup_here' | t }}
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <div class="grid_5 last">
+    <div id="email_login">
+      <h5>{{ 'user_login_login_using_email' | t }}</h5>
+      <form id="login_form" accept-charset="utf-8" action="{{ 'login_create' | path }}" method="POST" onsubmit="hq.postDialog(this);return false">
+        {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+        <label for="email">{{ 'email' | t }}</label>
+        <input id="email" type="text" name="email" onblur="this.value=this.value.toLowerCase()"{% if params.email %} value="{{ params.email }}"{% endif %}>
+        <label for="password">{{ 'user_login_password' | t }}</label>
+        <input id="password" type="password" name="password">
+        <button class="btn">{{ 'login' | t }}</button>
+        <a class="cancel" href="{{ 'campaign_index' | path }}" onclick="hq.closeDialog();return false">
+          {{ 'cancel' | t }}
+        </a>
+      </form>
+      <p>
+        <a onclick="hq.loadDialog(this);return false" href="{{ 'password_show' | path }}">
+          {{ 'user_login_reset_your_password' | t }}
+        </a>
+      </p>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>

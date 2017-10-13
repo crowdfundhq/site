@@ -1,0 +1,128 @@
+{% comment %}Included in commitment edit and new{% endcomment %}
+
+{% if commitment.new_record? and current_site.commitment_images_enabled %}
+  {% assign commitment_images_enabled = true %}
+{% endif %}
+
+{% if commitment_images_enabled or commitment.images_enabled %}
+  <label for="commitment_image">
+    {{ 'commitment_form_image' | t }}
+    {% if commitment.new_record? and current_site.commitment_images_required %}
+      {% assign commitment_images_required = true %}
+    {% endif %}
+    {% if commitment_images_required or commitment.images_required %} * {% endif %}
+  </label>
+  <br>
+  <div id="image_preview" data-url="{{ commitment.image_url | e }}">
+    <div class="preview_frame commitment-preview">
+      {% if commitment.image_url != blank %}
+        <img src="{{ commitment.image_url | e }}" alt="">
+      {% endif %}
+    </div>
+  </div>
+  <br>
+  <input id="commitment_image" name="image_url" type="hidden" value="{{ commitment.image_url | e }}">
+
+  {% if commitment.errors.image_url != blank %}
+    <span class="field_error">{{ commitment.errors.image_url | join: ', ' }}</span>
+  {% endif %}
+
+  <div class="clear"></div>
+
+  <div class="commitment-dropbox dropbox dropbox-inline">
+    <a class="dropbox-clickable">{{ 'upload' | t }}</a>
+    <span class="dropbox-progress"></span>
+    <span class="dropbox-error"></span>
+  </div>
+
+  <div class="spacer"></div>
+{% endif %}
+
+<p>
+  <label for="commitment_name">{{ 'commitment_form_name' | t }} * </label>
+  <br>
+  <input id="commitment_name" name="name" type="text"{% if commitment.name %} value="{{ commitment.name }}"{% endif %}>
+  {% if commitment.errors.name != blank %}
+    <span class="field_error">{{ commitment.errors.name | join: ', ' }}</span>
+  {% endif %}
+</p>
+<p>
+  <label for="commitment_max">{{ 'commitment_form_max_number_of_contributors' | t }}</label>
+  <br>
+  <input id="commitment_max" name="max" type="text"{% if commitment.max %} value="{{ commitment.max | round }}"{% endif %}>
+  {% if commitment.errors.max != blank %}
+    <span class="field_error">{{ commitment.errors.max | join: ', ' }}</span>
+  {% endif %}
+</p>
+<p>
+  <label for="commitment_description">{{ 'commitment_form_description' | t }} * </label>
+  <br>
+  <textarea id="commitment_description" name="description">{{ commitment.description }}</textarea>
+  {% if commitment.errors.description != blank %}
+    <span class="field_error">{{ commitment.errors.description | join: ', ' }}</span>
+  {% endif %}
+</p>
+<p>
+  <label for="commitment_visible">{{ 'commitment_form_set_visible' | t }}</label>
+  <input id="commitment_visible" type="checkbox" name="visible" value="true"{% if commitment.visible %} checked{% endif %}>
+</p>
+<p>
+  <button class="btn">{{ 'submit' | t }}</button>
+  <a class="cancel" href="{{ 'campaign_show_section' | path: campaign.link, 'commitments' }}" onclick="hq.closeDialog();return false">{{ 'cancel' | t }}</a>
+</p>
+
+{% if commitment_images_enabled or commitment.images_enabled %}
+  <script class="loadscript">
+    var el = document.querySelector('.commitment-dropbox');
+    var link = el.querySelector('.dropbox-clickable');
+    var meter = el.querySelector('.dropbox-progress');
+    var error = el.querySelector('.dropbox-error');
+
+    var preview = document.querySelector('.commitment-preview');
+    var input = document.querySelector('#commitment_image');
+
+    var dz = new Dropzone(el, {
+      url: '/uploads/commitment',
+      clickable: link,
+      previewsContainer: false,
+      paramName: 'datafile',
+      acceptedFiles: 'image/*',
+      maxFiles: 1,
+      maxFilesize: 20,
+      dictInvalidFile: "{{ 'upload_invalid_images_only' | t }}",
+      dictFileTooBig: "{{ 'upload_max_filesize' | t }} 20 MB",
+      dictResponseError: "{{ 'upload_connection_error' | t }}"
+    });
+
+    // Init
+    link.addEventListener('click', function(){
+      meter.textContent = '';
+      error.textContent = '';
+    });
+
+    // Update the total progress bar
+    dz.on('totaluploadprogress', function(progress) {
+      if(dz.files.length > 0) {
+        progress = parseInt(progress)
+        meter.textContent = progress + '%';
+      }
+    });
+
+    // Hide the total progress bar when nothing's uploading anymore
+    dz.on('queuecomplete', function() {
+      dz.removeAllFiles();
+      meter.textContent = '';
+    });
+
+    dz.on('success', function(file, data) {
+      data = JSON.parse(data);
+      preview.innerHTML = '<img src="' + encodeURI(data.url) + '" alt="">';
+      input.value = encodeURI(data.url);
+    });
+
+    dz.on('error', function(file, message) {
+      meter.textContent = '';
+      error.textContent = message;
+    });
+  </script>
+{% endif %}

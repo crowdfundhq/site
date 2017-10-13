@@ -1,0 +1,161 @@
+{% comment %}Campaign files{% endcomment %}
+
+{% assign sort = params.sort %}
+{% unless sort %}{% assign sort = 'timestamp' %}{% endunless %}
+{% assign order = params.order %}
+{% unless order %}{% assign order = '-1' %}{% endunless %}
+{% assign direction = order | flip %}
+{% assign paginate = campaign.images | order: sort, order | paginate %}
+{% assign files = paginate.entries %}
+
+<div id="campaign_files" class="row">
+  <div class="spacer-small"></div>
+  <div class="right">
+    <div class="campaign-files-dropbox dropbox">
+      <span class="dropbox-error"></span>
+      <span class="dropbox-progress"></span>
+      <a class="btn btn-med dropbox-clickable">{{ 'upload' | t }}</a>
+    </div>
+  </div>
+
+  <div class="campaign-storage-info hint">{{ campaign.storage_used }} / {{ current_site.storage_campaign }} MB</div>
+  <div class="spacer-small clear"></div>
+
+  <ul class="block-list no-style campaign-files-list">
+    <li class="controls">
+      <div class="resultlist-name grid_3">
+        <a href="?sort=name&amp;order={% if sort == 'name' %}{{ direction }}{% else %}-1{% endif %}"{% if sort == 'name' %} class="active"{% endif %}>
+          {{ 'campaign_files_list_name' | t }}
+
+          {% if sort == 'name' and order == '1' %}
+            <i class="icon-circle-arrow-up icon-drop"></i>
+          {% elsif sort == 'name' and order == '-1' %}
+             <i class="icon-circle-arrow-down icon-drop"></i>
+          {% endif %}
+        </a>
+      </div>
+
+      <div class="resultlist-timestamp grid_2">
+        <a href="?sort=timestamp&amp;order={% if sort == 'timestamp' %}{{ direction }}{% else %}-1{% endif %}"{% if sort == 'timestamp' %} class="active"{% endif %}>
+          {{ 'campaign_files_list_date' | t }}
+          {% if sort == 'timestamp' and order == '1' %}
+            <i class="icon-circle-arrow-up icon-drop"></i>
+          {% elsif sort == 'timestamp' and order == '-1' %}
+             <i class="icon-circle-arrow-down icon-drop"></i>
+          {% endif %}
+        </a>
+      </div>
+
+      <div class="resultlist-type grid_2">
+        <a href="?sort=type&amp;order={% if sort == 'type' %}{{ direction }}{% else %}-1{% endif %}"{% if sort == 'type' %} class="active"{% endif %}>
+          {{ 'campaign_files_list_type' | t }}
+          {% if sort == 'type' and order == '1' %}
+            <i class="icon-circle-arrow-up icon-drop"></i>
+          {% elsif sort == 'type' and order == '-1' %}
+             <i class="icon-circle-arrow-down icon-drop"></i>
+          {% endif %}
+        </a>
+      </div>
+
+      <div class="resultlist-filesize grid_2">
+        <a href="?sort=file_size&amp;order={% if sort == 'file_size' %}{{ direction }}{% else %}-1{% endif %}"{% if sort == 'file_size' %} class="active"{% endif %}>
+          {{ 'campaign_files_list_size' | t }}
+          {% if sort == 'file_size' and order == '1' %}
+            <i class="icon-circle-arrow-up icon-drop"></i>
+          {% elsif sort == 'file_size' and order == '-1' %}
+             <i class="icon-circle-arrow-down icon-drop"></i>
+          {% endif %}
+        </a>
+      </div>
+    </li>
+
+    {% if files.size > 0 %}
+      {% for file in files %}
+        {% include 'image/file' with file %}
+      {% endfor %}
+    {% else %}
+      <li class="campaign-files-empty">{{ 'campaign_files_empty' | t }}</li>
+    {% endif %}
+  </ul>
+  {% if paginate and paginate.total_pages > 1 %}
+    <div class="paginator campaign-files-list-paginate">{{ paginate.default }}</div>
+  {% endif %}
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+
+    var el = document.querySelector('.campaign-files-dropbox');
+    var meter = el.querySelector('.dropbox-progress');
+    var error = el.querySelector('.dropbox-error');
+    var link = el.querySelector('.dropbox-clickable');
+    var text = link.innerHTML.trim();
+
+    var list = document.querySelector('.campaign-files-list');
+    var info = document.querySelector('.campaign-storage-info');
+    var flash = document.querySelector('#flash');
+
+    var dz = new Dropzone(el, {
+      url: '/campaigns/{{ campaign.link }}/images',
+      clickable: link,
+      previewsContainer: false,
+      paramName: 'datafile',
+      maxFilesize: 20,
+      dictInvalidFile: "{{ 'upload_invalid_images_only' | t }}",
+      dictFileTooBig: "{{ 'upload_max_filesize' | t }} 20 MB",
+      dictResponseError: "{{ 'upload_connection_error' | t }}"
+    });
+
+    // Init
+    link.addEventListener('click', function(){
+      meter.textContent = '';
+      error.textContent = '';
+      flash.innerHTML = '';
+    });
+
+    // Update the total progress bar
+    dz.on('totaluploadprogress', function(progress) {
+      if(dz.files.length > 0) {
+        progress = parseInt(progress)
+        meter.textContent = progress + '%';
+      }
+    });
+
+    // Hide the total progress bar when nothing's uploading anymore
+    dz.on('queuecomplete', function() {
+      dz.removeAllFiles();
+      meter.textContent = '';
+    });
+
+    // Insert row when success
+    dz.on('success', function(file, data) {
+      if(data.error) { error.textContent = data.error; return; }
+
+      // Update counter in upper left
+      var values = info.textContent.split('/');
+      var base = parseFloat(values[0]);
+      var size = parseFloat(data.file_size) / 1048576;
+      info.textContent = (base + size).toFixed(2) + ' / ' + values[1];
+
+      // Insert template into list
+      var tmp = document.createElement('template');
+      tmp.innerHTML = data.template;
+
+      var top = list.querySelector('.upload-campaign-file');
+      if(top) {
+        list.insertBefore(tmp.content, top);
+      } else {
+        var empty = document.querySelector('.campaign-files-empty');
+        if(empty) { empty.remove(); }
+        list.appendChild(tmp.content);
+      }
+    });
+
+    dz.on('error', function(file, message) {
+      meter.textContent = '';
+      error.textContent = message;
+    });
+
+  });
+
+</script>

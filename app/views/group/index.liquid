@@ -1,0 +1,45 @@
+{% comment %}Group index at /groups{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ 'campaign_index_title' | t }} - {{ 'group_index_title' | t }}{% endtitle %}
+{% tagline %}{{ 'group_index_title' | t }}{% endtagline %}
+{% subtitle %}{{ 'group_index_subtitle' | t }}{% endsubtitle %}
+{% body_class group %}
+
+{% comment %} Setting up sort order {% endcomment %}
+{% assign category = current_site.categories | where: link: 'groups' | first %}
+{% assign sort = category.sort %}{% unless sort %}{% assign sort = 'created_at' %}{% endunless %}
+{% assign order = category.order %}{% unless order %}{% assign order = 'desc' %}{% endunless %}
+
+{% comment %} Fetching groups {% endcomment %}
+{% assign paginate = current_site.groups.visible | order: sort, order | paginate: per_page: 21 %}
+{% assign groups = paginate.entries %}
+{% assign category_name = 'categories' | t %}
+
+<div id="groups_index">
+  {% include 'campaign/categorybar' %}
+  <div class="well white" id="badges">
+    {% if groups != empty %}
+      {% for group in groups %}
+        <div class="grid_4 group_badge">
+          <a href="{{ 'group_show' | path: group.link }}">
+            <div class="group_img">
+              <img src="{{ group.image | e }}" alt="">
+            </div>
+            <h3>{{ group.name }}</h3>
+          </a>
+        </div>
+      {% endfor %}
+      {% if paginate and paginate.total_pages > 1 %}
+        <div class="clear"></div>
+        <div class="paginator groups-paginate">{{ paginate.default }}</div>
+      {% endif %}
+    {% endif %}
+    <div class="clear"></div>
+  </div>
+</div>
+{% if request.xhr? %}
+  <script class="loadscript">
+    hq.setTitle('{{ title }}', '{{ subtitle }}');
+  </script>
+{% endif %}

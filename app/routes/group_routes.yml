@@ -1,0 +1,84 @@
+GET#index:
+  desc: Index group
+  path: /groups
+  requires:
+    - groups
+
+GET#show_invite:
+  desc: Show invite group
+  path: /groups/:group_link/invite
+  requires:
+    - user
+    - groups
+    - groups_editable
+
+POST#create_invite:
+  desc: Create invite group
+  path: /groups/:group_link/invite
+  requires:
+    - user
+    - groups
+    - groups_editable
+
+GET#new:
+  desc: New group
+  path: /group/new
+  requires:
+    - user
+    - groups
+    - groups_editable
+
+POST#create:
+  desc: Create group
+  path: /groups
+  requires:
+    - user
+    - groups
+    - groups_editable
+
+GET#edit:
+  desc: Edit group
+  path: /groups/:group_link/edit
+  requires:
+    - user
+    - groups
+    - groups_editable
+
+GET#confirm:
+  desc: Confirm group
+  path: /groups/:group_link/delete
+  requires:
+    - user
+    - groups
+    - groups_editable
+
+DELETE#delete:
+  desc: Delete group
+  path: /groups/:group_link
+  requires:
+    - user
+    - groups
+    - groups_editable
+
+PUT#update:
+  desc: Update group
+  path: /groups/:group_link
+  requires:
+    - user
+    - groups
+    - groups_editable
+
+POST#toggle:
+  desc: Toggle group
+  path: /groups/:group_link/hidden
+  requires:
+    - user
+    - groups
+    - groups_editable
+
+GET#show:
+  desc: Show group
+  path: /groups/:group_link
+  requires:
+    - groups
+

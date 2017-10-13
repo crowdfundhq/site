@@ -1,0 +1,58 @@
+{% comment %}Create new vote{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'campaign_vote_for_title' | t }} {{ campaign.name }}?{% endtitle %}
+
+<div class="vote_intro">
+  <h5>{{ campaign.name }}</h5>
+  <div class="vote_description">{{ campaign.headline | newline_to_br }}</div>
+</div>
+
+<form id="vote_form" accept-charset="utf-8" action="{{ 'vote_create' | path: campaign.link }}" method="POST" onsubmit="hq.postDialog(this);return false">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+
+  {% if current_user == null and current_site.login_to_contribute == false %}
+    <p>
+      <label for="vote_name">{{ 'contribution_new_login_to_contribute_name' | t }}</label>
+      <br>
+      <input id="vote_name" name="name" type="text"{% if vote.name %} value="{{ vote.name }}"{% endif %}>
+      {% if vote.errors.name != blank %}
+        <span class="field_error">{{ vote.errors.name | join: ', ' }}</span>
+      {% endif %}
+    </p>
+    <p>
+      <label for="vote_email">{{ 'contribution_new_login_to_contribute_email' | t }}</label>
+      <br>
+      <input id="vote_email" name="email" type="text"{% if vote.email %} value="{{ vote.email }}"{% endif %}>
+      {% if vote.errors.email != blank %}
+        <span class="field_error">{{ vote.errors.email | join: ', ' }}</span>
+      {% endif %}
+    </p>
+  {% endif %}
+
+  {% comment %} Custom fields {% endcomment %}
+  {% assign form_type = 'vote' %}
+  {% assign model = vote %}
+  {% include 'site/fields' with current_site.vote_fields %}
+
+  <p>
+    <label for="vote_comment">{{ 'campaign_vote_leave_comment' | t }}</label>
+    <br>
+    <textarea id="vote_comment" name="comment">{{ vote.comment }}</textarea>
+    {% if vote.errors.comment != blank %}
+      <span class="field_error">{{ vote.errors.comment | join: ', ' }}</span>
+    {% endif %}
+  </p>
+
+  <p>
+    <label>
+      <input type="checkbox" value="1" name="anonymous"{% if vote.anonymous %} checked{% endif %}>
+      {{ 'campaign_vote_anonymous' | t }}
+    </label>
+  </p>
+
+  <p>
+    <button class="btn">{{ 'campaign_vote' | t }}</button>
+    <a class="cancel" onclick="hq.closeDialog();return false" href="{{ 'campaign_show' | path: campaign.link }}">{{ 'cancel' | t }}</a>
+  </p>
+</form>

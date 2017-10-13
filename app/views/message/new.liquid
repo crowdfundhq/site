@@ -1,0 +1,19 @@
+{% comment %}Create new message{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'message_new_to' | t }} {{ user.name }}{% endtitle %}
+
+<form accept-charset="utf-8" onsubmit="hq.postDialog(this);return false" action="{{ 'message_create' | path }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <p>
+    <label for="conversation_subject">{{ 'message_subject' | t }}</label>
+    <br>
+    <input id="conversation_subject" name="subject" type="text" value="{{ conversation.subject }}">
+    {% if conversation.errors.subject != blank %}
+      <span class="field_error">
+        {{ conversation.errors.subject | join: ', ' }}
+      </span>
+    {% endif %}
+  </p>
+  {% include 'message/form' %}
+</form>

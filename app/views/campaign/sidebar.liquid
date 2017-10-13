@@ -1,0 +1,209 @@
+{% comment %}Campaign sidebar, included in campaign show{% endcomment %}
+
+<div id="stats">
+  <ul class="no-style">
+    <li class="campaign-sidebar-goal">
+      {% unless campaign.voting? %}
+        <div class="number">{{ campaign.pledged | to_currency: precision: 0 }}</div>
+      {% endunless %}
+      {% if campaign.goal != blank %}
+        {% if campaign.voting? %}
+          {% if campaign.goal > 0 %}
+            {{ campaign.goal | to_i }} {{ 'campaign_show_votes_needed' | t }}
+          {% endif %}
+        {% else %}
+          {% if campaign.goal > 0 %}
+            {{ 'campaign_show_raised_of' | t }} {{ campaign.goal | to_currency: precision: 0 }}
+          {% else %}
+            {{ 'campaign_show_raised' | t }}
+          {% endif %}
+        {% endif %}
+      {% else %}
+        {{ 'campaign_show_goal_not_set' | t }}
+      {% endif %}
+    </li>
+
+    {% if campaign.voting? or campaign.votes.count > 0 %}
+      <li class="campaign-sidebar-votes-count">
+        <div class="number">{{ campaign.votes.count }}</div>
+        {{ 'votes' | t }}
+      </li>
+    {% endif %}
+
+    {% unless campaign.voting? %}
+      <li class="campaign-sidebar-contributions-count">
+        <div class="number">{{ campaign.contributions.active.count }}</div>
+        {{ 'contributions' | t }}
+      </li>
+    {% endunless %}
+
+    {% if campaign.never_ending? == false %}
+      <li class="campaign-sidebar-time-left">
+        <div class="number">
+          {{ campaign.time_left_time }}
+          {% assign time = campaign.time_left_unit %}
+          {% if time == 'min' %}
+             {% assign time = 'minutes' | t %}
+          {% elsif time == 'sec' %}
+            {% assign time = 'seconds' | t %}
+          {% endif %}
+        </div>
+        <div class="time-left">
+          {% if campaign.expires_at %}
+            {{ time }} {{ 'campaign_show_time_remaining' | t }}
+          {% else %}
+            {{ 'campaign_show_duration' | t }}
+            {{ campaign.duration }}
+            {{ 'campaign_show_days' | t }}
+          {% endif %}
+        </div>
+      </li>
+    {% endif %}
+  </ul>
+
+  {% if campaign.goal > 0 %}
+    <div class="progressbar">
+      <div class="progress" style="width:{% if campaign.percent >= 0 and campaign.percent < 100 %}{{ campaign.percent }}{% else %}100{% endif %}%"></div>
+      <span class="progress_percentage">{{ campaign.percent }} %</span>
+    </div>
+  {% endif %}
+
+  <div class="center">
+    {% if campaign.expired? == false and campaign.deleted == false %}
+      {% if campaign.keep_it_all? or campaign.goal == 0 %}
+        <div class="hint">
+          {{ 'campaign_show_keep_what_raise' | t }}
+        </div>
+      {% elsif campaign.all_or_nothing? %}
+        {% if campaign.percent >= 0 and campaign.percent < 100 %}
+          <div class="hint">
+            {{ 'campaign_show_all_or_nothing' | t }}
+          </div>
+        {% elsif campaign.percent >= 100 %}
+          <div class="hint">
+            {{ 'campaign_show_all_or_nothing_goal_met' | t }}
+          </div>
+        {% endif %}
+      {% endif %}
+
+      {% if campaign.can_receive_contributions? %}
+        {% if campaign.voting? %}
+          <a class="btn btn-primary" onclick="{% if current_site.login_to_contribute %}hq.transitLoad(this){% else %}hq.loadDialog(this){% endif %};return false" href="{{ 'vote_new' | path: campaign.link }}">
+            {{ 'campaign_show_vote_now' | t }}
+          </a>
+        {% else %}
+          <a class="btn btn-primary"{% if current_site.login_to_contribute %} onclick="hq.transit(this);return false"{% endif %} href="{{ 'contribution_new' | path: campaign.link }}">
+            {{ 'campaign_show_contribute_now' | t }}
+          </a>
+        {% endif %}
+      {% elsif campaign.awaiting_approval? %}
+        <div class="small">
+          {{ 'campaign_awaiting_approval' | t }}
+        </div>
+      {% else %}
+        <div class="small">
+          {{ 'campaign_show_closed_for_contributions' | t }}
+        </div>
+      {% endif %}
+
+    {% else %}
+      <div class="hint">
+        {% if campaign.deleted %}
+          {{ 'campaign_show_deleted' | t }}
+        {% else %}
+          {% if campaign.successful? or campaign.goal == 0 %}
+            {{ 'campaign_show_funded_on' | t }}
+            {{ campaign.expires_at | date }}
+          {% else %}
+            {% if campaign.keep_it_all? %}
+              {{ 'campaign_show_goal_not_met_kia' | t }}
+            {% elsif campaign.all_or_nothing? %}
+              {{ 'campaign_show_not_funded' | t }}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% if current_site.hide_user_bio != true %}
+  <div id="campaign_bio">
+    <img class="push-left" src="{{ campaign.user.avatar | e }}" width="50" height="50" alt="">
+    <h6>{{ 'campaign_show_subtitle' | t }} <a href="{{ 'user_show' | path: campaign.user.link }}">{{ campaign.user.name }}</a></h6>
+    <div id="campaign_user_data">
+      {{ campaign.user.campaigns.visible.size }} {{ 'campaign_show_campaigns_count' | t }},
+      {{ campaign.user.contributions.active.live.count }}
+      {{ 'campaign_show_contributions_count' | t }}
+    </div>
+
+    {% if campaign.user.website != blank %}
+      <div id="campaign_user_website">
+        <a href="{{ campaign.user.website | e }}" target="_blank">{{ campaign.user.website }}</a>
+      </div>
+    {% endif %}
+    <div class="clear"></div>
+
+    {% if campaign.user.bio_html != blank %}
+      <div id="campaign_user_bio_link">
+        <a href="{{ 'user_show_bio' | path: campaign.user.link }}" onclick="hq.loadDialog(this);return false">
+          {{ 'campaign_show_show_bio' | t }}
+        </a>
+      </div>
+    {% endif %}
+
+    {% if current_site.disable_messages != true and current_user.id != campaign.user.id %}
+      <div id="campaign_user_send_message">
+        <a href="{{ 'message_new' | path: campaign.user.link }}" onclick="hq.transitLoad(this);return false">
+          {{ 'send_message' | t }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+{% endif %}
+
+{% if current_site.rewards_enabled and campaign.voting? == false %}
+  <div id="rewards">
+    {% assign rewards = campaign.rewards.visible | order: amount: 1 | all %}
+    {% if rewards != empty %}
+      <h4 class="sidebar-title">{{ 'campaign_rewards_section_title' | t }}</h4>
+      <ul>
+        {% for reward in rewards %}
+          {% if campaign.inactive? %}
+            <li class="expired">{% include 'campaign/reward' with reward %}</li>
+          {% else %}
+            <li>
+              <a{% if current_site.login_to_contribute %} onclick="hq.transit(this);return false"{% endif %} href="{{ 'contribution_new' | path: campaign.link | query: select: forloop.index0 }}">
+                {% include 'campaign/reward' with reward %}
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+{% endif %}
+
+{% if current_site.commitments_enabled %}
+  <div id="commitments">
+    {% assign commitments = campaign.commitments.visible.all %}
+    {% if commitments != empty %}
+      <h4 class="sidebar-title">
+        {{ 'campaign_commitment_section_title' | t }}
+      </h4>
+      <ul>
+        {% for commitment in commitments %}
+          {% if campaign.inactive? %}
+            <li class="expired">{% include 'campaign/commitment' with commitment %}</li>
+          {% else %}
+            <li>
+              <a onclick="{% if current_site.login_to_contribute %}hq.transitLoad(this){% else %}hq.loadDialog(this){% endif %};return false" href="{{ 'pledge_new' | path: campaign.link, commitment.id }}">
+                {% include 'campaign/commitment' with commitment %}
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+{% endif %}

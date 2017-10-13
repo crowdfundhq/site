@@ -1,0 +1,9 @@
+{% comment %}Create new commitment{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'commitment_new_title' | t }}{% endtitle %}
+
+<form accept-charset="utf-8" onsubmit="hq.postDialog(this);return false" action="{{ 'commitment_create' | path: campaign.link }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  {% include 'commitment/form' %}
+</form>

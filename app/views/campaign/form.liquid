@@ -1,0 +1,325 @@
+{% comment %}Included in campaign edit and new forms{% endcomment %}
+
+<div id="campaign_form">
+  <label for="campaign_name">{{ 'campaign_form_name' | t }}</label>
+
+  {% if campaign.submitted == false %}
+    <div class="helper">{{ 'campaign_form_name_desc' | t }}</div>
+  {% endif %}
+  <input id="campaign_name" name="name" type="text" value="{{ campaign.name }}">
+  {% if campaign.errors.name != blank %}
+    <span class="field_error">{{ campaign.errors.name | join: ', ' }}</span>
+  {% endif %}
+
+  <label for="campaign-about">
+    {{ 'campaign_form_about' | t }}
+    {% if campaign.errors.about != blank %}
+      <span class="field_error">{{ campaign.errors.about | join: ', ' }}</span>
+    {% endif %}
+  </label>
+  <div class="helper">{{ 'campaign_form_about_desc' | t }}</div>
+
+  {% include 'campaign/editor' %}
+
+  <label for="campaign_headline">
+    {{ 'campaign_form_badge_summary' | t }}
+    {% if campaign.errors.headline != blank %}
+      <span class="field_error">{{ campaign.errors.headline | join: ', ' }}</span>
+    {% endif %}
+  </label>
+  <div class="helper">{{ 'campaign_form_badge_summary_desc' | t }}</div>
+  <textarea id="campaign_headline" class="form-input-low" maxlength="140" name="headline">{{ campaign.headline }}</textarea>
+
+  {% if current_site.campaign_location %}
+    <input id="location_data" type="hidden" name="location_data">
+    <script class="loadscript">
+      document.querySelector('#location_data').value = JSON.stringify({{ campaign.location_data }});
+    </script>
+
+    <label>
+      {{ 'location' | t }}
+      {% if campaign.errors.location != blank %}
+        <span class="field_error">{{ campaign.errors.location | join: ', ' }}</span>
+      {% endif %}
+      <br>
+      <input id="location" type="text" name="location" autocomplete="off" value="{{ campaign.location }}">
+    </label>
+    <div id="location_list"></div>
+    <div class="clear" style="height:24px"></div>
+  {% endif %}
+
+  <label class="label" for="form_categories">
+    {{ 'campaign_form_category' | t }}
+    {% if campaign.errors.category_link != blank %}
+      <span class="field_error">{{ campaign.errors.category_link | join: ', ' }}</span>
+    {% endif %}
+    <br>
+  </label>
+  <div class="helper">{{ 'campaign_form_category_desc' | t }}</div>
+
+  {% assign categories = current_site.categories.custom | order: position: '1' | all %}
+  {% if categories != empty %}
+    <select id="form_categories" name="category_link">
+      {% for category in categories %}
+        <option id="category_{{ forloop.index0 }}" value="{{ category.link }}"{% if campaign.category_link == category.link %} selected{% endif %}>{{ category.name }}</option>
+      {% endfor %}
+    </select>
+  {% else %}
+    <p>{{ 'campaign_form_no_category_found' | t }}</p>
+  {% endif %}
+
+  <div class="spacer"></div>
+
+  {% if current_site.groups_enabled %}
+    {% assign groups = current_user.groups | order: 'name', 'desc' | all %}
+    {% if groups.size > 0 %}
+      <label for="campaign_group_id">
+        {{ 'campaign_form_group' | t }}
+        {% if campaign.errors.group_id != blank %}
+          <span class="field_error">{{ campaign.errors.group_id | join: ', ' }}</span>
+        {% endif %}
+        <br>
+      </label>
+
+      <select id="campaign_group_id" name="group_id">
+        <option>&nbsp;</option>
+        {% for group in groups %}
+          <option {% if group.id == campaign.group.id %}selected {% endif %} value="{{ group.id }}">
+            {{ group.name }}{{ selected }}
+          </option>
+        {% endfor %}
+      </select>
+    {% endif %}
+    <div class="spacer"></div>
+  {% endif %}
+
+  <label for="campaign_video_url">
+    {{ 'campaign_form_video_label' | t }}
+    {{ 'campaign_form_video_label_must_be' | t }}
+    {{ current_site.video_type_hint }}
+  </label>
+
+  <div class="helper">{{ 'campaign_form_video_desc' | t }}</div>
+
+  <div id="image_preview" data-url="{{ campaign.video_image | e }}">
+    <div class="campaign-preview preview_frame">
+      {% if campaign.video_image != blank %}
+        <img src="{{ campaign.video_image | e }}" alt="">
+      {% endif %}
+    </div>
+  </div>
+
+  {% if campaign.errors.video_url != blank %}
+    <span class="field_error">{{ campaign.errors.video_url | join: ', ' }}</span>
+  {% endif %}
+
+  <br>
+  <input id="campaign_video_url" name="video_url" type="text" value="{{ campaign.video_url | e }}" onblur="hq.updatePreview(this)" data-preview="image_preview">
+
+  {% if current_site.video_types contains 'image' %}
+    <div class="campaign-dropbox dropbox">
+      <a class="dropbox-clickable campaign_image_upload">{{ 'campaign_form_upload_image' | t }}</a>
+      <span class="dropbox-progress"></span>
+      <span class="dropbox-error"></span>
+    </div>
+  {% endif %}
+
+  {% unless campaign.voting? %}
+    {% if current_site.fixed_amount_enabled and current_site.fixed_amount_user_decide %}
+      <label for="campaign_amount">
+        {{ 'campaign_form_fixed_amount' | t }}
+        {{ campaign.fixed_amount | to_currency }}
+      </label>
+      <div class="helper">{{ 'campaign_form_fixed_amount_desc' | t }}</div>
+      <input id="campaign_fixed_amount" name="fixed_amount" type="text"{% if campaign.fixed_amount %} value="{{ campaign.fixed_amount }}"{% endif %}>
+      {% if campaign.errors.fixed_amount != blank %}
+        <span class="field_error">{{ campaign.errors.fixed_amount | join: ', ' }}</span>
+      {% endif %}
+    {% endif %}
+  {% endunless %}
+
+  <div class="spacer"></div>
+
+  {% if current_site.campaign_strategies.size > 1 %}
+    <label>{{ 'campaign_form_campaign_strategy' | t }}</label>
+    <div class="helper">{{ 'campaign_form_campaign_strategy_desc' | t }}</div>
+
+    {% if current_site.campaign_strategies contains 'all_or_nothing' and current_site.campaign_duration != 'unlimited' %}
+      <label class="inline-label campaign-all-or-nothing-label">
+        <input type="radio" name="campaign_strategy" value="all_or_nothing"{% if campaign.all_or_nothing? %} checked{% endif %} onclick="hq.toggleCampaignFields(this)">
+        {{ 'campaign_form_all_or_nothing' | t }}
+      </label>
+    {% endif %}
+
+    {% if current_site.campaign_strategies contains 'keep_it_all' %}
+      <label class="inline-label campaign-keep-it-all-label">
+        <input type="radio" name="campaign_strategy" value="keep_it_all"{% if campaign.keep_it_all? %} checked{% endif %} onclick="hq.toggleCampaignFields(this)">
+         {{ 'campaign_form_keep_it_all' | t }}
+      </label>
+    {% endif %}
+
+    {% if current_site.campaign_strategies contains 'voting' %}
+      <label class="inline-label campaign-voting-label">
+        <input type="radio" name="campaign_strategy" value="voting"{% if campaign.voting? %} checked{% endif %} onclick="hq.toggleCampaignFields(this)">
+         {{ 'campaign_form_voting' | t }}
+      </label>
+    {% endif %}
+
+    <div class="clear" style="height:1.618em"></div>
+  {% endif %}
+
+  {% if current_site.campaign_duration == 'user_decide' %}
+    <div>
+      <label>{{ 'campaign_form_campaign_duration_title' | t }}</label>
+      <div class="helper">{{ 'campaign_form_campaign_duration_desc' | t }}</div>
+
+      <label class="inline-label">
+        <input id="limited_button" type="radio" name="campaign_duration" value="limited"{% if campaign.has_limit? %} checked{% endif %} onclick="document.getElementById('campaign_duration_fields').style.display = ''">
+        {{ 'campaign_form_limited' | t }}
+      </label>
+
+      <label id="never_ending_button" class="inline-label" {% if campaign.all_or_nothing? %} style="display:none"{% endif %}>
+        <input type="radio" name="campaign_duration" value="unlimited"{% if campaign.never_ending? %} checked{% endif %} onclick="document.getElementById('campaign_duration_fields').style.display = 'none'">
+        {{ 'campaign_form_never_ending' | t }}
+      </label>
+
+      {% if campaign.errors.campaign_duration != blank %}
+        <span class="field_error">{{ campaign.errors.campaign_duration | join: ', ' }}</span>
+      {% endif %}
+    </div>
+    <div class="clear" style="height:1.618em"></div>
+  {% endif %}
+
+  <div id="campaign_duration_fields"{% if campaign.has_limit? == false %} style="display:none"{% endif %}>
+    <label for="campaign_duration">
+      {{ 'campaign_form_campaign_duration' | t }}
+      {% unless campaign.approved %} - {{ 'campaign_form_less_than' | t }} {{ current_site.duration }}{% endunless %}
+    </label>
+
+    <div class="helper">{{ 'campaign_form_campaign_duration_days_desc' | t }}</div>
+    <input id="campaign_duration" name="duration" type="text"{% if campaign.duration %} value="{{ campaign.duration }}"{% endif %} style="width:50px">
+    {% if campaign.errors.duration != blank %}
+      <span class="field_error">{{ campaign.errors.duration | join: ', ' }}</span>
+    {% endif %}
+  </div>
+
+  {% unless campaign.voting? %}
+    {% if current_site.configuration.paypal_adaptive? %}
+      <label for="campaign_paypal_account">{{ 'campaign_form_paypal_account' | t }}</label>
+      <input id="campaign_paypal_account" name="paypal_account" size="50" type="text" value="{{ campaign.paypal_account }}">
+      {% if campaign.errors.paypal_account != blank %}
+        <span class="field_error">{{ campaign.errors.paypal_account | join: ', ' }}</span>
+      {% endif %}
+    {% endif %}
+  {% endunless %}
+
+  <label for="campaign_goal">
+    <span class="campaign-voting-goal"{% unless campaign.voting? %} style="display:none"{% endunless %}>
+      {{ 'campaign_form_campaign_goal_voting' | t }}
+    </span>
+    <span class="campaign-contribution-goal"{% if campaign.voting? %} style="display:none"{% endif %}>
+      {% if campaign.min_goal > 0 %}
+        {{ 'campaign_form_campaign_goal' | t }}
+        {{ campaign.min_goal | to_currency }}
+      {% else %}
+        {{ 'campaign_form_campaign_goal_zero' | t }}
+      {% endif %}
+    </span>
+  </label>
+  <div class="helper">{{ 'campaign_form_campaign_goal_desc' | t }}</div>
+  <input id="campaign_goal" name="goal" type="text"{% if campaign.goal %} value="{{ campaign.goal }}"{% endif %}>
+
+  {% if campaign.errors.goal != blank %}
+    <span class="field_error">{{ campaign.errors.goal | join: ', ' }}</span>
+  {% endif %}
+
+  {% comment %} Show campaign contribution amount {% endcomment %}
+  {% if current_site.contribution_amount == 'user_decide' %}
+    <label>{{ 'campaign_form_contribution_amount' | t }}</label>
+    <label class="inline-label">
+      <input type="radio" name="contribution_amount" value="hide"{% if campaign.contribution_amount == 'hide' %} checked{% endif %}>
+      {{ 'campaign_form_contribution_amount_hide' | t }}
+    </label>
+    <label class="inline-label">
+      <input type="radio" name="contribution_amount" value="show"{% if campaign.contribution_amount == 'show' %} checked{% endif %}>
+       {{ 'campaign_form_contribution_amount_show' | t }}
+    </label>
+    <div class="spacer-small"></div>
+  {% endif %}
+
+  {% comment %} Custom fields {% endcomment %}
+  {% assign form_type = 'campaign' %}
+  {% assign model = campaign %}
+  {% include 'site/fields' with current_site.campaign_fields %}
+
+  <br>
+  <p style="position:relative">
+    {% if campaign.new_record? == false %}
+      <button class="btn campaign-save-button" onclick="hq.saveCampaign(this);return false">{{ 'save' | t }}</button>
+    {% endif %}
+    <button class="btn campaign-preview-button">{{ 'campaign_form_save_and_preview' | t }}</button>
+    <a class="cancel" href="{{ 'campaign_index' | path }}" onclick="hq.closeDialog();return false">{{ 'cancel' | t }}</a>
+  </p>
+</div>
+{% if current_site.campaign_location %}
+  <script class="loadscript" data-repeat="true">
+    hq.initLocation('{{ current_site.lang | iso_lang }}');
+  </script>
+{% endif %}
+
+{% if current_site.video_types contains 'image' %}
+  <script class="loadscript">
+    var el = document.querySelector('.campaign-dropbox');
+    var link = el.querySelector('.dropbox-clickable');
+    var meter = el.querySelector('.dropbox-progress');
+    var preview = document.querySelector('.campaign-preview');
+    var input = document.querySelector('#campaign_video_url');
+    var error = el.querySelector('.dropbox-error');
+
+    var dz = new Dropzone(el, {
+      url: '/uploads/campaign',
+      clickable: link,
+      previewsContainer: false,
+      paramName: 'datafile',
+      acceptedFiles: 'image/*',
+      maxFiles: 1,
+      maxFilesize: 20,
+      dictInvalidFile: "{{ 'upload_invalid_images_only' | t }}",
+      dictFileTooBig: "{{ 'upload_max_filesize' | t }} 20 MB",
+      dictResponseError: "{{ 'upload_connection_error' | t }}"
+    });
+
+    // Init
+    link.addEventListener('click', function(){
+      meter.textContent = '';
+      error.textContent = '';
+    });
+
+    // Update the total progress bar
+    dz.on('totaluploadprogress', function(progress) {
+      if(dz.files.length > 0) {
+        progress = parseInt(progress)
+        meter.textContent = progress + '%';
+      }
+    });
+
+    // Hide the total progress bar when nothing's uploading anymore
+    dz.on('queuecomplete', function() {
+      dz.removeAllFiles();
+      meter.textContent = '';
+    });
+
+    // Insert url into preview and input when done
+    dz.on('success', function(file, data) {
+      data = JSON.parse(data);
+      preview.innerHTML = '<img src="' + encodeURI(data.url) + '" alt="">';
+      input.value = encodeURI(data.url);
+    });
+
+    dz.on('error', function(file, message) {
+      meter.textContent = '';
+      error.textContent = message;
+    });
+
+  </script>
+{% endif %}

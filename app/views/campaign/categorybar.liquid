@@ -1,0 +1,56 @@
+{% comment %}Category bar included in campaign discover, index and search{% endcomment %}
+
+{% assign categories = current_site.categories.visible | order: position: '1' | all %}
+
+{% if categories != empty %}
+  <ul id="ctabs" class="nav nav-tabs">
+    {% if params.q %}
+      <li>
+        <a class="selected" href="{{ 'campaign_search' | path | query: q: params.q }}">
+          {{ 'search' | t }}
+        </a>
+      </li>
+    {% endif %}
+    {% assign dropdown = 'wait' %}
+
+    {% for outer in categories %}
+      {% if dropdown == 'wait' and current_site.sidebar == 'dropdown' and outer.custom? %}
+        {% assign dropdown = 'done' %}
+        <li id="category-tab">
+          <a id="mclink" class="category-tab{% if category.custom? and category.link == params.category_link %} selected{% endif %}" onclick="hq.toggleMenuCategories(this);return false" href="javascript:void(0)">
+            {% if category.custom? %}{{ category.name }}{% else %}{{ 'categories' | t }}{% endif %}
+            <span class="down-arrow"></span>
+          </a>
+
+          <ul id="category-dropdown">
+            {% for inner in categories %}
+              {% if inner.custom? %}
+                <li>
+                  <a class="{% if params.category_link == inner.link %}selected {% endif %}nocap" href="{{ 'campaign_discover' | path: inner.link }}">{{ inner.name }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </li>
+
+      {% elsif current_site.sidebar != 'dropdown' or outer.default? %}
+        {% if outer.link != 'you' or current_user %}
+          {% if outer.link == 'groups' %}
+            {% if current_site.groups_enabled and current_site.groups.visible.count > 0 %}
+              <li id="groups-tab">
+                {% assign path = 'group_index' | path %}
+                <a{% if request.absolutepath == path %} class="selected"{% endif %} href="{{ path }}">
+                  {{ 'groups' | t }}
+                </a>
+              </li>
+            {% endif %}
+          {% else %}
+            <li>
+              <a class="{% if params.category_link == outer.link %}selected {% endif %}nocap" href="{{ 'campaign_discover' | path: outer.link }}">{% if outer.custom? %}{{ outer.name }}{% else %}{{ outer.link | t }}{% endif %}</a>
+            </li>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endif %}

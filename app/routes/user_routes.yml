@@ -1,0 +1,122 @@
+GET#edit:
+  desc: Edit user
+  path: /settings
+  requires:
+    - user
+
+GET#new:
+  desc: New user
+  path: /user/new
+  requires:
+    - no_user
+
+POST#create:
+  desc: Create user
+  path: /users
+  requires:
+    - no_user
+
+GET#user_confirm:
+  desc: User confirm user
+  path: /user/confirm/:confirmation_token
+  requires:
+    - no_user
+
+GET#user_approval:
+  desc: User show approval page
+  path: /users/:user_link/approval
+  requires:
+    - no_user
+
+POST#submit_approval:
+  desc: User approval
+  path: /users/:user_link/approval
+  requires:
+    - no_user
+
+PUT#update:
+  desc: Update user
+  path: /users
+  requires:
+    - user
+
+PUT#update_password:
+  desc: Update password user
+  path: /users/:user_link/password
+  requires:
+    - user
+
+GET#confirm:
+  desc: Confirm user
+  path: /users/:user_link/delete
+  requires:
+    - user
+
+DELETE#delete:
+  desc: Delete user
+  path: /users
+  requires:
+    - user
+
+GET#show_bio:
+  desc: Show bio user
+  path: /users/:user_link/bio
+  requires: []
+
+GET#show_address:
+  desc: Show address user
+  path: /users/:user_link/address
+  requires:
+    - user
+
+GET#show_avatar:
+  desc: Show avatar user
+  path: /users/:user_link/avatar
+  requires:
+    - user
+
+PUT#update_avatar:
+  desc: Update avatar user
+  path: /users/:user_link/avatar
+  requires:
+    - user
+
+GET#show_campaigns:
+  desc: Show campaigns user
+  path: /users/:user_link/show/campaigns
+  requires: []
+
+GET#campaigns_list:
+  desc: Show user campaigns
+  path: /users/:user_link/campaign/list
+  requires: []
+
+GET#show_contributions:
+  desc: Show contributions user
+  path: /users/:user_link/show/contributions
+  requires: []
+
+GET#contributions_list:
+  desc: Show user contributions
+  path: /users/:user_link/contribution/list
+  requires: []
+
+GET#show_pledges:
+  desc: Show pledges user
+  path: /users/:user_link/show/pledges
+  requires: []
+
+GET#pledges_list:
+  desc: Show user pledges
+  path: /users/:user_link/pledge/list
+  requires: []
+
+GET#show:
+  desc: Show user
+  path: /users/:user_link
+  requires: []
+
+GET#sync:
+  desc: Show sync
+  path: /user/sync
+  requires: []

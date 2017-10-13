@@ -1,0 +1,16 @@
+{% comment %}Delete campaign{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'campaign_delete_title' | t }} "{{ campaign.name }}"?{% endtitle %}
+
+<form accept-charset="utf-8" action="{{ 'campaign_delete' | path: campaign.link }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="DELETE">
+  <p>
+    {{ 'campaign_delete_warning' | t }}
+  </p>
+  <button class="btn btn-warning">{{ 'delete' | t }}</button>
+  <a class="cancel" onclick="hq.closeDialog();return false" href="{{ 'campaign_index' | path }}">
+    {{ 'cancel' | t }}
+  </a>
+</form>

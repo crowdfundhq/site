@@ -1,0 +1,108 @@
+{% comment %}Mangopay payment{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ campaign.name }}{% endtitle %}
+{% subtitle %}{{ 'contribution_payment_subtitle' | t }}{% endsubtitle %}
+{% body_class contribution %}
+
+{% if current_site.configuration.live? == false %}
+  <div class="alert">{{ 'contribution_payment_live_reminder' | t }}</div>
+{% endif %}
+
+<div class="right grid_4 last">{% include 'campaign/campaign_badge' %}</div>
+
+<div class="grid_8">
+  <div class="well white">
+    <form accept-charset="utf-8" action="{{ 'gateway_create' | path: campaign.link, contribution.id }}" onsubmit="return validateForm()" method="POST">
+      {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+      <img class="right" src="{{ 'mangopay.png' | image_url }}" alt="mangopay">
+      <h2>
+        {{ 'contribution_contribute' | t }}
+        {{ contribution.total | to_currency }}
+        {{ 'contribution_contribute_to' | t }}
+        {{ campaign.name }}
+      </h2>
+      <div class="form-row">
+        <input name="amount" value="{{ contribution.total }}" type="hidden">
+      </div>
+      <div class="form-row">
+        <label>
+          <i class="icon-credit"></i>
+          {{ 'contribution_stripe_form_card' | t }}
+          <br>
+          <input class="card-number i-field" id="card_number" name="card_number" autocomplete="off" style="width:225px" size="20" type="text" placeholder="{{ 'contribution_stripe_form_card' | t }}">
+        </label>
+      </div>
+      <div class="form-row">
+        <label>
+          {{ 'contribution_mangopay_form_expiration_date' | t }}
+          <br>
+          <input id="card_expiration_date" name="card_expiration_date" autocomplete="off" type="text" placeholder="MMYY">
+        </label>
+      </div>
+      <div class="form-row">
+        <label>
+          <i class="icon-lock"></i>
+          {{ 'contribution_stripe_form_cvc' | t }}
+          <br>
+          <input class="card-cvc" id="card_cvc" name="card_cvx" autocomplete="off" style="width:30px" size="4" type="text" placeholder="{{ 'contribution_stripe_form_cvc' | t }}">
+        </label>
+      </div>
+      <button class="btn btn-primary submit-button space-top" id="submit_button">
+        {{ 'contribution_mangopay_form_confirm_payment' | t }}
+      </button>
+      <a href="{{ 'contribution_new' | path: campaign.link }}">
+        {{ 'cancel' | t }}
+      </a>
+      <div class="clear" style="height:20px"></div>
+      <div class="field_error" id="payment-errors" style="display:none"></div>
+    </form>
+  </div>
+</div>
+
+<script src="https://js.stripe.com/v2/"></script>
+<script>
+
+  function reportError(msg) {
+    // // Show the error in the form:
+    var errors = document.getElementById('payment-errors');
+    errors.innerHTML = msg;
+    errors.style.display = 'block';
+
+    // disable the submit button to prevent repeated clicks:
+    document.getElementById('submit_button').disabled = false;
+    return false;
+  }
+
+  // Watch for the document to be ready:
+  function validateForm() {
+
+    // disable the submit button to prevent repeated clicks:
+    document.getElementById('submit_button').disabled = true;
+
+    // Get the values:
+    var cardNumber = document.getElementById('card_number').value
+    , cardCvx = document.getElementById('card_cvc').value
+    , cardExpirationDate = document.getElementById('card_expiration_date').value;
+
+    // Validate the card number
+    if (!Stripe.validateCardNumber(cardNumber)) {
+      return reportError("{{ 'contribution_mangopay_error_invalid_card_number' | t }}");
+    }
+
+    // Validate the card expiration date
+    if (!Stripe.validateExpiry(cardExpirationDate.slice(0,2), cardExpirationDate.slice(2,4))) {
+      return reportError("{{ 'contribution_mangopay_error_invalid_card_expiration_date' | t }}");
+    }
+
+    // Validate the card cvx
+    if (!Stripe.validateCVC(cardCvx)) {
+      return reportError("{{ 'contribution_mangopay_error_invalid_card_cvx' | t }}");
+    }
+  }
+
+  // error messages
+  site.translations['contribution_mangopay_error_invalid_card_number'] = "{{ 'contribution_mangopay_error_invalid_card_number' | t }}";
+  site.translations['contribution_mangopay_error_invalid_card_expiration_date'] = "{{ 'contribution_mangopay_error_invalid_card_expiration_date' | t }}";
+  site.translations['contribution_mangopay_error_invalid_card_cvx'] = "{{ 'contribution_mangopay_error_invalid_card_cvx' | t }}";
+</script>

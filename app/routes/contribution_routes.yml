@@ -1,0 +1,65 @@
+GET#list:
+  desc: Contribution list
+  path: /campaigns/:campaign_link/contribution/list
+  requires: []
+
+GET#new:
+  desc: New contribution
+  path: /campaigns/:campaign_link/contribution/new
+  requires:
+    - user:
+      - login_to_contribute: true
+
+GET#back_to_new:
+  desc: Back to new contribution
+  path: /campaigns/:campaign_link/contributions
+  requires: []
+
+GET#edit:
+  desc: Edit contribution
+  path: /campaigns/:campaign_link/contributions/:contribution_id/edit
+  requires:
+    - user:
+      - login_to_contribute: true
+
+POST#create:
+  desc: Create contribution
+  path: /campaigns/:campaign_link/contributions
+  requires:
+    - user:
+      - login_to_contribute: true
+
+PUT#update:
+  desc: Update contribution
+  path: /campaigns/:campaign_link/contributions/:contribution_id
+  requires:
+    - user:
+      - login_to_contribute: true
+
+GET#confirmation:
+  desc: Confirmation contribution
+  path: /campaigns/:campaign_link/contributions/:contribution_id
+  requires:
+    - user:
+      - login_to_contribute: true
+
+POST#contribution_confirm:
+  desc: Contribution confirm contribution
+  path: /campaigns/:campaign_link/contributions/:contribution_id
+  requires:
+    - user:
+      - login_to_contribute: true
+
+GET#thank_you:
+  desc: Thank you contribution
+  path: /campaigns/:campaign_link/contributions/:contribution_id/thank_you
+  requires:
+    - user:
+      - login_to_contribute: true
+
+GET#shipping:
+  desc: Shipping contribution
+  path: /campaigns/:campaign_link/contributions/:contribution_id/shipping
+  requires:
+    - user
+

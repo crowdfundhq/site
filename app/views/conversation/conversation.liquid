@@ -1,0 +1,36 @@
+{% comment %}Included in conversation index (/inbox){% endcomment %}
+
+<div id="conversation_content">
+  <h3>{{ conversation.subject }}</h3>
+
+  <div class="white border">
+    {% include 'conversation/reply' with conversation %}
+    <ul id="message-list" class="block-list no-style white">
+      {% assign paginate = conversation.messages | order: updated_at: '-1' | paginate %}
+      {% assign messages = paginate.entries %}
+      {% for message in messages %}
+        {% include 'message/message' with message %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% if messages != empty and paginate.total_pages > 1 %}
+    <div class="load-more-data">
+      <a class="small-link space-right" href="{{ 'message_list' | path: conversation.id }}" data-list="message-list" data-count="{{ paginate.total_entries }}" data-per-page="{{ settings.per_page }}" onclick="hq.loadMore(this);return false">
+        {{ 'load_more' | t }} ...
+      </a>
+    </div>
+    <div class="spacer"></div>
+  {% endif %}
+</div>
+
+<script class="loadscript">
+  // Auto-resize text area
+  var mc = document.getElementById('message_content');
+  mc.style.height = '36px';
+  mc.addEventListener('keydown', resizeTextarea);
+
+  function resizeTextarea(ev) {
+    this.style.height = '24px';
+    this.style.height = this.scrollHeight + 12 + 'px';
+  }
+</script>

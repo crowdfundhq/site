@@ -1,0 +1,184 @@
+{% comment %}Show user profile{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ user.name }}{% endtitle %}
+{% subtitle %}{{ 'user_show_subtitle' | t }}{% endsubtitle %}
+{% body_class profile %}
+
+<div id="user_profile">
+  <div class="grid_6">
+    <div class="well white">
+      <div class="right">
+        {% if current_user.id == user.id %}
+          {% if current_site.groups_enabled and current_site.groups_editable %}
+            <a class="small-link" href="{{ 'group_new' | path }}" onclick="hq.loadDialog(this);return false">
+              {{ 'group_show_add' | t }}
+            </a>
+          {% endif %}
+          <a class="btn btn-small" onclick="hq.loadDialog(this);return false" href="{{ 'user_edit' | path }}">
+            {{ 'user_show_settings' | t }}
+          </a>
+        {% else %}
+          {% if current_site.disable_messages == false %}
+            {% assign path = 'user_show' | path: user.link %}
+            <a class="btn btn-small" href="{{ 'message_new' | path: user.link | query: redirect: path }}" onclick="hq.transitLoad(this);return false">
+              {{ 'send_message' | t }}
+            </a>
+          {% endif %}
+        {% endif %}
+      </div>
+      <img class="push-left" src="{{ user.avatar | e }}" width="50" height="50" alt="">
+      <h5 class="user-show-name-header">
+        <a href="{{ 'user_show' | path: user.link }}">
+          {{ user.name }}
+        </a>
+        {% if current_user.id == user.id %}
+          <a style="font-weight:normal" href="mailto:{{ user.email }}">
+            {{ user.email }}
+          </a>
+        {% endif %}
+      </h5>
+      <br>
+      {% if user.website != blank %}
+        <a href="{{ user.website | e }}" target="_blank">{{ user.website }}</a>
+      {% endif %}
+      <div class="hint">
+        {{ 'user_show_signed_up' | t }}
+        {{ user.created_at | date }}
+      </div>
+      <div class="clear"></div>
+
+      {% if user.bio != blank %}
+        <div id="user_bio">
+          {{ user.bio_html }}
+        </div>
+      {% endif %}
+
+      {% assign groups = user.groups.visible.all %}
+      {% if groups != empty %}
+        <h3>{{ 'groups' | t }}</h3>
+        <ul class="no-style group-members well">
+          {% for group in groups %}
+            <li>
+              <a href="{{ 'group_show' | path: group.link }}" title="{{ group.name }}">
+                <img src="{{ group.image | e }}" alt="">
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      <div class="clear"></div>
+
+      {% if current_user.id != user.id and current_site.hide_campaign_contributions %}
+        {{ 'user_show_contributions_hidden' | t }}
+      {% else %}
+        {% assign query = user.contributions.confirmed %}
+        {% if current_user.id != user.id %}
+          {% assign query = user.contributions.active.visible %}
+        {% endif %}
+        {% assign contributions = query | order: created_at: '-1' | limit: 6 | all %}
+        <h2>
+          {% if contributions.size > 5 %}
+            <a class="right small-link header-link show-user-contributions" href="{{ 'user_show_contributions' | path: user.link }}" onclick="hq.loadDialog(this);return false">
+              {{ 'show_all' | t }}
+            </a>
+          {% endif %}
+          {% if current_user.id == user.id %}
+            {{ 'user_show_my_contributions' | t }}
+          {% else %}
+            {{ 'user_show_contributions' | t }}
+          {% endif %}
+        </h2>
+
+        {% if contributions != empty %}
+          <ul class="block-list no-style squish">
+            {% for contribution in contributions %}
+              {% assign campaign = contribution.campaign %}
+              {% include 'contribution/contribution' with contribution %}
+            {% endfor %}
+          </ul>
+        {% else %}
+          {% if current_user.id == user.id %}
+            {{ 'user_show_no_contributions' | t }}
+          {% else %}
+            {{ 'user_show_no_contributions_from_this_user' | t }}
+          {% endif %}
+        {% endif %}
+      {% endif %}
+
+      {% comment %}Pledges{% endcomment %}
+      {% if current_site.commitments_enabled %}
+        {% assign pledges = user.pledges | order: created_at: '-1' | limit: 6 | all %}
+        <h2>
+          {% if pledges.size > 5 %}
+            <a class="right small-link header-link show-user-commitments" href="{{ 'user_show_pledges' | path: user.link }}" onclick="hq.loadDialog(this);return false">
+              {{ 'show_all' | t }}
+            </a>
+          {% endif %}
+          {% if current_user.id == user.id %}
+            {{ 'user_show_my_pledges' | t }}
+          {% else %}
+            {{ 'user_show_pledges' | t }}
+          {% endif %}
+        </h2>
+
+        {% if pledges != empty %}
+          <ul class="block-list no-style squish">
+            {% for pledge in pledges %}
+              {% assign campaign = pledge.campaign %}
+              {% include 'pledge/pledge' with pledge %}
+            {% endfor %}
+          </ul>
+        {% else %}
+          {% if current_user.id == user.id %}
+            {{ 'user_show_no_pledges' | t }}
+          {% else %}
+            {{ 'user_show_no_pledges_from_this_user' | t }}
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+
+  {% comment %}Campaigns{% endcomment %}
+  <div id="user_campaigns_preview" class="grid_6 right last">
+    {% if current_site.mode != 'select' or user.author %}
+      {% if current_user.id == user.id %}
+        {% assign query = user.campaigns %}
+      {% else %}
+        {% assign query = user.campaigns.visible %}
+      {% endif %}
+      {% assign campaigns = query | order: created_at: '-1' | limit: 6 | all %}
+      <h2>
+        {% if campaigns.size > 5 %}
+          <a class="right small-link header-link show-user-campaigns" href="{{ 'user_show_campaigns' | path: user.link }}" onclick="hq.loadDialog(this);return false">
+            {{ 'show_all' | t }}
+          </a>
+        {% endif %}
+        {% if current_user.id == user.id %}
+          {{ 'user_show_my_campaigns' | t }}
+        {% else %}
+          {{ 'user_show_campaigns' | t }}
+        {% endif %}
+      </h2>
+
+      <div class="campaign-badge-row">
+        {% if campaigns != empty %}
+          {% for campaign in campaigns %}
+            {% include 'campaign/campaign_badge' %}
+          {% endfor %}
+          <div class="clear"></div>
+        {% else %}
+          {% if current_user.id == user.id %}
+            {{ 'user_show_no_campaigns' | t }}
+          {% else %}
+            {{ 'user_show_no_campaigns_from_this_user' | t }}
+          {% endif %}
+        {% endif %}
+        <div class="clear"></div>
+      </div>
+      <div class="clear"></div>
+    {% endif %}
+  </div>
+</div>

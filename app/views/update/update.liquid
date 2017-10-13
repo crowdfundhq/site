@@ -1,0 +1,18 @@
+{% comment %}Included in campaign updates{% endcomment %}
+
+<li class="count_me">
+  {% if campaign and current_user.id == campaign.user.id %}
+    <div class="right campaign-updates-controls">
+      <span class="campaign-update-status hint">{% if update.published %}{{ 'campaign_update_status_published' | t }}{% else %}{{ 'campaign_update_status_draft' | t }}{% endif %}</span>
+      <a class="btn btn-small" onclick="hq.loadDialog(this);return false" href="{{ 'update_edit' | path: campaign.link, update.id }}">{{ 'edit' | t }}</a>
+      <a class="btn btn-warning btn-small" onclick="hq.loadDialog(this);return false" href="{{ 'update_confirm' | path: campaign.link, update.id }}">{{ 'delete' | t }}</a>
+    </div>
+  {% endif %}
+
+  <div class="campaign-update-data">
+    <img class="user-avatar" src="{{ campaign.user.avatar | e }}" width="50" height="50" alt="">
+    <a href="{{ 'user_show' | path: campaign.user.link }}">{{ campaign.user.name }}</a>
+    <span class="time">{{ update.created_at | date }}</span>
+    <div class="campaign-update-content">{{ update.html }}</div>
+  </div>
+</li>

@@ -1,0 +1,19 @@
+{% comment %}Publish campaign update{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'campaign_updates_publish_title' | t }}{% endtitle %}
+<div class="campaign-update-publish-info">
+  {{ 'campaign_update_publish_confirmation' | t }}
+  <span class="campaign-update-publish-hint">
+    {% if update.emails_sent %} {{ 'campaign_update_publish_already' | t }}
+    {% else %}{{ campaign.contributors.size }} {{ 'campaign_update_publish_notify' | t }}
+    {% endif %}
+  </span>
+</div>
+<form accept-charset="utf-8" onsubmit="hq.postDialog(this);return false" action="{{ 'update_publish' | path: campaign.link, update.id }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <button class='btn btn-medium'>{{ 'publish_update' | t }}</button>
+  <a class="cancel" onclick="hq.closeDialog();return false" href="{{ 'campaign_tab' | path: campaign.link, 'updates' }}">
+    {{ 'cancel' | t }}
+  </a>
+</form>

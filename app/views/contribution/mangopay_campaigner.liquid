@@ -1,0 +1,195 @@
+{% comment %}Mangopay campaigner setup{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'campaign_mangopay_setup_bank_information' | t }}{% endtitle %}
+
+<form onsubmit="hq.postDialog(this);return false" action="{{ 'gateway_authorize_campaign' | path: campaign.link, 'mangopay' }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+
+  <p>
+    <label>
+      {{ 'campaign_mangopay_setup_type' | t }}
+      <br>
+      <select name="mangopay_bank[Type]" onchange="hq.toggleBankAccount(this)">
+        <option value="IBAN"{% if mangopay_bank[Type] == 'IBAN' %} selected{% endif %}>IBAN</option>
+        <option value="GB"{% if mangopay_bank[Type] == 'GB' %} selected{% endif %}>GB</option>
+        <option value="US"{% if mangopay_bank[Type] == 'US' %} selected{% endif %}>US</option>
+        <option value="CA"{% if mangopay_bank[Type] == 'CA' %} selected{% endif %}>CA</option>
+        <option value="OTHER"{% if mangopay_bank[Type] == 'OTHER' %} selected{% endif %}>OTHER</option>
+      </select>
+    </label>
+  </p>
+  <p>
+    <label>
+      {{ 'campaign_mangopay_setup_name' | t }}
+      <br>
+      <input type="text" name="mangopay_bank[OwnerName]"{% if mangopay_bank %} value="{{ mangopay_bank.OwnerName | h }}"{% endif %}>
+      {% if errors.OwnerName != blank %}
+        <span class="field_error">{{ errors.OwnerName | join: ', ' }}</span>
+      {% endif %}
+    </label>
+  </p>
+  <p>
+    <label>
+      {{ 'campaign_mangopay_setup_address' | t }}
+      <br>
+      <input type="text" name="mangopay_bank[OwnerAddress][AddressLine1]"{% if mangopay_bank %} value="{{ mangopay_bank.OwnerAddress.AddressLine1 | h }}"{% endif %}>
+      {% if errors['OwnerAddress.AddressLine1'] != blank %}
+        <span class="field_error">{{ errors['OwnerAddress.AddressLine1'] | join: ', ' }}</span>
+      {% endif %}
+    </label>
+  </p>
+  <p>
+    <label>
+      {{ 'campaign_mangopay_setup_city' | t }}
+      <br>
+      <input type="text" name="mangopay_bank[OwnerAddress][City]"{% if mangopay_bank %} value="{{ mangopay_bank.OwnerAddress.City | h }}"{% endif %}>
+      {% if errors['OwnerAddress.City'] != blank %}
+        <span class="field_error">{{ errors['OwnerAddress.City'] | join: ', ' }}</span>
+      {% endif %}
+    </label>
+  </p>
+  <p>
+    <label>
+      {{ 'campaign_mangopay_setup_region' | t }}
+      <br>
+      <input type="text" name="mangopay_bank[OwnerAddress][Region]"{% if mangopay_bank %} value="{{ mangopay_bank.OwnerAddress.Region | h }}"{% endif %}>
+      {% if errors['OwnerAddress.Region'] != blank %}
+        <span class="field_error">{{ errors['OwnerAddress.Region'] | join: ', ' }}</span>
+      {% endif %}
+    </label>
+  </p>
+  <p>
+    <label>
+      {{ 'campaign_mangopay_setup_postal_code' | t }}
+      <br>
+      <input type="text" name="mangopay_bank[OwnerAddress][PostalCode]"{% if mangopay_bank %} value="{{ mangopay_bank.OwnerAddress.PostalCode | h }}"{% endif %}>
+      {% if errors['OwnerAddress.PostalCode'] != blank %}
+        <span class="field_error">{{ errors['OwnerAddress.PostalCode'] | join: ', ' }}</span>
+      {% endif %}
+    </label>
+  </p>
+  <p>
+    <label>
+      {{ 'campaign_mangopay_setup_country' | t }}
+      <br>
+      <select id="mangopay_country" name="mangopay_bank[OwnerAddress][Country]">
+        {% for country in countries %}
+          <option value="{{ country[1] }}"{% if mangopay_bank and mangopay_bank.OwnerAddress.Country == country[1] %} selected{% endif %}>{{ country[0] }}</option>
+        {% endfor %}
+      </select>
+    </label>
+  </p>
+
+  <div id="IBAN" class="bank-account"{% if mangopay_bank and mangopay_bank.Type != 'IBAN' %} style="display:none"{% endif %}>
+    <p>
+      <label>
+        {{ 'campaign_mangopay_setup_iban' | t }}
+        <br>
+        <input type="text" name="mangopay_bank[IBAN]"{% if mangopay_bank %} value="{{ mangopay_bank.IBAN | h }}"{% endif %}>
+        {% if errors.IBAN != blank %}
+          <span class="field_error">{{ errors.IBAN | join: ', ' }}</span>
+        {% endif %}
+      </label>
+    </p>
+  </div>
+
+  <div id="all" class="bank-account"{% if mangopay_bank.Type == 'IBAN' or mangopay_bank == blank %} style="display:none"{% endif %}>
+    <p>
+      <label>
+        {{ 'campaign_mangopay_setup_account_number' | t }}
+        <br>
+        <input type="text" name="mangopay_bank[AccountNumber]"{% if mangopay_bank %} value="{{ mangopay_bank.AccountNumber | h }}"{% endif %}>
+        {% if errors.AccountNumber != blank %}
+          <span class="field_error">{{ errors.AccountNumber | join: ', ' }}</span>
+        {% endif %}
+      </label>
+    </p>
+  </div>
+
+  <div id="GB" class="bank-account"{% if mangopay_bank.Type != 'GB' %} style="display:none"{% endif %}>
+    <p>
+      <label>
+        {{ 'campaign_mangopay_setup_sort_code' | t }}
+        <br>
+        <input type="text" name="mangopay_bank[SortCode]"{% if mangopay_bank %} value="{{ mangopay_bank.SortCode | h }}"{% endif %}>
+        {% if errors.SortCode != blank %}
+          <span class="field_error">{{ errors.SortCode | join: ', ' }}</span>
+        {% endif %}
+      </label>
+    </p>
+  </div>
+
+  <div id="US" class="bank-account"{% if mangopay_bank.Type != 'US' %} style="display:none"{% endif %}>
+    <p>
+      <label>
+        {{ 'campaign_mangopay_setup_aba' | t }}
+        <br>
+        <input type="text" name="mangopay_bank[ABA]"{% if mangopay_bank %} value="{{ mangopay_bank.ABA | h }}"{% endif %}>
+        {% if errors.ABA != blank %}
+          <span class="field_error">{{ errors.ABA | join: ', ' }}</span>
+        {% endif %}
+      </label>
+    </p>
+    <p>
+      <label>
+        {{ 'campaign_mangopay_setup_deposit_account_type' | t }}
+        <br>
+        <select name="DepositAccountType">
+          <option value="CHECKING">{{ 'campaign_mangopay_setup_region' | t }}</option>
+          <option value="SAVINGS">{{ 'campaign_mangopay_setup_region' | t }}</option>
+        </select>
+      </label>
+    </p>
+  </div>
+
+  <div id="CA" class="bank-account"{% if mangopay_bank.Type != 'CA' %} style="display:none"{% endif %}>
+    <p>
+      <label>{{ 'campaign_mangopay_setup_bank_name' | t }}
+        <br>
+        <input type="text" name="mangopay_bank[BankName]"{% if mangopay_bank %} value="{{ mangopay_bank.BankName | h }}"{% endif %}>
+        {% if errors.BankName != blank %}
+          <span class="field_error">{{ errors.BankName | join: ', ' }}</span>
+        {% endif %}
+      </label>
+    </p>
+    <p>
+      <label>
+        {{ 'campaign_mangopay_setup_institution_number' | t }}
+        <br>
+        <input type="text" name="mangopay_bank[InstitutionNumber]"{% if mangopay_bank %} value="{{ mangopay_bank.InstitutionNumber | h }}"{% endif %}>
+        {% if errors.InstitutionNumber != blank %}
+          <span class="field_error">{{ errors.InstitutionNumber | join: ', ' }}</span>
+        {% endif %}
+      </label>
+    </p>
+    <p>
+      <label>
+        {{ 'campaign_mangopay_setup_branch_code' | t }}
+        <br>
+        <input type="text" name="mangopay_bank[BranchCode]"{% if mangopay_bank %} value="{{ mangopay_bank.BranchCode | h }}"{% endif %}>
+        {% if errors.BranchCode != blank %}
+          <span class="field_error">{{ errors.BranchCode | join: ', ' }}</span>
+        {% endif %}
+      </label>
+    </p>
+  </div>
+
+  <div id="OTHER" class="bank-account"{% if mangopay_bank.Type != 'OTHER' %} style="display:none"{% endif %}>
+    <p>
+      <label>
+        {{ 'campaign_mangopay_setup_bic' | t }}
+        <br>
+        <input type="text" name="mangopay_bank[BIC]"{% if mangopay_bank %} value="{{ mangopay_bank.BIC | h }}"{% endif %}>
+        {% if errors.BIC != blank %}
+          <span class="field_error">{{ errors.BIC | join: ', ' }}</span>
+        {% endif %}
+      </label>
+    </p>
+  </div>
+
+  <p>
+    <button class="btn btn-primary submit-button space-top" id="submit_button">{{ 'save' | t }}</button>
+    <a href="{{ 'campaign_show' | path: campaign.link }}">{{ 'cancel' | t }}</a>
+  </p>
+</form>

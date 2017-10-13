@@ -1,0 +1,69 @@
+{% comment %}Included as custom fields in campaign, user, contribution, contact, approval and vote forms{% endcomment %}
+
+{% if fields != blank %}
+  <div class="site-custom-fields custom-fields-{{ form_type }}">
+    {% for entry in fields %}
+      {% assign name = entry[0] %}
+      {% assign field = entry[1] %}
+      {% assign value = model | read: name %}
+
+      {% if field.enabled %}
+        {% if field.editable or model.new_record? or form_type == 'campaign' %}
+          <div class="site-custom-field">
+
+            {% if field.type == 'text' %}
+              <label>{{ field.label | h }}</label>
+              <div class="hint">{{ field.description | h }}</div>
+              <input id="{{ form_type }}_{{ name }}" type="text" name="{{ name }}" value="{{ value }}">
+
+            {% elsif field.type == 'textarea' %}
+              <label>{{ field.label | h }}</label>
+              <div class="hint">{{ field.description | h }}</div>
+              <textarea id="{{ form_type }}_{{ name }}" type="text" name="{{ name }}">{{ value }}</textarea>
+
+            {% elsif field.type == 'select' %}
+              <label>{{ field.label | h }}</label>
+              <div class="hint">{{ field.description | h }}</div>
+              <select id="{{ form_type }}_{{ name }}" type="text" name="{{ name }}">
+                {% for option in field.options %}
+                  <option value="{{ option.name }}"{% if value == option.name %} selected{% endif %}>
+                    {{ option.label | h }}
+                  </option>
+                {% endfor %}
+              </select>
+
+            {% elsif field.type == 'radio' %}
+              <label>{{ field.label | h }}</label>
+              <div class="hint">{{ field.description | h }}</div>
+
+              {% for option in field.options %}
+                <label>
+                  <input id="{{ form_type }}_{{ name }}_{{ forloop.index0 }}" type="radio" name="{{ name }}" value="{{ option.name }}"{% if value == option.name %} checked{% endif %}>
+                  {{ option.label | h }}
+                </label>
+              {% endfor %}
+
+            {% elsif field.type == 'checkbox' %}
+              <input type="hidden" name="{{ name }}[]">
+              <label>{{ field.label | h }}</label>
+              <div class="hint">{{ field.description | h }}</div>
+
+              {% for option in field.options %}
+                <label>
+                  <input id="{{ form_type }}_{{ name }}_{{ forloop.index0 }}" type="checkbox" name="{{ name }}[]" value="{{ option.name }}"{% if value contains option.name %} checked{% endif %}>
+                  {{ option.label | h }}
+                </label>
+              {% endfor %}
+
+            {% endif %}
+
+            {% if model.errors[name] != blank %}
+              <span class="field_error">{{ model.errors[name] | join: ', ' }}</span>
+            {% endif %}
+
+          </div>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}

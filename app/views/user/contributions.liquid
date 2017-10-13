@@ -1,0 +1,49 @@
+{% comment %}User contributions list{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'user_contributions_list' | t }} {{ user.name }}{% endtitle %}
+
+<div id="user_contributions">
+  {% if current_user.id != user.id and current_site.hide_campaign_contributions == true %}
+    {{ 'user_show_contributions_hidden' | t }}
+  {% else %}
+    {% assign query = user.contributions.confirmed %}
+    {% if current_user.id != user.id %}
+      {% assign query = user.contributions.active.visible %}
+    {% endif %}
+    {% assign paginate = query | order: created_at: '-1' | paginate %}
+    {% assign contributions = paginate.entries %}
+
+    <div class="clear">
+      <p>{{ 'user_contributions_showing' | t }} ({{ paginate.total_entries }})</p>
+    </div>
+
+    {% if contributions != empty %}
+      <ul id="user_contributions_list" class="block-list no-style squish">
+        {% for contribution in contributions %}
+          {% assign campaign = contribution.campaign %}
+          {% assign redirect = '?r=user' %}
+          {% include 'contribution/contribution' with contribution %}
+        {% endfor %}
+      </ul>
+    {% else %}
+      {% if current_user.id == user.id %}
+        {{ 'user_show_no_contributions' | t }}
+      {% else %}
+        {{ 'user_show_no_contributions_from_this_user' | t }}
+      {% endif %}
+    {% endif %}
+
+    {% if contributions != empty and paginate.total_pages > 1 %}
+      <div class="load-more-data">
+        <a class="small-link space-right" href="{{ 'user_contributions_list' | path: user.link }}" data-list="user_contributions_list" data-count="{{ paginate.total_entries }}" data-per-page="{{ settings.per_page }}" onclick="hq.loadMore(this);return false">
+          {{ 'load_more' | t }} ...
+        </a>
+      </div>
+      <div class="spacer"></div>
+    {% endif %}
+  {% endif %}
+  <div class="clear center spacer-small">
+    <a class="small-link cancel" href="{{ 'user_show' | path: user.link }}" onclick="hq.closeDialog();return false">{{ 'cancel' | t }}</a>
+  </div>
+</div>

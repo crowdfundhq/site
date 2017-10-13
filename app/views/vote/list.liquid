@@ -1,0 +1,8 @@
+{% comment %}Vote list{% endcomment %}
+
+{% assign paginate = campaign.votes | order: created_at: '-1' | paginate %}
+{% assign votes = paginate.entries %}
+
+{% for vote in votes %}
+  {% include 'vote/vote' with vote %}
+{% endfor %}

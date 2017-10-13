@@ -1,0 +1,5 @@
+{% comment %}Campaign report in PDF format{% endcomment %}
+
+{% layout %}{{ layout.pdf }}{% endlayout %}
+{% title %}{{ 'campaign_report_show_title' | t }}{% endtitle %}
+{% include 'report/report' %}

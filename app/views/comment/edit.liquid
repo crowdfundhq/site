@@ -1,0 +1,17 @@
+{% comment %}Edit comment{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'campaign_comments_edit' | t }}{% endtitle %}
+
+<form accept-charset="utf-8" onsubmit="hq.postTab(this);return false" action="{{ 'comment_update' | path: campaign.link, comment.id }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="PUT">
+  <p>
+    <textarea id="comment_raw" class="form-input-double" name="raw">{{ comment.raw }}</textarea>
+    <br>
+    <button class="btn btn-medium">{{ 'save' | t }}</button>
+    <a class="cancel" onclick="hq.closeDialog();return false" href="{{ 'campaign_tab' | path: campaign.link, 'comments' }}">
+      {{ 'cancel' | t }}
+    </a>
+  </p>
+</form>

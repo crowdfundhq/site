@@ -1,1 +1,0 @@
-../../../../../shared/public/js/lib/development.js

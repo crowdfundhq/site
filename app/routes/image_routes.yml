@@ -1,0 +1,29 @@
+GET#confirm:
+  desc: Confirm image
+  path: /campaigns/:campaign_link/images/:image_id/delete
+  requires:
+    - user
+
+POST#create:
+  desc: Create image
+  path: /campaigns/:campaign_link/images
+  requires:
+    - user
+
+DELETE#delete:
+  desc: Delete image
+  path: /campaigns/:campaign_link/images/:image_id
+  requires:
+    - user
+
+GET#show:
+  desc: Show image
+  path: /campaigns/:campaign_link/images/:image_id
+  requires:
+    - user
+
+POST#image:
+  desc: Image image
+  path: /campaign/image
+  requires: []
+

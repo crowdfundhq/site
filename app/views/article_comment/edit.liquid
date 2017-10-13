@@ -1,0 +1,20 @@
+{% comment %}Edit blog article comment{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'article_edit_comment' | t }}{% endtitle %}
+
+<form accept-charset="utf-8" onsubmit="hq.postDialog(this);return false" action="{{ 'article_comment_update' | path: article.link, comment.id }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="PUT">
+  <p>
+    <textarea id="comment_raw" class="form-input-double" name="raw">{{ comment.raw }}</textarea>
+    {% if comment.errors.raw != blank %}
+      <span class="field_error">{{ comment.errors.raw | join: ', ' }}</span>
+    {% endif %}
+    <br>
+    <button class="btn btn-medium">{{ 'save' | t }}</button>
+    <a class="cancel" onclick="hq.closeDialog();return false" href="{{ 'article_show' | path: article.link }}">
+      {{ 'cancel' | t }}
+    </a>
+  </p>
+</form>

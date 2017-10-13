@@ -1,0 +1,60 @@
+{% comment %}Campaign stats{% endcomment %}
+
+<div class="grid_8">
+  {% if campaign.draft? %}
+    <p>{{ 'campaign_stats_not_available' | t }}</p>
+  {% else %}
+    <div id="campaign_stats">
+      <table>
+        <tr>
+          <th><div class="icon icon-signal"></div></th>
+          <th>{{ 'campaign_stats_today' | t }}</th>
+          <th>{{ 'campaign_stats_week' | t }}</th>
+          <th>{{ 'campaign_stats_month' | t }}</th>
+          <th>{{ 'campaign_stats_total' | t }}</th>
+        </tr>
+        <tr>
+          <th>{{ 'campaign_stats_unique_visitors' | t }}</th>
+          <td>{{ stats.days_unique }}</td>
+          <td>{{ stats.week_unique }}</td>
+          <td>{{ stats.month_unique }}</td>
+          <td>{{ stats.unique_total }}</td>
+        </tr>
+        <tr>
+          <th>{{ 'campaign_stats_page_views' | t }}</th>
+          <td>{{ stats.stats_days }}</td>
+          <td>{{ stats.stats_week }}</td>
+          <td>{{ stats.stats_month }}</td>
+          <td>{{ stats.stats_total }}</td>
+        </tr>
+        {% if campaign.voting? %}
+          <tr>
+            <th>{{ 'campaign_stats_votes' | t }}</th>
+            <td>{{ stats.votes_day }}</td>
+            <td>{{ stats.votes_week }}</td>
+            <td>{{ stats.votes_month }}</td>
+            <td>{{ stats.votes_total }}</td>
+          </tr>
+        {% else %}
+          <tr>
+            <th>{{ 'campaign_stats_contributions' | t }}</th>
+            <td>{{ stats.contributions_day }}</td>
+            <td>{{ stats.contributions_week }}</td>
+            <td>{{ stats.contributions_month }}</td>
+            <td>{{ stats.contributions_total }}</td>
+          </tr>
+        {% endif %}
+      </table>
+    </div>
+    <div class="campaign-stats-report-link">
+      <a class="btn btn-small" href="{{ 'report_show' | path: campaign.link }}">{{ 'campaign_stats_report_link' | t }}</a>
+    </div>
+    <div class="campaign-stats-report-info hint">
+      {{ 'campaign_stats_report_info' | t }}
+    </div>
+  {% endif %}
+</div>
+
+<div class="grid_4 last">
+  {% include 'campaign/campaign_badge' %}
+</div>

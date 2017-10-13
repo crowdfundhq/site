@@ -1,0 +1,10 @@
+{% comment %}Edit group{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'group_form_edit' | t }} "{{ group.name }}"{% endtitle %}
+
+<form accept-charset="UTF-8" action="{{ 'group_update' | path: group.link }}" method="POST" onsubmit="hq.postDialog(this);return false">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input name="_method" type="hidden" value="PUT">
+  {% include 'group/form' %}
+</form>

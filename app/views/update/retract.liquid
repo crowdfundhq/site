@@ -1,0 +1,15 @@
+{% comment %}Retract campaign update{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'campaign_updates_retract_title' | t }}{% endtitle %}
+<div class="campaign-update-retract-info">
+  {{ 'campaign_update_retract_confirmation' | t }}
+  <span class="campaign-update-retract-hint">{{ 'campaign_update_retract_no_visible' | t }}</span>
+</div>
+<form accept-charset="utf-8" onsubmit="hq.postDialog(this);return false" action="{{ 'update_retract' | path: campaign.link, update.id }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <button class='btn btn-medium btn-warning'>{{ 'retract_update' | t }}</button>
+  <a class="cancel" onclick="hq.closeDialog();return false" href="{{ 'campaign_tab' | path: campaign.link, 'updates' }}">
+    {{ 'cancel' | t }}
+  </a>
+</form>

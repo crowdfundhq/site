@@ -1,0 +1,59 @@
+{% comment %}Meta tags included in layouts{% endcomment %}
+
+{{ security.forgery_meta }}
+
+<meta property="og:site_name" content="{{ current_site.name }}">
+{% if current_site.facebook != blank %}
+  <meta property="fb:app_id" content="{{ current_site.facebook }}">
+{% endif %}
+
+{% if meta == 'site' %}
+
+  {% if current_site.meta_description != blank %}
+    <meta name="description" content="{{ current_site.meta_description }}">
+  {% endif %}
+
+  <meta property="og:url" content="{{ request.url | e }}">
+
+  {% if current_site.title != blank %}
+    <meta property="og:title" content="{{ current_site.title | h }}">
+  {% endif %}
+
+  {% if current_site.logo != blank %}
+     <meta property="og:image" content="{{ current_site.logo | e }}">
+  {% endif %}
+
+{% elsif meta == 'campaign' %}
+
+  {% if campaign.headline != blank %}
+    <meta name="description" content="{{ campaign.headline }}">
+  {% endif %}
+  <meta property="og:url" content="{{ campaign.url | e }}">
+  <meta property="og:title" content="{{ 'campaign_facebook_description' | t }}{{ campaign.name }}">
+  <meta property="og:image" content="{{ campaign.video_image | e }}">
+  <meta property="og:description" content="{{ campaign.headline }}">
+
+{% elsif meta == 'page' %}
+
+  {% if page.meta_description != blank %}
+    <meta name="description" content="{{ page.meta_description }}">
+  {% endif %}
+
+  <meta property="og:url" content="{{ request.url | e }}">
+  {% if page.title != blank %}
+    <meta property="og:title" content="{{ page.title }}">
+  {% endif %}
+
+{% elsif meta == 'article' %}
+
+  <meta name="description" content="{{ article.description }}">
+  <meta property="og:url" content="{{ request.url | e }}">
+  <meta property="og:title" content="{{ article.title }}">
+  <meta property="og:type" content="article">
+
+  {% if article.image_url != blank %}
+    <meta property="og:image" content="{{ article.image_url | e }}">
+  {% endif %}
+  <meta property="og:description" content="{{ article.description }}">
+
+{% endif %}

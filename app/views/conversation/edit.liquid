@@ -1,0 +1,10 @@
+{% comment %}Edit conversation{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'message_edit_conversation' | t }}{% endtitle %}
+
+<form accept-charset="utf-8" onsubmit="hq.postDialog(this);return false" action="{{ 'conversation_update' | path: conversation.id }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="PUT">
+  {% include 'conversation/form' with conversation %}
+</form>

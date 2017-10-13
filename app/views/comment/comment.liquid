@@ -1,0 +1,22 @@
+{% comment %}Included in campaign comments and index{% endcomment %}
+
+<li class="count_me">
+  {% if current_user.id == comment.user.id or current_user.id == campaign.user.id %}
+    <div class="right campaign-comments-controls">
+      <a class="btn btn-small" onclick="hq.loadDialog(this);return false" href="{{ 'comment_edit' | path: campaign.link, comment.id }}">{{ 'edit' | t }}</a>
+      <a class="btn btn-small btn-warning" onclick="hq.loadDialog(this);return false" href="{{ 'comment_confirm' | path: campaign.link, comment.id }}">{{ 'delete' | t }}</a>
+    </div>
+  {% endif %}
+
+  <div class="campaign-comment-data">
+    <img class="user-avatar" src="{% if comment.anonymous != true or current_user.id == comment.user.id %}{{ comment.user.avatar | e }}{% else %}{{ current_site.default_avatar | image_url }}{% endif %}" width="50" height="50" alt="">
+
+    {% if comment.anonymous != true or current_user.id == comment.user.id %}
+      <a href="{{ 'user_show' | path: comment.user.link }}">{{ comment.user.name }}</a>
+    {% else %}
+      {{ 'comment_anonymous' | t }}
+    {% endif %}
+    <span class="time">{{ comment.created_at | date }}</span>
+    <div class="campaign-comment-content">{{ comment.html }}</div>
+  </div>
+</li>

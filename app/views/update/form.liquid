@@ -1,0 +1,21 @@
+{% comment %}Included in update edit and new{% endcomment %}
+
+<div class="update-editor-form">
+  {% include 'update/editor' %}
+  {% if update.errors.raw != blank %}
+    <span class="field_error">{{ update.errors.raw | join: ', ' }}</span>
+  {% endif %}
+  <div class="update-editor-form-controls">
+    <button class="btn btn-medium">{{ 'save_update' | t }}</button>
+    {% if update.published %}
+      <button class="btn btn-medium btn-warning" onclick="hq.b.value='retract'">{{ 'retract_update' | t }}</button>
+    {% else %}
+      <button class="btn btn-medium" onclick="hq.b.value='publish'">{{ 'publish_update' | t }}</button>
+    {% endif %}
+    <a class="cancel" onclick="hq.closeDialog();return false" href="{{ 'campaign_tab' | path: campaign.link, 'updates' }}">
+      {{ 'cancel' | t }}
+    </a>
+  </div>
+</div>
+<input id="update_editor_button" type="hidden" name="button" value="save">
+<script class="loadscript">hq.b = document.getElementById('update_editor_button');</script>

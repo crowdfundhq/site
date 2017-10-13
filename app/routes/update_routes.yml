@@ -1,0 +1,53 @@
+GET#new:
+  desc: New update
+  path: /campaigns/:campaign_link/update/new
+  requires:
+    - user
+
+POST#create:
+  desc: Create update
+  path: /campaigns/:campaign_link/updates
+  requires:
+    - user
+
+GET#list:
+  desc: Index update
+  path: /campaigns/:campaign_link/update/list
+  requires: []
+
+GET#edit:
+  desc: Edit update
+  path: /campaigns/:campaign_link/updates/:update_id/edit
+  requires:
+    - user
+
+PUT#update:
+  desc: Update update
+  path: /campaigns/:campaign_link/updates/:update_id
+  requires:
+    - user
+
+POST#publish:
+  desc: Publish update
+  path: /campaigns/:campaign_link/updates/:update_id/publish
+  requires:
+    - user
+
+POST#retract:
+  desc: Retract update
+  path: /campaigns/:campaign_link/updates/:update_id/retract
+  requires:
+    - user
+
+GET#confirm:
+  desc: Confirm update
+  path: /campaigns/:campaign_link/updates/:update_id/delete
+  requires:
+    - user
+
+DELETE#delete:
+  desc: Delete update
+  path: /campaigns/:campaign_link/updates/:update_id
+  requires:
+    - user
+

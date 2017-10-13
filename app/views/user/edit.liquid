@@ -1,0 +1,162 @@
+{% comment %}Edit user{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'user_edit_title' | t }}{% endtitle %}
+
+<div class="user_edit_avatar right center">
+  <img src="{{ user.avatar | e }}" width="50" height="50" alt="">
+  <div class="hint">
+    <p>
+      <a href="{{ 'user_show_avatar' | path: user.link }}" onclick="hq.loadDialog(this);return false">
+        {{ 'user_edit_image_edit' | t }}
+      </a>
+    </p>
+  </div>
+</div>
+
+<form accept-charset="utf-8" id="user-update" action="{{ 'user_update' | path }}" method="POST" onsubmit="hq.postDialog(this);return false">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="PUT">
+  <p>
+    <label for="name">{{ 'user_edit_name' | t }}</label>
+    <br>
+    <input id="name" type="text" name="name" value="{{ user.name }}">
+    <br>
+    {% if user.errors.name != blank %}
+      <span class="field_error">
+        {{ user.errors.name | join: ', ' }}
+      </span>
+    {% endif %}
+  </p>
+  <p>
+    <label for="email">{{ 'email' | t }}</label>
+    <br>
+    <input id="email" type="text" name="email" value="{{ user.email }}" onblur="this.value=this.value.toLowerCase()">
+    <br>
+    {% if user.errors.email != blank %}
+      <span class="field_error">
+        {{ user.errors.email | join: ', ' }}
+      </span>
+    {% endif %}
+  </p>
+
+  {% comment %}-# Custom fields {% endcomment %}
+  {% assign form_type = 'user' %}
+  {% assign model = user %}
+  {% include 'site/fields' with current_site.user_fields %}
+
+  <p>
+    <label for="website">{{ 'user_edit_website' | t }}</label>
+    <br>
+    <input id="website" type="text" name="website" value="{{ user.website }}">
+    <br>
+    {% if user.errors.website != blank %}
+      <span class="field_error">
+        {{ user.errors.website | join: ', ' }}
+      </span>
+    {% endif %}
+  </p>
+  <p>
+    <input id="update_emails" type="checkbox" name="update_emails" value="1"{% if user.update_emails %} checked{% endif %}>
+    <label for="update_emails">
+      {{ 'user_edit_update_emails' | t }}
+    </label>
+  </p>
+  <p>
+    <label for="bio">{{ 'user_edit_bio' | t }}</label>
+    <br>
+    <textarea id="bio" class="form-input-double" type="text" name="bio">{{ user.bio }}</textarea>
+    <br>
+    {% if user.errors.bio != blank %}
+      <span class="field_error">
+        {{ user.errors.bio | join: ', ' }}
+      </span>
+    {% endif %}
+  </p>
+
+  <p>
+    <label for="address">
+      {{ 'user_edit_address' | t }}
+      {% if current_site.rewards_enabled %}{{ 'user_edit_address_hint' | t }}{% endif %}
+    </label>
+    <br>
+    <textarea id="address" class="form-input-double" type="text" name="address">{{ user.address }}</textarea>
+    <br>
+    {% if user.errors.address != blank %}
+      <span class="field_error">
+        {{ user.errors.address | join: ', ' }}
+      </span>
+    {% endif %}
+  </p>
+
+  <p>
+    <label for="payment_info">
+      {{ 'user_edit_payment_info' | t }}
+      {{ 'user_edit_payment_info_hint' | t }}
+    </label>
+    <br>
+    <textarea id="payment_info" class="form-input-low" type="text" name="payment_info">{{ user.payment_info }}</textarea>
+    <br>
+    {% if user.errors.payment_info %}
+      <span class="field_error">
+        {{ user.errors.payment_info | join: ', ' }}
+      </span>
+    {% endif %}
+  </p>
+  <p>
+    <button class="btn">{{ 'save' | t }}</button>
+    <a class="cancel" href="{{ 'campaign_index' | path }}" onclick="hq.closeDialog();return false">
+      {{ 'cancel' | t }}
+    </a>
+  </p>
+</form>
+
+<div class="clear" style="height:30px"></div>
+
+<form accept-charset="utf-8" id="user-password-update" action="{{ 'user_update_password' | path: user.link }}" method="POST" onsubmit="hq.postDialog(this);return false">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="PUT">
+  {% if current_user.pwhs != blank %}
+    <p>
+      <label for="current_password">
+        {{ 'user_edit_current_password' | t }}
+      </label>
+      <br>
+      <input id="current_password" type="password" name="current_password">
+      {% if user.errors.current_password %}
+        <span class="field_error">
+          {{ user.errors.current_password | join: ', ' }}
+        </span>
+      {% endif %}
+    </p>
+  {% endif %}
+  <p>
+    <label for="password">{{ 'user_edit_new_password' | t }}</label>
+    <br>
+    <input id="password" type="password" name="password" autocomplete="off">
+    <br>
+    {% if user.errors.password != blank %}
+      <span class="field_error">
+        {{ user.errors.password | join: ', ' }}
+      </span>
+    {% endif %}
+  </p>
+  <p>
+    <label for="password_confirmation">
+      {{ 'user_edit_repeat_new_password' | t }}
+    </label>
+    <br>
+    <input id="password_confirmation" type="password" name="password_confirmation" autocomplete="off">
+  </p>
+  <div class="right">
+    <a class="delete small" href="{{ 'user_confirm' | path: user.link }}" onclick="hq.loadDialog(this);return false">
+      {{ 'user_edit_delete_user' | t }}
+    </a>
+  </div>
+  <p>
+    <button class="btn">{{ 'user_edit_update_password' | t }}</button>
+    <a class="cancel" href="{{ 'campaign_index' | path }}" onclick="hq.closeDialog();return false">
+      {{ 'cancel' | t }}
+    </a>
+  </p>
+</form>

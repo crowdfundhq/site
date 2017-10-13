@@ -1,0 +1,30 @@
+{% comment %}Campaign contributions{% endcomment %}
+
+{% assign paginate = campaign.contributions.active | order: created_at: '-1' | paginate %}
+{% assign contributions = paginate.entries %}
+<input id="total_entries" type="hidden" value="{{ paginate.total_entries }}">
+
+{% if campaign.approved and contributions != empty %}
+  <ul id="contributions_list" class="block-list no-style squish">
+    {% for contribution in contributions %}
+      {% include 'contribution/contribution' with contribution %}
+    {% endfor %}
+  </ul>
+
+{% else %}
+  <p>
+    {% if campaign.approved %}
+      {{ 'campaign_contributions_no_contributions' | t }}
+    {% else %}
+      {{ 'campaign_contributions_no_contributions_until_campaign_approved' | t }}
+    {% endif %}
+  </p>
+{% endif %}
+
+{% if contributions != empty and paginate.total_pages > 1 %}
+  <div class="load-more-data">
+    <a class="small" href="{{ 'contribution_list' | path: campaign.link }}" data-list="contributions_list" data-count="{{ paginate.total_entries }}" data-per-page="{{ settings.per_page }}" onclick="hq.loadMore(this);return false">
+      {{ 'load_more' | t }} ...
+    </a>
+  </div>
+{% endif %}

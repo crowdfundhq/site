@@ -1,0 +1,286 @@
+{% comment %}Stripe payment{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ campaign.name }}{% endtitle %}
+{% subtitle %}{{ 'contribution_payment_subtitle' | t }}{% endsubtitle %}
+{% body_class contribution %}
+
+{% if current_site.configuration.live? == false %}
+  <div class="alert">{{ 'contribution_payment_live_reminder' | t }}</div>
+{% endif %}
+
+<div class="right grid_4 last stripe-payment-sidebar">
+  {% include 'campaign/campaign_badge' %}
+</div>
+
+<div class="grid_8 stripe-payment-form">
+  <div class="well white" id="stripe_payment">
+    <div class="stripe-payment-header">
+      <img class="right" src="{{ 'stripe.png' | image_url }}" alt="stripe">
+      <h2>
+        {{ 'contribution_contribute' | t }}
+        {{ contribution.total | to_currency }}
+        {{ 'contribution_contribute_to' | t }}
+        {{ campaign.name }}
+      </h2>
+    </div>
+    <form id="stripe_payment_form" accept-charset="utf-8" action="{{ 'gateway_create' | path: campaign.link, contribution.id }}" onsubmit="return validateForm()" method="POST">
+      {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+      <div class="form-row">
+        <input name="amount" value="{{ contribution.total }}" type="hidden">
+        <input id="stripe_publishable_key" value="{{ current_site.configuration.stripe_publishable_key }}" type="hidden">
+      </div>
+      <div class="form-row">
+        <label>
+          <i class="icon-credit"></i>
+          {{ 'contribution_stripe_form_card' | t }}
+          <br>
+          <input class="stripe-card-number i-field form-input-wide" id="stripe_card_number" autocomplete="off" size="20" type="text" placeholder="{{ 'contribution_stripe_form_card' | t }}">
+        </label>
+      </div>
+      <div class="form-row push-left space-right form-inline">
+        <label for="stripe_card_expiry_month">
+          {{ 'contribution_stripe_form_expiration' | t }}
+        </label>
+        <br>
+        <input class="stripe-card-expiry-month form-input-narrow" id="stripe_card_expiry_month" size="2" type="text" placeholder="{{ 'contribution_stripe_form_month' | t }}">
+        <span> / </span>
+        <input class="stripe-card-expiry-year form-input-medium" id="stripe_card_expiry_year" size="4" type="text" placeholder="{{ 'contribution_stripe_form_year' | t }}">
+      </div>
+      <div class="form-row">
+        <label>
+          <i class="icon-lock"></i>
+          {{ 'contribution_stripe_form_cvc' | t }}
+          <br>
+          <input class="stripe-card-cvc form-input-narrow" id="stripe_card_cvc" autocomplete="off" size="4" type="text" placeholder="{{ 'contribution_stripe_form_cvc' | t }}">
+        </label>
+      </div>
+      {% if current_site.configuration.stripe_billing_fields %}
+        <div class="contribution-stripe-billing-information">
+          <strong>{{ 'contribution_stripe_form_billing_information' | t }}</strong>
+        </div>
+
+        <div class="form-row">
+          <label>
+            {{ 'contribution_stripe_form_name' | t }}
+            <br>
+            <input class="stripe-name i-field form-input-wide" id="stripe_name" autocomplete="off" size="20" type="text" placeholder="{{ 'contribution_stripe_form_name' | t }}">
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            {{ 'contribution_stripe_form_address_line1' | t }}
+            <br>
+            <input class="stripe-address-line1 i-field form-input-wide" id="stripe_address_line1" autocomplete="off" size="20" type="text" placeholder="{{ 'contribution_stripe_form_address_line1' | t }}">
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            {{ 'contribution_stripe_form_address_line2' | t }}
+            <br>
+            <input class="stripe-address-line2 i-field form-input-wide" id="stripe_address_line2" autocomplete="off" size="20" type="text" placeholder="{{ 'contribution_stripe_form_address_line2' | t }}">
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            {{ 'contribution_stripe_form_city' | t }}
+            <br>
+            <input class="stripe-city i-field form-input-wide" id="stripe_city" autocomplete="off" size="20" type="text" placeholder="{{ 'contribution_stripe_form_city' | t }}">
+          </label>
+        </div>
+
+        <div class="form-row form-row push-left space-right">
+          <label>
+            {{ 'contribution_stripe_form_state' | t }}
+            <br>
+            <input class="stripe-state i-field form-input-half" id="stripe_state" autocomplete="off" size="20" type="text" placeholder="{{ 'contribution_stripe_form_state' | t }}">
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            {{ 'contribution_stripe_form_zip' | t }}
+            <br>
+            <input class="stripe-zip i-field form-input-half" id="stripe_zip" autocomplete="off" size="20" type="text" placeholder="{{ 'contribution_stripe_form_zip' | t }}">
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            {{ 'contribution_stripe_form_country' | t }}
+            <br>
+            <select id="stripe_country">
+              {{ settings.countries | option_list }}
+            </select>
+          </label>
+        </div>
+      {% endif %}
+
+      {% if current_site.configuration.stripe_recurring %}
+        <div class="form-row">
+          {% if current_site.configuration.stripe_recurring_optional %}
+            <input id="contribution_subscription" name="subscription" type="checkbox" value="1"{% if contribution.subscription %} checked{% endif %}>
+            <label for="contribution_subscription">{{ 'contribution_subscription' | t }}</label>
+          {% else %}
+            <input id="contribution_subscription" name="subscription" type="hidden" value="1">
+            <div class="hint">{{ 'contribution_subscription_optional' | t }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <div class="field_error" id="stripe_payment_errors" style="display:none"></div>
+      <div class="hidden" id="stripe_key"></div>
+
+      <p class="contribution-confirm-buttons space-top clear">
+        <button class="btn btn-primary submit-button" id="submit_button">
+          {{ 'contribution_stripe_form_confirm_payment' | t }}
+        </button>
+        <a class="contribution-stripe-cancel" href="{{ 'contribution_edit' | path: campaign.link, contribution.id }}">
+          {{ 'cancel' | t }}
+        </a>
+      </p>
+
+    </form>
+  </div>
+</div>
+
+<script src="https://js.stripe.com/v2/"></script>
+<script>
+  var billingFields = {{ current_site.configuration.stripe_billing_fields }};
+
+  function reportError(msg) {
+    // // Show the error in the form:
+    var errors = document.getElementById('stripe_payment_errors');
+    errors.innerHTML = msg;
+    errors.style.display = 'block';
+
+    // disable the submit button to prevent repeated clicks:
+    document.getElementById('submit_button').disabled = false;
+    return false;
+  }
+
+  // Watch for the document to be ready:
+  function validateForm() {
+    // disable the submit button to prevent repeated clicks:
+    document.getElementById('submit_button').disabled = true;
+
+    // Get the values and define billing fields
+    var ccNum = document.getElementById('stripe_card_number').value.trim()
+      , cvcNum = document.getElementById('stripe_card_cvc').value.trim()
+      , expMonth = document.getElementById('stripe_card_expiry_month').value.trim()
+      , expYear = document.getElementById('stripe_card_expiry_year').value.trim()
+      , key = document.getElementById('stripe_publishable_key').value.trim()
+      , name, line1, line2, city, state, zip, country;
+
+    // Validate the number:
+    if (!Stripe.validateCardNumber(ccNum)) {
+      return reportError(t('contribution_stripe_error_invalid_number'));
+    }
+
+    // Validate the CVC:
+    if (!Stripe.validateCVC(cvcNum)) {
+      return reportError(t('contribution_stripe_error_invalid_cvc'));
+    }
+
+    // Validate the expiration:
+    if (!Stripe.validateExpiry(expMonth, expYear)) {
+      return reportError(t('contribution_stripe_error_invalid_expiry_date'));
+    }
+
+    if(billingFields) {
+      // Billing field values
+      name = document.getElementById('stripe_name').value.trim()
+      , line1 = document.getElementById('stripe_address_line1').value.trim()
+      , line2 = document.getElementById('stripe_address_line2').value.trim()
+      , city = document.getElementById('stripe_city').value.trim()
+      , state = document.getElementById('stripe_state').value.trim()
+      , zip = document.getElementById('stripe_zip').value.trim()
+      , country = document.getElementById('stripe_country').value.trim();
+
+      // Validate billing name
+      if (name.length < 2) {
+        return reportError(t('contribution_stripe_error_name_too_short'));
+      }
+
+      // Validate billing address line1
+      if (line1.length < 2) {
+        return reportError(t('contribution_stripe_error_address_line1_too_short'));
+      }
+
+      // Validate billing city
+      if (city.length < 2) {
+        return reportError(t('contribution_stripe_error_city_too_short'));
+      }
+
+      // Validate billing state
+      if (state.length < 2) {
+        return reportError(t('contribution_stripe_error_state_too_short'));
+      }
+
+      // Validate billing zip
+      if (zip.length < 2) {
+        return reportError(t('contribution_stripe_error_incorrect_zip'));
+      }
+
+      // Validate billing country
+      if (country.length < 2) {
+        return reportError(t('contribution_stripe_error_country_too_short'));
+      }
+    }
+
+    // Validate other form elements, if needed!
+    // Check for errors:
+    Stripe.setPublishableKey(key);
+
+    // The payment object
+    var payment = {number: ccNum, cvc: cvcNum, exp_month: expMonth, exp_year: expYear};
+
+    if(billingFields) {
+      payment.name = name;
+      payment.address_line1 = line1;
+      payment.address_line2 = line2;
+      payment.address_city = city;
+      payment.address_state = state;
+      payment.address_zip = zip;
+      payment.address_country = country;
+    }
+
+    // Get the Stripe token:
+    Stripe.createToken(payment, stripeResponseHandler);
+
+    // Prevent the form from submitting:
+    return false;
+  }
+
+  // Function handles the Stripe response:
+  function stripeResponseHandler(status, response) {
+    // Check for an error:
+    if (response.error) {
+      //var message = t('contribution_stripe_error_' + response.error.code);
+      var message = response.error.message;
+      if(!message) message = t('contribution_stripe_error_general');
+      reportError(message);
+
+    } else { // No errors, submit the form:
+
+      var form = document.getElementById('stripe_payment_form');
+
+      // Token contains id, last4, and card type:
+      var token = response['id'];
+
+      // Insert the token into the form so it gets submitted to the server
+      document.getElementById('stripe_key').innerHTML = '<input type="hidden" name="stripeToken" value="' + token + '">';
+
+      // Submit the form:
+      form.submit();
+    }
+  }
+
+  // Error message translations
+  {% for key in current_site.configuration.stripe_translations %}
+    site.translations['{{ key }}'] = "{{ key | t }}";
+  {% endfor %}
+</script>

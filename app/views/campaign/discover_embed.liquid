@@ -1,0 +1,25 @@
+{% comment %}Discover campaign /discover{% endcomment %}
+
+{% assign category = current_site.categories | where: link: params.category_link | first %}
+{% assign category_name = params.category_link %}
+{% if category %}{% assign category_name = category.name %}{% endif %}
+{% assign paginate = current_site.campaigns.visible | category: params.category_link | paginate %}
+{% assign campaigns = paginate.entries %}
+{% assign iframe = true %}
+
+{% layout %}discover_embed{% endlayout %}
+{% title %}{{ 'campaign_index_title' | t }} - {{ category_name }}{% endtitle %}
+{% body_class discover %}
+
+<div id="campaign_discover" class="campaign-discover-embed">
+  <div id="badges" class="well white {{ params.category_link | h }}">
+    {% if campaigns.size > 0 %}
+      {% for campaign in campaigns %}
+        {% assign last = forloop.index | modulo: current_site.badges_per_row %}
+        {% include 'campaign/campaign_badge' %}
+      {% endfor %}
+      <div class="clear"></div>
+    {% endif %}
+    <div class="clear"></div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+{% comment %}Included in campaign, article and update forms{% endcomment %}
+
+{% if current_site.editor == 'froala' %}
+  <textarea class="froala-editor" id="campaign-about" name="about">{{ campaign.about }}</textarea>
+  <br>
+
+  <script class="loadscript">
+    var opt = $.FroalaEditor.DEFAULTS.options;
+    opt.scrollableContainer = '#center';
+    $('.froala-editor').froalaEditor(opt);
+  </script>
+
+{% elsif current_site.editor == 'pagedown' %}
+  <div id="wmd-panel-area">
+    <div class="wmd-panel">
+      <div id="wmd-button-bar-2"></div>
+      <textarea id="wmd-input-2" class="wmd-input form-input-high" name="about">{{ campaign.about }}</textarea>
+    </div>
+  </div>
+  <script class="loadscript">hq.setMarkdown('-2');</script>
+{% else %}
+  {% if current_site.editor == 'wysihtml' %}
+    {% assign toolbar = 'toolbar' %}
+    {% assign textarea = 'campaign-about' %}
+    {% include 'site/wysihtml' %}
+  {% endif %}
+  <textarea id="campaign-about" class="form-input-high" name="about">{{ campaign.about }}</textarea>
+{% endif %}

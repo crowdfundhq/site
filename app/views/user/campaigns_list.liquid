@@ -1,0 +1,10 @@
+{% comment %}User campaigns list{% endcomment %}
+
+{% assign query = user.campaigns.visible %}
+{% if current_user.id == user.id %}{% assign query = user.campaigns %}{% endif %}
+{% assign paginate = query | order: created_at: '-1' | paginate %}
+{% assign campaigns = paginate.entries %}
+
+{% for campaign in campaigns %}
+  {% include 'campaign/campaign_badge' %}
+{% endfor %}

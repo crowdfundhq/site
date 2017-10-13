@@ -1,0 +1,102 @@
+{% comment %}Show group list{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ group.name }} - {{ 'group_index_title' | t }}{% endtitle %}
+{% tagline %}{{ group.name }}{% endtagline %}
+{% subtitle %}{{ 'group_show_subtitle' | t }}{% endsubtitle %}
+{% body_class group %}
+
+<div id="group_back_link">
+  <a href="{{ 'group_index' | path }}">
+    <i class="icon-chevron-left group_back_arrow"></i> {{ 'group_back_link' | t }}
+  </a>
+</div>
+
+<div id="groups">
+  <div id="group_info">
+    <div class="grid_4">
+      <img class="group_image" src="{{ group.image | e }}" alt="">
+      <a class="group_site" href="{{ group.url | e }}">
+        {{ group.url | e }}
+      </a>
+      {% if group.total_amount > 0 %}
+        <div class="group_total_amount">
+          {{ 'group_show_total_raised' | t }}
+          {{ group.total_amount | to_currency: precision: 0 }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="grid_8 last">
+      {% if current_site.groups_enabled and current_site.groups_editable %}
+        <div class="right group-controls">
+
+          {% if current_user.id == group.user_id %}
+            <a href="{{ 'group_show_invite' | path: group.link }}" onclick="hq.loadDialog(this);return false">
+              {{ 'invite' | t }}
+            </a>
+            <a href="{{ 'group_edit' | path: group.link }}" onclick="hq.loadDialog(this);return false">
+              {{ 'edit' | t }}
+            </a>
+            <a class="red" href="{{ 'group_confirm' | path: group.link }}" onclick="hq.loadDialog(this);return false">
+              {{ 'delete' | t }}
+            </a>
+          {% endif %}
+
+          {% if current_site.groups_joinable %}
+            {% if current_user and group.member? %}
+              <a class="btn" href="{{ 'membership_confirm' | path: group.link }}" onclick="hq.loadDialog(this);return false">
+                {{ 'group_show_leave' | t }}
+              </a>
+            {% else %}
+              <a class="btn" href="{{ 'membership_new' | path: group.link }}" onclick="hq.transitLoad(this);return false">
+                {{ 'group_show_join' | t }}
+              </a>
+            {% endif %}
+          {% endif %}
+          <div class="clear"></div>
+        </div>
+      {% endif %}
+      <div class="clear"></div>
+
+      <div class="group_bio">{{ group.bio_html }}</div>
+      <div style="height:1.618em"></div>
+
+      {% assign users = group.users.all %}
+      {% if users != empty %}
+        <h3>{{ 'group_members' | t }}</h3>
+        <ul class="no-style group-members well">
+          {% for user in users %}
+            <li>
+              <a href="{{ 'user_show' | path: user.link }}" title="{{ user.name }}">
+                <img src="{{ user.avatar | e }}" alt="">
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <div class="clear"></div>
+  </div>
+
+  {% assign paginate = group.campaigns.visible.active | paginate %}
+  {% assign campaigns = paginate.entries %}
+  {% if campaigns != empty %}
+    <div class="well white" id="group_badges">
+      {% for campaign in campaigns %}
+        {% assign last = forloop.index | modulo: 4 %}
+        {% include 'campaign/campaign_badge' %}
+      {% endfor %}
+      <div class="clear"></div>
+      {% if paginate and paginate.total_pages > 1 %}
+        {{ paginate.arrows }}
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+{% if request.xhr? %}
+  <script class="loadscript">
+    hq.setTitle('{{ title }}', '{{ subtitle }}');
+  </script>
+{% endif %}

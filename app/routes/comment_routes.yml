@@ -1,0 +1,34 @@
+POST#create:
+  desc: Create comment
+  path: /campaigns/:campaign_link/comments
+  requires: []
+
+GET#list:
+  desc: Comment list
+  path: /campaigns/:campaign_link/comment/list
+  requires: []
+
+GET#edit:
+  desc: Edit comment
+  path: /campaigns/:campaign_link/comments/:comment_id/edit
+  requires:
+    - user
+
+PUT#update:
+  desc: Update comment
+  path: /campaigns/:campaign_link/comments/:comment_id
+  requires:
+    - user
+
+GET#confirm:
+  desc: Confirm comment
+  path: /campaigns/:campaign_link/comments/:comment_id/delete
+  requires:
+    - user
+
+DELETE#delete:
+  desc: Delete comment
+  path: /campaigns/:campaign_link/comments/:comment_id
+  requires:
+    - user
+

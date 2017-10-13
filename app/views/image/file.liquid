@@ -1,0 +1,38 @@
+{% comment %}Included in campaign files{% endcomment %}
+
+<li class="upload-campaign-file">
+  {% if file.image? %}
+    <div class="grid_3 file-image">
+      <a class="hint" href="{{ file.url | e }}">
+        <img src="{{ file.thumb_url | e }}" alt="">
+        <div class="small">
+          {{ file.name | truncate: 31 }}
+        </div>
+      </a>
+    </div>
+  {% else %}
+    <div class="grid_3 file-extension">
+      <a href="{{ file.url | e }}">
+        {{ file.name | truncate: 25 }}
+      </a>
+    </div>
+  {% endif %}
+
+  <div class="grid_2 date">
+    {{ file.timestamp | date }}
+  </div>
+
+  <div class="grid_2 type" title="{{ file.type }}">
+    {{ file.type | truncate: 22 }}
+  </div>
+
+  <div class="grid_2 size">
+    {{ file.file_size | divided_by: 1000 }} KB
+  </div>
+
+  <div class="grid_3 action last">
+    <a class="small" onclick="hq.loadDialog(this);return false" href="{{ 'image_show' | path: campaign.link, file.id }}" title="{{ 'campaign_files_copy_to_clipboard' | t }}">{{ 'campaign_files_copy_url' | t }}</a>
+    &nbsp;
+    <a class="delete small" onclick="hq.loadDialog(this);return false" href="{{ 'image_confirm' | path: campaign.link, file.id }}">{{ 'delete' | t }}</a>
+  </div>
+</li>

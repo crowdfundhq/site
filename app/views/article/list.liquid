@@ -1,0 +1,90 @@
+{% comment %}List of blog articles{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ 'article_list_title' | t }}{% endtitle %}
+{% subtitle %}{{ 'article_list_subtitle' | t }}{% endsubtitle %}
+
+{% include 'article/blog_bar' %}
+
+<div class="clear"></div>
+
+<div class="well white">
+  <h2>{{ 'article_list_articles' | t }}</h2>
+
+  {% assign articles = current_site.articles.all %}
+
+  {% if articles == empty %}
+    <p>{{ 'article_not_written' | t }}</p>
+  {% else %}
+
+    {% assign drafts = articles | select: finished: false, published: false %}
+
+    <div class="articletype">
+      <strong>{{ 'article_draft' | t }} ({{ drafts.size }})</strong>
+    </div>
+
+    {% if drafts == empty %}
+      <p>{{ 'article_no_draft' | t }}</p>
+    {% else %}
+      <ul>
+        {% for article in drafts %}
+          <li>
+            <a href="{{ 'article_show' | path: article.link }}">{{ article.title }}</a>
+            |
+            <span class="hint">{{ article.user.name }}</span>
+            |
+            <span class="hint">{{ article.updated_at | date }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <br><hr><br>
+
+    {% assign finished = articles | select: finished: true, published: false %}
+
+    <div class="articletype">
+      <strong>{{ 'article_finished' | t }} ({{ finished.size }})</strong>
+    </div>
+
+    {% if finished == empty %}
+      <p>{{ 'articles_no_articles_updates' | t }}</p>
+    {% else %}
+      <ul>
+        {% for article in finished %}
+          <li>
+            <a href="{{ 'article_show' | path: article.link }}">{{ article.title }}</a>
+            |
+            <span class="hint">{{ article.user.name }}</span>
+            |
+            <span class="hint">{{ article.updated_at | date }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <br><hr><br>
+
+    {% assign published = articles | select: published: true %}
+
+    <div class="articletype">
+      <strong>{{ 'article_published' | t }} ({{ published.size }})</strong>
+    </div>
+
+    {% if published == empty %}
+      <p>{{ 'articles_no_published' | t }}</p>
+    {% else %}
+      <ul>
+        {% for article in published %}
+          <li>
+            <a href="{{ 'article_show' | path: article.link }}">{{ article.title }}</a>
+            |
+            <span class="hint">{{ article.user.name }}</span>
+            |
+            <span class="hint">{{ article.published_at | date }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endif %}
+</div>

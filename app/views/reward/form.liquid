@@ -1,0 +1,127 @@
+{% comment %}Included in reward edit and new{% endcomment %}
+
+{% if reward.new_record? and current_site.reward_images_enabled %}
+  {% assign reward_images_enabled = true %}
+{% endif %}
+
+{% if reward_images_enabled or reward.images_enabled %}
+  <label for="reward_image">
+    {{ 'reward_form_image' | t }}
+    {% if reward.new_record? and current_site.reward_images_required %}
+      {% assign reward_images_required = true %}
+    {% endif %}
+    {% if reward_images_required or reward.images_required %} * {% endif %}
+  </label>
+  <br>
+  <div id="image_preview" data-url="{{ reward.image_url | e }}">
+    <div class="reward-preview preview_frame">
+      {% if reward.image_url != blank %}
+        <img src="{{ reward.image_url | e }}" alt="">
+      {% endif %}
+    </div>
+  </div>
+  <br>
+  <input id="reward_image" name="image_url" type="hidden" value="{{ reward.image_url | e }}">
+  {% if reward.errors.image_url != blank %}
+    <span class="field_error">{{ reward.errors.image_url | join: ', ' }}</span>
+  {% endif %}
+
+  <div class="clear"></div>
+
+  <div class="reward-dropbox dropbox dropbox-inline">
+    <a class="dropbox-clickable">{{ 'upload' | t }}</a>
+    <span class="dropbox-progress"></span>
+    <span class="dropbox-error"></span>
+  </div>
+
+  <div class="spacer"></div>
+{% endif %}
+
+<p>
+  <label for="reward_amount">{{ 'reward_form_amount' | t }} * </label>
+  <br>
+  <input id="reward_amount" name="amount" type="text"{% if reward.amount > -1 %} value="{{ reward.amount | round }}"{% endif %}>
+  {% if reward.errors.amount != blank %}
+    <span class="field_error">{{ reward.errors.amount | join: ', ' }}</span>
+  {% endif %}
+</p>
+<p>
+  <label for="reward_max">{{ 'reward_form_max_number_of_contributors' | t }}</label>
+  <br>
+  <input id="reward_max" name="max" type="text"{% if reward.max > -1 %} value="{{ reward.max | round }}"{% endif %}>
+  {% if reward.errors.max != blank %}
+    <span class="field_error">{{ reward.errors.max | join: ', ' }}</span>
+  {% endif %}
+</p>
+<p>
+  <label for="reward_description">{{ 'reward_form_description' | t }} * </label>
+  <br>
+  <textarea id="reward_description" name="description" rows="20">{{ reward.description }}</textarea>
+  {% if reward.errors.description != blank %}
+    <span class="field_error">{{ reward.errors.description | join: ', ' }}</span>
+  {% endif %}
+</p>
+<p>
+  <label for="reward_visible">{{ 'reward_form_set_visible' | t }}</label>
+  <input id="reward_visible" name="visible" type="checkbox" value="true"{% if reward.visible %} checked{% endif %}>
+</p>
+<p>
+  <button class="btn">{{ 'submit' | t }}</button>
+  <a class="cancel" href="{{ 'campaign_show_section' | path: campaign.link, 'rewards' }}" onclick="hq.closeDialog();return false">{{ 'cancel' | t }}</a>
+</p>
+
+{% if reward_images_enabled or reward.images_enabled %}
+  <script class="loadscript">
+    var el = document.querySelector('.reward-dropbox');
+    var link = el.querySelector('.dropbox-clickable');
+    var meter = el.querySelector('.dropbox-progress');
+    var error = el.querySelector('.dropbox-error');
+
+    var preview = document.querySelector('.reward-preview');
+    var input = document.querySelector('#reward_image');
+
+    var dz = new Dropzone(el, {
+      url: '/uploads/reward',
+      clickable: link,
+      previewsContainer: false,
+      paramName: 'datafile',
+      acceptedFiles: 'image/*',
+      maxFiles: 1,
+      maxFilesize: 20,
+      dictInvalidFile: "{{ 'upload_invalid_images_only' | t }}",
+      dictFileTooBig: "{{ 'upload_max_filesize' | t }} 20 MB",
+      dictResponseError: "{{ 'upload_connection_error' | t }}"
+    });
+
+    // Init
+    link.addEventListener('click', function(){
+      meter.textContent = '';
+      error.textContent = '';
+    });
+
+    // Update the total progress bar
+    dz.on('totaluploadprogress', function(progress) {
+      if(dz.files.length > 0) {
+        progress = parseInt(progress)
+        meter.textContent = progress + '%';
+      }
+    });
+
+    // Hide the total progress bar when nothing's uploading anymore
+    dz.on('queuecomplete', function() {
+      dz.removeAllFiles();
+      meter.textContent = '';
+    });
+
+    dz.on('success', function(file, data) {
+      data = JSON.parse(data);
+      preview.innerHTML = '<img src="' + encodeURI(data.url) + '" alt="">';
+      input.value = encodeURI(data.url);
+    });
+
+    dz.on('error', function(file, message) {
+      meter.textContent = '';
+      error.textContent = message;
+    });
+  </script>
+{% endif %}

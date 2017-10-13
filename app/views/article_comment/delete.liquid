@@ -1,0 +1,13 @@
+{% comment %}Delete blog article comment{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'article_delete_comment_warning' | t }}{% endtitle %}
+
+<form accept-charset="utf-8" onsubmit="hq.deleteArticleComment(this);return false" data-id="{{ comment.id }}" data-counter="num_comments" action="{{ 'article_comment_delete' | path: article.link, comment.id }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="DELETE">
+  <button class="btn btn-warning">{{ 'delete' | t }}</button>
+  <a class="cancel" onclick="hq.closeDialog();return false" href="{{ 'article_show' | path: article.link }}">
+    {{ 'cancel' | t }}
+  </a>
+</form>

@@ -1,0 +1,10 @@
+{% comment %}Create new campaign{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'campaign_form_title' | t }}{% endtitle %}
+
+{{ 'campaign_form_intro_text' | t }}
+<form accept-charset="utf-8" action="{{ 'campaign_create' | path }}" method="POST" onsubmit="hq.postDialog(this);return false">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  {% include 'campaign/form' %}
+</form>

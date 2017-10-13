@@ -1,0 +1,30 @@
+{% comment %}Campaign votes{% endcomment %}
+
+{% assign paginate = campaign.votes | order: created_at: '-1' | paginate %}
+{% assign votes = paginate.entries %}
+<input id="total_entries" type="hidden" value="{{ paginate.total_entries }}">
+
+{% if campaign.approved and votes != empty %}
+  <ul id="votes_list" class="block-list no-style squish">
+    {% for vote in votes %}
+      {% include 'vote/vote' with vote %}
+    {% endfor %}
+  </ul>
+
+{% else %}
+  <p>
+    {% if campaign.approved %}
+      {{ 'campaign_votes_no_votes' | t }}
+    {% else %}
+      {{ 'campaign_votes_no_votes_until_campaign_approved' | t }}
+    {% endif %}
+  </p>
+{% endif %}
+
+{% if votes != empty and paginate.total_pages > 1 %}
+  <div class="load-more-data">
+    <a class="small" href="{{ 'vote_list' | path: campaign.link }}" data-list="votes_list" data-count="{{ paginate.total_entries }}" data-per-page="{{ settings.per_page }}" onclick="hq.loadMore(this);return false">
+      {{ 'load_more' | t }} ...
+    </a>
+  </div>
+{% endif %}

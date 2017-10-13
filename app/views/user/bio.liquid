@@ -1,0 +1,18 @@
+{% comment %}User bio{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'campaign_show_user_bio_title' | t }} {{ user.name }}{% endtitle %}
+
+<img class="push-left" src="{{ user.avatar | e }}" width="50" height="50" alt="">
+<h5 style="display:inline;font-weight:bold;font-size:15px">
+  <a href="{{ 'user_show' | path: user.link }}">{{ user.name }}</a>
+</h5>
+<div class="hint">
+  {{ 'user_show_signed_up' | t }}
+  {{ user.created_at | date }}
+</div>
+{% if user.website != blank %}
+  <a href="{{ user.website | e }}" target="_blank">{{ user.website }}</a>
+{% endif %}
+<div class="clear" style="height:20px"></div>
+<div class="user-bio-html">{{ user.bio_html }}</div>

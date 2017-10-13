@@ -1,0 +1,8 @@
+{% comment %}Pledge list{% endcomment %}
+
+{% assign paginate = campaign.pledges | order: created_at: '-1' | paginate %}
+{% assign pledges = paginate.entries %}
+
+{% for pledge in pledges %}
+  {% include 'pledge/pledge' with pledge %}
+{% endfor %}

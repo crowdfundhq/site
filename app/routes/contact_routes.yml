@@ -1,0 +1,15 @@
+GET#new:
+  desc: New contact
+  path: /contact
+  requires: []
+
+POST#create:
+  desc: Create contact
+  path: /contact
+  requires: []
+
+GET#thanks:
+  desc: Thanks contact
+  path: /contact/thanks
+  requires: []
+

@@ -1,0 +1,12 @@
+GET#show:
+  desc: Show reminder
+  path: /campaigns/:campaign_link/reminder
+  requires:
+    - user
+
+POST#toggle:
+  desc: Toggle reminder
+  path: /campaigns/:campaign_link/reminder
+  requires:
+    - user
+

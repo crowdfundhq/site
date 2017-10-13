@@ -1,0 +1,49 @@
+GET#list:
+  desc: Message list
+  path: /conversations/:conversation_id/message/list
+  requires:
+    - messages_enabled
+    - user
+
+GET#new:
+  desc: New message
+  path: /messages/:user_link/new
+  requires:
+    - messages_enabled
+    - user
+
+POST#create:
+  desc: Create message
+  path: /messages
+  requires:
+    - messages_enabled
+    - user
+
+GET#edit:
+  desc: Edit message
+  path: /messages/:message_id/edit
+  requires:
+    - messages_enabled
+    - user
+
+PUT#update:
+  desc: Update message
+  path: /messages/:message_id
+  requires:
+    - messages_enabled
+    - user
+
+GET#confirm:
+  desc: Confirm message
+  path: /messages/:message_id/delete
+  requires:
+    - messages_enabled
+    - user
+
+DELETE#delete:
+  desc: Delete message
+  path: /messages/:message_id
+  requires:
+    - messages_enabled
+    - user
+

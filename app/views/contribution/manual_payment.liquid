@@ -1,0 +1,26 @@
+{% comment %}Manual payment{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ 'contribution_new_manual_payment_title' | t }}{% endtitle %}
+{% subtitle %}{{ 'contribution_new_manual_payment_subtitle' | t }}{% endsubtitle %}
+{% body_class contribution %}
+
+<div id="manual_payment_confirm" class="center">
+  <h2>
+    {{ 'contribution_new_manual_payment_contributing_to' | t }}
+    {{ contribution.full_amount }}
+    {{ 'to' | t }}
+    {{ campaign.name }}
+  </h2>
+
+  <p>{{ 'contribution_new_manual_payment_info' | t }}</p>
+
+  <div class="clear" style="height:20px"></div>
+  <a class="btn" href="{{ 'gateway_success' | path: campaign.link, contribution.id }}">
+    {{ 'contribution_new_manual_payment_confirm' | t }}
+  </a>
+  &nbsp;
+  <a href="{{ 'contribution_new' | path: campaign.link }}">{{ 'cancel' | t }}</a>
+</div>
+
+<div class="clear" style="height:20px"></div>

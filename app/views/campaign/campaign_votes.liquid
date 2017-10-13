@@ -1,0 +1,30 @@
+{% comment %}Campaign votes{% endcomment %}
+
+{% assign paginate = campaign.votes | order: 'created_at', -1 | paginate %}
+{% assign votes = paginate.entries %}
+
+<div id="campaign_votes">
+  <div class="grid_8">
+    {% if campaign.approved and votes != empty %}
+      <ul class="block-list no-style squish" id="votes_list">
+        {% for vote in votes %}
+          {% include 'vote/vote' with vote %}
+        {% endfor %}
+      </ul>
+      {% if paginate and paginate.total_pages > 1 %}
+        <div class="paginator campaign-votes-paginate">{{ paginate.default }}</div>
+      {% endif %}
+
+    {% else %}
+      {% if campaign.approved %}
+        <p>{{ 'campaign_votes_no_votes' | t }}</p>
+      {% else %}
+        <p>{{ 'campaign_votes_no_votes_until_campaign_approved' | t }}</p>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  <div class="grid_4 last">
+    {% include 'campaign/campaign_badge' %}
+  </div>
+</div>

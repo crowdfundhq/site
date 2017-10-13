@@ -1,0 +1,66 @@
+GET#payment:
+  desc: Payment gateway
+  path: /campaigns/:campaign_link/contributions/:contribution_id/pay
+  requires:
+    - user:
+      - login_to_contribute: true
+
+GET#manual:
+  desc: Manual gateway
+  path: /campaigns/:campaign_link/contributions/:contribution_id/manual_payment
+  requires:
+    - user:
+      - login_to_contribute: true
+
+POST#create:
+  desc: Create gateway
+  path: /campaigns/:campaign_link/contributions/:contribution_id/pay
+  requires:
+    - user:
+      - login_to_contribute: true
+
+GET#success:
+  desc: Success gateway
+  path: /campaigns/:campaign_link/contributions/:contribution_id/success
+  requires:
+    - user:
+      - login_to_contribute: true
+
+POST#ipn_static:
+  desc: Ipn gateway static
+  path: /gateways/:provider/ipn
+  requires: []
+
+POST#ipn:
+  desc: Ipn gateway
+  path: /campaigns/:campaign_link/contributions/:contribution_id/ipn
+  requires: []
+
+POST#event:
+  desc: Event gateway
+  path: /campaigns/:provider/event
+  requires: []
+
+GET#authorize:
+  desc: Authorize gateway
+  path: /campaigns/authorize/:provider
+  requires:
+    - user
+
+GET#authorize_campaign:
+  desc: Authorize gateway campaign
+  path: /campaigns/:campaign_link/authorize/:provider
+  requires:
+    - user
+
+POST#authorize:
+  desc: Authorize gateway
+  path: /campaigns/authorize/:provider
+  requires:
+    - user
+
+POST#authorize_campaign:
+  desc: Authorize gateway campaign
+  path: /campaigns/:campaign_link/authorize/:provider
+  requires:
+    - user

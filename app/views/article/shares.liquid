@@ -1,0 +1,70 @@
+{% comment %}Included in article article{% endcomment %}
+
+{% unless url %}{% assign url = article.url %}{% endunless %}
+
+<ul id="campaign_share" class="social-share-list no-style{% if current_site.share_button_style == 'big' %} big-icons{% endif %}">
+  {% if current_site.share_buttons contains 'facebook' %}
+    <li id="facebook_share" class="share">
+      <a href="{{ url | e }}" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u={{ url | e }}', 'facebook_share_dialog', 'width=626,height=436');return false">
+        <div class="icon icon-facebook3"></div>
+        {% if current_site.share_button_text %}
+          <div class="share-hint">{{ 'campaign_show_facebook_share' | t }}</div>
+        {% endif %}
+        <div class="data-count">
+          <div class="left-arrow-bg"></div>
+          <div class="left-arrow"></div>
+          <span class="share-count" data-url="{{ url | e }}" data-type="facebook">&nbsp;</span>
+        </div>
+      </a>
+    </li>
+  {% endif %}
+
+  {% if current_site.share_buttons contains 'pinterest' %}
+    <li id="pinterest_share" class="share">
+      <a rel="nofollow" href="https://pinterest.com/pin/create/button/?url={{ url | e }}&amp;description={{ article.title | e }}" onclick="window.open(this.href, 'pinterest-share-dialog', 'width=626,height=436');return false">
+        <div class="icon icon-pinterest"></div>
+        {% if current_site.share_button_text %}
+          <div class="share-hint">{{ 'campaign_show_pinterest_share' | t }}</div>
+        {% endif %}
+        <div class="data-count">
+          <div class="left-arrow-bg"></div>
+          <div class="left-arrow"></div>
+          <span class="share-count" data-url="{{ url | e }}" data-type="pinterest">&nbsp;</span>
+        </div>
+      </a>
+    </li>
+  {% endif %}
+
+  {% if current_site.share_buttons contains 'twitter' %}
+    <li id="twitter_share" class="share">
+      {% capture share_text_twitter %}{{ 'article_show_twitter_description' | t }} {{ article.title }}{% endcapture %}
+      {% capture via %}{% if current_site.twitter != blank %}{{ current_site.twitter }}{% else %}{{ current_site.name }}{% endif %}{% endcapture %}
+
+      <a rel="nofollow" href="https://twitter.com/intent/tweet?text={{ share_text_twitter | e }}&amp;via={{ via | e }}&amp;url={{ url | e }}" onclick="window.open(this.href, 'twitter-share-dialog', 'width=626,height=436');return false">
+        <div class="icon icon-twitter2"></div>
+        {% if current_site.share_button_text %}
+          <div class="share-hint">{{ 'campaign_show_twitter_share' | t }}</div>
+        {% endif %}
+      </a>
+    </li>
+  {% endif %}
+
+  {% if current_site.share_buttons contains 'email' %}
+    <li id="email_share" class="share">
+      {% capture subject %}{{ 'article_show_email_subject' | t }}:%20{{ article.title }}&amp;body={{ article.title }}%20{{ url }}{% endcapture %}
+      <a href="mailto:{{ article.user.email }}?subject={{ subject | e }}">
+        <div class="icon icon-envelope"></div>
+        {% if current_site.share_button_text %}
+          <div class="share-hint">{{ 'campaign_show_email_share' | t }}</div>
+        {% endif %}
+      </a>
+    </li>
+  {% endif %}
+
+</ul>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    hq.getDataCount();
+  });
+</script>

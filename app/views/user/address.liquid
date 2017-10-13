@@ -1,0 +1,6 @@
+{% comment %}User address{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'campaign_rewards_shipping_details' | t }}{% endtitle %}
+
+<div id="show_address">{{ user.address | newline_to_br }}</div>

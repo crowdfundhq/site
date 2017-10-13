@@ -1,0 +1,323 @@
+{% comment %}Included in contribution edit and new{% endcomment %}
+
+<p>
+  <label for="contribution_amount">
+    {% if current_site.fixed_amount_enabled and campaign.fixed_amount > 0 %}
+      {{ 'contribution_new_amount_field_label' | t }}
+    {% else %}
+      {{ 'contribution_new_how_much' | t }}
+    {% endif %}
+  </label>
+  <br>
+
+  {% if current_site.fixed_amount_enabled and campaign.fixed_amount > 0 %}
+    <div id="contribution_amount_fixed">{{ campaign.fixed_amount | to_currency }}</div>
+    <input id="contribution_amount" name="amount" type="hidden" value="{{ campaign.fixed_amount }}">
+  {% else %}
+    <input id="contribution_amount" name="amount" type="text" value="{{ contribution.amount | min }}">
+  {% endif %}
+
+  {% if contribution.errors.amount != blank %}
+    <span class="field_error">
+      {{ contribution.errors.amount | join: ', ' }}
+    </span>
+  {% endif %}
+
+  {% if current_site.anonymous_contributions == 'user_decide' %}
+    <br>
+    <input id="contribution_anonymous" name="anonymous" type="checkbox" value="1"{% if contribution.anonymous %} checked{% endif %}>
+    <label for="contribution_anonymous">
+      {{ 'contribution_new_want_to_be_anonymous' | t }}
+    </label>
+  {% endif %}
+</p>
+
+{% if current_site.login_to_contribute == false and current_user == null %}
+  <p>
+    <label for="contribution_name">
+      {{ 'contribution_new_login_to_contribute_name' | t }}
+    </label>
+    <br>
+
+    <input id="contribution_name" name="name" type="text" value="{{ contribution.name }}">
+    {% if contribution.errors.name != blank %}
+      <span class="field_error">
+        {{ contribution.errors.name | join: ', ' }}
+      </span>
+    {% endif %}
+  </p>
+  <p>
+    <label for="contribution_email">
+      {{ 'contribution_new_login_to_contribute_email' | t }}
+    </label>
+    <br>
+
+    <input id="contribution_email" name="email" type="text" value="{{ contribution.email }}">
+    {% if contribution.errors.email != blank %}
+      <span class="field_error">
+        {{ contribution.errors.email | join: ', ' }}
+      </span>
+    {% endif %}
+  </p>
+{% endif %}
+
+{% if current_site.costs_enabled %}
+  {% assign costs = current_site.costs.all %}
+  {% if costs != empty %}
+    <div id="contribution_additional_costs">
+      <label for="cost_select">{{ 'contribution_new_additional_costs' | t }}</label>
+      <br>
+      <select id="cost_select" name="cost">
+        {% unless current_site.costs_required %}
+          <option value="">{{ 'contribution_new_additional_cost_default' | t }}</option>
+        {% endunless %}
+        {% for cost in costs %}
+          <option value="{{ cost.id }}"{% if cost.id == contribution.cost.id %} selected{% endif %}>{% if cost.percentage %}{{ cost.amount | to_decimal }}%{% else %}{{ cost.amount | to_currency }}{% endif %} {{ cost.name }}</option>
+        {% endfor %}
+      </select>
+      {% if contribution.errors.cost != blank %}
+        <span class="field_error">
+          {{ contribution.errors.cost | join: ', ' }}
+        </span>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endif %}
+
+{% if current_site.fees_enabled %}
+  {% assign fees = current_site.fees.all %}
+  {% if fees != empty %}
+    <div id="contribution_extra_fees">
+      <label for="fee_select">{{ 'contribution_new_extra_fees' | t }}</label>
+      <br>
+      <select id="fee_select" name="fee">
+        {% unless current_site.fees_required %}
+          <option value="">{{ 'contribution_new_extra_fee_default' | t }}</option>
+        {% endunless %}
+        {% for fee in fees %}
+          <option value="{{ fee.id }}"{% if fee.id == contribution.fee.id %} selected{% endif %}>{{ fee.percentage | to_decimal }}% {{ fee.name }}</option>
+        {% endfor %}
+      </select>
+
+      {% if contribution.errors.fee != blank %}
+        <span class="field_error">
+          {{ contribution.errors.fee | join: ', ' }}
+        </span>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endif %}
+
+{% assign rewards = campaign.rewards.visible | order: amount: '1' | all %}
+{% if rewards != empty %}
+  <p class="hint squish">
+    {{ 'contribution_new_select_reward' | t }}
+  </p>
+
+  <ul id="selectable" class="block-list contribution_rewards">
+    <li>
+      <label class="blue xlarge" for="contribution_0">
+        <input id="contribution_0" name="reward" type="radio" value="0"{% if contribution.reward == blank %} checked{% endif %}>
+        {{ 'contribution_new_prefer_not_to_have_reward' | t }}
+        <div class="hint">
+          {{ 'contribution_new_dont_need_reward_hint' | t }}
+        </div>
+      </label>
+    </li>
+
+    {% for reward in rewards %}
+      <li>
+        <label class="blue xlarge" for="contribution_{{ forloop.index | plus: 1 }}">
+          {% if reward.image_url != blank %}
+            <div class="reward_image">
+              <img src="{{ reward.image_url | e }}" alt="">
+            </div>
+          {% endif %}
+
+          <input id="contribution_{{ forloop.index | plus: 1 }}" name="reward" type="radio" value="{{ reward.id }}"{% if contribution.reward.id == reward.id %} checked{% endif %} data-amount="{{ reward.amount }}">
+
+         {{ reward.amount | to_currency: precision: 0 }} {{ 'campaign_reward_or_more' | t }}
+         <div class="hint">{{ reward.description_html }}</div>
+        </label>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% if contribution.errors.reward != blank %}
+  <div class="field_error">
+    {{ contribution.errors.reward | join: ', ' }}
+  </div>
+{% endif %}
+
+<div class="squish space-top">
+  <label>
+    {{ 'contribution_new_payment_method' | t }}
+  </label>
+
+  {% if current_site.configuration.enabled == empty %}
+    <p class="alert">
+      {{ 'contribution_new_payment_options_disabled' | t }}
+    </p>
+  {% else %}
+    <ul id="selectable" class="block-list payment_methods">
+      {% if current_site.configuration.enabled contains 'manual' %}
+        <li class="manual">
+          <label class="manual" for="contribution_payment_method_manual">
+            <input id="contribution_payment_method_manual"{% if contribution.payment_method == 'manual' %} checked{% endif %} name="payment_method" type="radio" value="manual">
+            <h3>{{ 'contribution_new_payment_option_manual' | t }}</h3>
+          </label>
+        </li>
+      {% endif %}
+
+      {% if current_site.configuration.enabled contains 'wepay' %}
+        <li class="wepay">
+          <label class="wepay" for="contribution_payment_method_wepay">
+            <input id="contribution_payment_method_wepay"{% if contribution.payment_method == 'wepay' %} checked{% endif %} name="payment_method" type="radio" value="wepay">
+            <img alt="WePay" src="{{ 'wepay.png' | image_url }}" title="WePay">
+          </label>
+        </li>
+      {% endif %}
+
+      {% if current_site.configuration.enabled contains 'stripe' %}
+        <li class="stripe">
+          <label class="stripe" for="contribution_payment_method_stripe">
+            <input id="contribution_payment_method_stripe"{% if contribution.payment_method == 'stripe' %} checked{% endif %} name="payment_method" type="radio" value="stripe">
+            <img class="pull-down" alt="Stripe" src="{{ 'stripe.png' | image_url }}" title="stripe">
+          </label>
+        </li>
+      {% endif %}
+
+      {% if current_site.configuration.enabled contains 'paypal' %}
+        <li class="paypal">
+          <label class="paypal" for="contribution_payment_method_paypal">
+            <input id="contribution_payment_method_paypal"{% if contribution.payment_method == 'paypal' %} checked{% endif %} name="payment_method" type="radio" value="paypal">
+            <img class="pull-down" alt="PayPal" src="{{ 'paypal.png' | image_url }}" title="paypal">
+          </label>
+        </li>
+      {% endif %}
+
+      {% if current_site.configuration.enabled contains 'bitpay' %}
+        <li class="bitpay">
+          <label class="bitpay" for="contribution_payment_method_bitpay">
+            <input id="contribution_payment_method_bitpay"{% if contribution.payment_method == 'bitpay' %} checked{% endif %} name="payment_method" type="radio" value="bitpay">
+            <img class="pull-down" alt="BitPay" src="{{ 'bitpay.png' | image_url }}" title="bitpay">
+          </label>
+        </li>
+      {% endif %}
+
+      {% if current_site.configuration.enabled contains 'dwolla' %}
+        <li class="dwolla">
+          <label class="dwolla" for="contribution_payment_method_dwolla">
+            <input id="contribution_payment_method_dwolla"{% if contribution.payment_method == 'dwolla' %} checked{% endif %} name="payment_method" type="radio" value="dwolla">
+            <img class="pull-down" alt="Dwolla" src="{{ 'dwolla.png' | image_url }}" title="dwolla">
+          </label>
+        </li>
+      {% endif %}
+
+      {% if current_site.configuration.enabled contains 'mangopay' %}
+        <li class="mangopay">
+          <label class="mangopay" for="contribution_payment_method_mangopay">
+            <input id="contribution_payment_method_mangopay"{% if contribution.payment_method == 'mangopay' %} checked{% endif %} name="payment_method" type="radio" value="mangopay">
+            <img class="pull-down" alt="mangopay" src="{{ 'mangopay.png' | image_url }}" title="mangopay">
+          </label>
+        </li>
+      {% endif %}
+
+      {% if current_site.configuration.enabled contains 'braintree' %}
+        <li class="braintree">
+          <label class="braintree" for="contribution_payment_method_braintree">
+            <input id="contribution_payment_method_braintree"{% if contribution.payment_method == 'braintree' %} checked{% endif %} name="payment_method" type="radio" value="braintree">
+            <img class="pull-down" alt="braintree" src="{{ 'braintree.png' | image_url }}" title="braintree">
+          </label>
+        </li>
+      {% endif %}
+
+      {% if current_site.configuration.enabled contains 'gocardless' %}
+        <li class="gocardless">
+          <label class="gocardless" for="contribution_payment_method_gocardless">
+            <input id="contribution_payment_method_gocardless"{% if contribution.payment_method == 'gocardless' %} checked{% endif %} name="payment_method" type="radio" value="gocardless">
+            <img class="pull-down" alt="gocardless" src="{{ 'gocardless.png' | image_url }}" title="gocardless">
+          </label>
+        </li>
+      {% endif %}
+
+      {% if current_site.configuration.enabled contains 'payfast' %}
+        <li class="payfast">
+          <label class="payfast" for="contribution_payment_method_payfast">
+            <input id="contribution_payment_method_payfast"{% if contribution.payment_method == 'payfast' %} checked{% endif %} name="payment_method" type="radio" value="payfast">
+            <img class="pull-down" alt="payfast" src="{{ 'payfast.png' | image_url }}" title="payfast">
+          </label>
+        </li>
+      {% endif %}
+
+      {% if current_site.configuration.enabled contains 'pagseguro' %}
+        <li class="pagseguro">
+          <label class="pagseguro" for="contribution_payment_method_pagseguro">
+            <input id="contribution_payment_method_pagseguro"{% if contribution.payment_method == 'pagseguro' %} checked{% endif %} name="payment_method" type="radio" value="pagseguro">
+            <img class="pull-down" alt="pagseguro" src="{{ 'pagseguro.png' | image_url }}" title="pagseguro">
+          </label>
+        </li>
+      {% endif %}
+
+      {% if current_site.configuration.enabled contains 'coinbase' %}
+        <li class="coinbase">
+          <label class="coinbase" for="contribution_payment_method_coinbase">
+            <input id="contribution_payment_method_coinbase"{% if contribution.payment_method == 'coinbase' %} checked{% endif %} name="payment_method" type="radio" value="coinbase">
+            <img class="pull-down" alt="coinbase" src="{{ 'coinbase.png' | image_url }}" title="coinbase">
+          </label>
+        </li>
+      {% endif %}
+
+      {% if current_site.configuration.enabled contains 'razorpay' %}
+        <li class="razorpay">
+          <label class="razorpay" for="contribution_payment_method_razorpay">
+            <input id="contribution_payment_method_razorpay"{% if contribution.payment_method == 'razorpay' %} checked{% endif %} name="payment_method" type="radio" value="razorpay">
+            <img class="pull-down" alt="razorpay" src="{{ 'razorpay.png' | image_url }}" title="razorpay">
+          </label>
+        </li>
+      {% endif %}
+
+    </ul>
+  {% endif %}
+  {% if contribution.errors.payment_method %}
+    <div class="field_error">
+      {{ contribution.errors.payment_method | join: ', ' }}
+    </div>
+  {% endif %}
+</div>
+<br>
+
+{% comment %} Custom fields {% endcomment %}
+{% assign form_type = 'contribution' %}
+{% assign model = contribution %}
+{% include 'site/fields' with current_site.contribution_fields %}
+
+<p>
+  <input id="accept" name="accept" type="checkbox" value="1"{% if contribution.accept %} checked{% endif %}>
+  <label for="accept">
+    {% assign termspage = current_site.termspage %}
+    {% if termspage %}
+      {{ 'contribution_new_i_accept' | t }}
+      <a href="{{ 'page_show' | path: termspage.link }}" target="_blank">
+        {{ 'contribution_new_the_terms' | t }}
+      </a>
+    {% else %}
+      {{ 'contribution_new_accept_terms_html' | t }}
+    {% endif %}
+  </label>
+
+  {% if contribution.errors.accept != blank %}
+    <div class="field_error">
+      {{ contribution.errors.accept | join: ', ' }}
+    </div>
+  {% endif %}
+</p>
+<p class="contribution-buttons">
+  <button class="btn btn-primary">
+    {{ 'contribution_new_checkout' | t }}
+  </button>
+  <a class="cancel" href="{{ 'campaign_show' | path: campaign.link }}">
+    {{ 'cancel' | t }}
+  </a>
+</p>

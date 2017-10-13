@@ -1,0 +1,29 @@
+{% comment %}New campaign contribution{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ campaign.name }}{% endtitle %}
+{% subtitle %}{{ 'contribution_contribute' | t }}{% if campaign.rewards != empty %}{{ 'contribution_pick_a_reward' | t }}{% endif %} {{ 'contribution_enjoy' | t }}{% endsubtitle %}
+{% body_class contribution %}
+
+<div id="new_contribution">
+  {% if current_site.configuration.live? == false %}
+    <div class="alert">{{ 'contribution_payment_live_reminder' | t }}</div>
+  {% endif %}
+
+  <div class="right grid_4 last">
+    {% include 'campaign/campaign_badge' %}
+  </div>
+  <div class="grid_8">
+    {{ 'contribution_new_intro_text' | t }}
+    <form accept-charset="utf-8" action="{{ 'contribution_create' | path: campaign.link }}" method="POST">
+      {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+      {% include 'contribution/form' %}
+    </form>
+  </div>
+</div>
+
+{% if request.xhr? %}
+  <script class="loadscript">
+    hq.setTitle('{{ title }}', '{{ subtitle }}');
+  </script>
+{% endif %}

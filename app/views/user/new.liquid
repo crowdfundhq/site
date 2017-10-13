@@ -1,0 +1,62 @@
+{% comment %}Create new user{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'user_new_title' | t }}{% endtitle %}
+
+{{ 'user_new_intro_text' | t }}
+<form accept-charset="utf-8" action="{{ 'user_create' | path }}" method="POST" onsubmit="hq.postDialog(this);return false">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <p>
+    <label for="name">{{ 'user_new_name' | t }}</label>
+    <br>
+    <input id="name" type="text" name="name" value="{{ user.name }}">
+    {% if user.errors.name != blank %}
+      <span class="field_error">{{ user.errors.name | join: ', ' }}</span>
+    {% endif %}
+  </p>
+  <p>
+    <label for="email">{{ 'email' | t }}</label>
+    <br>
+    <input id="email" type="text" name="email" value="{{ user.email }}" onblur="this.value=this.value.toLowerCase()">
+    {% if user.errors.email != blank %}
+      <span class="field_error">{{ user.errors.email | join: ', ' }}</span>
+    {% endif %}
+  </p>
+
+  {% comment %} Custom fields {% endcomment %}
+  {% assign form_type = 'user' %}
+  {% assign model = user %}
+  {% include 'site/fields' with current_site.user_fields %}
+
+  <p>
+    <label for="password">{{ 'user_new_password' | t }}</label>
+    <br>
+    <input id="password" type="password" name="password" autocomplete="off">
+    {% if user.errors.password != blank %}
+      <span class="field_error">{{ user.errors.password | join: ', ' }}</span>
+    {% endif %}
+  </p>
+  <p>
+    <label for="password_confirmation">{{ 'user_new_repeat_password' | t }}</label>
+    <br>
+    <input id="password_confirmation" type="password" name="password_confirmation" autocomplete="off">
+    {% if user.errors.password_confirmation != blank %}
+      <span class="field_error">{{ user.errors.password_confirmation | join: ', ' }}</span>
+    {% endif %}
+  </p>
+  <p>
+    <label>
+      {{ 'user_new_by_signing_up_accept' | t }}
+      {% assign termspage = current_site.termspage %}
+      {% if termspage %}
+        <a href="{{ 'page_show' | path: termspage.link }}" target="_blank">{{ 'user_new_the_terms' | t }}</a>
+      {% else %}
+        {{ 'user_new_the_terms' | t }}
+      {% endif %}
+    </label>
+  </p>
+  <p>
+    <button class="btn">{{ 'submit' | t }}</button>
+    <a class="cancel" onclick="hq.loadDialog(this);return false" href="{{ 'login_new' | path }}">{{ 'cancel' | t }}</a>
+  </p>
+</form>

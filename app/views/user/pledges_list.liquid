@@ -1,0 +1,9 @@
+{% comment %}List of pledges{% endcomment %}
+
+{% assign paginate = user.pledges | paginate %}
+{% assign pledges = paginate.entries %}
+
+{% for pledge in pledges %}
+  {% assign campaign = pledge.campaign %}
+  {% include 'pledge/pledge' with pledge %}
+{% endfor %}

@@ -1,0 +1,28 @@
+{% comment %}Included in campaign update form{% endcomment %}
+
+{% if current_site.editor == 'froala' %}
+  <textarea class="froala-editor" id="update_raw" name="raw">{{ update.raw }}</textarea>
+  <br>
+  <script class="loadscript">
+    var opt = $.FroalaEditor.DEFAULTS.options;
+    opt.language = '{{ current_site.lang | froala_lang }}';
+    opt.scrollableContainer = '#center';
+    opt.imageUploadURL = '/uploads/update';
+    $('.froala-editor').froalaEditor(opt);
+  </script>
+{% elsif current_site.editor == 'pagedown' %}
+  <div id="wmd-panel-area">
+    <div class="wmd-panel">
+      <div id="wmd-button-bar"></div>
+      <textarea class="wmd-input" id="wmd-input" name="raw">{{ update.raw }}</textarea>
+    </div>
+  </div>
+  <script class="loadscript">hq.setMarkdown();</script>
+{% else %}
+  {% if current_site.editor == 'wysihtml' %}
+    {% assign toolbar = 'toolbar2' %}
+    {% assign textarea = 'update_raw' %}
+    {% include 'site/wysihtml' %}
+  {% endif %}
+  <textarea id="update_raw" name="raw">{{ update.raw }}</textarea>
+{% endif %}

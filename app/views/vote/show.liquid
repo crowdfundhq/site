@@ -1,0 +1,22 @@
+{% comment %}Show registered vote{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'campaign_vote_already_registered' | t }} {{ campaign.name }}{% endtitle %}
+
+<div class="vote_intro">
+  <h5>{{ campaign.name }}</h5>
+  <div class="vote_description">{{ campaign.headline | newline_to_br }}</div>
+</div>
+
+<div class="vote_comment">
+  {{ vote.comment_html }}
+</div>
+<div class="vote_already_made">
+  {{ 'campaign_flash_vote_already_made' | t }}
+  <span class="vote_time">
+    {{ vote.created_at | date }}
+  </span>
+</div>
+<div class="center">
+  <a onclick="hq.closeDialog();return false" href="{{ 'campaign_show' | path: campaign.link }}">{{ 'cancel' | t }}</a>
+</div>

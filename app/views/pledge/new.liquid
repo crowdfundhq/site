@@ -1,0 +1,54 @@
+{% comment %}New commitment pledge{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'campaign_commitment_pledge_to_title' | t }} {{ campaign.name }}?{% endtitle %}
+
+<div class="commitment_intro">
+  <h5>{{ commitment.name }}</h5>
+  <div class="commitment_description">{{ commitment.description_html }}</div>
+</div>
+
+<form id="commitment_form" accept-charset="utf-8" action="{{ 'pledge_create' | path: campaign.link, commitment.id }}" method="POST" onsubmit="hq.postDialog(this);return false">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+
+  {% if current_user == null and current_site.login_to_contribute == false %}
+    <p>
+      <label for="commitment_name">{{ 'contribution_new_login_to_contribute_name' | t }}</label>
+      <br>
+      <input id="commitment_name" name="name" type="text"{% if pledge.name %} value="{{ pledge.name }}"{% endif %}>
+      {% if pledge.errors.name != blank %}
+        <span class="field_error">{{ pledge.errors.name | join: ', ' }}</span>
+      {% endif %}
+    </p>
+    <p>
+      <label for="commitment_email">{{ 'contribution_new_login_to_contribute_email' | t }}</label>
+      <br>
+      <input id="commitment_email" name="email" type="text"{% if pledge.email %} value="{{ pledge.email }}"{% endif %}>
+      {% if pledge.errors.email != blank %}
+        <span class="field_error">{{ pledge.errors.email | join: ', ' }}</span>
+      {% endif %}
+    </p>
+  {% endif %}
+
+  <p>
+    <label for="commitment_comment">{{ 'commitment_pledge_leave_comment' | t }}</label>
+    <br>
+    <textarea id="commitment_comment" name="comment">{{ pledge.comment }}</textarea>
+    {% if pledge.errors.comment != blank %}
+      <span class="field_error">{{ pledge.errors.comment | join: ', ' }}</span>
+    {% endif %}
+  </p>
+
+  <p>
+    <label>
+      <input type="checkbox" value="1" name="anonymous">
+      {{ 'campaign_pledge_anonymous' | t }}
+    </label>
+  </p>
+
+  <p>
+    <button class="btn">{{ 'campaign_commitment_pledge' | t }}</button>
+    <a class="cancel" onclick="hq.closeDialog();return false" href="{{ 'campaign_show' | path: campaign.link }}">{{ 'cancel' | t }}</a>
+  </p>
+
+</form>

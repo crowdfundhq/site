@@ -1,0 +1,21 @@
+{% comment %}Included in campaign show page{% endcomment %}
+
+{% if current_site.updates_in_about > 0 %}
+  {% assign updates = campaign.updates.published | order: created_at: '-1' | limit: current_site.updates_in_about | all %}
+{% endif %}
+
+{% if current_site.tab_position == 'above' %}
+  <div id="campaign_video">{{ campaign.video_embed_code }}</div>
+  {% include 'campaign/shares' %}
+{% endif %}
+
+<div id="campaign_about" class="fr-view">
+  {% if updates and updates.size > 0 %}
+    <ul id="updates_list" class="block-list">
+      {% for update in updates %}
+        {% include 'update/update' with update %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+  {{ campaign.about_html }}
+</div>

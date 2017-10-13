@@ -1,0 +1,19 @@
+GET#list:
+  desc: Vote list
+  path: /campaigns/:campaign_link/vote/list
+  requires: []
+
+GET#new:
+  desc: New vote
+  path: /campaigns/:campaign_link/vote/new
+  requires:
+    - user:
+      - login_to_contribute: true
+
+POST#create:
+  desc: Create vote
+  path: /campaigns/:campaign_link/votes
+  requires:
+    - user:
+      - login_to_contribute: true
+

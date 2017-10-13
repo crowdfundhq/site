@@ -1,0 +1,19 @@
+{% comment %}Thank you message after new contact submitted{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ 'contact_thanks_title' | t }}{% endtitle %}
+{% subtitle %}{{ 'contact_thanks_subtitle' | t }}{% endsubtitle %}
+
+<div id="contact_thanks">
+  <div class="well white">
+    <h2 class="no-border">
+      {{ 'contact_thanks_message_sent' | t }}
+    </h2>
+    <br>
+    <p>
+      <a class="btn" href="{{ 'contact_new' | path }}">
+        {{ 'contact_thanks_write_another_message' | t }}
+      </a>
+    </p>
+  </div>
+</div>

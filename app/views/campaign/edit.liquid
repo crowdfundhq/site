@@ -1,0 +1,10 @@
+{% comment %}Edit campaign{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'campaign_edit_title' | t }} "{{ campaign.name }}"{% endtitle %}
+
+<form accept-charset="utf-8" action="{{ 'campaign_update' | path: campaign.link }}" method="POST" onsubmit="hq.postDialog(this);return false">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="PUT">
+  {% include 'campaign/form' %}
+</form>

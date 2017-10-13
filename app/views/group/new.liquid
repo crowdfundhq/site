@@ -1,0 +1,9 @@
+{% comment %}Create new group{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'group_form_new' | t }}{% endtitle %}
+
+<form accept-charset="UTF-8" action="{{ 'group_create' | path }}" method="POST" onsubmit="hq.postDialog(this);return false">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  {% include 'group/form' %}
+</form>

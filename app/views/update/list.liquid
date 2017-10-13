@@ -1,0 +1,10 @@
+{% comment %}List of updates{% endcomment %}
+
+{% assign query = campaign.updates %}
+{% if current_user.id != campaign.user_id %}{% assign query = query.published %}{% endif %}
+{% assign paginate = query | order: created_at: '-1' | paginate %}
+{% assign updates = paginate.entries %}
+
+{% for update in updates %}
+  {% include 'update/update' with update %}
+{% endfor %}

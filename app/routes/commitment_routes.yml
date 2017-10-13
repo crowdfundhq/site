@@ -1,0 +1,47 @@
+GET#new:
+  desc: New commitment
+  path: /campaigns/:campaign_link/commitment/new
+  requires:
+    - user
+
+GET#show:
+  desc: Show commitment
+  path: /campaigns/:campaign_link/commitments/:commitment_id
+  requires: []
+
+POST#create:
+  desc: Create commitment
+  path: /campaigns/:campaign_link/commitments
+  requires:
+    - user
+
+GET#edit:
+  desc: Edit commitment
+  path: /campaigns/:campaign_link/commitments/:commitment_id/edit
+  requires:
+    - user
+
+PUT#update:
+  desc: Update commitment
+  path: /campaigns/:campaign_link/commitments/:commitment_id
+  requires:
+    - user
+
+GET#confirm:
+  desc: Confirm commitment
+  path: /campaigns/:campaign_link/commitments/:commitment_id/delete
+  requires:
+    - user
+
+DELETE#delete:
+  desc: Delete commitment
+  path: /campaigns/:campaign_link/commitments/:commitment_id
+  requires:
+    - user
+
+POST#toggle:
+  desc: Toggle commitment
+  path: /campaigns/:campaign_link/commitments/:commitment_id/toggle
+  requires:
+    - user
+

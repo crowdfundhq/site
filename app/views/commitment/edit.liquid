@@ -1,0 +1,10 @@
+{% comment %}Edit commitment{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'commitment_edit_title' | t }} {{ campaign.name }}{% endtitle %}
+
+<form accept-charset="utf-8" onsubmit="hq.postDialog(this);return false" action="{{ 'commitment_update' | path: campaign.link, commitment.id }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="PUT">
+  {% include 'commitment/form' %}
+</form>

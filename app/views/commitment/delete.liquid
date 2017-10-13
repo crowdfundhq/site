@@ -1,0 +1,12 @@
+{% comment %}Delete commitment{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'commitment_delete_title' | t }}{% endtitle %}
+
+<p class="hint">{{ commitment.name }}</p>
+<form accept-charset="utf-8" action="{{ 'commitment_delete' | path: campaign.link, commitment.id }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="DELETE">
+  <button class="btn btn-warning">{{ 'delete' | t }}</button>
+  <a class="cancel" href="{{ 'campaign_show_section' | path: campaign.link, 'commitments' }}" onclick="hq.closeDialog();return false">{{ 'cancel' | t }}</a>
+</form>

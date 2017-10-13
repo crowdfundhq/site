@@ -1,0 +1,14 @@
+{% comment %}PDF report layout{% endcomment %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ layout.title }}</title>
+    <style>{% include 'report/reset' %}</style>
+    <style>{% include 'report/styles' %}</style>
+  </head>
+  <body>
+    {{ content }}
+  </body>
+</html>

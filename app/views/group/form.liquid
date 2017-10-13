@@ -1,0 +1,125 @@
+{% comment %}Included in group edit and new{% endcomment %}
+
+<label>{{ 'group_form_image' | t }}</label>
+<div class="helper"></div>
+
+<div id="image_preview">
+  <div class="preview_frame group-preview">
+    {% if group.image != blank %}
+      <img src="{{ group.image | e }}" alt="">
+    {% endif %}
+  </div>
+</div>
+
+{% if group.errors.image != blank %}
+  <span class="field_error">
+    {{ group.errors.image | join: ', ' }}
+  </span>
+{% endif %}
+
+<div class="group-dropbox dropbox">
+  <a class="dropbox-clickable">{{ 'upload' | t }}</a>
+  <span class="dropbox-progress-percent"></span>
+  <span class="dropbox-error"></span>
+</div>
+
+<input id="group_image" name="image" type="hidden" value="{{ group.image | e }}">
+
+<div class="spacer"></div>
+<div>
+  <label for="name">{{ 'group_form_name' | t }}</label>
+  <div class="helper"></div>
+  <input id="name" name="name" type="text" value="{{ group.name }}">
+
+  {% if group.errors.name != blank %}
+    <span class="field_error">
+      {{ group.errors.name | join: ', ' }}
+    </span>
+  {% endif %}
+</div>
+<div class="spacer"></div>
+
+<div>
+  <label for="url">{{ 'group_form_url' | t }}</label>
+  <div class="helper"></div>
+  <input id="url" name="url" type="text" value="{{ group.url | e }}">
+  {% if group.errors.url != blank %}
+    <span class="field_error">
+      {{ group.errors.url | join: ', ' }}
+    </span>
+  {% endif %}
+</div>
+<div class="spacer"></div>
+
+<div>
+  <label for="bio">{{ 'group_form_bio' | t }}</label>
+  <div class="helper"></div>
+  <textarea id="bio" name="bio">{{ group.bio }}</textarea>
+  {% if group.errors.bio != blank %}
+    <span class="field_error">
+      {{ group.errors.bio | join: ', ' }}
+    </span>
+  {% endif %}
+</div>
+<div class="spacer"></div>
+
+<div class="buttons-bar">
+  <button class="btn">{{ 'save' | t }}</button>
+  <a href="" onclick="hq.closeDialog();return false">{{ 'cancel' | t }}</a>
+</div>
+
+<div class="clear"></div>
+
+<script class="loadscript">
+  var el = document.querySelector('.group-dropbox');
+  var link = el.querySelector('.dropbox-clickable');
+  var meter = el.querySelector('.dropbox-progress-percent');
+  var error = el.querySelector('.dropbox-error');
+
+  var preview = document.querySelector('.group-preview');
+  var input = document.querySelector('#group_image');
+
+  var dz = new Dropzone(el, {
+    url: '/uploads/groups',
+    clickable: link,
+    previewsContainer: false,
+    paramName: 'datafile',
+    acceptedFiles: 'image/*',
+    maxFiles: 1,
+    maxFilesize: 20,
+    dictInvalidFile: "{{ 'upload_invalid_images_only' | t }}",
+    dictFileTooBig: "{{ 'upload_max_filesize' | t }} 20 MB",
+    dictResponseError: "{{ 'upload_connection_error' | t }}"
+  });
+
+  // Init
+  link.addEventListener('click', function(){
+    meter.textContent = '';
+    error.textContent = '';
+  });
+
+  // Update the total progress bar
+  dz.on('totaluploadprogress', function(progress) {
+    if(dz.files.length > 0) {
+      progress = parseInt(progress)
+      meter.textContent = progress + '%';
+    }
+  });
+
+  // Hide the total progress bar when nothing's uploading anymore
+  dz.on('queuecomplete', function() {
+    dz.removeAllFiles();
+    meter.textContent = '';
+  });
+
+  dz.on('success', function(file, data) {
+    data = JSON.parse(data);
+    preview.innerHTML = '<img src="' + encodeURI(data.url) + '" alt="">';
+    input.value = encodeURI(data.url);
+  });
+
+  dz.on('error', function(file, message) {
+    meter.textContent = '';
+    error.textContent = message;
+  });
+</script>

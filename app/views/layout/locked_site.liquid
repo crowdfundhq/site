@@ -1,0 +1,48 @@
+{% comment %}Layout for locked sites{% endcomment %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    {% if current_site.disable_responsive != true %}<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">{% endif %}
+
+    {% include 'layout/meta' with layout.meta %}
+
+    <title>{% if layout.title != blank %}{{ layout.title }}{% else %}{{ current_site.name }}{% endif %}{% if current_site.title != blank %} {{ current_site.title_separator }} {{ current_site.title | h }}{% endif %}</title>
+
+    {% include 'layout/head' %}
+
+    {{ 'bundle.css' | style_tag }}
+    {{ 'icons.css' | style_tag }}
+
+    {% if current_site.theme != 'base' %}
+      {% capture theme_path %}themes/{{ current_site.theme }}.css{% endcapture %}
+      {% if current_site.theme_neue %}{{ 'themes/neue.css' | style_tag }}{% endif %}
+      {{ theme_path | style_tag }}
+    {% endif %}
+
+    {% if current_site.favicon != blank %}
+      <link href="{{ current_site.favicon }}" rel="shortcut icon">
+    {% endif %}
+
+    {% include 'layout/libraries' %}
+
+    <style>{% include 'layout/styles' %}</style>
+  </head>
+  <body class="locked dialog">
+    <div id="dialog">
+      <div id="dialog_header">
+        <h4>{% if layout.title != blank %}{{ layout.title }}{% else %}&nbsp;{% endif %}</h4>
+      </div>
+      <div id="dialog_flash">
+        {% if flash.error %}
+          <div id="dialog_error">{{ flash.error }}</div>
+        {% endif %}
+        {% if flash.info %}
+          <div id="dialog_info">{{ flash.info }}</div>
+        {% endif %}
+      </div>
+      <div id="dialog_content">{{ content }}</div>
+    </div>
+  </body>
+</html>

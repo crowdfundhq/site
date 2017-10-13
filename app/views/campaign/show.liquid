@@ -1,0 +1,96 @@
+{% comment %}Show campaign /campaign/campaign_link{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ campaign.name }}{% endtitle %}
+{% tagline %}{{ campaign.name }}{% endtagline %}
+{% subtitle %}{{ 'campaign_show_subtitle' | t }} <a href="{{ 'user_show' | path: campaign.user.link }}">{{ campaign.user.name }}</a>{% endsubtitle %}
+{% body_class campaign %}
+{% meta campaign %}
+{% assign show = params.section | h %}
+{% assign list = 'campaign,contributions,rewards,commitments,votes,stats,files' | split: ',' %}
+{% unless list contains show %}{% assign show = 'campaign' %}{% endunless %}
+
+{% if current_user and current_user.id == campaign.user.id %}
+  {% if campaign.editable? %}
+    <div class="campaign_action">
+      {% if campaign.submitted == false %}
+        <a class="btn" href="{{ 'campaign_show_submit' | path: campaign.link }}" onclick="hq.loadDialog(this);return false">{{ 'campaign_submit_title' | t }}</a>
+      {% else %}
+        <div class="clear" style="height:0.5em"></div>
+      {% endif %}
+
+      {% unless campaign.voting? %}
+        {% if campaign.wepay_payment_authorized? == false %}
+          <a class="btn" href="{{ 'gateway_authorize_campaign' | path: campaign.link, 'wepay' }}">{{ 'campaign_contributions_wepay_adaptive' | t }}</a>
+        {% endif %}
+
+        {% if campaign.stripe_payment_authorized? == false %}
+          <a class="btn" href="{{ 'gateway_authorize_campaign' | path: campaign.link, 'stripe' }}">{{ 'campaign_contributions_stripe_adaptive' | t }}</a>
+        {% endif %}
+
+        {% if campaign.dwolla_payment_authorized? == false %}
+          <a class="btn" href="{{ 'gateway_authorize_campaign' | path: campaign.link, 'dwolla' }}">{{ 'campaign_contributions_dwolla_adaptive' | t }}</a>
+        {% endif %}
+
+        {% if campaign.mangopay_payment_authorized? == false %}
+          <a class="btn" onclick="hq.loadDialog(this);return false" href="{{ 'gateway_authorize_campaign' | path: campaign.link, 'mangopay' }}">{{ 'campaign_contributions_mangopay_adaptive' | t }}</a>
+        {% endif %}
+      {% endunless %}
+      <a class="btn" onclick="hq.loadDialog(this);return false" href="{{ 'campaign_edit' | path: campaign.link }}">{{ 'edit' | t }}</a>
+      <a class="btn btn-warning" onclick="hq.loadDialog(this);return false" href="{{ 'campaign_confirm' | path: campaign.link }}">{{ 'delete' | t }}</a>
+    </div>
+  {% endif %}
+
+  <ul id="campaign_dash" class="nav nav-pills">
+    <li>
+      <a{% if show == null or show == 'campaign' %} class="active"{% endif %} href="{{ 'campaign_show' | path: campaign.link }}">
+        {{ 'campaign_contributions_view_campaign' | t }}
+      </a>
+    </li>
+
+    {% if campaign.voting? %}
+      <li>
+        <a{% if show == 'votes' %} class="active"{% endif %} href="{{ 'campaign_show_section' | path: campaign.link, 'votes' }}">
+          {{ 'campaign_contributions_view_votes' | t }}
+        </a>
+      </li>
+    {% else %}
+      <li>
+        <a{% if show == 'contributions' %} class="active"{% endif %} href="{{ 'campaign_show_section' | path: campaign.link, 'contributions' }}">
+          {{ 'campaign_contributions_view_contribution' | t }}
+        </a>
+      </li>
+      {% if current_site.rewards_enabled %}
+        <li>
+          <a{% if show == 'rewards' %} class="active"{% endif %} href="{{ 'campaign_show_section' | path: campaign.link, 'rewards' }}">
+            {{ 'campaign_contributions_view_rewards' | t }}
+          </a>
+        </li>
+      {% endif %}
+    {% endif %}
+
+    {% if current_site.commitments_enabled %}
+      <li>
+        <a{% if show == 'commitments' %} class="active"{% endif %} href="{{ 'campaign_show_section' | path: campaign.link, 'commitments' }}">
+          {{ 'campaign_contributions_view_commitments' | t }}
+        </a>
+      </li>
+    {% endif %}
+
+    <li>
+      <a{% if show == 'stats' %} class="active"{% endif %} href="{{ 'campaign_show_section' | path: campaign.link, 'stats' }}">
+        {{ 'campaign_contributions_stats' | t }}
+      </a>
+    </li>
+
+    <li>
+      <a{% if show == 'files' %} class="active"{% endif %} href="{{ 'campaign_show_section' | path: campaign.link, 'files' }}">
+        {{ 'campaign_contributions_files' | t }}
+      </a>
+    </li>
+  </ul>
+  <div class="clear"></div>
+{% endif %}
+
+{% capture template %}campaign/campaign_{{ show }}{% endcapture %}
+{% include template %}

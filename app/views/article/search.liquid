@@ -1,0 +1,40 @@
+{% comment %}Search for blog articles{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ 'blog_title' | t }}{% endtitle %}
+{% subtitle %}{% if params.q != blank %}{{ 'article_search_for' | t }} "{{ params.q | h }}"{% else %}{{ 'blog_subtitle' | t }}{% endif %}{% endsubtitle %}
+{% body_class blog %}
+
+{% include 'article/blog_bar' %}
+
+<div class="grid_8">
+  <a href="{{ 'article_blog' | path }}">
+    <i class="icon-chevron-left icon"></i>
+    {{ 'article_return_blog' | t }}
+  </a>
+  {% if articles != empty %}
+    {% for article in articles limit: 10 %}
+      <div class="well white box-shadowed">
+        {% include 'article/article' with article %}
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="empty-article-search">
+      <h2>{{ 'article_not_found' | t }}</h2>
+      <p>{{ 'article_empty_search' | t }} "{{ params.q | h }}".</p>
+    </div>
+  {% endif %}
+</div>
+
+<div class="grid_4 last">
+  {% include 'article/sidebar' %}
+
+  <h3>{{ 'article_search_results' | t }} ({{ articles.size }})</h3>
+  {% for article in articles %}
+    <div class="feed">
+      <a href="{{ 'article_show' | path: article.link | query: q: params.q }}">
+        <span class="content">{{ article.title }}</span>
+      </a>
+    </div>
+  {% endfor %}
+</div>

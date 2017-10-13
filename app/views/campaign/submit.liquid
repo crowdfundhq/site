@@ -1,0 +1,40 @@
+{% comment %}Submit campaign{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'campaign_submit_title' | t }} "{{ campaign.name }}"?{% endtitle %}
+
+<div class="campaign-submit-warning">{{ 'campaign_submit_warning' | t }}</div>
+{% unless campaign.voting? %}
+  {% if current_site.rewards_enabled and campaign.rewards.count < 1 %}
+    <div class="campaign-submit-alert alert">{{ 'campaign_submit_no_rewards' | t }}</div>
+  {% endif %}
+{% endunless %}
+
+<form id="campaign-submit-form" accept-charset="utf-8" onsubmit="hq.postDialog(this);return false" action="{{ 'campaign_submit' | path: campaign.link }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <p class="campaign-submit-form-fields">
+    <input id="accept" name="accept" type="checkbox" value="1">
+    <label for="accept">
+      {% assign termspage = current_site.termspage %}
+      {% if termspage %}
+        {{ 'campaign_submit_accept_terms' | t }}
+        <a href="{{ 'page_show' | path: termspage.link }}" target="_blank">
+          {{ 'campaign_submit_the_terms_link' | t }}
+        </a>
+      {% else %}
+        {{ 'campaign_submit_accept_terms_html' | t }}
+      {% endif %}
+    </label>
+    {% if campaign.errors.headline != blank %}
+      <div class="field_error">
+        {{ campaign.errors.headline | join: ', ' }}
+      </div>
+    {% endif %}
+  </p>
+  <p class="campaign-submit-form-button">
+    <button class="btn">{{ 'submit' | t }}</button>
+    <a class="cancel" onclick="hq.closeDialog();return false" href="{{ 'campaign_show' | path: campaign.link }}">
+      {{ 'cancel' | t }}
+    </a>
+  </p>
+</form>

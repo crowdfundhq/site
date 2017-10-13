@@ -1,0 +1,44 @@
+{% comment %}Included in default layout{% endcomment %}
+
+<h1 class="logo">
+{% if current_site.logo != blank %}
+  <a href="{{ 'campaign_index' | path }}">
+    <img src="{{ current_site.logo | e }}" alt="{{ current_site.name }}">
+  </a>
+{% else %}
+  <a href="{{ 'campaign_index' | path }}">{{ current_site.name }}</a>
+{% endif %}
+</h1>
+
+<nav>
+  <ul class="clearfix">
+    <li class="discover main-link">
+      <a href="{{ 'campaign_index' | path }}">
+        <span class="tall green">
+          {{ 'layout_site_discover' | t }}
+        </span>
+        <span class="menu-note">
+          {{ 'layout_site_awesome_campaigns' | t }}
+        </span>
+      </a>
+    </li>
+    {% if current_site.mode != 'select' or current_user.author == true %}
+      <li class="new-campaign main-link">
+        <a class="new-campaign" href="{{ 'campaign_new' | path }}">
+          <span class="tall blue">
+            {{ 'layout_site_create' | t }}
+          </span>
+          <span class="menu-note">
+            {{ 'layout_site_your_campaign' | t }}
+          </span>
+        </a>
+      </li>
+    {% endif %}
+    <li class="search">
+      <div class="icon-search"></div>
+      <form accept-charset="utf-8" action="{{ 'campaign_search' | path }}" method="GET" onsubmit="var a=this.querySelector('input');if(a.value.trim().length < 1){a.focus();return false;}">
+        <input type="text" name="q" placeholder="{{ 'search' | t }}" value="{{ params.q | h }}">
+      </form>
+    </li>
+  </ul>
+</nav>

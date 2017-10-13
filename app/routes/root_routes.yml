@@ -1,0 +1,15 @@
+GET#sitemap:
+  desc: Sitemap root
+  path: /sitemap.xml
+  requires: []
+
+GET#language:
+  desc: Language root
+  path: /language/:lang
+  requires: []
+
+GET#liquid_test:
+  desc: Liquid test root
+  path: /test/liquid
+  requires: []
+

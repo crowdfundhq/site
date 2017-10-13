@@ -1,0 +1,125 @@
+{% comment %}Confirm contribution{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ 'contribution_confirmation_title' | t }}{% endtitle %}
+{% subtitle %}{{ 'contribution_confirmation_subtitle' | t }}{% endsubtitle %}
+
+<div class="contribution-confirmation">
+  <div class="grid_8">
+    <div class="contribution-confirmation-intro">{{ 'contribution_confirmation_intro_text' | t }}</div>
+    <form accept-charset="utf-8" action="{{ 'contribution_contribution_confirm' | path: campaign.link, contribution.id }}" method="POST">
+      {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+
+      <div class="contribution-confirmation-intro">
+        {% if contribution.contributor_pays_fees %}
+          {{ 'contribution_confirmation_contributor_pays_fees' | t }}
+        {% else %}
+          {{ 'contribution_confirmation_campaign_pays_fees' | t }}
+        {% endif %}
+      </div>
+
+      <div class="contribution-confirmation-amount space-top">
+        <div class="contribution-confirmation-label">
+          {{ 'contribution_confirmation_amount' | t }}
+        </div>
+        <div class="contribution-confirmation-field">
+          {{ contribution.amount | to_currency }}
+        </div>
+      </div>
+
+      <div class="contribution-confirmation-payment-method space-top">
+        <div class="contribution-confirmation-label">
+          {{ 'contribution_confirmation_payment_method' | t }}
+        </div>
+        <div class="contribution-confirmation-field">
+          {{ contribution.payment_method | capitalize }}
+        </div>
+      </div>
+
+      {% assign cost = contribution.cost %}
+      {% if cost and current_site.costs_enabled %}
+        <div class="contribution-confirmation-costs space-top">
+          <div class="contribution-confirmation-label">
+            {{ 'contribution_confirmation_additional_costs' | t }}
+          </div>
+          <div class="contribution-confirmation-field">
+            {% if cost.percentage %}{{ cost.amount | to_decimal }}%{% else %}{{ cost.amount | to_currency }}{% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="contribution-confirmation-platform-fee space-top">
+        <div class="contribution-confirmation-label">
+          {{ 'contribution_confirmation_platform_fee' | t }}
+        </div>
+        <div class="contribution-confirmation-field">
+          {{ current_site.platform_fee | to_decimal }}%
+        </div>
+      </div>
+
+      {% assign fee = contribution.fee %}
+      {% if fee and current_site.fees_enabled %}
+        <div class="contribution-confirmation-fees space-top">
+          <div class="contribution-confirmation-label">
+            {{ 'contribution_confirmation_extra_fees' | t }}
+          </div>
+          <div class="contribution-confirmation-field">
+            {{ fee.percentage | to_decimal }}%
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="contribution-confirmation-payment-fee space-top">
+        <div class="contribution-confirmation-label">
+          {{ 'contribution_confirmation_payment_fee' | t }}
+        </div>
+        {% assign gateway_fee = current_site.gateway_fees[contribution.payment_method] %}
+        <div class="contribution-confirmation-field">
+          {{ gateway_fee.percentage | to_decimal }}% + {{ gateway_fee.static | to_currency }}
+        </div>
+      </div>
+
+      <div class="contribution-confirmation-campaign-receives space-top">
+        <div class="contribution-confirmation-label">
+          {{ 'contribution_confirmation_campaign_receives' | t }}
+        </div>
+        <div class="contribution-confirmation-field">
+          {{ contribution.campaign_receives | to_currency }}
+        </div>
+      </div>
+
+      <div class="contribution-confirmation-total space-top">
+        <div class="contribution-confirmation-label">
+          {{ 'contribution_confirmation_total' | t }}
+        </div>
+        <div class="contribution-confirmation-field">
+          {{ contribution.total | to_currency }}
+        </div>
+      </div>
+
+      {% if contribution.reward %}
+        <div class="contribution-confirmation-rewards space-top">
+          <div class="contribution-confirmation-label">
+            {{ 'contribution_confirmation_rewards' | t }}
+          </div>
+          <div class="contribution-confirmation-field">
+            {{ contribution.reward.description_html }}
+          </div>
+        </div>
+      {% endif %}
+
+      <p class="contribution-confirm-buttons">
+        <button class="btn btn-primary">
+          {{ 'contribution_confirmation_button' | t }}
+        </button>
+        <a class="cancel" href="{{ 'contribution_edit' | path: campaign.link, contribution.id }}">
+          {{ 'cancel' | t }}
+        </a>
+      </p>
+    </form>
+  </div>
+  <div class="grid_4 last">
+    {% include 'campaign/campaign_badge' %}
+  </div>
+  <div class="clear"></div>
+</div>

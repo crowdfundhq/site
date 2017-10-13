@@ -1,0 +1,31 @@
+{% comment %}Payment setup for Razorpay{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  var id = null;
+  var options = {
+    'key': '{{ current_site.configuration.razorpay_api_key }}',
+    'amount': '{{ contribution.total | times: 100 | round }}',
+    'name': '{{ campaign.name }}',
+    'description': '{{ contribution.description }}',
+    'handler': function (response){
+      id = response.razorpay_payment_id;
+      window.location = '/campaigns/{{ campaign.link }}/contributions/{{ contribution.id }}/success?transaction_id=' + id;
+    },
+    'modal': {
+      'ondismiss': function(e){
+
+        if(id == null) {
+          window.history.back();
+        } else {
+          window.location = '/campaigns/{{ campaign.link }}/contributions/{{ contribution.id }}/success?transaction_id=' + id;
+        }
+      }
+    }
+  };
+  var rzp1 = new Razorpay(options);
+  rzp1.open();
+
+</script>

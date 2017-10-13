@@ -1,0 +1,19 @@
+GET#list:
+  desc: Pledge list
+  path: /campaigns/:campaign_link/pledge/list
+  requires: []
+
+GET#new:
+  desc: New pledge
+  path: /campaigns/:campaign_link/pledges/:commitment_id/new
+  requires:
+    - user:
+      - login_to_contribute: true
+
+POST#create:
+  desc: Create pledge
+  path: /campaigns/:campaign_link/pledges/:commitment_id
+  requires:
+    - user:
+      - login_to_contribute: true
+

@@ -1,0 +1,12 @@
+{% comment %}Delete user{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'user_delete_title' | t }} {{ user.name }}?{% endtitle %}
+
+<p>{{ 'user_delete_info' | t }}</p>
+<form accept-charset="utf-8" action="{{ 'user_delete' | path }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="DELETE">
+  <button class="btn btn-warning">{{ 'delete' | t }}</button>
+  <a class="cancel" href="{{ 'user_edit' | path }}" onclick="hq.loadDialog(this);return false">{{ 'cancel' | t }}</a>
+</form>

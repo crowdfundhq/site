@@ -1,0 +1,28 @@
+{% comment %}Included in article form{% endcomment %}
+
+{% if current_site.editor == 'froala' %}
+  <textarea class="froala-editor form-input-tall" id="article_content" name="content">{{ article.content }}</textarea>
+  <br>
+  <script class="loadscript">
+    var opt = $.FroalaEditor.DEFAULTS.options;
+    opt.language = '{{ current_site.lang | froala_lang }}';
+    opt.scrollableContainer = '#center';
+    opt.imageUploadURL = '/uploads/article';
+    $('.froala-editor').froalaEditor(opt);
+  </script>
+{% elsif current_site.editor == 'pagedown' %}
+  <div id="wmd-panel-area">
+    <div class="wmd-panel">
+      <div id="wmd-button-bar-1"></div>
+      <textarea class="wmd-input form-input-tall" id="wmd-input-1" name="content">{{ article.content }}</textarea>
+    </div>
+  </div>
+  <script class="loadscript">hq.setMarkdown('-1');</script>
+{% else %}
+  {% if current_site.editor == 'wysihtml' %}
+    {% assign toolbar = 'toolbar' %}
+    {% assign textarea = 'article_content' %}
+    {% include 'site/wysihtml' %}
+  {% endif %}
+  <textarea id="article_content" class="form-input-tall" name="content">{{ article.content }}</textarea>
+{% endif %}

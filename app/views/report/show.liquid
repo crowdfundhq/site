@@ -1,0 +1,25 @@
+{% comment %}Show campaign report{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ 'campaign_report_show_title' | t }}{% endtitle %}
+{% subtitle %}{{ 'campaign_report_show_subtitle' | t }}{% endsubtitle %}
+<div class="campaign-report-show-view">
+  <style scoped>{% include 'report/styles' %}</style>
+  <div class="grid_8">
+    <div class="campaign-report-links right">
+      <span class="campaign-report-format">{{ 'campaign_report_format' | t }}</span>
+      <a href="{{ 'report_show_pdf' | path: campaign.link }}" target="_blank" title="PDF">PDF</a>
+      <a href="{{ 'report_show_csv' | path: campaign.link }}" target="_blank" title="CSV">CSV</a>
+      <a href="{{ 'report_show_json' | path: campaign.link }}" target="_blank" title="JSON">JSON</a>
+    </div>
+    <div class="campaign-report-back-link">
+      <a href="{{ 'campaign_show_section' | path: campaign.link, 'stats' }}">
+        <i class="icon-chevron-left"></i> {{ 'campaign_report_back_link' | t }}
+      </a>
+    </div>
+    {% include 'report/report' %}
+  </div>
+  <div class="grid_4 last">
+    {% include 'campaign/campaign_badge' %}
+  </div>
+</div>

@@ -1,0 +1,36 @@
+{% comment %}Included in default layout{% endcomment %}
+
+<div class="mobile_header">
+  <div class="panel">
+    <span onclick="Mob.toggleNavigation()" class="nav_toggle mobile_item">
+      <i class="icon-reorder"></i>
+    </span>
+    <a href="{{ 'campaign_index' | path }}" class="logotype mobile_item"><img alt="logo" class="mobile_logo" src=""></a>
+    <span onclick="Mob.toggleSearch()" class="search_toggle mobile_item">
+      <i class="icon-search"></i>
+    </span>
+  </div>
+  <div class="mobile_search">
+    <form accept-charset="utf-8" action="{{ 'campaign_search' | path }}" method="GET" onsubmit="var a=this.querySelector('input');if(a.value.trim().length < 1){a.focus();return false;}">
+      <input name="q" type="text" placeholder="{{ 'search' | t }}">
+    </form>
+    <span onclick="Mob.toggleSearch()" class="toggle_search mobile_item">
+      <i class="icon-remove-sign"></i>
+    </span>
+  </div>
+</div>
+
+<div class="mobile_navigation">
+  <div class="top_bar">
+    <h3>{{ 'menu' | t }}</h3>
+    <button onclick="Mob.toggleNavigation()" class="btn nav_toggle">{{ 'close' | t }}</button>
+  </div>
+  <div class="mobile_wrap">
+    <div class="mobile_user mobile_block"></div>
+    <div class="navigation mobile_block"></div>
+    <div class="lang mobile_block"></div>
+  </div>
+  <div class="side_hide" onclick="Mob.toggleNavigation()"></div>
+  <br>
+</div>
+<div class="search_overlay" onclick="Mob.toggleSearch()"></div>

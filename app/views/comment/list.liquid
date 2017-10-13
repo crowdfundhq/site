@@ -1,0 +1,8 @@
+{% comment %}List of comments{% endcomment %}
+
+{% assign paginate = campaign.comments | order: created_at: '-1' | paginate %}
+{% assign comments = paginate.entries %}
+
+{% for comment in comments %}
+  {% include 'comment/comment' with comment %}
+{% endfor %}

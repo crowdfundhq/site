@@ -1,0 +1,111 @@
+{% comment %}Campaign main content included in campaign show{% endcomment %}
+
+<div id="campaign_icons">
+  <div class="campaign-location">
+    {% if campaign.show_location? and campaign.has_location? %}
+      <a href="{{ 'campaign_search' | path | query: q: campaign.location, location: true }}">
+        <div class="icon icon-location"></div>
+        {{ campaign.location }}
+      </a>
+    {% endif %}
+  </div>
+
+  <div class="campaign-category">
+    {% if campaign.category_link and campaign.category_name != blank %}
+      <a href="{{ 'campaign_discover' | path: campaign.category_link }}">
+        <div class="icon icon-tag"></div>
+        {{ campaign.category_name }}
+      </a>
+    {% else %}
+      <div class="icon icon-tag"></div>
+      {{ 'campaign_show_category_not_set' | t }}
+    {% endif %}
+  </div>
+</div>
+
+<div id="campaign_sidebar" class="right grid_4 last">
+  {% include 'campaign/sidebar' %}
+</div>
+
+<div id="campaign_content" class="grid_8" data-video_image="{{ campaign.video_image | e }}">
+  {% if current_site.tab_position != 'above' %}
+    <div id="campaign_video">{{ campaign.video_embed_code }}</div>
+    {% include 'campaign/shares' %}
+  {% endif %}
+
+  {% if current_site.tabs_visible.size > 0 %}
+    <ul id="campaign_nav" class="nav nav-tabs">
+      {% if current_site.tabs_visible contains 'about' %}
+        <li>
+          <a id="about_view" onclick="hq.fetchTab(this.href);return false"{% if params.tab == blank or params.tab == 'about' %} class="selected"{% endif %} href="{{ 'campaign_tab' | path: campaign.link, 'about' }}">
+            {{ 'about' | t }}
+          </a>
+        </li>
+      {% endif %}
+
+      {% if current_site.tabs_visible contains 'updates' %}
+        <li>
+          <a id="updates_view" onclick="hq.fetchTab(this.href);return false"{% if params.tab == 'updates' %} class="selected"{% endif %} href="{{ 'campaign_tab' | path: campaign.link, 'updates' }}">
+            {{ 'updates' | t }}
+            {% assign query = campaign.updates %}
+            {% if current_user.id != campaign.user_id %}{% assign query = query.published %}{% endif %}
+            <span class="count">{{ query.count }}</span>
+          </a>
+        </li>
+      {% endif %}
+
+      {% if current_site.tabs_visible contains 'comments' %}
+        <li>
+          <a id="comments_view" onclick="hq.fetchTab(this.href);return false"{% if params.tab == 'comments' %} class="selected"{% endif %} href="{{ 'campaign_tab' | path: campaign.link, 'comments' }}">
+            {{ 'comments' | t }}
+            <span class="count">{{ campaign.comments.count }}</span>
+          </a>
+        </li>
+      {% endif %}
+
+      {% if current_site.hide_campaign_contributions == false %}
+        {% if campaign.voting? or campaign.votes.count > 0 %}
+          {% if current_site.tabs_visible contains 'votes' %}
+            <li>
+              <a id="votes_view" onclick="hq.fetchTab(this.href);return false"{% if params.tab == 'votes' %} class="selected"{% endif %} href="{{ 'campaign_tab' | path: campaign.link, 'votes' }}">
+                {{ 'votes' | t }}
+                <span class="count">{{ campaign.votes.count }}</span>
+              </a>
+            </li>
+          {% endif %}
+        {% else %}
+
+          {% if current_site.tabs_visible contains 'contributions' %}
+            <li>
+              <a id="contributions_view" onclick="hq.fetchTab(this.href);return false"{% if params.tab == 'contributions' %} class="selected"{% endif %} href="{{ 'campaign_tab' | path: campaign.link, 'contributions' }}">
+                {{ 'contributions' | t }}
+                <span class="count">{{ campaign.contributions.active.count }}</span>
+              </a>
+            </li>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+
+      {% if current_site.tabs_visible contains 'pledges' and current_site.commitments_enabled %}
+        <li>
+          <a id="pledges_view" onclick="hq.fetchTab(this.href);return false"{% if params.tab == 'pledges' %} class="selected"{% endif %} href="{{ 'campaign_tab' | path: campaign.link, 'pledges' }}">
+            {{ 'pledges' | t }}
+            <span class="count">{{ campaign.pledges.count }}</span>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+    <div id="campaign_data" class="well white">
+      {% assign tab = params.tab | h %}
+      {% unless current_site.tabs_visible contains tab %}{% assign tab = current_site.tabs_visible | first %}{% endunless %}
+      {% capture path %}campaign/{{ tab }}{% endcapture %}
+      {% include path %}
+    </div>
+  {% endif %}
+</div>
+
+{% if campaign.approved %}
+  <script class="loadscript">
+    if(typeof hq !== 'undefined'){ hq.stats('{{ campaign.link }}');} else { document.addEventListener('DOMContentLoaded', function(){hq.stats('{{ campaign.link }}')});}
+  </script>
+{% endif %}

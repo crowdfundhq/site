@@ -1,0 +1,50 @@
+{% comment %}Campaign commitments{% endcomment %}
+
+{% assign paginate = campaign.commitments | order: created_at: '-1' | paginate %}
+{% assign commitments = paginate.entries %}
+{% assign pledges = campaign.pledges.all %}
+
+<div class="grid_8">
+  {% if pledges != empty %}
+    <ul id="commitment-list" class="block-list no-style">
+      {% for pledge in pledges %}
+        {% include 'pledge/pledge' with pledge %}
+      {% endfor %}
+    </ul>
+    {% if paginate and paginate.total_pages > 1 %}
+      <div class="paginator campaign-commitments-paginate">{{ paginate.default }}</div>
+    {% endif %}
+  {% else %}
+    <p>
+      {{ 'user_contributions_no_pledge_to_any_campaign' | t }}
+    </p>
+  {% endif %}
+</div>
+
+<div class="grid_4 last" id="add_rewards">
+  <div class="right">
+    <span class="hint">{{ commitments.size }}/{{ current_site.max_commitments }}</span>
+    {% if current_site.max_commitments > commitments.size %}
+      <a class="btn" onclick="hq.loadDialog(this);return false" href="{{ 'commitment_new' | path: campaign.link }}">{{ 'campaign_show_add_commitment' | t }}</a>
+    {% else %}
+      <a class="btn disabled" onclick="return false" href="">{{ 'campaign_show_add_commitment' | t }}</a>
+    {% endif %}
+  </div>
+
+  <div class="clear" style="height:20px"></div>
+  <div id="commitments">
+    {% if commitments != empty %}
+      <h4 class="sidebar-title">
+        {{ 'campaign_commitment_section_title' | t }}
+      </h4>
+      <ul>
+        {% assign edit = true %}
+        {% for commitment in commitments %}
+          <li{% if campaign.expired? %} class="expired"{% endif %}>
+            {% include 'campaign/commitment' with commitment %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</div>

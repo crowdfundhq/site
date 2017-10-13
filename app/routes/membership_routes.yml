@@ -1,0 +1,40 @@
+GET#new:
+  desc: New membership
+  path: /groups/:group_link/membership/new
+  requires:
+    - groups
+    - groups_joinable
+    - user
+
+POST#create:
+  desc: Create membership
+  path: /groups/:group_link/memberships
+  requires:
+    - groups
+    - groups_joinable
+    - user
+
+PUT#update:
+  desc: Update membership
+  path: /groups/:group_link/memberships/:id
+  requires:
+    - groups
+    - groups_joinable
+    - user
+
+GET#confirm:
+  desc: Confirm membership
+  path: /groups/:group_link/membership/delete
+  requires:
+    - groups
+    - groups_joinable
+    - user
+
+DELETE#delete:
+  desc: Delete membership
+  path: /groups/:group_link/memberships
+  requires:
+    - groups
+    - groups_joinable
+    - user
+

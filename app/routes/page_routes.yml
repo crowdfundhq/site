@@ -1,0 +1,5 @@
+GET#show:
+  desc: Show page
+  path: /pages/:page_link
+  requires: []
+

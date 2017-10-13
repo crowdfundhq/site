@@ -1,0 +1,159 @@
+{% comment %}Included in campaign, article and update editors{% endcomment %}
+
+<script>var {{ toolbar }} = null;</script>
+
+<div id="{{ toolbar }}" class="wysiwyg-editor-toolbar" style="display:none">
+  <ul class="commands">
+    <li data-wysihtml5-command="formatInline" data-wysihtml5-command-value="strong">
+      <i class="icon icon-bold"></i>
+    </li>
+    <li data-wysihtml5-command="italic" data-wysihtml5-command-value="em">
+      <i class="icon icon-italic"></i>
+    </li>
+    <li data-wysihtml5-command="formatInline" data-wysihtml5-command-value="h2">
+      <i class="icon icon-header"></i>
+    </li>
+    <li data-wysihtml5-command="insertUnorderedList">
+      <i class="icon icon-list-ul"></i>
+    </li>
+    <li data-wysihtml5-command="insertOrderedList">
+      <i class="icon icon-list-ol"></i>
+    </li>
+    <li data-wysihtml5-command="createLink">
+      <i class="icon icon-link"></i>
+    </li>
+    <li class="wysihtml5-insert-image">
+      <i class="icon icon-image"></i>
+    </li>
+    <li class="wysihtml5-upload">
+      <div class="{{ toolbar }}-dropbox dropbox dropbox-inline">
+        <span class="dropbox-progress"></span>
+        <span class="dropbox-error"></span>
+      </div>
+    </li>
+  </ul>
+  <div class="clear"></div>
+
+  <div data-wysihtml5-dialog="createLink" style="display:none">
+    <label>
+      {{ 'link' | t }}
+      <input data-wysihtml5-dialog-field="href" value="http://" type="text">
+    </label>
+    <a class="btn btn-small" data-wysihtml5-dialog-action="save">
+      {{ 'insert' | t }}
+    </a>
+  </div>
+
+  <div class="{{ toolbar }}-dropbox-progress dropbox-progress-only"></div>
+</div>
+
+<script class="loadscript">
+  var setup = function(){
+    {{ toolbar }} = new wysihtml5.Editor('{{ textarea }}', {
+      toolbar: '{{ toolbar }}',
+      autoLink: false,
+      stylesheets: '/css/lib/wysiwyg-iframe.css',
+      parserRules: {
+        tags: {
+          br: 1,
+          span: 1,
+          div: 1,
+          p: 1,
+          strong: 1,
+          b: {
+            rename_tag: 'strong'
+          },
+          em: 1,
+          i: {
+            rename_tag: 'em'
+          },
+          h1: {
+            rename_tag: 'h2'
+          },
+          h2: 1,
+          h3: 1,
+          h4: 1,
+          h5: 1,
+          h6: 1,
+          ol: 1,
+          ul: 1,
+          li: 1,
+          blockquote: 1,
+          a: {
+            check_attributes: {
+              href: 'url'
+            },
+            set_attributes: {
+              rel: 'nofollow'
+            }
+          },
+          img: {
+            check_attributes: {
+              width: 'numbers',
+              alt: 'alt',
+              src: 'url',
+              height: 'numbers'
+            }
+          }
+        },
+        classes: {
+          'wysiwyg-text-align-center': 1
+        }
+      }
+    });
+    var e = {{ toolbar }};
+
+    var editor = document.querySelector('#{{ toolbar }}');
+    var link = editor.querySelector('.wysihtml5-insert-image');
+    var el = editor.querySelector('.{{ toolbar }}-dropbox');
+    var meter = el.querySelector('.dropbox-progress');
+    var error = el.querySelector('.dropbox-error');
+
+    var dz = new Dropzone(el, {
+      url: '/uploads/default',
+      clickable: link,
+      previewsContainer: false,
+      paramName: 'datafile',
+      acceptedFiles: 'image/*',
+      maxFiles: 1,
+      maxFilesize: 20,
+      dictInvalidFile: "{{ 'upload_invalid_images_only' | t }}",
+      dictFileTooBig: "{{ 'upload_max_filesize' | t }} 20 MB",
+      dictResponseError: "{{ 'upload_connection_error' | t }}"
+    });
+
+    // Init
+    link.addEventListener('click', function(){
+      meter.textContent = '';
+      error.textContent = '';
+    });
+
+    // Update the total progress bar
+    dz.on('totaluploadprogress', function(progress) {
+      if(dz.files.length > 0) {
+        progress = parseInt(progress)
+        meter.textContent = progress + '%';
+      }
+    });
+
+    // Hide the total progress bar when nothing's uploading anymore
+    dz.on('queuecomplete', function() {
+      dz.removeAllFiles();
+      meter.textContent = '';
+    });
+
+    // Insert url into preview and input when done
+    dz.on('success', function(file, data) {
+      data = JSON.parse(data);
+      meter.textContent = '';
+      e.toolbar.execCommand('insertImage', data.url);
+    });
+
+    // Display error
+    dz.on('error', function(file, message) {
+      meter.textContent = '';
+      error.textContent = message;
+    });
+  };
+  setup();
+</script>

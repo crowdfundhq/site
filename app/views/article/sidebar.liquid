@@ -1,0 +1,10 @@
+{% comment %}Included in article index, search and show{% endcomment %}
+
+<div class="sidebar-section">
+  <div class="article-search">
+    <form accept-charset="utf-8" action="{{ 'article_search' | path }}" method="GET">
+      {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+      <input type="text" name="q" placeholder="{{ 'article_search' | t }}" value="{{ params.q | h }}">
+    </form>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+{% comment %}Publish blog article{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'article_publish' | t }} "{{ article.title }}"?{% endtitle %}
+
+<p>{{ 'articles_publish_sure' | t }}</p>
+<form accept-charset="utf-8" onsubmit="hq.postDialog(this);return false" action="{{ 'article_submit' | path: article.link }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <button class="btn">{{ 'article_publish' | t }}</button>
+  <a onclick="hq.closeDialog();return false" href="{{ 'article_show' | path: article.link }}">{{ 'cancel' | t }}</a>
+</form>

@@ -1,0 +1,16 @@
+{% comment %}Included in conversation edit{% endcomment %}
+
+<p>
+  <label for="conversation_subject">{{ 'message_subject' | t }}</label>
+  <br>
+  <input id="conversation_subject" name="subject" type="text" value="{{ conversation.subject }}">
+  {% if conversation.errors.subject != blank %}
+    <span class="field_error">
+      {{ conversation.errors.subject | join: ', ' }}
+    </span>
+  {% endif %}
+</p>
+<p>
+  <button class="btn">{{ 'save' | t }}</button>
+  <a onclick="hq.closeDialog();return false" href="{{ 'conversation_inbox' | path }}">{{ 'cancel' | t }}</a>
+</p>

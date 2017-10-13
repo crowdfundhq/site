@@ -1,0 +1,134 @@
+GET#index:
+  desc: Index campaign
+  path: /
+  requires: []
+
+GET#search:
+  desc: Search campaign
+  path: /search
+  requires: []
+
+GET#discover_json:
+  desc: Discover campaign JSON
+  path: /discover/:category_link.json
+  requires: []
+
+GET#discover_embed:
+  desc: Discover campaign embed
+  path: /discover/:category_link.embed
+  requires: []
+
+GET#discover_rss:
+  desc: Discover campaign RSS
+  path: /discover/:category_link.rss
+  requires: []
+
+GET#discover:
+  desc: Discover campaign
+  path: /discover/:category_link
+  requires: []
+
+GET#show_json:
+  desc: Show campaign JSON
+  path: /campaigns/:campaign_link.json
+  requires: []
+
+GET#show_embed:
+  desc: Show campaign embed
+  path: /campaigns/:campaign_link.embed
+  requires: []
+
+GET#show_frame:
+  desc: Show campaign frame
+  path: /campaigns/:campaign_link.frame
+  requires: []
+
+GET#show:
+  desc: Show campaign
+  path: /campaigns/:campaign_link
+  requires: []
+
+GET#new:
+  desc: New campaign
+  path: /campaign/new
+  requires:
+    - dialog
+    - user
+
+POST#create:
+  desc: Create campaign
+  path: /campaigns
+  requires:
+    - dialog:
+      - route: /campaign/new
+    - user
+    - author
+
+PUT#update:
+  desc: Update campaign
+  path: /campaigns/:campaign_link
+  requires:
+    - user
+    - author
+
+GET#show_section:
+  desc: Show campaign sections
+  path: /campaigns/:campaign_link/show/:section
+  requires:
+    - user
+
+GET#tab:
+  desc: Tab campaign
+  path: /campaigns/:campaign_link/tab/:tab
+  requires: []
+
+GET#edit:
+  desc: Edit campaign
+  path: /campaigns/:campaign_link/edit
+  requires:
+    - user
+
+GET#show_submit:
+  desc: Show submit campaign
+  path: /campaigns/:campaign_link/submit
+  requires:
+    - user
+
+POST#submit:
+  desc: Submit campaign
+  path: /campaigns/:campaign_link/submit
+  requires:
+    - user
+
+GET#confirm:
+  desc: Confirm campaign
+  path: /campaigns/:campaign_link/delete
+  requires:
+    - user
+
+DELETE#delete:
+  desc: Delete campaign
+  path: /campaigns/:campaign_link
+  requires:
+    - user
+
+GET#embed:
+  desc: Embed campaign
+  path: /campaigns/:campaign_link/embed
+  requires: []
+
+GET#feed:
+  desc: Feed campaign
+  path: /feed.rss
+  requires: []
+
+GET#short_url:
+  desc: Short url campaign
+  path: /c/:id
+  requires: []
+
+POST#create_stats:
+  desc: Create stats campaign
+  path: /stats
+  requires: []
+

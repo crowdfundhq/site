@@ -1,0 +1,55 @@
+{% comment %}Discover campaign /discover{% endcomment %}
+
+{% assign category = current_site.categories | where: link: params.category_link | first %}
+{% assign category_name = params.category_link %}
+{% if category %}{% assign category_name = category.name %}{% endif %}
+{% assign paginate = current_site.campaigns.visible | category: params.category_link | paginate %}
+{% assign campaigns = paginate.entries %}
+{% if current_site.random_on_empty and campaigns == empty %}
+  {% assign campaigns = current_site.campaigns.visible.active | limit: current_site.random_limit | shuffle %}
+  {% assign random_on_empty = true %}
+{% endif %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ 'campaign_index_title' | t }} - {{ category_name }}{% endtitle %}
+{% tagline %}{{ 'campaign_index_title' | t }}{% endtagline %}
+{% body_class discover %}
+{% subtitle %}{{ category_name }}{% endsubtitle %}
+
+<div id="campaign_discover">
+  {% include 'campaign/categorybar' %}
+
+  <div id="badges" class="well white {{ params.category_link | h }}">
+    {% if campaigns != empty %}
+      {% if random_on_empty %}
+        <p>
+          {{ 'campaign_campaign_badges_no_campaigns' | t }}
+          "{{ category_name }}"
+          {{ 'campaign_campaign_badges_alternative_campaigns' | t }}
+        <p>
+      {% endif %}
+
+      {% for campaign in campaigns %}
+        {% assign last = forloop.index | modulo: current_site.badges_per_row %}
+        {% include 'campaign/campaign_badge' %}
+      {% endfor %}
+
+      <div class="clear"></div>
+      {% if paginate and paginate.total_pages > 1 %}
+        {{ paginate.arrows }}
+      {% endif %}
+
+    {% else %}
+      <p>
+        {% if current_user and params.category_link == 'you' %}
+          {{ 'campaign_campaign_badges_no_campaign_created' | t }}
+        {% else %}
+          {{ 'campaign_campaign_badges_no_campaigns' | t }}
+          "{{ layout.subtitle }}"
+        {% endif %}
+      </p>
+    {% endif %}
+    <div class="clear"></div>
+  </div>
+</div>
+{% include 'campaign/campaign_js_includes' %}

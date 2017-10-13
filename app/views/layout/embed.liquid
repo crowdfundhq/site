@@ -1,0 +1,44 @@
+{% comment %}Embed layout for campaign badges{% endcomment %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <title>{{ layout.title }}</title>
+
+    {{ 'bundle.css' | style_tag }}
+    {{ 'icons.css' | style_tag }}
+
+    {% capture badge_style_path %}themes/badges/{{ current_site.badge_style }}.css{% endcapture %}
+    {{ badge_style_path | style_tag }}
+
+    {% if current_site.theme != 'base' %}
+      {% capture theme_path %}themes/{{ current_site.theme }}.css{% endcapture %}
+      {% if current_site.theme_neue %}{{ 'themes/neue.css' | style_tag }}{% endif %}
+      {{ theme_path | style_tag }}
+    {% endif %}
+
+    {% include 'layout/libraries' %}
+
+    <style>{% include 'layout/styles' %}</style>
+
+    <style>
+      body {
+        background: transparent;
+        margin: 0px;
+        padding: 0px;
+        overflow: hidden;
+      }
+
+      iframe {
+        overflow: hidden;
+      }
+
+      .campaign_badge {
+        margin: 0px;
+      }
+    </style>
+  </head>
+  <body class="{{ current_site.classes }} {{ layout.body_class }}">{{ content }}</body>
+</html>

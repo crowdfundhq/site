@@ -1,0 +1,92 @@
+{% comment %}Included in article index, search and show{% endcomment %}
+<div class="article">
+  <h1 class="title">
+    <a href="{{ 'article_show' | path: article.link }}">{{ article.title }}</a>
+  </h1>
+
+  {% if current_site.blog_image %}
+    {% if article.image_url != blank %}
+      <div class="article_cover">
+        <img src="{{ article.image_url }}" alt="{{ article.title }}">
+      </div>
+    {% endif %}
+  {% endif %}
+
+  <div class="date small grey">
+    {% if article.published %}
+      {{ 'article_posted_by' | t }} {{ article.user.name }} {{ 'on' | t }} {{ article.published_at | date }}
+    {% endif %}
+  </div>
+
+  <div class="article_shares">
+    {% include 'article/shares' with article %}
+  </div>
+
+  <div class="clear"></div>
+  <div class="content">{{ article.content_html }}</div>
+
+  {% if article.tags != empty %}
+    <div class="tags">
+      <strong>{{ 'article_tags' | t }}:</strong>
+      {% for tag in article.tags %}
+        <a href="{{ 'article_search' | path | query: q: tag }}">{{ tag | h }}</a>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% assign paginate = article.article_comments | order: created_at: '-1' | paginate %}
+  {% assign comments = paginate.entries %}
+
+  <div class="comments" id="comments">
+    {% if disable_comments == false %}
+      <div class="comments_count">
+    {% else %}
+      <a href="{{ 'article_show' | path: article.link | id: 'comments' }}">
+    {% endif %}
+
+    <span class="comments_number grey small">
+      <strong id="num_comments">{{ paginate.total_entries }}</strong>
+      {{ 'article_comments' | t }}
+    </span>
+
+    {% if disable_comments == false %}
+      </div>
+    {% else %}
+      </a>
+    {% endif %}
+
+    {% if disable_comments == false %}
+
+      {% if current_user %}
+        <form accept-charset="utf-8" onsubmit="hq.postArticleComment(this);return false" action="{{ 'article_comment_create' | path: article.link }}" method="POST" data-list="comments_list" data-counter="num_comments">
+          {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+          <textarea id="new_comment" class="form-input-double" name="raw" placeholder="{{ 'article_join_discussion' | t }}"></textarea>
+          <button class="btn btn-medium">{{ 'article_post_comment' | t }}</button>
+        </form>
+
+      {% else %}
+        <div class="hint">
+          {{ 'article_please' | t }}
+          <a href="{{ 'login_new' | path }}" onclick="hq.loadDialog(this);return false">{{ 'article_log_in' | t }}</a>
+          {{ 'article_to_comment' | t }}.
+        </div>
+      {% endif %}
+
+      <div class="comments_list" id="article_comments_list">
+        {% if comments != empty %}
+          {% for comment in comments %}
+            {% include 'article/comment' with comment %}
+          {% endfor %}
+          {% if paginate.total_pages > 1 %}
+            <div class="load-more-data">
+              <a class="small" href="{{ 'article_comment_list' | path: article.link }}" data-list="article_comments_list" data-count="{{ paginate.total_entries }}" data-per-page="{{ settings.per_page }}" onclick="hq.loadMore(this);return false">
+                {{ 'load_more' | t }} ...
+              </a>
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+
+    {% endif %}
+  </div>
+</div>

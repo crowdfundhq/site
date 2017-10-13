@@ -1,1 +1,0 @@
-../../../../../shared/public/js/lib/froala-min.js

@@ -1,0 +1,42 @@
+{% comment %}Show user commitment pledges list{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'user_commitments_list' | t }} {{ user.name }}{% endtitle %}
+
+<div id="user_pledges">
+  {% if current_site.commitments_enabled %}
+    {% assign paginate = user.pledges | paginate %}
+    {% assign pledges = paginate.entries %}
+
+    <div class="clear">
+      <p>{{ 'user_commitments_showing' | t }} ({{ paginate.total_entries }})</p>
+    </div>
+
+    {% if pledges != empty %}
+      <ul class="block-list no-style squish" id="user_pledges_list">
+        {% for pledge in pledges %}
+          {% assign campaign = pledge.campaign %}
+          {% include 'pledge/pledge' with pledge %}
+        {% endfor %}
+      </ul>
+    {% else %}
+      {% if current_user.id == user.id %}
+        {{ 'user_show_no_commitments' | t }}
+      {% else %}
+        {{ 'user_show_no_commitments_from_this_user' | t }}
+      {% endif %}
+    {% endif %}
+
+    {% if pledges != empty and paginate.total_pages > 1 %}
+      <div class="load-more-data">
+        <a class="small-link space-right" href="{{ 'user_pledges_list' | path: user.link }}" data-list="user_pledges_list" data-count="{{ paginate.total_entries }}" data-per-page="{{ settings.per_page }}" onclick="hq.loadMore(this);return false">
+          {{ 'load_more' | t }} ...
+        </a>
+      </div>
+    {% endif %}
+    <div class="spacer"></div>
+  {% endif %}
+  <div class="clear center spacer-small">
+    <a class="small-link cancel" href="{{ 'user_show' | path: user.link }}" onclick="hq.closeDialog();return false">{{ 'cancel' | t }}</a>
+  </div>
+</div>

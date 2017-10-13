@@ -1,0 +1,38 @@
+{% comment %}Included in campaign commitments and sidebar{% endcomment %}
+
+{% if commitment.image_url != blank %}
+  <div class="commitment_image">
+    <img src="{{ commitment.image_url | e }}" alt="">
+  </div>
+{% endif %}
+
+<h3>{{ commitment.name }}</h3>
+
+{% if commitment.max and commitment.max > 0 %}
+  <div class="hint">
+    {{ 'campaign_commitment_limited_to' | t }} {{ commitment.max }} {{ 'campaign_reward_contributors' | t }}
+  </div>
+{% endif %}
+{{ commitment.description_html }}
+
+<div class="c_count">
+  {{ commitment.pledges.count }}
+  {{ 'campaign_commitment_number_of_pledges' | t }}
+</div>
+
+{% if edit and current_user.id == campaign.user.id %}
+  <div class="space-top">
+    {% if commitment.editable? %}
+      <a class="btn btn-small" onclick="hq.loadDialog(this);return false" href="{{ 'commitment_edit' | path: campaign.link, commitment.id }}">
+        {{ 'edit' | t }}
+      </a>
+      <a class="btn btn-warning btn-small" onclick="hq.loadDialog(this);return false" href="{{ 'commitment_confirm' | path: campaign.link, commitment.id }}">
+        {{ 'delete' | t }}
+      </a>
+    {% endif %}
+    <label>
+      <input type="checkbox" name="visible" onclick="hq.toggleVisibility(this)" data-url="{{ 'commitment_toggle' | path: campaign.link, commitment.id }}"{% if commitment.visible %} checked{% endif %}>
+      {{ 'visible' | t }}
+    </label>
+  </div>
+{% endif %}

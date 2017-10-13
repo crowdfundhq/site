@@ -1,0 +1,22 @@
+{% comment %}Reset password for login{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'user_login_title_password_reset' | t }}{% endtitle %}
+
+<form accept-charset="utf-8" action="{{ 'password_create' | path }}" method="POST" onsubmit="hq.postDialog(this);return false">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <p>
+    <label for="reset_email">{{ 'email' | t }}</label>
+    <br>
+    <input id="reset_email" name="email" type="text" onblur="this.value=this.value.toLowerCase()">
+  </p>
+  <p>
+    <button class="btn">{{ 'submit' | t }}</button>
+    <a class="cancel" href="{{ 'login_new' | path }}" onclick="hq.loadDialog(this);return false">
+      {{ 'cancel' | t }}
+    </a>
+  </p>
+  <div class="hint">
+    {{ 'user_login_password_reset_hint' | t }}
+  </div>
+</form>

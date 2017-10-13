@@ -1,0 +1,42 @@
+GET#new:
+  desc: New reward
+  path: /campaigns/:campaign_link/reward/new
+  requires:
+    - user
+
+POST#create:
+  desc: Create reward
+  path: /campaigns/:campaign_link/rewards
+  requires:
+    - user
+
+GET#edit:
+  desc: Edit reward
+  path: /campaigns/:campaign_link/rewards/:reward_id/edit
+  requires:
+    - user
+
+PUT#update:
+  desc: Update reward
+  path: /campaigns/:campaign_link/rewards/:reward_id
+  requires:
+    - user
+
+GET#confirm:
+  desc: Confirm reward
+  path: /campaigns/:campaign_link/rewards/:reward_id/delete
+  requires:
+    - user
+
+DELETE#delete:
+  desc: Delete reward
+  path: /campaigns/:campaign_link/rewards/:reward_id
+  requires:
+    - user
+
+POST#toggle:
+  desc: Toggle reward
+  path: /campaigns/:campaign_link/rewards/:reward_id/toggle
+  requires:
+    - user
+

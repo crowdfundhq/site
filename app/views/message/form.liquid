@@ -1,0 +1,21 @@
+{% comment %}Included in message edit and new{% endcomment %}
+
+{% assign redirect = params.redirect %}
+{% if redirect == blank %}{% assign redirect = 'conversation_inbox' | path %}{% endif %}
+<input type="hidden" value="{{ redirect }}" name="redirect">
+<input type="hidden" value="{{ params.user_link | h }}" name="user_link">
+
+<p>
+  <label for="message_content">{{ 'message_content' | t }}</label>
+  <br>
+  <textarea id="message_content" name="content">{{ message.content }}</textarea>
+  {% if message.errors.content != blank %}
+    <span class="field_error">
+      {{ message.errors.content | join: ', ' }}
+    </span>
+  {% endif %}
+</p>
+<p>
+  <button class="btn">{{ 'send' | t }}</button>
+  <a onclick="hq.closeDialog();return false" href="">{{ 'cancel' | t }}</a>
+</p>

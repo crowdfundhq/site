@@ -1,0 +1,52 @@
+{% comment %}Included in default layout{% endcomment %}
+
+<ul class="user no-margin" id="menu">
+  {% if current_user %}
+    <li class="user">
+      <a href="javascript:void(0)" onclick="hq.toggleMenu();return false">
+        <img src="{{ current_user.avatar | e }}" alt="{{ current_user.name }}">
+        {{ 'menu_text' | t }}
+        <i class="icon-chevron-left rotate-left small icon-space-left"></i>
+      </a>
+      <ul id="user">
+        {% if current_site.disable_messages == false %}
+          <li>
+            <a href="{{ 'conversation_inbox' | path }}">{{ 'user_menu_inbox' | t }}</a>
+          </li>
+        {% endif %}
+        {% if current_site.mode == 'select' and current_user.author %}
+          <li>
+            <a href="{{ 'campaign_new' | path }}" onclick="hq.transitLoad(this);return false">
+              {{ 'user_menu_create_campaign' | t }}
+            </a>
+          </li>
+        {% endif %}
+        <li>
+          <a href="{{ 'user_show' | path: current_user.link }}">
+            {{ 'user_menu_profile' | t }}
+          </a>
+        </li>
+        <li>
+          <a href="{{ 'user_edit' | path }}" onclick="hq.loadDialog(this);return false">
+            {{ 'user_menu_settings' | t }}
+          </a>
+        </li>
+        <li>
+          <a href="{{ 'login_logout' | path }}" onclick="hq.clearSession()">
+            {{ 'user_menu_log_out' | t }}
+          </a>
+        </li>
+      </ul>
+    </li>
+  {% else %}
+    <li>
+      <a id="login-link" href="{{ 'login_new' | path }}" onclick="hq.loadDialog(this);return false">
+        {{ 'layout_site_login_signup' | t }}
+      </a>
+    </li>
+  {% endif %}
+</ul>
+<script{% if request.xhr? %} class="loadscript"{% endif %}>
+  if(!window.site) window.site = {};
+  window.site.authorized = {% if current_user %}true{% else %}false{% endif %};
+</script>

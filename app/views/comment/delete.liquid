@@ -1,0 +1,13 @@
+{% comment %}Delete comment{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'comment_delete_title' | t }}{% endtitle %}
+
+<form accept-charset="utf-8" onsubmit="hq.deleteComment(this);return false" action="{{ 'comment_delete' | path: campaign.link, comment.id }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="DELETE">
+  <button class="btn btn-warning">{{ 'delete' | t }}</button>
+  <a class="cancel" onclick="hq.closeDialog();return false" href="{{ 'campaign_tab' | path: campaign.link, 'comments' }}">
+    {{ 'cancel' | t }}
+  </a>
+</form>

@@ -1,0 +1,49 @@
+{% comment %}Show campaign embed dialog{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'campaign_show_embed_share' | t }}{% endtitle %}
+
+<div class="embed_campaign">
+  <p>
+    <label>
+      {{ 'campaign_show_embed_campaign_url' | t }}
+      <br>
+      <input id="campaign_link" class="form-input-maxed" onfocus="this.selectionStart=0; this.selectionEnd=this.value.length" ontouchend="this.selectionStart=0; this.selectionEnd=this.value.length" onmouseup="return false" readonly="true" type="text" value="{{ campaign.url }}">
+    </label>
+  </p>
+  {% if campaign.approved and current_user.id == campaign.user_id %}
+    <p>
+      <label>
+        {{ 'campaign_show_embed_private_url' | t }}
+        <br>
+        <input id="campaign_link_private" class="form-input-maxed" onfocus="this.selectionStart=0; this.selectionEnd=this.value.length" ontouchend="this.selectionStart=0; this.selectionEnd=this.value.length" onmouseup="return false" readonly="true" type="text" value="{{ campaign.url }}?key={{ campaign.key }}">
+      </label>
+    </p>
+  {% endif %}
+  <p>
+    <label>
+      {{ 'campaign_show_embed_short_url' | t }}
+      <br>
+      <input id="campaign_short_url" class="form-input-maxed" onfocus="this.selectionStart=0; this.selectionEnd=this.value.length" ontouchend="this.selectionStart=0; this.selectionEnd=this.value.length" onmouseup="return false" readonly="true" type="text" value="http://{{ settings.short_url_domain }}/{{ campaign.short_url }}">
+    </label>
+  </p>
+  <p>
+    <label>
+      {{ 'campaign_show_embed_video_code' | t }}
+      <br>
+      <textarea id="campaign_video_embed_code" class="form-input-double" onfocus="this.selectionStart=0; this.selectionEnd=this.value.length" ontouchend="this.selectionStart=0; this.selectionEnd=this.value.length" onmouseup="return false" readonly="true" name="campaign_video_embed_code">{{ campaign.video_embed_code | h }}</textarea>
+    </label>
+  </p>
+  <p>
+    <label>
+      {{ 'campaign_show_embed_badge_code' | t }}
+      <br>
+      <textarea id="campaign_badge_embed_code" class="form-input-double" onfocus="this.selectionStart=0; this.selectionEnd=this.value.length" ontouchend="this.selectionStart=0; this.selectionEnd=this.value.length" onmouseup="return false" readonly="true" name="campaign_badge_embed_code">{{ campaign.badge_embed | h }}</textarea>
+    </label>
+  </p>
+</div>
+
+<script class="loadscript">
+  var el = document.getElementById('campaign_link');
+  if(el) { el.focus(); }
+</script>

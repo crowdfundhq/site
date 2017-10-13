@@ -1,0 +1,15 @@
+{% comment %}Delete message{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'message_delete_message' | t }}{% endtitle %}
+
+<form accept-charset="utf-8" onsubmit="hq.postDialog(this);return false" action="{{ 'message_delete' | path: message.id }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="DELETE">
+  <button class="btn btn-warning">
+    {{ 'delete' | t }}
+	</button>
+  <a onclick="hq.closeDialog();return false" href="{{ 'conversation_inbox' | path }}">
+    {{ 'cancel' | t }}
+	</a>
+</form>

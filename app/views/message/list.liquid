@@ -1,0 +1,8 @@
+{% comment %}Message list{% endcomment %}
+
+{% assign paginate = conversation.messages | order: updated_at: '-1' | paginate %}
+{% assign messages = paginate.entries %}
+
+{% for message in messages %}
+  {% include 'message/message' with message %}
+{% endfor %}

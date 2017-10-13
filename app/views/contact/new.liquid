@@ -1,0 +1,60 @@
+{% comment %}Create new contact{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ 'contact_new_title' | t }}{% endtitle %}
+{% subtitle %}{{ 'contact_new_subtitle' | t }}{% endsubtitle %}
+
+<div id="contact">
+  {{ 'contact_new_custom' | t }}
+  <form accept-charset="utf-8" action="{{ 'contact_create' | path }}" method="POST">
+    {{ security.forgery_tag }}
+    {{ security.honeypot_captcha }}
+    <p>
+      <label for="contact_name">{{ 'contact_form_field_name' | t }}</label>
+      <br>
+      <input id="contact_name" type="text" name="name" value="{{ contact.name }}">
+      {% if contact.errors.name != blank %}
+        <span class="field_error">{{ contact.errors.name | join: ', ' }}</span>
+      {% endif %}
+    </p>
+    <p>
+      <label for="contact_email">{{ 'contact_form_field_email' | t }}</label>
+      <br>
+      <input id="contact_email" type="text" name="email" value="{{ contact.email }}">
+      {% if contact.errors.email != blank %}
+        <span class="field_error">{{ contact.errors.email | join: ', ' }}</span>
+      {% endif %}
+    </p>
+    <p>
+      <label for="contact_subject">{{ 'contact_form_field_subject' | t }}</label>
+      <br>
+      <input id="contact_subject" type="text" name="subject" value="{{ contact.subject }}">
+      {% if contact.errors.subject != blank %}
+        <span class="field_error">{{ contact.errors.subject | join: ', ' }}</span>
+      {% endif %}
+    </p>
+
+    {% comment %} Custom fields {% endcomment %}
+    {% assign form_type = 'contact' %}
+    {% assign model = contact %}
+    {% include 'site/fields' with current_site.contact_fields %}
+
+    <p>
+      <label for="contact_message">{{ 'contact_new_message' | t }}</label>
+      <br>
+      <textarea id="contact_message" name="message">{{ contact.message }}</textarea>
+      {% if contact.errors.message != blank %}
+        <span class="field_error">{{ contact.errors.message | join: ', ' }}</span>
+      {% endif %}
+    </p>
+
+    <p>
+      <button class="btn">{{ 'contact_new_send_message' | t }}</button>
+    </p>
+  </form>
+</div>
+{% if request.xhr? %}
+  <script class="loadscript">
+    hq.setTitle('{{ title }}', '{{ subtitle }}');
+  </script>
+{% endif %}

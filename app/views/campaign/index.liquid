@@ -1,0 +1,44 @@
+{% comment %}Campaign index{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{% if current_site.tagline_title != blank and current_site.tagline_title_homepage %}{{ current_site.tagline_title }}{% endif %}{% endtitle %}
+{% tagline %}{{ current_site.tagline_title }}{% endtagline %}
+{% subtitle %}{{ current_site.tagline_subtitle }}{% endsubtitle %}
+{% body_class home %}
+
+{% assign category_name = 'categories' | t %}
+
+{% assign homepage = current_site.homepage %}
+{% if homepage.html != blank and homepage.hidden != true %}
+  <div id="custom-page">{{ current_site.homepage.html | liquid }}</div>
+{% endif %}
+
+<div id="homepage">
+  {% include 'campaign/categorybar' %}
+  <div id="badges" class="well white">
+    {% for section in current_site.sections %}
+
+      {% if section.limit >= 0 %}
+        {% assign campaigns = current_site.campaigns.visible | category: section.link, section.limit | all %}
+        {% if campaigns.size > 0 %}
+          {% if section.title %}
+            <h2>
+              {% capture section_title %}campaign_campaign_badges_{{ section.link }}_campaigns{% endcapture %}
+              {{ section_title | t }}
+            </h2>
+          {% endif %}
+          <div class="campaign-badge-row">
+            {% assign big = section.big %}
+            {% for campaign in campaigns %}
+              {% assign last = forloop.index | modulo: current_site.badges_per_row %}
+              {% include 'campaign/campaign_badge' %}
+            {% endfor %}
+          </div>
+          <div class="clear"></div>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    <div class="clear"></div>
+  </div>
+</div>
+{% include 'campaign/campaign_js_includes' %}

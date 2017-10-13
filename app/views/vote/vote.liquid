@@ -1,0 +1,34 @@
+{% comment %}Included in campaign votes{% endcomment %}
+
+{% if vote and vote.user and campaign %}
+  <li class="image-list-item">
+    <img class="user-avatar" src="{% if vote.anonymous %}{{ current_site.default_avatar | image_url }}{% else %}{{ vote.user.avatar | e }}{% endif %}" width="50" height="50" alt="">
+
+    {% if vote.anonymous and campaign.user and current_user.id != campaign.user.id %}
+      {{ 'contribution_anonymous' | t }}
+    {% else %}
+      <a href="{{ 'user_show' | path: vote.user.link }}">
+        {{ vote.user.name }}{% if current_user.id == campaign.user.id %},{% endif %}
+      </a>
+      {% if current_user.id == campaign.user.id %}
+        <a href="mailto:{{ vote.user.email }}">{{ vote.user.email }}</a>
+      {% endif %}
+    {% endif %}
+    <br>
+
+    {{ 'campaign_voted_for' | t }}
+    <a href="{{ campaign.url | e }}">{{ campaign.name }}</a>
+    {{ 'on' | t }}
+    {{ vote.created_at | date }}
+    <div class="vote-comment">
+      <div class="vote-text-raw hint">
+        {{ vote.comment | truncate: 50 }}
+        {% if vote.comment.size > 50 %}
+          <a class="small-link" onclick="hq.showVoteComment(this);return false">{{ 'vote_show_comment' | t }}</a>
+        {% endif %}
+      </div>
+      <div class="vote-text-html" style="display:none">{{ vote.comment_html }}</div>
+    </div>
+    <div class="clear"></div>
+  </li>
+{% endif %}

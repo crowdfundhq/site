@@ -1,0 +1,25 @@
+{% comment %}Group invite{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'group_form_invite_title' | t }} - {{ group.name }}{% endtitle %}
+
+<form class="group-invite-users" accept-charset="UTF-8" action="{{ 'group_create_invite' | path: group.link }}" method="POST" onsubmit="hq.postDialog(this);return false">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <label for="invite">{{ 'group_form_invite_users' | t }}</label>
+  <div class="helper"></div>
+  <textarea id="invite_users" name="users"></textarea>
+
+  <button class="btn">{{ 'invite' | t }}</button>
+  <a href="{{ 'group_show' | path: group.link }}" onclick="hq.closeDialog();return false">{{ 'cancel' | t }}</a>
+</form>
+
+{% if users != blank %}
+  <div class="group-invite-list">
+    <label>{{ 'group_users_invite_list_title' | t }}</label>
+    <ul>
+      {% for user in users %}
+        <li>{{ user.name }}, {{ user.email }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}

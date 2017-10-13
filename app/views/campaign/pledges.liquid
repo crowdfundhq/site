@@ -1,0 +1,30 @@
+{% comment %}Campaign pledges{% endcomment %}
+
+{% assign paginate = campaign.pledges | order: created_at: '-1' | paginate %}
+{% assign pledges = paginate.entries %}
+<input id="total_entries" type="hidden" value="{{ paginate.total_entries }}">
+
+{% if campaign.approved and pledges != empty %}
+  <ul id="pledges_list" class="block-list no-style squish">
+    {% for pledge in pledges %}
+      {% include 'pledge/pledge' with pledge %}
+    {% endfor %}
+  </ul>
+
+{% else %}
+  <p>
+    {% if campaign.approved %}
+      {{ 'campaign_commitment_no_pledges' | t }}
+    {% else %}
+      {{ 'campaign_commitment_no_pledges_until_campaign_approved' | t }}
+    {% endif %}
+  </p>
+{% endif %}
+
+{% if pledges != empty and paginate.total_pages > 1 %}
+  <div class="load-more-data">
+    <a class="small" href="{{ 'pledge_list' | path: campaign.link }}" data-list="pledges_list" data-count="{{ paginate.total_entries }}" data-per-page="{{ settings.per_page }}" onclick="hq.loadMore(this);return false">
+      {{ 'load_more' | t }} ...
+    </a>
+  </div>
+{% endif %}

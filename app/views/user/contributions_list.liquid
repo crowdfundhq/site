@@ -1,0 +1,14 @@
+{% comment %}User contributions list{% endcomment %}
+
+{% assign query = user.contributions.confirmed %}
+{% if current_user.id != user.id %}
+  {% assign query = user.contributions.active.visible %}
+{% endif %}
+{% assign paginate = query | order: created_at: '-1' | paginate %}
+{% assign contributions = paginate.entries %}
+
+{% for contribution in contributions %}
+  {% assign campaign = contribution.campaign %}
+  {% assign redirect = '?r=user' %}
+  {% include 'contribution/contribution' with contribution %}
+{% endfor %}

@@ -1,0 +1,16 @@
+{% comment %}New membership{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'membership_new_title' | t }} {{ group.name }}{% endtitle %}
+
+<p>{{ 'membership_new_info' | t }}</p>
+
+<form action="{{ 'membership_create' | path: group.link }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="users" value="{{ current_user.email }}">
+
+  <div>
+    <button class="btn">{{ 'membership_new_join' | t }}</button>
+    <a href="{{ 'group_show' | path: group.link }}" onclick="hq.closeDialog();return false">{{ 'cancel' | t }}</a>
+  </div>
+</form>

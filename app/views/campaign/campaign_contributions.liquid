@@ -1,0 +1,88 @@
+{% comment %}Campaign contributions{% endcomment %}
+
+{% assign sort = params.sort %}
+{% unless sort %}{% assign sort = 'created_at' %}{% endunless %}
+{% assign order = params.order %}
+{% unless order %}{% assign order = '-1' %}{% endunless %}
+{% assign direction = order | flip %}
+{% assign paginate = campaign.contributions.confirmed | order: sort, order | paginate %}
+{% assign contributions = paginate.entries %}
+{% assign reward_full_description = true %}
+
+<div id="campaign_contributions">
+  <div class="grid_8">
+
+    {% if contributions != empty %}
+      <ul class="block-list no-style campaign-contributions-list">
+        <li class="controls">
+          <div class="resultlist-created_at grid_2">
+            <a href="?sort=created_at&amp;order={% if sort == 'created_at' %}{{ direction }}{% else %}-1{% endif %}"{% if sort == 'created_at' %} class="active"{% endif %}>
+              {{ 'campaign_files_list_date' | t }}
+              {% if sort == 'created_at' and order == '1' %}
+                <i class="icon-circle-arrow-up icon-drop"></i>
+              {% elsif sort == 'created_at' and order == '-1' %}
+                 <i class="icon-circle-arrow-down icon-drop"></i>
+              {% endif %}
+            </a>
+          </div>
+
+          <div class="resultlist-amount grid_2">
+            <a href="?sort=amount&amp;order={% if sort == 'amount' %}{{ direction }}{% else %}-1{% endif %}"{% if sort == 'amount' %} class="active"{% endif %}>
+              {{ 'amount' | t }}
+              {% if sort == 'amount' and order == '1' %}
+                <i class="icon-circle-arrow-up icon-drop"></i>
+              {% elsif sort == 'amount' and order == '-1' %}
+                 <i class="icon-circle-arrow-down icon-drop"></i>
+              {% endif %}
+            </a>
+          </div>
+
+          <div class="resultlist-name grid_2">
+            <a href="?sort=name&amp;order={% if sort == 'name' %}{{ direction }}{% else %}-1{% endif %}"{% if sort == 'name' %} class="active"{% endif %}>
+              {{ 'campaign_files_list_name' | t }}
+              {% if sort == 'name' and order == '1' %}
+                <i class="icon-circle-arrow-up icon-drop"></i>
+              {% elsif sort == 'name' and order == '-1' %}
+                 <i class="icon-circle-arrow-down icon-drop"></i>
+              {% endif %}
+            </a>
+          </div>
+
+          <div class="resultlist-email grid_2">
+            <a href="?sort=email&amp;order={% if sort == 'email' %}{{ direction }}{% else %}-1{% endif %}"{% if sort == 'email' %} class="active"{% endif %}>
+              {{ 'campaign_files_list_email' | t }}
+              {% if sort == 'email' and order == '1' %}
+                <i class="icon-circle-arrow-up icon-drop"></i>
+              {% elsif sort == 'email' and order == '-1' %}
+                 <i class="icon-circle-arrow-down icon-drop"></i>
+              {% endif %}
+            </a>
+          </div>
+
+        </li>
+      </ul>
+    {% endif %}
+
+    {% if campaign.approved and contributions != empty %}
+      <ul class="block-list no-style squish" id="contributions_list">
+        {% for contribution in contributions %}
+          {% include 'contribution/contribution' with contribution %}
+        {% endfor %}
+      </ul>
+      {% if paginate and paginate.total_pages > 1 %}
+        <div class="paginator campaign-contributions-paginate">{{ paginate.default }}</div>
+      {% endif %}
+
+    {% else %}
+      {% if campaign.approved %}
+        <p>{{ 'campaign_contributions_no_contributions' | t }}</p>
+      {% else %}
+        <p>{{ 'campaign_contributions_no_contributions_until_campaign_approved' | t }}</p>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  <div class="grid_4 last">
+    {% include 'campaign/campaign_badge' %}
+  </div>
+</div>

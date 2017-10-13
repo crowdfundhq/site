@@ -1,0 +1,15 @@
+{% comment %}Delete reward{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'reward_delete_title' | t }}{% endtitle %}
+
+<p class="hint">
+  {{ reward.amount | to_currency: precision: 0 }}:
+  {{ reward.description | truncate: 50 }}
+</p>
+<form accept-charset="utf-8" action="{{ 'reward_delete' | path: campaign.link, reward.id }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="DELETE">
+  <button class="btn btn-warning">{{ 'delete' | t }}</button>
+  <a class="cancel" href="{{ 'campaign_show_section' | path: campaign.link, 'rewards' }}" onclick="hq.closeDialog();return false">{{ 'cancel' | t }}</a>
+</form>

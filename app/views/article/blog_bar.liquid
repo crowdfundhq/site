@@ -1,0 +1,64 @@
+{% comment %}Included in article index, list, search and show{% endcomment %}
+
+{% if current_user.blogger? %}
+
+  <div class="blog_bar">
+    <a class="btn space-right" onclick="hq.loadDialog(this);return false" href="{{ 'article_new' | path }}">
+      <i class="icon-plus small"></i>
+      {{ 'article_create' | t }}
+    </a>
+
+    <a class="space-right" href="{{ 'article_blog' | path }}">
+      <i class="icon-earth small"></i>
+      {{ 'article_public' | t }}
+    </a>
+
+    <a class="space-right" href="{{ 'article_index' | path }}">
+      <i class="icon-list-ul small"></i>
+      {{ 'article_list' | t }}
+    </a>
+
+    {% if article %}
+      <div class="blog_actions right">
+
+        <a class="space-right" onclick="hq.loadDialog(this);return false" href="{{ 'article_edit' | path: article.link }}">
+          <i class="icon-edit small"></i>
+          {{ 'edit' | t }}
+        </a>
+
+        <a class="space-right red" onclick="hq.loadDialog(this);return false" href="{{ 'article_confirm' | path: article.link }}">
+          <i class="icon-trash small"></i>
+          {{ 'delete' | t }}
+        </a>
+
+        <span class="grey space-right"> | </span>
+
+        {% if article.published %}
+          <span class="blog_bar_status green" title="{{ 'article_published' | t }}">
+            <i class="icon-switch small"></i>
+            {{ 'article_published' | t }}
+          </span>
+
+        {% else %}
+
+          <span class="blog_bar_status grey space-right" title="{% if article.finished %}{{ 'article_finished' | t }}{% else %}{{ 'article_draft' | t }}{% endif %}">
+            <i class="icon-switch small"></i>
+            {% if article.finished %}
+                {{ 'article_finished' | t }}
+            {% else %}
+                {{ 'article_draft' | t }}
+            {% endif %}
+          </span>
+
+          <form id="post_action" accept-charset="utf-8" onsubmit="hq.postDialog(document.getElementById('post_action'));return false" action="{{ 'article_update' | path: article.link }}" method="POST" style="display:inline">
+            {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+            <input type="hidden" name="_method" value="PUT">
+            <input id="submit_type" name="commit" type="hidden" value="submit">
+            <button class="btn">{{ 'article_publish' | t }}</button>
+          </form>
+
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

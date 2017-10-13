@@ -1,0 +1,9 @@
+{% comment %}New article{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'article_new_title' | t }}{% endtitle %}
+
+<form accept-charset="utf-8" onsubmit="this.querySelector('#submit_type').value=this.button_clicked;hq.postDialog(this);return false" action="{{ 'article_create' | path }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  {% include 'article/form' %}
+</form>

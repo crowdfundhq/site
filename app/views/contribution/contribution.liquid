@@ -1,0 +1,93 @@
+{% comment %}Included as campaign contribution content{% endcomment %}
+
+{% if contribution and contribution.user and campaign and campaign.user %}
+  <li class="image-list-item">
+    {% if current_user and current_user.id == campaign.user.id %}
+      <div class="right small">
+        <a href="{{ 'contribution_shipping' | path: campaign.link, contribution.id | query: redirect }}" onclick="hq.loadDialog(this);return false">
+          {{ 'campaign_rewards_shipping_details' | t }}
+        </a>
+      </div>
+    {% endif %}
+    {% assign anonymous = false %}
+    {% if contribution.is_anonymous? and current_user.id != campaign.user.id %}{% assign anonymous = true %}{% endif %}
+    <img class="user-avatar" src="{% if anonymous %}{{ current_site.default_avatar | image_url }}{% else %}{{ contribution.user.avatar | e }}{% endif %}" alt="">
+    {% if anonymous %}
+      {{ 'contribution_anonymous' | t }}
+    {% else %}
+      <a href="{{ 'user_show' | path: contribution.user.link }}">
+        {% if contribution.name_override != blank %}
+          {% assign name = contribution.name_override %}
+        {% else %}
+          {% assign name = contribution.user.name %}
+        {% endif %}
+        {{ name }}{% if current_user.id == campaign.user.id %},{% endif %}
+      </a>
+      {% if current_user.id == campaign.user.id %}
+        <a href="mailto:{{ contribution.user.email }}">{{ contribution.user.email }}</a>
+      {% endif %}
+    {% endif %}
+    <br>
+    {{ 'contribution_contributed' | t }}
+
+    {% if campaign.show_contribution_amount or current_user.id == contribution.user.id %}
+      {% if current_site.display_actual_currency %}
+        {{ contribution.currency }} {{ contribution.amount | to_currency: precision: 0, format: 'number_only' }}
+      {% else %}
+        {{ contribution.amount | to_currency: precision: 0 }}
+      {% endif %}
+    {% endif %}
+
+    {{ 'on' | t }}
+    {{ contribution.created_at | date }}
+    {{ 'to' | t }}
+
+    <a href="{{ 'campaign_show' | path: campaign.link }}">{{ campaign.name }}</a>
+
+    {% if contribution.refunded %}
+      <div class="hint">{{ 'contribution_refunded' | t }}</div>
+    {% elsif current_user.id == campaign.user.id or current_user.id == contribution.user.id %}
+      <div class="hint">
+        {% if contribution.reward %}
+          {{ 'contribution_chosen_reward' | t }}
+          {{ contribution.reward.amount | to_currency: precision: 0 }}:
+          {% if reward_full_description %}
+            {{ contribution.reward.description_html }}
+          {% else %}
+            {{ contribution.reward.description | truncate: 50 }}
+          {% endif %}
+        {% else %}
+          {{ 'contribution_didnot_choose_reward' | t }}
+        {% endif %}
+      </div>
+      {% assign cost = contribution.cost %}
+      {% if cost %}
+        <div class="hint">
+          {% if cost.percentage %}{{ cost.amount | to_decimal }}%{% else %}{{ cost.amount | to_currency }}{% endif %}
+          {{ cost.name }}
+        </div>
+      {% endif %}
+
+      {% assign fee = contribution.fee %}
+      {% if fee %}
+        <div class="hint">
+          {{ fee.percentage | to_decimal }}%
+          {{ fee.name }}
+        </div>
+      {% endif %}
+
+      {% assign fields = contribution.custom_fields %}
+      {% if fields != empty %}
+        <div class="hint">
+          {% for field in fields %}
+            {% assign name = field[0] %}
+            {% assign label = current_site.contribution_fields[name].label %}
+            {% if label != blank %}
+              {{ current_site.contribution_fields[name].label }}: {{ field[1] }}{% if forloop.last == false %}, {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endif %}
+  </li>
+{% endif %}

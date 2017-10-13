@@ -1,0 +1,12 @@
+{% comment %}Delete blog article{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'delete' | t }} "{{ article.title }}"?{% endtitle %}
+
+<form accept-charset="utf-8" action="{{ 'article_delete' | path: article.link }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="DELETE">
+  <p>{{ 'article_delete_warning' | t }}</p>
+  <button class="btn btn-warning">{{ 'delete' | t }}</button>
+  <a onclick="hq.closeDialog();return false" href="{{ 'article_show' | path: article.link }}">{{ 'cancel' | t }}</a>
+</form>

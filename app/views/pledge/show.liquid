@@ -1,0 +1,22 @@
+{% comment %}Show pledges{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'campaign_commitment_pledge_already_made' | t }} {{ campaign.name }}{% endtitle %}
+
+<div class="commitment_intro">
+  <h5>{{ commitment.name }}</h5>
+  <div class="commitment_description">{{ commitment.description_html }}</div>
+</div>
+
+<div class="commitment_pledge_comment">
+  {{ pledge.comment_html }}
+</div>
+<div class="commitment_already_made">
+  {{ 'campaign_flash_pledge_already_made' | t }}
+  <span class="commitment_time">
+    {{ pledge.created_at | date }}
+  </span>
+</div>
+<div class="center">
+  <a onclick="hq.closeDialog();return false" href="{{ 'campaign_show' | path: campaign.link }}">{{ 'cancel' | t }}</a>
+</div>

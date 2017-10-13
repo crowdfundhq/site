@@ -1,0 +1,26 @@
+{% comment %}Included in article article{% endcomment %}
+
+<div class="comment" data-container-id="{{ comment.id }}">
+  <strong class="comment_user space-right">
+    {{ comment.user.name }}
+  </strong>
+
+  <span class="comment_date grey">
+    {{ comment.created_at | date }}
+  </span>
+
+  <span class="comment_delete right">
+    {% if current_user == comment.user or current_user.blogger? %}
+
+      <a class="space-right" href="{{ 'article_comment_edit' | path: article.link, comment.id }}" onclick="hq.loadDialog(this);return false" title="{{ 'article_edit_comment' | t }}">
+        <i class="icon-edit"></i>
+      </a>
+
+      <a class="delete" href="{{ 'article_comment_confirm' | path: article.link, comment.id }}" onclick="hq.loadDialog(this);return false" title="{{ 'article_delete_comment' | t }}">
+        <i class="icon-trash delete"></i>
+      </a>
+
+    {% endif %}
+  </span>
+  <div class="comment_content">{{ comment.html }}</div>
+</div>

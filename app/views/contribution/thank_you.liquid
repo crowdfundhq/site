@@ -1,0 +1,96 @@
+{% comment %}Thank you message after contribution{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ 'contribution_thank_you_title' | t }}{% endtitle %}
+{% subtitle %}{{ 'contribution_thank_you_subtitle' | t }}{% endsubtitle %}
+{% body_class thank_you %}
+{% meta campaign %}
+
+<div id="thank_you">
+  <div class="grid_4 last right">
+    {% include 'campaign/campaign_badge' %}
+  </div>
+  <div class="grid_8">
+    {{ 'contribution_thank_you_intro_text' | t }}
+
+    {% if contribution.confirmed == false %}
+      <h1>
+        {{ 'contribution_thank_you_please_wait' | t }}
+      </h1>
+      <p class="hint">
+        {{ 'contribution_thank_you_still_processing' | t }}
+      </p>
+    {% else %}
+      <h1>
+        {{ campaign.name }}
+        {{ 'contribution_thank_you_loves_you' | t }}
+      </h1>
+      <p>
+        {{ 'contribution_thank_you_body' | t }}
+      </p>
+    {% endif %}
+
+    {% include 'campaign/shares' %}
+
+    <p>
+      {{ 'contribution_thank_you_contribution_support' | t }}
+      <a href="{{ 'campaign_show' | path: campaign.link }}">
+        {{ campaign.name }}.
+      </a>
+      {% if current_user %}
+        {{ 'go' | t }}
+        <a href="{{ 'user_show' | path: current_user.link }}">
+          {{ 'your_profile' | t }}
+        </a>
+      {% else %}
+        {{ 'login_and_go' | t }}
+        {{ 'your_profile' | t }}
+      {% endif %}
+      {{ 'contribution_thank_you_to_follow_campaign' | t }}
+    </p>
+    {% if contribution.payment_method == 'manual' %}
+      <p>
+        <strong>{{ 'contribution_thank_you_manual_payments' | t }}</strong>
+      </p>
+    {% endif %}
+
+    {% if current_user and contribution.reward %}
+      <p>{{ 'contribution_thank_you_reward_correct' | t }}</p>
+    {% endif %}
+
+    {% if campaign.all_or_nothing? %}
+      <p>{{ 'contribution_thank_you_contributions_refund' | t }}</p>
+    {% endif %}
+
+    <div class="thank-you-comment">
+      <div class="thank-you-confirmation" style="display:none">
+        {{ 'contribution_thank_you_your_comment' | t }}
+        <a href="{{ 'campaign_show' | path: campaign.link | query: tab: 'comments' }}">
+          {{ 'contribution_thank_you_view_comment' | t }}
+        </a>
+      </div>
+      <form class="thank-you-form" onsubmit="hq.postComment(this);return false" action="{{ 'comment_create' | path: campaign.link }}" method="POST">
+        {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+        <input type="hidden" name="contribution_id" value="{{ contribution.id }}">
+        <label for="comment_raw">
+          {{ 'contribution_thank_you_write_comment' | t }}
+        </label>
+        <textarea id="comment_raw" class="form-input-double" name="raw"></textarea>
+        <button class="btn btn-medium">
+          {{ 'campaign_comments_new' | t }}
+        </button>
+      </form>
+    </div>
+    <br>
+  </div>
+</div>
+
+<script>
+  window.contribution = {{ contribution | json: access: 'user' }};
+  document.addEventListener('DOMContentLoaded', function() {
+    hq.getDataCount();
+    if(cookies.get('comment') == contribution.id) {
+      hq.hideCommentInput();
+    }
+  });
+</script>

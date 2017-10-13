@@ -1,0 +1,22 @@
+{% comment %}Included in conversation message list /inbox{% endcomment %}
+
+<li>
+  {% if message.user.id == current_user.id %}
+    <div class="right">
+      <a onclick="hq.loadDialog(this);return false" href="{{ 'message_edit' | path: message.id }}">
+        <i class="icon-edit"></i>
+      </a>
+      <a class="delete" onclick="hq.loadDialog(this);return false" href="{{ 'message_confirm' | path: message.id }}">
+        <i class="icon-remove"></i>
+      </a>
+    </div>
+  {% endif %}
+  <div class="hint">
+    <img class="avatar" src="{{ message.user.avatar | e }}" height="20" width="20" alt="">
+    <a href="{{ 'user_show' | path: message.user.link }}">
+      {{ message.user.name }}
+    </a>
+    {{ message.created_at | date: 'short' }}
+  </div>
+  {{ message.content_html }}
+</li>

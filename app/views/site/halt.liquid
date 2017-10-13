@@ -1,0 +1,14 @@
+{% comment %}Site locked and unlock{% endcomment %}
+
+{% layout %}locked_site{% endlayout %}
+{% title %}{{ 'site_locked_title' | t }}{% endtitle %}
+
+<form accept-charset="utf-8" action="{{ 'site_unlock' | path }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <p>
+    <label for="password">{{ 'site_password' | t }}</label>
+    <br>
+    <input id="password" type="password" name="password">
+    <button class="btn">{{ 'site_unlock_site' | t }}</button>
+  </p>
+</form>

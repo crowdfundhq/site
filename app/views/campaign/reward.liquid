@@ -1,0 +1,35 @@
+{% comment %}Included in campaign campaign rewards and sidebar{% endcomment %}
+
+{% if reward.image_url != blank %}
+  <div class="reward_image">
+    <img src="{{ reward.image_url | e }}" alt="">
+  </div>
+{% endif %}
+
+<h3>{{ 'campaign_reward_contribute' | t }} {{ reward.amount | to_currency: precision: 0 }} {{ 'campaign_reward_or_more' | t }}</h3>
+{% if reward.max and reward.max > 0 %}
+  <div class="hint">
+    {{ 'campaign_reward_limited_to' | t }} {{ reward.max }} {{ 'campaign_reward_contributors' | t }}
+  </div>
+{% endif %}
+{{ reward.description_html }}
+<div class="c_count">
+  {{ reward.contributions.active.count }} {{ 'campaign_reward_count' | t }}
+</div>
+
+{% if edit and current_user.id == campaign.user.id %}
+  <div class="space-top">
+
+    <a class="btn btn-small" onclick="hq.loadDialog(this);return false" href="{{ 'reward_edit' | path: campaign.link, reward.id }}">
+      {{ 'edit' | t }}
+    </a>
+    <a class="btn btn-warning btn-small" onclick="hq.loadDialog(this);return false" href="{{ 'reward_confirm' | path: campaign.link, reward.id }}">
+      {{ 'delete' | t }}
+    </a>
+
+    <label>
+      <input type="checkbox" name="visible" onclick="hq.toggleVisibility(this)" data-url="{{ 'reward_toggle' | path: campaign.link, reward.id }}"{% if reward.visible %} checked{% endif %}>
+      {{ 'visible' | t }}
+    </label>
+  </div>
+{% endif %}

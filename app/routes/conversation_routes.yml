@@ -1,0 +1,49 @@
+GET#inbox:
+  desc: Inbox conversation
+  path: /inbox
+  requires:
+    - messages_enabled
+    - user
+
+GET#show:
+  desc: Show conversation
+  path: /conversations/:conversation_id
+  requires:
+    - messages_enabled
+    - user
+
+PUT#reply:
+  desc: Reply conversation
+  path: /conversations/:conversation_id/reply
+  requires:
+    - messages_enabled
+    - user
+
+GET#edit:
+  desc: Edit conversation
+  path: /conversations/:conversation_id/edit
+  requires:
+    - messages_enabled
+    - user
+
+PUT#update:
+  desc: Update conversation
+  path: /conversations/:conversation_id
+  requires:
+    - messages_enabled
+    - user
+
+GET#confirm:
+  desc: Confirm conversation
+  path: /conversations/:conversation_id/delete
+  requires:
+    - messages_enabled
+    - user
+
+DELETE#delete:
+  desc: Delete conversation
+  path: /conversations/:conversation_id
+  requires:
+    - messages_enabled
+    - user
+

@@ -1,0 +1,27 @@
+GET#show_pdf:
+  desc: Show report PDF
+  path: /campaigns/:campaign_link/report.pdf
+  requires:
+    - user:
+      - key: true
+
+GET#show_csv:
+  desc: Show report CSV
+  path: /campaigns/:campaign_link/report.csv
+  requires:
+    - user:
+      - key: true
+
+GET#show_json:
+  desc: Show report JSON
+  path: /campaigns/:campaign_link/report.json
+  requires:
+    - user:
+      - key: true
+
+GET#show:
+  desc: Show report HTML
+  path: /campaigns/:campaign_link/report
+  requires:
+    - user:
+      - key: true

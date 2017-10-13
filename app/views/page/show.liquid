@@ -1,0 +1,8 @@
+{% comment %}Show custom page{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ page.title }}{% endtitle %}
+{% subtitle %}{% if page.subtitle != blank %}{{ page.subtitle }}{% else %}{{ 'page_show_subtitle' | t }}{% endif %}{% endsubtitle %}
+{% body_class page %}
+{% meta page %}
+<div id="page">{{ page.html | liquid }}</div>

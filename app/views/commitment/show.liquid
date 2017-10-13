@@ -1,0 +1,24 @@
+{% comment %}Show commitment{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ commitment.name }}{% endtitle %}
+
+<div class='commitment_description'>{{ commitment.description_html }}</div>
+<p class="hint">{{ commitment.users.count }} {{ 'campaign_commitment_number_of_commitments' | t }}</p>
+{% if commitment.users != empty %}
+  <ol>
+    {% for user in commitment.users %}
+      <li>
+        <a href="{{ 'user_show' | path: user.link }}">
+          {% if current_user.id == campaign.user.id %}
+            {{ user.name }}, {{ user.email }}
+          {% else %}
+            {{ user.name }}
+          {% endif %}
+        </a>
+      </li>
+    {% endfor %}
+  </ol>
+{% else %}
+  <p class="hint">{{ 'campaign_commitment_are_no' | t }}</p>
+{% endif %}

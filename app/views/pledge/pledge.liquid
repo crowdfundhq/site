@@ -1,0 +1,35 @@
+{% comment %}Included in campaign pledges{% endcomment %}
+
+{% if pledge and pledge.user and campaign %}
+  <li class="image-list-item">
+    <img class="user-avatar" src="{% if pledge.anonymous %}{{ current_site.default_avatar | image_url }}{% else %}{{ pledge.user.avatar | e }}{% endif %}" width="50" height="50" alt="">
+
+    {% if pledge.anonymous and campaign.user and current_user.id != campaign.user.id %}
+      {{ 'contribution_anonymous' | t }}
+    {% else %}
+      <a href="{{ 'user_show' | path: pledge.user.link }}">
+        {{ pledge.user.name }}{% if current_user.id == campaign.user.id %},{% endif %}
+      </a>
+      {% if current_user.id == campaign.user.id %}
+        <a href="mailto:{{ pledge.user.email }}">{{ pledge.user.email }}</a>
+      {% endif %}
+    {% endif %}
+    <br>
+
+    {{ 'campaign_commitment_pledged_to' | t }}
+    <a href="{{ campaign.url | e }}">{{ campaign.name }}</a>
+    {{ 'on' | t }}
+    {{ pledge.created_at | date }}
+    <div class="hint commitment-pledge-name">{{ pledge.commitment.name }}</div>
+    <div class="commitment-pledge-comment">
+      <div class="commitment-pledge-text-raw hint">
+        {{ pledge.comment | truncate: 50 }}
+        {% if pledge.comment.size > 50 %}
+          <a class="small-link" onclick="hq.showPledgeComment(this);return false">{{ 'commitment_pledge_show_comment' | t }}</a>
+        {% endif %}
+      </div>
+      <div class="commitment-pledge-text-html" style="display:none">{{ pledge.comment_html }}</div>
+    </div>
+    <div class="clear"></div>
+  </li>
+{% endif %}

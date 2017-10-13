@@ -1,0 +1,25 @@
+{% comment %}User approval{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ 'user_approval_title' | t }} {{ user.name }}{% endtitle %}
+{% subtitle %}{{ 'user_approval_subtitle' | t }}{% endsubtitle %}
+{% body_class approval %}
+
+<div class="user-approval-page">
+  <div class='user-approval-introduction'>
+    {{ 'user_approval_introduction' | t }}
+  </div>
+
+  <form class="user-approval-form" action="{{ 'user_submit_approval' | path: user.link }}" method="POST">
+    {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+    <div class="user-approval-fields">
+      {% comment %} Custom fields {% endcomment %}
+      {% assign form_type = 'approval' %}
+      {% assign model = user %}
+      {% include 'site/fields' with current_site.approval_fields %}
+    </div>
+    <div class="user-approval-form-button">
+      <button class="btn">{{ 'submit' | t }}</button>
+    </div>
+  </form>
+</div>

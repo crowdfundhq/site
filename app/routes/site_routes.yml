@@ -1,0 +1,26 @@
+GET#show_lock:
+  desc: Show lock site
+  path: /site/halt
+  requires:
+    - site
+    - password_enabled
+
+POST#unlock:
+  desc: Unlock site
+  path: /site/unlock
+  requires:
+    - site
+    - password_enabled
+
+GET#lock:
+  desc: Lock site
+  path: /site/lock
+  requires:
+    - site
+    - password_enabled
+
+GET#login:
+  desc: Login site
+  path: /site/login
+  requires: []
+

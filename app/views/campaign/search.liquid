@@ -1,0 +1,35 @@
+{% comment %}Search for campaign{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ 'search' | t }} {{ current_site.title_separator }} {{ params.q | h }}{% endtitle %}
+{% subtitle %}{{ params.q | h }}{% endsubtitle %}
+{% tagline %}{{ 'search' | t }}{% endtagline %}
+{% body_class search %}
+
+{% assign category_name = 'categories' | t %}
+{% assign paginate = params.q | search: params.location | paginate %}
+{% assign campaigns = paginate.entries %}
+
+<div id="homepage">
+  {% include 'campaign/categorybar' %}
+
+  <div id="badges" class="well white">
+    {% if campaigns != empty %}
+      {% for campaign in campaigns %}
+        {% assign last = forloop.index | modulo: current_site.badges_per_row %}
+        {% include 'campaign/campaign_badge' %}
+      {% endfor %}
+      <div class="clear"></div>
+      {% if paginate and paginate.total_pages > 1 %}
+        {{ paginate.arrows }}
+      {% endif %}
+    {% else %}
+      <p>
+        {{ 'campaign_campaign_badges_no_campaigns' | t }}
+        "{{ params.q | h }}"
+      <p>
+    {% endif %}
+    <div class="clear"></div>
+  </div>
+</div>
+{% include 'campaign/campaign_js_includes' %}

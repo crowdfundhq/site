@@ -1,0 +1,17 @@
+{% comment %}Delete membership{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'membership_delete_title' | t }} {{ group.name }}{% endtitle %}
+
+<p>{{ 'membership_delete_info' | t }}</p>
+
+<form action="{{ 'membership_delete' | path: group.link }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="hidden" name="users" value="{{ current_user.email }}">
+
+  <div>
+    <button class="btn">{{ 'membership_delete_leave' | t }}</button>
+    <a href="{{ 'group_show' | path: group.link }}" onclick="hq.closeDialog();return false">{{ 'cancel' | t }}</a>
+  </div>
+</form>

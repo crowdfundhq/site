@@ -1,0 +1,41 @@
+GET#list:
+  desc: Article comment list
+  path: /articles/:article_link/comment/list
+  requires:
+    - blog_enabled
+    - user
+
+POST#create:
+  desc: Create article comment
+  path: /articles/:article_link/comments
+  requires:
+    - blog_enabled
+    - user
+
+GET#edit:
+  desc: Edit article comment
+  path: /articles/:article_link/comments/:comment_id/edit
+  requires:
+    - blog_enabled
+    - user
+
+PUT#update:
+  desc: Update article comment
+  path: /articles/:article_link/comments/:comment_id
+  requires:
+    - blog_enabled
+    - user
+
+GET#confirm:
+  desc: Confirm article comment
+  path: /articles/:article_link/comments/:comment_id/delete
+  requires:
+    - blog_enabled
+    - user
+
+DELETE#delete:
+  desc: Delete article comment
+  path: /articles/:article_link/comments/:comment_id
+  requires:
+    - blog_enabled
+    - user

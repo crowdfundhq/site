@@ -1,0 +1,46 @@
+GET#new:
+  desc: New login
+  path: /user/login
+  requires:
+    - no_user
+    - dialog
+
+POST#create:
+  desc: Create login
+  path: /user/login
+  requires:
+    - no_user
+
+GET#setup:
+  desc: Setup login
+  path: /auth/:provider/setup
+  requires: []
+
+GET#callback:
+  desc: Callback login
+  path: /auth/:name/callback
+  requires:
+    - no_user
+
+POST#callback:
+  desc: Callback login
+  path: /auth/:name/callback
+  requires:
+    - no_user
+
+GET#auth_failure:
+  desc: Auth failure login
+  path: /auth_failure
+  requires: []
+
+GET#failure:
+  desc: Failure login
+  path: /auth/failure
+  requires: []
+
+GET#logout:
+  desc: Logout login
+  path: /user/logout
+  requires:
+    - user
+

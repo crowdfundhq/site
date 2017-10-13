@@ -1,0 +1,10 @@
+{% comment %}Edit blog article{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'edit' | t }} "{{ article.title }}"{% endtitle %}
+
+<form accept-charset="utf-8" onsubmit="this.querySelector('#submit_type').value=this.button_clicked;hq.postDialog(this);return false" action="{{ 'article_update' | path: article.link }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="PUT">
+  {% include 'article/form' %}
+</form>

@@ -1,0 +1,23 @@
+{% comment %}Show image URL in campaign files{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'campaign_files_copy_url' | t }}{% endtitle %}
+
+<h4 id="copy_info"></h4>
+<p>
+  <label>
+    {{ 'campaign_files_direct_url' | t }}
+    <br>
+    <input id="copy_field" type="text" value="{{ image.url | e }}" style="width:80%" onfocus="this.select()" onclick="this.select()" readonly="true">
+  </label>
+  <a href="" onclick="hq.closeDialog();return false">
+    {{ 'cancel' | t }}
+  </a>
+</p>
+<script class="loadscript">
+  var label = document.getElementById('copy_info');
+  var isMac = navigator.platform.toUpperCase().indexOf('MAC')>=0;
+  label.textContent = "{{ 'campaign_files_copy_to_clipboard' | t }}: " + (isMac ? 'Cmd + C' : 'Ctrl+C');
+  var field = document.getElementById('copy_field');
+  field.select();
+</script>

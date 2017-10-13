@@ -1,0 +1,34 @@
+{% comment %}Campaign updates{% endcomment %}
+
+{% assign query = campaign.updates %}
+{% if current_user.id != campaign.user_id %}{% assign query = query.published %}{% endif %}
+{% assign paginate = query | order: created_at: '-1' | paginate %}
+{% assign updates = paginate.entries %}
+
+<input id="total_entries" type="hidden" value="{{ paginate.total_entries }}">
+{% if campaign and current_user.id == campaign.user_id %}
+  <div class="campaign-update-new-button">
+    <a href="{{ 'update_new' | path: campaign.link }}" onclick="hq.loadDialog(this);return false">{{ 'campaign_updates_new_button' | t }}</a>
+  </div>
+{% endif %}
+
+{% if updates != empty %}
+  <hr>
+  <ul id="updates_list" class="block-list fr-view">
+    {% for update in updates %}
+      {% include 'update/update' with update %}
+    {% endfor %}
+  </ul>
+
+  {% if updates.size < paginate.total_entries %}
+    <div class="load-more-data">
+      <a class="small" href="{{ 'update_list' | path: campaign.link }}" data-list="updates_list" data-count="{{ paginate.total_entries }}" data-per-page="{{ settings.per_page }}" onclick="hq.loadMore(this);return false">
+        {{ 'load_more' | t }} ...
+      </a>
+    </div>
+  {% endif %}
+{% else %}
+  <p class="campaign-no-updates">
+    {{ 'campaign_updates_no_updates_yet' | t }}
+  </p>
+{% endif %}

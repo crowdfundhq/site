@@ -1,0 +1,139 @@
+{% comment %}Campaign badge on discover and home page{% endcomment %}
+
+{% if single %}{% layout %}embed{% endlayout %}{% assign iframe = true %}{% assign last = 0 %}{% endif %}
+
+<div class="campaign_badge {% if campaign.expired? %}finished{% else %}active{% endif %}{% if big %} badge-big{% endif %}{% if last == 0 %} badge-last{% endif %}">
+
+  <div class="campaign_header">
+    <div class="campaign_image">
+      <a href="{{ campaign.url }}"{% if iframe %} target="_top"{% endif %}>
+        {% if campaign.video_image != blank %}
+          <img src="{{ campaign.video_image | e }}" alt="{{ campaign.name }}">
+        {% else %}
+          <div class="no_image"><i class="icon-image"></i></div>
+        {% endif %}
+      </a>
+    </div>
+
+    <div class="campaign_category">
+      {% if campaign.category_name != blank %}
+        {{ campaign.category_name }}
+      {% else %}
+        {{ 'campaign_campaign_badge_category_not_set' | t }}
+      {% endif %}
+    </div>
+
+    <h1><a href="{{ campaign.url }}"{% if iframe %} target="_top"{% endif %}>{{ campaign.name }}</a></h1>
+
+    <div class="campaign_owner" data-link="{{ campaign.user.link }}">
+      {{ 'by' | t }}
+      {% if campaign.user.name %}
+        {{ campaign.user.name }}
+      {% else %}
+        {{ 'campaign_campaign_badge_anonymous' | t }}
+      {% endif %}
+    </div>
+
+    <div class="campaign_headline">
+      {% if campaign.headline != blank %}
+        {{ campaign.headline }}
+      {% else %}
+        {{ 'campaign_campaign_badge_headline_not_set' | t }}
+      {% endif %}
+    </div>
+
+    {% if campaign.show_location? %}
+      <div class="campaign_location">
+        {% if campaign.has_location? %}
+          <a href="{{ 'campaign_search' | path | query: q: campaign.location, location: true }}">
+            <div class="icon icon-location"></div>
+            {{ campaign.location }}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+    <div class="clear"></div>
+  </div>
+
+  <div class="campaign_progress">
+    {% if campaign.successful? and campaign.can_expire? %}
+      <div class="campaign_successful">
+        {{ 'campaign_campaign_badge_successful' | t }}
+      </div>
+
+    {% else %}
+      <div class="progressbar">
+        <div class="progress" style="width:{% if campaign.percent > -1 and campaign.percent < 100 %}{{ campaign.percent | round }}{% else %}100{% endif %}%"></div>
+      </div>
+    {% endif %}
+
+    <div class="progress_info">
+      <table>
+        <tr class="numbers">
+          {% if campaign.goal > 0 %}
+            <td>{{ campaign.percent | round }}%</td>
+          {% endif %}
+          <td>
+            {% if campaign.voting? %}
+              {{ campaign.votes.count }}
+            {% else %}
+              {{ campaign.pledged | to_currency: precision: 0 }}
+            {% endif %}
+          </td>
+
+          <td>
+            {% if campaign.expired? %}
+              {% if campaign.funded? %}
+                {{ 'campaign_campaign_badge_funded' | t }}
+              {% else %}
+                {{ 'campaign_campaign_badge_finished' | t }}
+              {% endif %}
+            {% elsif campaign.never_ending? %}
+              {% if campaign.can_receive_contributions? %}
+                {{ 'campaign_campaign_badge_open' | t }}
+              {% else %}
+                {{ 'campaign_campaign_badge_closed' | t }}
+              {% endif %}
+            {% else %}
+              {{ campaign.status }}
+            {% endif %}
+          </td>
+        </tr>
+
+        <tr class="desc">
+          {% if campaign.goal > 0 %}
+            <td>
+              {% if campaign.voting? %}
+                {{ 'campaign_campaign_badge_reached' | t }}
+              {% else %}
+                {{ 'campaign_campaign_badge_funded' | t }}
+              {% endif %}
+            </td>
+          {% endif %}
+          <td>
+            {% if campaign.voting? %}
+              {{ 'campaign_campaign_badge_votes' | t }}
+            {% else %}
+              {{ 'campaign_campaign_badge_contributed' | t }}
+            {% endif %}
+          </td>
+
+          <td>
+            {% if campaign.expired? %}
+              {{ campaign.expires_at | date: 'short' }}
+            {% elsif campaign.never_ending? %}
+              {% if campaign.can_receive_contributions? %}
+                {{ campaign.approved_at | date: 'short' }}
+              {% else %}
+                {{ campaign.closed_at | date: 'short' }}
+              {% endif %}
+            {% else %}
+              {{ 'campaign_campaign_badge_to_go'| t }}
+            {% endif %}
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>

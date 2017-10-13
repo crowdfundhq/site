@@ -1,0 +1,23 @@
+{% comment %}Delete file{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'campaign_files_delete_file' | t }}{% endtitle %}
+
+<div class="file-image center">
+  {% if image.image? %}
+    <img src="{{ image.thumb_url | e }}" class="image-thumb" alt="{{ image.name }}">
+  {% else %}
+    <div class="file-extension">{{ image.extension }}</div>
+  {% endif %}
+</div>
+
+<p class="center">{{ image.name }}</p>
+
+<form class="center" action="{{ 'image_delete' | path: campaign.link, image.id }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="DELETE">
+  <button class="btn btn-warning">{{ 'delete' | t }}</button>
+  <a class="cancel" onclick="hq.closeDialog();return false" href="{{ 'campaign_show_section' | path: campaign.link, 'files' }}">
+    {{ 'cancel' | t }}
+  </a>
+</form>

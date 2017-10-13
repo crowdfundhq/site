@@ -1,0 +1,19 @@
+{% comment %}Dialog layout{% endcomment %}
+
+<div id="dialog">
+  <div id="dialog_header">
+    <a class="close" href="{{ 'campaign_index' | path }}" onclick="hq.closeDialog();return false" title="{{ 'close' | t }}">
+      <i class="icon-remove-sign"></i>
+    </a>
+    <h4>{% if layout.title != blank %}{{ layout.title }}{% else %}&nbsp;{% endif %}</h4>
+  </div>
+  <div id="dialog_flash">
+    {% if flash.error %}
+      <div id="dialog_error">{{ flash.error }}</div>
+    {% endif %}
+    {% if flash.info %}
+      <div id="dialog_info">{{ flash.info }}</div>
+    {% endif %}
+  </div>
+  <div id="dialog_content">{{ content }}</div>
+</div>

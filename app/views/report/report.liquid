@@ -1,0 +1,99 @@
+{% comment %}Included in campaign report PDF and show{% endcomment %}
+
+<div class="campaign-report-view">
+  {% if campaign.approved %}
+    {% assign list = campaign.activity %}
+
+    <div class="campaign-report-current-date right hint">{{ current_site.now | date }}</div>
+    <h3 class="campaign-report-intro-title">{{ campaign.name }}</h3>
+    <div class="campaign-report-intro-by hint">by {{ campaign.user.name }}, {{ campaign.user.email }}</div>
+
+    <div class="campaign-report-main">
+      <div class="campaign-report-text">
+        <strong>{{ 'campaign_report_created' | t }}</strong>
+        {{ campaign.created_at | date }}
+      </div>
+      <div class="campaign-report-text">
+        <strong>{{ 'campaign_report_start' | t }}</strong>
+        {{ campaign.approved_at | date }}
+      </div>
+      <div class="campaign-report-text">
+        <strong>{{ 'campaign_report_end' | t }}</strong>
+        {{ campaign.expires_at | date }}
+      </div>
+      <div class="campaign-report-text">
+        <strong>{{ 'campaign_report_status' | t }}</strong>
+        {{ campaign.status }}
+      </div>
+      <div class="campaign-report-text">
+        <strong>{{ 'campaign_report_contributions' | t }}</strong>
+        {{ list.size }}
+      </div>
+      {% if campaign.voting? %}
+        <div class="campaign-report-text">
+          <strong>{{ 'campaign_report_votes' | t }}</strong>
+          {{ campaign.votes.count }}
+        </div>
+      {% endif %}
+      <div class="campaign-report-text">
+        <strong>{{ 'campaign_report_total' | t }}</strong>
+        {{ campaign.pledged | to_currency }}
+      </div>
+    </div>
+
+    <div class="clear"></div>
+
+    {% if list.size > 0 %}
+      <ul class="campaign-report-list">
+        {% for item in list %}
+          <li class="campaign-report-item">
+            <strong>
+              {{ item.user.name }}, {{ item.user.email }}, {{ item.created_at | date }}
+            </strong>
+            <div class="campaign-report-subheader campaign-report-model-{{ item.model_name }}">
+              {% if item.model_name == 'vote' %}
+                <div class="campaign-report-hint">
+                  {{ 'campaign_report_vote_registered' | t }}
+                  {% if item.anonymous %}, {{ 'campaign_report_anonymous' | t }}{% endif %}
+                </div>
+              {% elsif item.model_name == 'contribution' %}
+                <strong>{{ 'campaign_report_contribution' | t }}</strong>
+                {{ item.currency }} {{ item.amount | to_currency }}
+                <strong>{{ 'campaign_report_payment' | t }}</strong>
+                {{ item.payment_method }},
+                {{ item.payment_type | default: 'direct' }}
+
+                {% if item.reward %}
+                  <div class="campaign-report-rewards">
+                    <strong>{{ 'campaign_report_reward' | t }}</strong>
+                    {{ item.reward.amount | to_currency }}
+                    <div class="campaign-report-rewards-description">
+                      {{ item.reward.description_html }}
+                    </div>
+                    {% if item.user %}
+                      <div class="campaign-report-rewards-address">
+                        <strong>{{ 'campaign_report_address' | t }}</strong>
+                         {% if item.user.address != blank %}
+                          {{ item.user.address | newline_to_br }}
+                        {% else %}
+                          {{ 'campaign_report_please_contact' | t }} {{ item.user.name }}, {{ item.user.email }}
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              {% else %}
+                <strong>{{ 'campaign_report_pledge' | t }}</strong>
+                {{ item.commitment.name }}
+              {% endif %}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>{{ 'campaign_report_nothing_yet' | t }}</p>
+    {% endif %}
+  {% else %}
+    <p>{{ 'campaign_report_not_started' | t }}</p>
+  {% endif %}
+</div>

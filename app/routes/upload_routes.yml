@@ -1,0 +1,12 @@
+POST#create:
+  desc: Create upload
+  path: /uploads/:config
+  requires:
+    - user
+
+DELETE#delete:
+  desc: Delete upload
+  path: /uploads/:config/:url
+  requires:
+    - user
+

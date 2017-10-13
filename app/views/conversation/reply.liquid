@@ -1,0 +1,11 @@
+{% comment %}Included in conversation index /inbox{% endcomment %}
+
+<div id="reply-section">
+  <form accept-charset="utf-8" onsubmit="hq.replyMessage(this);return false" action="{{ 'conversation_reply' | path: conversation.id }}" method="POST">
+    {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+    <input type="hidden" name="_method" value="PUT">
+    <textarea id="message_content" name="content" placeholder="{{ 'message_content' | t }}">{{ message.content }}</textarea>
+    <br>
+    <button class="btn btn-med">{{ 'message_reply' | t }}</button>
+  </form>
+</div>

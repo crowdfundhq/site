@@ -1,0 +1,28 @@
+{% comment %}Braintree payment{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ campaign.name }}{% endtitle %}
+{% subtitle %}{{ 'contribution_payment_subtitle' | t }}{% endsubtitle %}
+{% body_class contribution %}
+
+<form id="checkout" method="POST" accept-charset="utf-8" action="{{ 'gateway_create' | path: campaign.link, contribution.id }}">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <div id="payment-form"></div>
+    <button class="btn btn-primary submit-button space-top" id="submit_button">
+      {{ 'contribution_stripe_form_confirm_payment' | t }}
+    </button>
+    <a href="{{ 'contribution_new' | path: campaign.link }}">
+      {{ 'cancel' | t }}
+    </a>
+    <div class="clear" style="height:20px"></div>
+    <div class="field_error" id="payment-errors" style="display:none"></div>
+</form>
+
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+<script>
+  var clientToken = '{{ clientToken }}';
+
+  braintree.setup(clientToken, 'dropin', {
+    container: 'payment-form'
+  });
+</script>

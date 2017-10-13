@@ -1,0 +1,6 @@
+{% comment %}Contributions for user{% endcomment %}
+
+{% for contribution in contributions %}
+  {% assign campaign = contribution.campaign %}
+  {% include 'contribution/contribution' with contribution %}
+{% endfor %}

@@ -1,0 +1,9 @@
+{% comment %}Create new reward{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'reward_new_title' | t }}{% endtitle %}
+
+<form accept-charset="utf-8" onsubmit="hq.postDialog(this);return false" action="{{ 'reward_create' | path: campaign.link }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  {% include 'reward/form' %}
+</form>

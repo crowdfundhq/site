@@ -1,0 +1,16 @@
+{% comment %}Delete group{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'group_form_delete' | t }} "{{ group.name }}"?{% endtitle %}
+
+<div class="group-image">
+  <img alt="{{ group.name }}" src="{{ group.image | e }}">
+</div>
+<div class="spacer"></div>
+
+<form accept-charset="UTF-8" action="{{ 'group_delete' | path: group.link }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input name="_method" type="hidden" value="DELETE">
+  <button class="btn btn-warning">{{ 'delete' | t }}</button>
+  <a href="{{ 'group_show' | path: group.link }}" onclick="hq.closeDialog();return false">{{ 'cancel' | t }}</a>
+</form>

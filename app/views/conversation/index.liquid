@@ -1,0 +1,75 @@
+{% comment %}Conversation list at /inbox{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ 'message_inbox' | t }}{% endtitle %}
+{% subtitle %}{{ 'message_showing_all' | t }}{% endsubtitle %}
+{% body_class message %}
+
+{% assign paginate = current_site.conversations.active | order: updated_at: '-1' | paginate %}
+{% assign conversations = paginate.entries %}
+
+{% if conversations == empty %}
+  <p>{{ 'message_no_messages' | t }}</p>
+{% else %}
+  <div class="grid_5" id="conversation_list">
+    <ul id="conversation_list_items" class="block-list">
+      {% for conversation in conversations %}
+        {% assign recipient = conversation.user %}
+        {% if current_user.id == conversation.user.id %}{% assign recipient = conversation.other_user %}{% endif %}
+
+        {% if recipient %}
+          <li onclick="hq.setMessage(this)" data-id="{{ conversation.id }}">
+            <div class="right">
+              {{ conversation.updated_at | date: 'short' }}
+            </div>
+            <a class="hint" href="{{ 'user_show' | path: recipient.link }}" target="_blank">
+              <img class="avatar push-left" src="{{ recipient.avatar | e }}" height="40" width="40" alt="">
+              {{ recipient.name | truncate: 35 }}
+            </a>
+            <br>
+            <a href="{{ 'conversation_show' | path: conversation.id }}" onclick="hq.setMessage(this);return false">
+              {{ conversation.subject }}
+            </a>
+
+            <div class="conversation-buttons right">
+              {% assign path = 'conversation_inbox' | path %}
+              <a onclick="hq.loadDialog(this);return false" href="{{ 'message_new' | path: recipient.link | query: redirect: path }}">
+                <i class="icon-plus"></i>
+              </a>
+              <a onclick="hq.loadDialog(this);return false" href="{{ 'conversation_edit' | path: conversation.id }}">
+                <i class="icon-edit"></i>
+              </a>
+              <a class="delete" onclick="hq.loadDialog(this);return false" href="{{ 'conversation_confirm' | path: conversation.id }}">
+                <i class="icon-remove"></i>
+              </a>
+            </div>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    {% if paginate and paginate.total_pages > 1 %}
+      <div class="paginator conversations-inbox-paginate space-top small">{{ paginate.default }}</div>
+    {% endif %}
+  </div>
+
+  <div class="grid_7 last" id="conversation_show"></div>
+{% endif %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    // Load conversations
+    var conversations = document.getElementById('conversation_list_items')
+      , conversation = cookies.get('conversation')
+      , button;
+
+    if(conversations) {
+      // Load first conversation
+      if(conversation) {
+        button = conversations.querySelector('li[data-id="' + conversation + '"]');
+      } else {
+        button = conversations.querySelector('li');
+      }
+    }
+    if(button && !hq.isMobile()) { hq.setMessage(button, true);}
+  });
+</script>

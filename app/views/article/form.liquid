@@ -1,0 +1,142 @@
+{% comment %}Included in article edit and new{% endcomment %}
+
+<div class="article-form">
+  <label for="article_image_url">{{ 'article_form_image' | t }}</label>
+  <br>
+
+  <div id="image_preview" data-url="{{ article.image_url | e }}">
+    <div class="article-preview preview_frame">
+      {% if article.image_url != blank %}
+        <img src="{{ article.image_url | e }}" alt="">
+      {% endif %}
+    </div>
+  </div>
+  <br>
+
+  <input id="article_image_url" name="image_url" type="text" value="{{ article.image_url | e }}">
+  {% if article.errors.image_url != blank %}
+    <span class="field_error">{{ article.errors.image_url | join: ', ' }}</span>
+  {% endif %}
+  <br>
+
+  <div class="article-dropbox dropbox">
+    <a class="dropbox-clickable article_image_upload">
+      {{ 'upload' | t }}
+    </a>
+    <span class="dropbox-progress"></span>
+    <span class="dropbox-error"></span>
+  </div>
+</div>
+<br>
+
+<p>
+  <label for="article_title">{{ 'article_form_title' | t }}</label>
+  <br>
+  <input id="article_title" name="title" type="text" value="{{ article.title }}" style="width:450px">
+  {% if article.errors.title != blank %}
+    <span class="field_error">{{ article.errors.title | join: ', ' }}</span>
+  {% endif %}
+  <br>
+
+  {% if article.persisted? %}
+    <label>
+      <input id="update_link" name="update_link" type="checkbox" value="1">
+      {{ 'update_link' | t }}
+    </label>
+  {% endif %}
+</p>
+
+<p>
+  <label for="article_description">{{ 'article_form_description' | t }}</label>
+  <br>
+  <textarea id="article_description" class="form-input-low" name="description">{{ article.description }}</textarea>
+  {% if article.errors.description != blank %}
+    <span class="field_error">{{ article.errors.description | join: ', ' }}</span>
+  {% endif %}
+</p>
+
+<div>
+  <label for="article_content">{{ 'article_form_content' | t }}</label>
+  <br>
+  {% include 'article/editor' %}
+  <br>
+
+  {% if article.errors.content != blank %}
+    <span class="field_error">{{ article.errors.content | join: ', ' }}</span>
+  {% endif %}
+</div>
+
+<p>
+  <label for="article_tags">{{ 'article_form_tags' | t }}</label>
+  <input id="article_tags" name="tags" style="width:250px" type="text" value="{{ article.tags | join: ', ' | h }}">
+</p>
+
+<p>
+  <input id="submit_type" name="commit" type="hidden" value="save">
+
+  {% if article.published == false %}
+    <button class="btn" onclick="this.form.button_clicked='draft'">{{ 'article_form_save_draft' | t }}</button>
+    <button class="btn" onclick="this.form.button_clicked='finish'">{{ 'article_form_save_finish' | t }}</button>
+    <button class="btn" onclick="this.form.button_clicked='submit'">{{ 'article_publish' | t }}</button>
+  {% else %}
+    <button class="btn">{{ 'save' | t }}</button>
+    <button class="btn btn-warning" onclick="this.form.button_clicked='unpublish'">{{ 'article_form_retract' | t }}</button>
+  {% endif %}
+
+  <a href="" onclick="hq.closeDialog();return false">{{ 'cancel' | t }}</a>
+</p>
+
+<script class="loadscript">
+  var el = document.querySelector('.article-dropbox');
+  var link = el.querySelector('.dropbox-clickable');
+  var meter = el.querySelector('.dropbox-progress');
+  var preview = document.querySelector('.article-preview');
+  var input = document.querySelector('#article_image_url');
+  var error = el.querySelector('.dropbox-error');
+
+  var dz = new Dropzone(el, {
+    url: '/uploads/article',
+    clickable: link,
+    previewsContainer: false,
+    paramName: 'datafile',
+    acceptedFiles: 'image/*',
+    maxFiles: 1,
+    maxFilesize: 20,
+    dictInvalidFile: "{{ 'upload_invalid_images_only' | t }}",
+    dictFileTooBig: "{{ 'upload_max_filesize' | t }} 20 MB",
+    dictResponseError: "{{ 'upload_connection_error' | t }}"
+  });
+
+  // Init
+  link.addEventListener('click', function(){
+    meter.textContent = '';
+    error.textContent = '';
+  });
+
+  // Update the total progress bar
+  dz.on('totaluploadprogress', function(progress) {
+    if(dz.files.length > 0) {
+      progress = parseInt(progress)
+      meter.textContent = progress + '%';
+    }
+  });
+
+  // Hide the total progress bar when nothing's uploading anymore
+  dz.on('queuecomplete', function() {
+    dz.removeAllFiles();
+    meter.textContent = '';
+  });
+
+  // Insert url into preview and input when done
+  dz.on('success', function(file, data) {
+    data = JSON.parse(data);
+    preview.innerHTML = '<img src="' + encodeURI(data.url) + '" alt="">';
+    input.value = encodeURI(data.url);
+  });
+
+  dz.on('error', function(file, message) {
+    meter.textContent = '';
+    error.textContent = message;
+  });
+
+</script>

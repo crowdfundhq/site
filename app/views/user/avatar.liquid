@@ -1,0 +1,123 @@
+{% comment %}User avatar profile image{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'user_edit_image_edit' | t }}{% endtitle %}
+
+<form accept-charset="utf-8" onsubmit="hq.postDialog(this);return false" action="{{ 'user_update_avatar' | path: user.link }}" method="POST">
+  {{ security.forgery_tag }}{{ security.honeypot_captcha }}
+  <input type="hidden" name="_method" value="PUT">
+  <input id="user_avatar" name="avatar_upload" type="hidden" value="{{ user.avatar_upload | e }}">
+
+  <label>
+    <input id="user_avatar_type" type="radio" name="avatar_type" value="url"{% if user.avatar_type == 'url' %} checked{% endif %}>
+    {{ 'url' | t }} (gif, jpg, png, bmp)
+  </label>
+  <br>
+  <div id="image_preview" data-url="{{ user.avatar_upload | e }}" class="preview-small">
+    <div class="preview_frame avatar-preview">
+      {% if user.avatar_upload != blank %}
+        <img src="{{ user.avatar_upload | e }}" alt="">
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="clear"></div>
+
+  <div class="avatar-dropbox dropbox dropbox-inline">
+    <a class="dropbox-clickable">{{ 'upload' | t }}</a>
+    <span class="dropbox-progress"></span>
+    <span class="dropbox-error"></span>
+  </div>
+
+  {% if user.errors.avatar != blank %}
+    <div id="user_avatar_error">
+      <br>
+      <div class="field_error">{{ user.errors.avatar | join: ', ' }}</div>
+    </div>
+  {% endif %}
+
+  {% if user.facebook_avatar != blank %}
+    <div class="spacer"></div>
+    <div>
+      <label>
+        <input type="radio" name="avatar_type" value="facebook*{{ user.facebook_avatar | e }}"{% if user.avatar_type == 'facebook' %} checked{% endif %}>
+        {{ 'user_avatar_facebook' | t }}
+        <div class="spacer"></div>
+        <img src="{{ user.facebook_avatar | e }}" alt="">
+      </label>
+    </div>
+  {% endif %}
+
+  <div class="spacer"></div>
+  <div>
+    <label>
+      <input type="radio" name="avatar_type" value="gravatar*{{ user.gravatar_url | e }}"{% if user.avatar_type == 'gravatar' %} checked{% endif %}>
+      {{ 'user_avatar_gravatar' | t }}
+      <br>
+    </label>
+    <div class="spacer"></div>
+    <img src="{{ user.gravatar_url | e }}" alt="">
+  </div>
+
+  <div>
+    <br>
+    <button class="btn" onclick="window.reload=true">{{ 'save' | t }}</button>
+    &nbsp;
+    <a href="{{ 'user_edit' | path }}" onclick="hq.loadDialog(this);return false">{{ 'cancel' | t }}</a>
+  </div>
+</form>
+
+<script class="loadscript">
+  var el = document.querySelector('.avatar-dropbox');
+  var link = el.querySelector('.dropbox-clickable');
+  var meter = el.querySelector('.dropbox-progress');
+  var error = el.querySelector('.dropbox-error');
+
+  var preview = document.querySelector('.avatar-preview');
+  var input = document.querySelector('#user_avatar');
+
+  var dz = new Dropzone(el, {
+    url: '/uploads/avatar',
+    clickable: link,
+    previewsContainer: false,
+    paramName: 'datafile',
+    acceptedFiles: 'image/*',
+    maxFiles: 1,
+    maxFilesize: 20,
+    dictInvalidFile: "{{ 'upload_invalid_images_only' | t }}",
+    dictFileTooBig: "{{ 'upload_max_filesize' | t }} 20 MB",
+    dictResponseError: "{{ 'upload_connection_error' | t }}"
+  });
+
+  // Init
+  link.addEventListener('click', function(){
+    meter.textContent = '';
+    error.textContent = '';
+  });
+
+  // Update the total progress bar
+  dz.on('totaluploadprogress', function(progress) {
+    if(dz.files.length > 0) {
+      progress = parseInt(progress)
+      meter.textContent = progress + '%';
+    }
+  });
+
+  // Hide the total progress bar when nothing's uploading anymore
+  dz.on('queuecomplete', function() {
+    dz.removeAllFiles();
+    meter.textContent = '';
+  });
+
+  // Insert url into preview and input when done
+  dz.on('success', function(file, data) {
+    data = JSON.parse(data);
+    input.value = encodeURI(data.url);
+    preview.innerHTML = '<img src="' + encodeURI(data.url) + '" alt="">';
+  });
+
+  dz.on('error', function(file, message) {
+    meter.textContent = '';
+    error.textContent = message;
+  });
+</script>

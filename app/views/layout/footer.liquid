@@ -1,0 +1,20 @@
+{% comment %}Included in default layout{% endcomment %}
+
+<ul class="nav no-style">
+  {% assign pages = current_site.pages.visible.all %}
+  {% for page in pages %}
+    <li><a href="{{ 'page_show' | path: page.link }}">{{ page.title }}</a></li>
+  {% endfor %}
+  {% if current_site.blog_admin != 'disabled' %}
+    <li><a href="{{ 'article_blog' | path }}">{{ 'layout_site_blog' | t }}</a></li>
+  {% endif %}
+  <li><a href="{{ 'contact_new' | path }}">{{ 'layout_site_contact' | t }}</a></li>
+</ul>
+
+{% unless current_site.hide_powered_by %}
+  <a class="powered-by" href="https://crowdfundhq.com">
+    <span class="small">{{ 'layout_site_powered_by' | t }}</span>
+    <br>
+    {{ 'crowdfundhq' | t }}
+  </a>
+{% endunless %}

@@ -1,0 +1,37 @@
+{% comment %}Show blog article at /blog{% endcomment %}
+
+{% layout %}{{ layout.default }}{% endlayout %}
+{% title %}{{ 'blog_title' | t }}{% endtitle %}
+{% subtitle %}{{ article.title }}{% endsubtitle %}
+{% meta article %}
+{% assign disable_comments = false %}
+
+{% if params.q != blank %}
+  <a href="{{ 'article_search' | path | query: q: params.q }}">
+    <i class="icon-chevron-left icon-drop"></i>
+    {{ 'article_return_search' | t }}
+  </a>
+{% else %}
+  <a href="{{ 'article_blog' | path }}">
+    <i class="icon-chevron-left icon-drop"></i>
+    {{ 'article_return_blog' | t }}
+  </a>
+{% endif %}
+
+<br><br>
+
+<div class="blog-sidebar-wrapper grid_4 right last">
+  <div>{% include 'article/sidebar' %}</div>
+</div>
+
+<div class="blog-content-wrapper grid_8">
+  <div class="grid_12 last">
+    {% include 'article/blog_bar' %}
+  </div>
+
+  <div class="clear"></div>
+
+  <div class="well white box-shadowed fr-view">
+    {% include 'article/article' with article %}
+  </div>
+</div>

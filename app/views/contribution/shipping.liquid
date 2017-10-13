@@ -1,0 +1,39 @@
+{% comment %}Contribution shipping details{% endcomment %}
+
+{% layout %}{{ layout.dialog }}{% endlayout %}
+{% title %}{{ 'campaign_rewards_shipping_details' | t }}{% endtitle %}
+
+<div class="right show_address_rewards">
+  {% if contribution.show_shipping_link %}
+    <div class="contribution_shipping_details_address">
+      <strong>{{ 'contribution_rewards_shipping_address' | t }}:</strong>
+      <br>
+      {{ contribution.user.address | newline_to_br }}
+    </div>
+  {% else %}
+    <div class="contribution_shipping_details_intro">
+      {{ 'contribution_rewards_shipping_details_hint' | t }}:
+      <br>
+      <a href="{{ 'user_show' | path: contribution.user.link }}">{{ contribution.user.name }}</a>, <a href="mailto: {{ contribution.user.email }}">{{ contribution.user.email }}</a>
+    </div>
+  {% endif %}
+</div>
+
+<div class="show_shipping_reward_info">
+  {% if contribution.reward %}
+    <div class="show_shipping_reward_chosen">
+      <strong>{{ 'contribution_chosen_reward' | t }} {{ contribution.reward.amount | to_currency: precision: 0 }}:</strong>
+      {{ contribution.reward.description_html }}
+    </div>
+  {% else %}
+    <p>{{ 'contribution_didnot_choose_reward' | t }}</p>
+  {% endif %}
+</div>
+<div class="clear"></div>
+<div class="center">
+  {% if params.r == 'user' %}
+    <a href="{{ 'user_show_contributions' | path: current_user.link }}" onclick="hq.loadDialog(this);return false">{{ 'cancel' | t }}</a>
+  {% else %}
+    <a href="" onclick="hq.closeDialog();return false">{{ 'cancel' | t }}</a>
+  {% endif %}
+</div>
