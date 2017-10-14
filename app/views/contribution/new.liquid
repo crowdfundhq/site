@@ -21,9 +21,3 @@
     </form>
   </div>
 </div>
-
-{% if request.xhr? %}
-  <script class="loadscript">
-    hq.setTitle('{{ title }}', '{{ subtitle }}');
-  </script>
-{% endif %}

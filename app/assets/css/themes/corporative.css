@@ -66,18 +66,18 @@ button:active,
   background-color: #d04436;
 }
 
-.campaign_action .btn[href*="/authorize/"] {
+.campaign_action .btn.auth-button {
   background: transparent;
   box-shadow: inset 0 0 0 1px #1CAF9A;
   color: #1CAF9A !important;
 }
 
-.campaign_action .btn[href*="/authorize/"]:hover,
-.campaign_action .btn[href*="/authorize/"]:focus {
+.campaign_action .btn.auth-button:hover,
+.campaign_action .btn.auth-button:focus {
   background: rgba(28,175,154,0.05);
 }
 
-.campaign_action .btn[href*="/authorize/"]:active {
+.campaign_action .btn.auth-button:active {
   background: rgba(28,175,154,0.15);
 }
 

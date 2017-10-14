@@ -1,11 +1,5 @@
 {% comment %}Campaign JS includes in campaign index, search and discover{% endcomment %}
-
-{% if request.xhr? %}
-  <script>
-    if(current_site.sidebar === 'sticky') { hq.trackSidebar() };
-    hq.setTitle('{{ title }}', '{{ subtitle }}');
-  </script>
-{% elsif current_site.sidebar == 'sticky' %}
+{% if current_site.sidebar == 'sticky' %}
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       hq.trackSidebar();scrollTo(0, pageYOffset+1);scrollTo(0, pageYOffset-1);

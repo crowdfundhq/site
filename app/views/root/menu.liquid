@@ -1,4 +1,4 @@
-{% comment %}Included in default layout{% endcomment %}
+{% comment %}Included in the default layout{% endcomment %}
 
 <ul class="user no-margin" id="menu">
   {% if current_user %}
@@ -46,7 +46,7 @@
     </li>
   {% endif %}
 </ul>
-<script{% if request.xhr? %} class="loadscript"{% endif %}>
+<script>
   if(!window.site) window.site = {};
   window.site.authorized = {% if current_user %}true{% else %}false{% endif %};
 </script>

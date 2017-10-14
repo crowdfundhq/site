@@ -21,19 +21,19 @@
 
       {% unless campaign.voting? %}
         {% if campaign.wepay_payment_authorized? == false %}
-          <a class="btn" href="{{ 'gateway_authorize_campaign' | path: campaign.link, 'wepay' }}">{{ 'campaign_contributions_wepay_adaptive' | t }}</a>
+          <a class="btn auth-button" href="{{ 'gateway_authorize_campaign' | path: campaign.link, 'wepay' }}">{{ 'campaign_contributions_wepay_adaptive' | t }}</a>
         {% endif %}
 
         {% if campaign.stripe_payment_authorized? == false %}
-          <a class="btn" href="{{ 'gateway_authorize_campaign' | path: campaign.link, 'stripe' }}">{{ 'campaign_contributions_stripe_adaptive' | t }}</a>
+          <a class="btn auth-button" href="{{ 'gateway_authorize_campaign' | path: campaign.link, 'stripe' }}">{{ 'campaign_contributions_stripe_adaptive' | t }}</a>
         {% endif %}
 
         {% if campaign.dwolla_payment_authorized? == false %}
-          <a class="btn" href="{{ 'gateway_authorize_campaign' | path: campaign.link, 'dwolla' }}">{{ 'campaign_contributions_dwolla_adaptive' | t }}</a>
+          <a class="btn auth-button" href="{{ 'gateway_authorize_campaign' | path: campaign.link, 'dwolla' }}">{{ 'campaign_contributions_dwolla_adaptive' | t }}</a>
         {% endif %}
 
         {% if campaign.mangopay_payment_authorized? == false %}
-          <a class="btn" onclick="hq.loadDialog(this);return false" href="{{ 'gateway_authorize_campaign' | path: campaign.link, 'mangopay' }}">{{ 'campaign_contributions_mangopay_adaptive' | t }}</a>
+          <a class="btn auth-button" onclick="hq.loadDialog(this);return false" href="{{ 'gateway_authorize_campaign' | path: campaign.link, 'mangopay' }}">{{ 'campaign_contributions_mangopay_adaptive' | t }}</a>
         {% endif %}
       {% endunless %}
       <a class="btn" onclick="hq.loadDialog(this);return false" href="{{ 'campaign_edit' | path: campaign.link }}">{{ 'edit' | t }}</a>
