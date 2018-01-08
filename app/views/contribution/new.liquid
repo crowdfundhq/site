@@ -1,8 +1,8 @@
-{% comment %}New campaign contribution{% endcomment %}
+{% comment %}New campaign contribution. See contribution/edit if you make changes here.{% endcomment %}
 
 {% layout %}{{ layout.default }}{% endlayout %}
 {% title %}{{ campaign.name }}{% endtitle %}
-{% subtitle %}{{ 'contribution_contribute' | t }}{% if campaign.rewards != empty %}{{ 'contribution_pick_a_reward' | t }}{% endif %} {{ 'contribution_enjoy' | t }}{% endsubtitle %}
+{% subtitle %}{{ 'contribution_contribute' | t }}{% if campaign.rewards.count > 0 %}{{ 'contribution_pick_a_reward' | t }}{% endif %} {{ 'contribution_enjoy' | t }}{% endsubtitle %}
 {% body_class contribution %}
 
 <div id="new_contribution">

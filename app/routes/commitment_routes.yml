@@ -4,11 +4,6 @@ GET#new:
   requires:
     - user
 
-GET#show:
-  desc: Show commitment
-  path: /campaigns/:campaign_link/commitments/:commitment_id
-  requires: []
-
 POST#create:
   desc: Create commitment
   path: /campaigns/:campaign_link/commitments
